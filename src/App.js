@@ -1,21 +1,15 @@
-import React, { Component } from 'react';
+import Index from "./pages/Index";
+import Header from "./components/Header";
+import '../src/assets/css/home-classic.css';
+import '../src/assets/css/main.css';
 import './App.css';
-import Test from './components/test';
-import Welcome from './components/welcome';
-class App extends Component
-{
-  render()
-  {
-    return(
-      <div className='App'>
-        <header className='test'></header>
-        <Test></Test>
-        <Welcome></Welcome>
+function App (){
+   return(
+      <div>
+        <Header/>
+        <Index/>
       </div>
-    )
-      
-    
-  }
+    );
 }
 
 export default App;
