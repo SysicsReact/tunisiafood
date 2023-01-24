@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 class Header extends React.Component{
      render() {
           return (
@@ -29,12 +30,15 @@ class Header extends React.Component{
                        </div>
    
                        <a href="index.html" className="header-logo">
+                       <Link to="/">
                            <img src="assets/images/Logo.jpg" alt="logo"/>
+                       </Link>
                        </a>
-                       <a href="login.html" className="header-widget" title="My Account">
+                       <li className="header-widget" title="My Account">
+                         
                            <img src="assets/images/user.png" alt="user"/>
-                           <span>join</span>
-                       </a>
+                           <span><Link to="/Login"> join </Link></span>
+                       </li>
    
                        <form className="header-form">
                            <input type="text" placeholder="Search anything..."/>
@@ -42,7 +46,7 @@ class Header extends React.Component{
                        </form>
    
                        <div className="header-widget-group">
-                           <a href="compare.html" className="header-widget" title="Compare List">
+                           <a href="front/compare.html" className="header-widget" title="Compare List">
                                <i className="fas fa-random"></i>
                                <sup>0</sup>
                            </a>
