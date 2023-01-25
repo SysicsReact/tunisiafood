@@ -1,7 +1,7 @@
-import Index from "./Pages/Index";
-import Login from "./Pages/Login";
-import Register from "./Pages/register";
-import Reset from "./Pages/resetPwd";
+import Index from "./pages/Index";
+import Login from "./pages/Login";
+import Register from "./pages/register";
+import Reset from "./pages/resetPwd";
 import Header from "./components/Header";
 
 import './App.css';
