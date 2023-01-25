@@ -1,25 +1,18 @@
-
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase.config";
-import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
-import { app } from "../firebase.config";
-import { Link, useNavigate } from "react-router-dom";
-
-
-function Login() {
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { auth, sendPasswordReset } from "../firebase.config";
+function Reset() {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
-    useEffect(() => {
-        
-    }, [user, loading]);
-
+   
     return (
+
         <html lang="en">
             <head>
-               
+
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -45,35 +38,29 @@ function Login() {
                                         <p>Use your credentials to access</p>
                                     </div>
                                     <div className="user-form-group">
-                                        <ul className="user-form-social">
-                                            <li><i className="fab fa-facebook-f"></i> Login with facebook</li>
-                                            <li><i className="fab fa-twitter"></i> Login with twitter</li>
-                                            <li><i className="fab fa-google"></i> <button onClick={signInWithGoogle} >Login with Google</button></li>
-                                            <li><i className="fab fa-instagram"></i> Login with instagram</li>
-                                        </ul>
+
                                         <div className="user-form-divider">
                                             <p>or</p>
                                         </div>
-                                        <form className="user-form"  onSubmit={(event) => event.preventDefault()}>
+                                        <form className="user-form" onSubmit={(event) => event.preventDefault()}>
+
                                             <div className="form-group">
-                                                <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
+                                                <input type="email" className="form-control" value={email}
+                                                    onChange={(e) => setEmail(e.target.value)} placeholder="E-mail Address" />
                                             </div>
-                                            <div className="form-group">
-                                                <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
-                                            </div>
-                                            <div className="form-check mb-3">
-                                                <input className="form-check-input" type="checkbox" value="" id="check" />
-                                                <label className="form-check-label" for="check">Remember Me</label>
-                                            </div>
+
+
                                             <div className="form-button">
-                                                <button  onClick={() => logInWithEmailAndPassword(email, password)}><Link to="/"> login</Link></button>
-                                                <p>Forgot your password?<a ><Link to="/Reset"> reset </Link></a></p>
-                                            </div>
+                                                <button
+                                                    className="reset__btn"
+                                                    onClick={() => sendPasswordReset(email)}
+                                                >
+                                                    Send password reset email
+                                                </button>                                        </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div className="user-form-remind">
-                                    <p>Don't have any account?<a><Link to="/Register"> Register here </Link></a></p>
                                 </div>
                                 <div className="user-form-footer">
                                     <p>TunisianFood | &COPY; Copyright by TunisianFood</p>
@@ -99,7 +86,5 @@ function Login() {
             </body>
         </html>
     );
-
 }
-
-export default Login;
+export default Reset;
