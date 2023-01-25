@@ -63,7 +63,7 @@ class Header extends React.Component{
                    </div>
                </div>
    </header>  
-   <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
+        <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
         <script src="assets/vendor/bootstrap/popper.min.js"></script>
         <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
         <script src="assets/vendor/countdown/countdown.min.js"></script>

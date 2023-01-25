@@ -48,11 +48,6 @@ return (
                                         <li><a href="front/wallet.html">my wallet</a></li>
                                         <li><a href="front/about.html">about us</a></li>
                                         <li><a href="front/contact.html">contact us</a></li>
-                                        <li><a href="front/privacy.html">privacy policy</a></li>
-                                        <li><a href="front/coming-soon.html">coming soon</a></li>
-                                        <li><a href="front/blank-page.html">blank page</a></li>
-                                        <li><a href="front/error.html">404 Error</a></li>
-                                        <li><a href="front/email-template.html">email template</a></li>
                                     </ul>
                                 </li>
                                 <li className="navbar-item dropdown">
@@ -235,6 +230,7 @@ return (
                 </div>
     </div>
     </section>
+
     
     <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
         <script src="assets/vendor/bootstrap/popper.min.js"></script>
