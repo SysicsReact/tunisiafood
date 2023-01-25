@@ -24,7 +24,7 @@ class Header extends React.Component{
                <div className="container">
                    <div className="header-content">
                        <div className="header-media-group">
-                           <button className="header-user"><img src="assets/images/user.png" alt="user"/></button>
+                           <button className="header-user"> <img src="assets/images/user.png" alt="user"/> </button>
                            <a href="index.html"><img src="assets/images/Logo.jpg" alt="logo"/></a>
                            <button className="header-src"><i className="fas fa-search"></i></button>
                        </div>
@@ -38,6 +38,7 @@ class Header extends React.Component{
                          
                            <img src="assets/images/user.png" alt="user"/>
                            <span><Link to="/Login"> join </Link></span>
+                           <span><Link to="/MyProfile"> profile </Link></span>
                        </li>
    
                        <form className="header-form">
