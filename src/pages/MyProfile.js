@@ -1,34 +1,48 @@
-import React from "react";
-import { Link,  } from "react-router-dom";
-import {  auth, db } from "../firebase.config";
+import React, { Component, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { app,auth, db, logout} from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {  ref, onValue } from "firebase/database";
-/*function test(id){
-     onValue(ref(db, '/users/' + id), (snapshot) => {
-        const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-        // ...
-        console.log(username)
-      }, {
-        onlyOnce: true
-      });
-}*/
+import {  updateProfile } from "firebase/auth";
+import { getDatabase, ref, child, get,onValue } from "firebase/database";
+class userdata {
+  u;
+  l;
+    test(user){
+    var logged
+    
+    if(user){
+       const starCountRef = ref(db, 'users/' + user.uid);
+       onValue(starCountRef, (snapshot) => {
+         const data = snapshot.val();
+         logged=data
+       });
+    }
+    const ux=new userdata();
+    ux.u=user;
+    ux.l=logged
+   return ux;
+}
+}
+
 function MyProfile() {
-    var loggedUser;
+    
+    
+    //const userda=useAuthState(auth);
+    var logged;
+   const user=auth.currentUser;
+   const uid=auth.currentUser.uid;
+    if(user==null||logged==null){
+        const starCountRef = ref(db, 'users/' + uid);
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+          logged=data
+        });
+        return;
+     }
+     
 
-    //get credentials
-    const [user] = useAuthState(auth);
-    //get user realtime database
-    const starCountRef = ref(db, 'users/' + user.uid);
-    onValue(starCountRef, (snapshot) => {
-        const data = snapshot.val();
-        loggedUser = data
-        // updateStarCount(postElement, data);
-    });
-
-
-    //test(user.uid);
-
-
+    // console.log(logged)
+    
     return (
         <html lang="en">
             <head>
@@ -81,14 +95,14 @@ function MyProfile() {
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-label">name</label>
-                                                    <h5>{loggedUser.username}</h5>
-
+                                                    <h5>{logged.username}</h5>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-label">Email</label>
-                                                    <h5>{loggedUser.email}</h5>
+                                                    <h5>{logged.email}</h5>
                                                 </div>
                                             </div>
 

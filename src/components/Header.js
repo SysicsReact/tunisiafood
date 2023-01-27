@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { auth, db, logout } from "../firebase.config";
+import { Link } from "react-router-dom";
+import { auth, logout } from "../firebase.config";
 
 function Dashboard() {
-    const [user, loading, error] = useAuthState(auth);
-    const [name, setName] = useState("");
-    const navigate = useNavigate();
+    const [user] = useAuthState(auth);
+   
+
     function loggedUser(user) {
         if (user) {
             return (
-                <><span>{user.email}</span><button className="dashboard__btn" onClick={logout}> <Link to="/"> Logout </Link> </button><span><Link to="/MyProfile"> profile </Link></span></>
+                <><button className="dashboard__btn" onClick={logout}> <Link to="/"> Logout </Link> </button><span><Link to="/MyProfile"> profile </Link></span></>
             )
         } else {
             return (

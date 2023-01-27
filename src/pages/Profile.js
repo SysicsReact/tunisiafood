@@ -1,43 +1,38 @@
-import React, {  useState } from "react";
-import { Link } from "react-router-dom";
-import { auth, db } from "../firebase.config";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth, db, logout } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {  ref, onValue,update } from "firebase/database";
+import {  updateProfile } from "firebase/auth";
+import { getDatabase, ref, child, get,onValue,update } from "firebase/database";
 
 function Profile() {
+    const [user] = useAuthState(auth);
+    const [newName, setName] = useState('');
+    const [newEmail, setEmail] = useState('');
+    const [newPhone, setPhone] = useState('');
     var loggedUser;
-    // getcredentials
-    const [user,name,email,phone] = useAuthState(auth);
-    const [setName] = useState("");
 
-
-    //---get user (realtime database)
     const starCountRef = ref(db, 'users/' + user.uid );
     onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      loggedUser=data
-      // updateStarCount(postElement, data);
+       loggedUser = snapshot.val();
     });
+   
+  
 
+    const updateUser =({ newName, newEmail,newPhone }) => {
+        console.log(newName)
+       update(ref(db, `users/${user.uid}`), {
+        username: newName,
+        email: newEmail,
+
+        phone: newPhone,
 
     
-
-
-
-    const updateUser = async (name,email,phone) => {
-        
-        update(ref(db, `users/${user.uid}`), {
-        username: name,
-        profileImg:"url",
-        email:"email",
-        phone:"123",
-        country:"54",
-        city:"3zfze"
       });
+      
     }
 
-       
-
+   
 
     return (
         <html lang="en">
@@ -82,15 +77,22 @@ function Profile() {
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">profile image</label>
+                                    <img src={loggedUser.photo}/>
                                     <input class="form-control" type="file" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">name</label>
-                                    <input class="form-control" type="text"  defaultValue={loggedUser.username}  placeholder="Type your name..." />
+                                    <label class="form-label">name: </label>
+                                    <label class="form-label">{loggedUser.name}</label>
+
+
+                                    <input class="form-control" type="text" value={newName}   onChange={(e) => setName(e.target.value)}   placeholder="Type your new name..." />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">email</label>
-                                    <input class="form-control" type="email" defaultValue={loggedUser.email} /></div>
+                                    <label class="form-label">email: </label>
+                                    <label class="form-label">{loggedUser.email}</label>
+
+
+                                    <input class="form-control" type="email"  value={newEmail} onChange={(e) => setEmail(e.target.value)} placeholder="Type your new email..."  /></div>
                                 <div class="form-group">
                                     <label class="form-label">Country</label>
                                     <select class="form-select">
@@ -123,9 +125,11 @@ function Profile() {
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Phone Number</label>
-                                    <input class="form-control" type="text" value={loggedUser.phone}  placeholder="Type your number..." />
+                                    <span>{loggedUser.phone}</span>
+
+                                    <input class="form-control" type="text" value={newPhone} onChange={(e) => setPhone(e.target.value)}   placeholder="Type your number..." />
                                 </div>
-                                <button class="form-btn"   onClick={() => updateUser(name,email,phone)}>save profile info</button>
+                                <button class="form-btn"   onClick={()=>updateUser(newName,newEmail,newPhone)}>save profile info</button>
                             </form>
                         </div>
                     </div>

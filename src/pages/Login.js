@@ -1,19 +1,46 @@
 
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase.config";
+import { db,auth, logInWithEmailAndPassword } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
-import { app } from "../firebase.config";
 import { Link, useNavigate } from "react-router-dom";
+import {  ref, set,onValue } from "firebase/database";
+import { GoogleAuthProvider,signInWithPopup} from "firebase/auth";
 
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
+    const googleProvider = new GoogleAuthProvider();
+    var testUser;
+
+    const signInWithGoogle = async () => {
+
+        try {
+          const res = await signInWithPopup(auth, googleProvider);
+          const user = res.user;
+      
+          const starCountRef = ref(db, 'users/' + user.uid );
+          onValue(starCountRef, (snapshot) => {
+            const data = snapshot.val();
+            testUser=data
+            // updateStarCount(postElement, data);
+          });
+        if (!testUser) {           
+          set(ref(db, 'users/' + user.uid), {
+            username: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          });
+         }
+        } catch (err) {
+          console.error(err);
+        }
+      };
+
     useEffect(() => {
-        if (user) navigate("/");
+       if(user)navigate("/")
       }, [user, loading]);
     return (
         <html lang="en">
