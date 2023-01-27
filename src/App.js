@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Register from "./pages/register";
 import Reset from "./pages/resetPwd";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import MyProfile from "./pages/MyProfile";
 
@@ -17,6 +18,7 @@ function App (){
     <div>
         <Header/>
     </div>
+  
     <Routes>
       <Route path="/" element={<Index/>}/>
       <Route path="/Login" element={<Login/>}/>
@@ -26,6 +28,10 @@ function App (){
       <Route path="/MyProfile" element={<MyProfile/>}/>
 
     </Routes>
+    <div>
+      <Footer/>
+    </div>
+
     
     </>
     );
