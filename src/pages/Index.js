@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Product from "../components/Product";
 import { Link,useNavigate } from "react-router-dom";
-import { auth, db, logout, addData } from "../firebase.config";
+import { auth, db, logout } from "../firebase.config";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
 function Dashboard() {
@@ -515,9 +515,6 @@ function Dashboard() {
             </div>
         </section>
                 
-<div>
-    <button onClick={addData}> Add </button>
-</div>
                 <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>

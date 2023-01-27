@@ -18,7 +18,6 @@ const firebaseConfig = {
 const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const db2 = getDatabase();
 const storage = getStorage(app);
 const googleProvider = new GoogleAuthProvider();
 
@@ -112,22 +111,6 @@ const logout = () => {
 
 
 
-function addData (){
-  set(ref(db2, 'products/' + 2), {
-    username: "Plat1",
-    price: "12",
-    profile_picture : ""
-  });
-  set(ref (db2, 'products/' + 2 + "/commands/" + 0),{
-    lham : 1,
-    makarouna: 2,
-    price: 20,
-
-  });
-}
-
-
-
 
 
 
@@ -135,6 +118,5 @@ function addData (){
 export { app, db, storage,auth, signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
-  addData,
   sendPasswordReset,
   logout };
