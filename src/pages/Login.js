@@ -13,9 +13,8 @@ function Login() {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     useEffect(() => {
-        
-    }, [user, loading]);
-
+        if (user) navigate("/");
+      }, [user, loading]);
     return (
         <html lang="en">
             <head>
@@ -66,7 +65,7 @@ function Login() {
                                                 <label className="form-check-label" for="check">Remember Me</label>
                                             </div>
                                             <div className="form-button">
-                                                <button  onClick={() => logInWithEmailAndPassword(email, password)}><Link to="/"> login</Link></button>
+                                                <button  onClick={() => logInWithEmailAndPassword(email, password)}> login</button>
                                                 <p>Forgot your password?<a ><Link to="/Reset"> reset </Link></a></p>
                                             </div>
                                         </form>
