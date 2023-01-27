@@ -1,24 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useHistory } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import {  ref, set } from "firebase/database";
+import {  db } from "../firebase.config";
 
 import {
   auth,
+  createUserWithEmailAndPassword,
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../firebase.config";
+var isvalidate=false;
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const register = () => {
-    if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+  
+  const register = async (name,email,password) => {
+   
+   createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    writeUserData(auth.currentUser.uid,name,auth.currentUser.email);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });     
+
   };
- 
+  function writeUserData(userId, name, email) {
+    
+    set(ref(db, 'users/' + userId), {
+      username: name,
+      email: email,
+    });
+    /*get(child(db, `users/${userId}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            console.log(snapshot)
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });*/
+  }
+
+useEffect(() => {
+    
+    if (user) navigate("/Profile");
+  }, [user, loading]);
   
 
   return (
@@ -69,7 +103,7 @@ function Register() {
                                             <label className="form-check-label" for="check">Remember Me</label>
                                         </div>
                                         <div className="form-button">
-                                            <button type="" onClick={() => registerWithEmailAndPassword(name,email, password)}>Register</button>
+                                            <button type="" onClick={() => register(name,email,password)}>Register</button>
                                             <p>Forgot your password?<a >reset here</a></p>
                                         </div>
                                     </form>
