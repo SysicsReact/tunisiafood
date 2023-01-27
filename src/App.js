@@ -1,10 +1,10 @@
-import Index from "./pages/Index";
-import Login from "./pages/Login";
-import Register from "./pages/register";
-import Reset from "./pages/resetPwd";
+import Index from "./Pages/Index";
+import Login from "./Pages/Login";
+import Register from "./Pages/register";
+import Reset from "./Pages/resetPwd";
 import Header from "./components/Header";
-import Profile from "./pages/Profile";
-import MyProfile from "./pages/MyProfile";
+import Profile from "./Pages/Profile";
+import MyProfile from "./Pages/MyProfile";
 
 import './App.css';
 import { Route, Routes } from "react-router-dom";
