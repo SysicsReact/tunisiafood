@@ -1,6 +1,7 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore,query,getDocs,collection, where,addDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getDatabase, ref, set } from "firebase/database";
 import { GoogleAuthProvider,getAuth,signInWithPopup,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
 
 const firebaseConfig = {
@@ -106,10 +107,6 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
-
-
-
-
 
 
 
