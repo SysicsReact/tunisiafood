@@ -53,7 +53,7 @@ const logout = () => {
 
 
 
-export { app, db, storage,auth, signInWithGoogle,
+export { app, db, storage,auth,
   logInWithEmailAndPassword,
   sendPasswordReset,
   createUserWithEmailAndPassword,
