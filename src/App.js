@@ -12,7 +12,7 @@ import './App.css';
 import { Route, Routes } from "react-router-dom";
 import React, { Component } from 'react'
 import $ from"jquery";
- import { jQuerycode } from "./components/Jq";
+ import { jQuerycode } from "./components/Jq.js";
 
  class  App extends Component {
   componentDidMount()
