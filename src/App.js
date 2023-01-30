@@ -5,16 +5,27 @@ import Reset from "./pages/resetPwd";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
+import About from "./pages/About";
+import Shop from "./pages/Shop";
 import MyProfile from "./pages/MyProfile";
-
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-function App (){
+import React, { Component } from 'react'
+import $ from"jquery";
+ import { jQuerycode } from "./components/Jq";
 
+ class  App extends Component {
+  componentDidMount()
+  {
+   
+      jQuerycode();
+  }
   
-
-   return(
+  
+ render(){
+  return(
     <>
+    
     <div>
         <Header/>
     </div>
@@ -25,7 +36,9 @@ function App (){
       <Route path="/Register" element={<Register/>}/>
       <Route path="/Reset" element={<Reset/>}/>
       <Route path="/Profile" element={<Profile/>}/>
+      <Route path="/About" element={<About/>}/>
       <Route path="/MyProfile" element={<MyProfile/>}/>
+      <Route path="/Shop" element={<Shop/>}/>
 
     </Routes>
     <div>
@@ -35,6 +48,8 @@ function App (){
     
     </>
     );
+ }
+   
 }
 
 export default App;

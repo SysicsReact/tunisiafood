@@ -2236,7 +2236,7 @@ tbody tr td:last-child {
 }
 
 .feature-name a {
-  color: var(--sub-heading);
+  color: var(white);
   transition: all linear .3s;
   -webkit-transition: all linear .3s;
   -moz-transition: all linear .3s;

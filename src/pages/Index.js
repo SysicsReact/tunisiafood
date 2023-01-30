@@ -30,6 +30,7 @@ function Dashboard() {
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
+                <link rel="stylesheet" href="assets/css/slider.css" />
             </head>
             <body>
                 <div className="backdrop"></div>
@@ -41,27 +42,23 @@ function Dashboard() {
                             <div className="col-lg-12">
                                 <div className="navbar-content">
                                     <ul className="navbar-list">
-                                        <li className="navbar-item dropdown">
-                                            home
+                                    <li className="navbar-item dropdown-megamenu">
+                                        <span className="feature-name"><Link to="/" className="navbar-link" >  Home </Link></span>
                                         </li>
                                         <li className="navbar-item dropdown-megamenu">
-                                            shop
+                                        <span className="feature-name"><Link to="Shop/" className="navbar-link" >  shop </Link></span>
                                         </li>
                                         <li className="navbar-item dropdown-megamenu">
-                                            category
+                                        <span className="feature-name"><Link to="About/" className="navbar-link" >  About Us</Link></span>
+                                        </li>
+                                        <li className="navbar-item dropdown-megamenu">
+                                        <span className="feature-name"><Link to="Category/" className="navbar-link" >  Categories</Link></span>
                                         </li>
                                         <li className="navbar-item dropdown">
                                             pages
                                             <ul className="dropdown-position-list">
                                                 <li><a href="front/faq.html">faqs</a></li>
                                                 <li><a href="front/offer.html">offers</a></li>
-                                                <li><a href="front/profile.html">my profile</a></li>
-                                                <li><a href="front/wallet.html">my wallet</a></li>
-                                                <li><a href="front/about.html">about us</a></li>
-                                                <li><a href="front/contact.html">contact us</a></li>
-                                                <li><a href="front/privacy.html">privacy policy</a></li>
-                                                <li><a href="front/coming-soon.html">coming soon</a></li>
-                                                <li><a href="front/blank-page.html">blank page</a></li>
                                                 <li><a href="front/error.html">404 Error</a></li>
                                                 <li><a href="front/email-template.html">email template</a></li>
                                             </ul>
@@ -75,38 +72,162 @@ function Dashboard() {
                                                 <li><a href="front/change-password.html">change password</a></li>
                                             </ul>
                                         </li>
-                                        <li className="navbar-item dropdown">
-                                            blogs
-                                            <ul className="dropdown-position-list">
-                                                <li><a href="front/blog-grid.html">blog grid</a></li>
-                                                <li><a href="front/blog-standard.html">blog standard</a></li>
-                                                <li><a href="front/blog-details.html">blog details</a></li>
-                                                <li><a href="front/blog-author.html">blog author</a></li>
-                                            </ul>
+                                        <li className="navbar-item dropdown-megamenu">
+                                        <span className="feature-name"><Link to="Blogs/" className="navbar-link" >  Blogs </Link></span>
                                         </li>
                                     </ul>
-                                    <div className="navbar-info-group">
-                                        <div className="navbar-info">
-                                            <i className="icofont-ui-touch-phone"></i>
-                                            <p>
-                                                <small>call us</small>
-                                                <span>(+880) 183 8288 389</span>
-                                            </p>
-                                        </div>
-                                        <div className="navbar-info">
-                                            <i className="icofont-ui-email"></i>
-                                            <p>
-                                                <small>email us</small>
-                                                <span>support@greeny.com</span>
-                                               
-                                            </p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </nav>
+            <aside className="category-sidebar">
+            <div className="category-header">
+                <h4 className="category-title">
+                    <i className="fas fa-align-left"></i>
+                    <span>categories</span>
+                </h4>
+                <button className="category-close"><i className="icofont-close"></i></button>
+            </div>
+            <ul className="category-list">
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-vegetable"></i>
+                        <span>vegetables</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">asparagus</a></li>
+                        <li><a href="#">broccoli</a></li>
+                        <li><a href="#">carrot</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-groceries"></i>
+                        <span>groceries</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Grains & Bread</a></li>
+                        <li><a href="#">Dairy & Eggs</a></li>
+                        <li><a href="#">Oil & Fat</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-fruit"></i>
+                        <span>fruits</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Apple</a></li>
+                        <li><a href="#">Orange</a></li>
+                        <li><a href="#">Strawberry</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-dairy-products"></i>
+                        <span>dairy farm</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Egg</a></li>
+                        <li><a href="#">milk</a></li>
+                        <li><a href="#">butter</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-crab"></i>
+                        <span>sea foods</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Lobster</a></li>
+                        <li><a href="#">Octopus</a></li>
+                        <li><a href="#">Shrimp</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-salad"></i>
+                        <span>diet foods</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Salmon</a></li>
+                        <li><a href="#">Potatoes</a></li>
+                        <li><a href="#">Greens</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-dried-fruit"></i>
+                        <span>dry foods</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">noodles</a></li>
+                        <li><a href="#">Powdered milk</a></li>
+                        <li><a href="#">nut & yeast</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-fast-food"></i>
+                        <span>fast foods</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">mango</a></li>
+                        <li><a href="#">plumsor</a></li>
+                        <li><a href="#">raisins</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-cheers"></i>
+                        <span>drinks</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Wine</a></li>
+                        <li><a href="#">Juice</a></li>
+                        <li><a href="#">Water</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-beverage"></i>
+                        <span>coffee</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Cappuchino</a></li>
+                        <li><a href="#">Espresso</a></li>
+                        <li><a href="#">Latte</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-barbecue"></i>
+                        <span>meats</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Meatball</a></li>
+                        <li><a href="#">Sausage</a></li>
+                        <li><a href="#">Poultry</a></li>
+                    </ul>
+                </li>
+                <li className="category-item">
+                    <a className="category-link dropdown-link" href="#">
+                        <i className="flaticon-fish"></i>
+                        <span>fishes</span>
+                    </a>
+                    <ul className="dropdown-list">
+                        <li><a href="#">Agujjim</a></li>
+                        <li><a href="#">saltfish</a></li>
+                        <li><a href="#">pazza</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div className="category-footer">
+                <p>All Rights Reserved by <a href="#">Mironcoder</a></p>
+            </div>
+            </aside>
+
                 <div className="mobile-menu">
                     <a href="index.html" title="Home Page">
                         <i className="fas fa-home"></i>
@@ -224,35 +345,152 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <section className="home-classic-slider slider-arrow">
-                    <div className="banner-part" style={{ backgroundImage: "url(assets/images/Home-2.png)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-11 col-lg-7 mx-auto">
-                                    <div className="banner-content text-center">
-                                        <h1>enjoy your healthy life with our fresh vegetables.</h1>
-                                        <p>get your organic food with our dairy items.</p>
-                                        <div className="banner-btn">
-                                            <a className="btn btn-inline" href="front/shop-4column.html">
-                                                <i className="fas fa-shopping-basket"></i>
-                                                <span>shop now</span>
-                                            </a>
-                                            <a className="btn btn-outline" href="front/offer.html">
-                                                <i className="icofont-sale-discount"></i>
-                                                <span>get offer</span>
-                                            </a>
-                                        </div>
-                                    </div>
+
+
+        <section>
+<div class="css-slider-wrapper">
+    
+    <input type="radio" name="slider" class="slide-radio1" checked id="slider_1"/>
+    <input type="radio" name="slider" class="slide-radio2" id="slider_2"/>
+    <input type="radio" name="slider" class="slide-radio3" id="slider_3"/>
+    <input type="radio" name="slider" class="slide-radio4" id="slider_4"/>
+    
+    
+    <div class="slider-pagination">
+        
+        <label for="slider_1" class="page1"></label> 
+        <label for="slider_2" class="page2"></label>
+        <label for="slider_3" class="page3"></label>
+        <label for="slider_4" class="page4"></label>
+    </div>
+    
+    <div class="next control">
+        <label for="slider_1" class="numb1"><i class="fa fa-arrow-circle-right"></i></label>
+        <label for="slider_2" class="numb2"><i class="fa fa-arrow-circle-right"></i></label>
+        <label for="slider_3" class="numb3"><i class="fa fa-arrow-circle-right"></i></label>
+        <label for="slider_4" class="numb4"><i class="fa fa-arrow-circle-right"></i></label>
+    </div>
+    <div class="previous control">
+        <label for="slider_1" class="numb1"><i class="fa fa-arrow-circle-left"></i></label>
+        <label for="slider_2" class="numb2"><i class="fa fa-arrow-circle-left"></i></label>
+        <label for="slider_3" class="numb3"><i class="fa fa-arrow-circle-left"></i></label>
+        <label for="slider_4" class="numb4"><i class="fa fa-arrow-circle-left"></i></label>
+    </div>
+    
+    
+    <div class="slider slide1">
+    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 col-lg-6">
+                            <div className="banner-content">
+                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
+                                <p>get your organic food with our dairy items.</p>
+                                <div className="banner-btn">
+                                    <a className="btn btn-inline" href="front/shop-4column.html">
+                                        <i className="fas fa-shopping-basket"></i>
+                                        <span>shop now</span>
+                                    </a>
+                                    <a className="btn btn-outline" href="offer.html">
+                                        <i className="icofont-sale-discount"></i>
+                                        <span>get offer</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <section class="section recent-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-heading">
+                </div>
+    </div>
+    </div>
+    <div class="slider slide2">
+    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 col-lg-6">
+                            <div className="banner-content">
+                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
+                                <p>get your organic food with our dairy items.</p>
+                                <div className="banner-btn">
+                                    <a className="btn btn-inline" href="front/shop-4column.html">
+                                        <i className="fas fa-shopping-basket"></i>
+                                        <span>shop now</span>
+                                    </a>
+                                    <a className="btn btn-outline" href="offer.html">
+                                        <i className="icofont-sale-discount"></i>
+                                        <span>get offer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </div>
+    <div class="slider slide3">
+    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 col-lg-6">
+                            <div className="banner-content">
+                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
+                                <p>get your organic food with our dairy items.</p>
+                                <div className="banner-btn">
+                                    <a className="btn btn-inline" href="front/shop-4column.html">
+                                        <i className="fas fa-shopping-basket"></i>
+                                        <span>shop now</span>
+                                    </a>
+                                    <a className="btn btn-outline" href="offer.html">
+                                        <i className="icofont-sale-discount"></i>
+                                        <span>get offer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </div>
+    <div class="slider slide4">
+    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 col-lg-6">
+                            <div className="banner-content">
+                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
+                                <p>get your organic food with our dairy items.</p>
+                                <div className="banner-btn">
+                                    <a className="btn btn-inline" href="front/shop-4column.html">
+                                        <i className="fas fa-shopping-basket"></i>
+                                        <span>shop now</span>
+                                    </a>
+                                    <a className="btn btn-outline" href="offer.html">
+                                        <i className="icofont-sale-discount"></i>
+                                        <span>get offer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </div>
+</div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
+        </section>
+           <section className="section recent-part">
+             
+            </section>
+            <section className="section recent-part">
+                <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="section-heading">
                             <h2>recently sold items</h2>
                         </div>
                     </div>
@@ -261,233 +499,233 @@ function Dashboard() {
                 <div> <Product /> </div>
                
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-btn-25">
-                            <a href="front/shop-4column.html" class="btn btn-outline">
-                                <i class="fas fa-eye"></i>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="section-btn-25">
+                            <a href="front/shop-4column.html" className="btn btn-outline">
+                                <i className="fas fa-eye"></i>
                                 <span>show more</span>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
-                </section>
-        <div class="section promo-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="promo-img">
+                </div>
+            </section>
+        <div className="section promo-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="promo-img">
                             <a href=""><img src="assets/images/spices.jpg" alt="promo"/></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <section class="section feature-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-heading">
+        <section className="section feature-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="section-heading">
                             <h2>our featured items</h2>
                         </div>
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
-                    <div class="col">
-                        <div class="feature-card">
-                            <div class="feature-media">
-                                <div class="feature-label">
-                                    <label class="label-text feat">feature</label>
+                <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
+                    <div className="col">
+                        <div className="feature-card">
+                            <div className="feature-media">
+                                <div className="feature-label">
+                                    <label className="label-text feat">feature</label>
                                 </div>
-                                <button class="feature-wish wish">
-                                    <i class="fas fa-heart"></i>
+                                <button className="feature-wish wish">
+                                    <i className="fas fa-heart"></i>
                                 </button>
-                                <a class="feature-image" href="product-video.html">
+                                <a className="feature-image" href="product-video.html">
                                     <img src="assets/images/product/09.jpg" alt="product"/>
                                 </a>
-                                <div class="feature-widget">
-                                    <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                <div className="feature-widget">
+                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
+                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                 </div>
                             </div>
-                            <div class="feature-content">
-                                <h6 class="feature-name">
+                            <div className="feature-content">
+                                <h6 className="feature-name">
                                     <a href="product-video.html">fresh organic green chilis</a>
                                 </h6>
-                                <div class="feature-rating">
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="icofont-star"></i>
+                                <div className="feature-rating">
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="icofont-star"></i>
                                     <a href="product-video.html">(3 Reviews)</a>
                                 </div>
-                                <h6 class="feature-price">
+                                <h6 className="feature-price">
                                     <del>$34</del>
                                     <span>$28<small>/piece</small></span>
                                 </h6>
-                                <p class="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
+                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
+                                <button className="product-add" title="Add to Cart">
+                                    <i className="fas fa-shopping-basket"></i>
                                     <span>add</span>
                                 </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                <div className="product-action">
+                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="feature-card">
-                            <div class="feature-media">
-                                <div class="feature-label">
-                                    <label class="label-text feat">feature</label>
+                    <div className="col">
+                        <div className="feature-card">
+                            <div className="feature-media">
+                                <div className="feature-label">
+                                    <label className="label-text feat">feature</label>
                                 </div>
-                                <button class="feature-wish wish">
-                                    <i class="fas fa-heart"></i>
+                                <button className="feature-wish wish">
+                                    <i className="fas fa-heart"></i>
                                 </button>
-                                <a class="feature-image" href="product-video.html">
+                                <a className="feature-image" href="product-video.html">
                                     <img src="assets/images/product/09.jpg" alt="product"/>
                                 </a>
-                                <div class="feature-widget">
-                                    <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                <div className="feature-widget">
+                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
+                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                 </div>
                             </div>
-                            <div class="feature-content">
-                                <h6 class="feature-name">
+                            <div className="feature-content">
+                                <h6 className="feature-name">
                                     <a href="product-video.html">fresh organic green chilis</a>
                                 </h6>
-                                <div class="feature-rating">
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="icofont-star"></i>
+                                <div className="feature-rating">
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="icofont-star"></i>
                                     <a href="product-video.html">(3 Reviews)</a>
                                 </div>
-                                <h6 class="feature-price">
+                                <h6 className="feature-price">
                                     <del>$34</del>
                                     <span>$28<small>/piece</small></span>
                                 </h6>
-                                <p class="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
+                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
+                                <button className="product-add" title="Add to Cart">
+                                    <i className="fas fa-shopping-basket"></i>
                                     <span>add</span>
                                 </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                <div className="product-action">
+                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="feature-card">
-                            <div class="feature-media">
-                                <div class="feature-label">
-                                    <label class="label-text feat">feature</label>
+                    <div className="col">
+                        <div className="feature-card">
+                            <div className="feature-media">
+                                <div className="feature-label">
+                                    <label className="label-text feat">feature</label>
                                 </div>
-                                <button class="feature-wish wish">
-                                    <i class="fas fa-heart"></i>
+                                <button className="feature-wish wish">
+                                    <i className="fas fa-heart"></i>
                                 </button>
-                                <a class="feature-image" href="product-video.html">
+                                <a className="feature-image" href="product-video.html">
                                     <img src="assets/images/product/09.jpg" alt="product"/>
                                 </a>
-                                <div class="feature-widget">
-                                    <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                <div className="feature-widget">
+                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
+                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                 </div>
                             </div>
-                            <div class="feature-content">
-                                <h6 class="feature-name">
+                            <div className="feature-content">
+                                <h6 className="feature-name">
                                     <a href="product-video.html">fresh organic green chilis</a>
                                 </h6>
-                                <div class="feature-rating">
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="icofont-star"></i>
+                                <div className="feature-rating">
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="icofont-star"></i>
                                     <a href="product-video.html">(3 Reviews)</a>
                                 </div>
-                                <h6 class="feature-price">
+                                <h6 className="feature-price">
                                     <del>$34</del>
                                     <span>$28<small>/piece</small></span>
                                 </h6>
-                                <p class="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
+                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
+                                <button className="product-add" title="Add to Cart">
+                                    <i className="fas fa-shopping-basket"></i>
                                     <span>add</span>
                                 </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                <div className="product-action">
+                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="feature-card">
-                            <div class="feature-media">
-                                <div class="feature-label">
-                                    <label class="label-text feat">feature</label>
+                    <div className="col">
+                        <div className="feature-card">
+                            <div className="feature-media">
+                                <div className="feature-label">
+                                    <label className="label-text feat">feature</label>
                                 </div>
-                                <button class="feature-wish wish">
-                                    <i class="fas fa-heart"></i>
+                                <button className="feature-wish wish">
+                                    <i className="fas fa-heart"></i>
                                 </button>
-                                <a class="feature-image" href="product-video.html">
+                                <a className="feature-image" href="product-video.html">
                                     <img src="assets/images/product/09.jpg" alt="product"/>
                                 </a>
-                                <div class="feature-widget">
-                                    <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                <div className="feature-widget">
+                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
+                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                 </div>
                             </div>
-                            <div class="feature-content">
-                                <h6 class="feature-name">
+                            <div className="feature-content">
+                                <h6 className="feature-name">
                                     <a href="product-video.html">fresh organic green chilis</a>
                                 </h6>
-                                <div class="feature-rating">
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="icofont-star"></i>
+                                <div className="feature-rating">
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="icofont-star"></i>
                                     <a href="product-video.html">(3 Reviews)</a>
                                 </div>
-                                <h6 class="feature-price">
+                                <h6 className="feature-price">
                                     <del>$34</del>
                                     <span>$28<small>/piece</small></span>
                                 </h6>
-                                <p class="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
+                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
+                                <button className="product-add" title="Add to Cart">
+                                    <i className="fas fa-shopping-basket"></i>
                                     <span>add</span>
                                 </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                <div className="product-action">
+                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-btn-25">
-                            <a href="shop-4column.html" class="btn btn-outline">
-                                <i class="fas fa-eye"></i>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="section-btn-25">
+                            <a href="shop-4column.html" className="btn btn-outline">
+                                <i className="fas fa-eye"></i>
                                 <span>show more</span>
                             </a>
                         </div>
@@ -495,15 +733,70 @@ function Dashboard() {
                 </div>
             </div>
         </section>
+        <section className="section blog-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="section-heading">
+                            <h2>Read our articles</h2>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="blog-slider slider-arrow">
+                            <div className="blog-card">
+                                <div className="blog-media">
+                                    <a className="blog-img" href="#">
+                                        <img src="assets/images/blog/blog.jpg" alt="blog"/>
+                                    </a>
+                                </div>
+                                <div className="blog-content">
+                                    <ul className="blog-meta">
+                                        <li>
+                                            <i className="fas fa-user"></i>
+                                            <span>admin</span>
+                                        </li>
+                                        <li>
+                                            <i className="fas fa-calendar-alt"></i>
+                                            <span>february 02, 2021</span>
+                                        </li>
+                                    </ul>
+                                    <h4 className="blog-title">
+                                        <a href="blog-details.html">Voluptate blanditiis provident Lorem ipsum dolor sit amet</a>
+                                    </h4>
+                                    <p className="blog-desc">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias autem recusandae deleniti nam dignissimos sequi ...
+                                    </p>
+                                    <a className="blog-btn" href="#">
+                                        <span>read more</span>
+                                        <i className="icofont-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="section-btn-25">
+                            <a href="blog-grid.html" className="btn btn-outline">
+                                <i className="fas fa-eye"></i>
+                                <span>view all blog</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
                 
-                <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
                 <script src="assets/vendor/countdown/countdown.min.js"></script>
                 <script src="assets/vendor/niceselect/nice-select.min.js"></script>
                 <script src="assets/vendor/slickslider/slick.min.js"></script>
                 <script src="assets/vendor/venobox/venobox.min.js"></script>
-
                 <script src="assets/js/nice-select.js"></script>
                 <script src="assets/js/countdown.js"></script>
                 <script src="assets/js/accordion.js"></script>
