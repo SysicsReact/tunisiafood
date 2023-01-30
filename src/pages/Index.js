@@ -345,147 +345,32 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
+                <section className="home-classic-slider slider-arrow">
+                    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 col-lg-6">
+                            <div className="banner-content">
+                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
+                                <p>get your organic food with our dairy items.</p>
+                                <div className="banner-btn">
+                                    <a className="btn btn-inline" href="front/shop-4column.html">
+                                        <i className="fas fa-shopping-basket"></i>
+                                        <span>shop now</span>
+                                    </a>
+                                    <a className="btn btn-outline" href="offer.html">
+                                        <i className="icofont-sale-discount"></i>
+                                        <span>get offer</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </section>
 
-
-        <section>
-<div class="css-slider-wrapper">
-    
-    <input type="radio" name="slider" class="slide-radio1" checked id="slider_1"/>
-    <input type="radio" name="slider" class="slide-radio2" id="slider_2"/>
-    <input type="radio" name="slider" class="slide-radio3" id="slider_3"/>
-    <input type="radio" name="slider" class="slide-radio4" id="slider_4"/>
-    
-    
-    <div class="slider-pagination">
-        
-        <label for="slider_1" class="page1"></label> 
-        <label for="slider_2" class="page2"></label>
-        <label for="slider_3" class="page3"></label>
-        <label for="slider_4" class="page4"></label>
-    </div>
-    
-    <div class="next control">
-        <label for="slider_1" class="numb1"><i class="fa fa-arrow-circle-right"></i></label>
-        <label for="slider_2" class="numb2"><i class="fa fa-arrow-circle-right"></i></label>
-        <label for="slider_3" class="numb3"><i class="fa fa-arrow-circle-right"></i></label>
-        <label for="slider_4" class="numb4"><i class="fa fa-arrow-circle-right"></i></label>
-    </div>
-    <div class="previous control">
-        <label for="slider_1" class="numb1"><i class="fa fa-arrow-circle-left"></i></label>
-        <label for="slider_2" class="numb2"><i class="fa fa-arrow-circle-left"></i></label>
-        <label for="slider_3" class="numb3"><i class="fa fa-arrow-circle-left"></i></label>
-        <label for="slider_4" class="numb4"><i class="fa fa-arrow-circle-left"></i></label>
-    </div>
-    
-    
-    <div class="slider slide1">
-    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 col-lg-6">
-                            <div className="banner-content">
-                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
-                                <p>get your organic food with our dairy items.</p>
-                                <div className="banner-btn">
-                                    <a className="btn btn-inline" href="front/shop-4column.html">
-                                        <i className="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
-                                    </a>
-                                    <a className="btn btn-outline" href="offer.html">
-                                        <i className="icofont-sale-discount"></i>
-                                        <span>get offer</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    </div>
-    </div>
-    <div class="slider slide2">
-    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 col-lg-6">
-                            <div className="banner-content">
-                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
-                                <p>get your organic food with our dairy items.</p>
-                                <div className="banner-btn">
-                                    <a className="btn btn-inline" href="front/shop-4column.html">
-                                        <i className="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
-                                    </a>
-                                    <a className="btn btn-outline" href="offer.html">
-                                        <i className="icofont-sale-discount"></i>
-                                        <span>get offer</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    </div>
-    </div>
-    <div class="slider slide3">
-    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 col-lg-6">
-                            <div className="banner-content">
-                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
-                                <p>get your organic food with our dairy items.</p>
-                                <div className="banner-btn">
-                                    <a className="btn btn-inline" href="front/shop-4column.html">
-                                        <i className="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
-                                    </a>
-                                    <a className="btn btn-outline" href="offer.html">
-                                        <i className="icofont-sale-discount"></i>
-                                        <span>get offer</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    </div>
-    </div>
-    <div class="slider slide4">
-    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 col-lg-6">
-                            <div className="banner-content">
-                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
-                                <p>get your organic food with our dairy items.</p>
-                                <div className="banner-btn">
-                                    <a className="btn btn-inline" href="front/shop-4column.html">
-                                        <i className="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
-                                    </a>
-                                    <a className="btn btn-outline" href="offer.html">
-                                        <i className="icofont-sale-discount"></i>
-                                        <span>get offer</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    </div>
-    </div>
-</div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
-        </section>
-           <section className="section recent-part">
-             
-            </section>
+          
             <section className="section recent-part">
                 <div className="container">
                 <div className="row">
