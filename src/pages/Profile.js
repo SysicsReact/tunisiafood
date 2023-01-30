@@ -1,38 +1,110 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth, db, logout } from "../firebase.config";
+import { Link } from "react-router-dom";
+import { auth, db,storage } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {  updateProfile } from "firebase/auth";
-import { getDatabase, ref, child, get,onValue,update } from "firebase/database";
+import {  ref, onValue, update } from "firebase/database";
+import { ref as sRef } from 'firebase/storage';
+
+
+import {
+
+    uploadBytes,
+    getDownloadURL,
+   
+} from "firebase/storage";
+import { v4 } from "uuid";
 
 function Profile() {
     const [user] = useAuthState(auth);
-    const [newName, setName] = useState('');
-    const [newEmail, setEmail] = useState('');
-    const [newPhone, setPhone] = useState('');
+    const [username,setName] = useState('');
+    
+    const [newPhone,setPhone] = useState('');
+    const [city,setCity] = useState('');
+    const [country,setCountry] = useState('');
+    const [adress,setAdress] = useState('');
+    const [imageUpload, setImageUpload] = useState(null);
+    const [imageUrls, setImageUrls] = useState([]);
     var loggedUser;
 
-    const starCountRef = ref(db, 'users/' + user.uid );
+    const starCountRef = ref(db, 'users/' + user.uid);
     onValue(starCountRef, (snapshot) => {
-       loggedUser = snapshot.val();
+        loggedUser = snapshot.val();
     });
-   
-  
-
-    const updateUser =({ newName, newEmail,newPhone }) => {
-        console.log(newName)
-       update(ref(db, `users/${user.uid}`), {
-        username: newName,
-        email: newEmail,
-
-        phone: newPhone,
 
     
+  
+    const uploadFile = () => {
+      const imageRef = sRef(storage, `images/${imageUpload.name + v4()}`);
+      uploadBytes(imageRef, imageUpload).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          setImageUrls((prev) => [prev, url]);
+        });
       });
-      
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        uploadFile()
+        update(ref(db, `users/${user.uid}`), {
+            username: username.username,
+            country: country.country,
+            city: city.City,
+            phone: newPhone.phone,
+            adress: adress.adress,
+            photo:imageUrls[1]
+
+
+        });
+
+    };
+    
+
+    function handleNameChange(event) {
+            setName({ username: event.target.value });
+    }
+    function handlePhoneChange(event) {
+        setPhone({ phone: event.target.value });
     }
 
-   
+
+    function handleCityChange(event) {
+        setCity({ City: event.target.value });
+    }
+
+ 
+    function handleCountryChange(event) {
+        setCountry({ country: event.target.value });
+    }
+
+    function handleAdressChange(event) {
+        setAdress({ adress: event.target.value });
+    }
+
+    function checkCity(loggedUser) {
+        if (loggedUser.city) {
+            return (
+                <><option selected disabled hidden>{loggedUser.city}</option></>
+            )
+        } else {
+            return (
+                <><option selected disabled hidden>Choose City</option></>
+            )
+        }
+    }
+
+    function checkCountry(loggedUser) {
+        if (loggedUser.country) {
+            return (
+                <><option selected disabled hidden>{loggedUser.country}</option></>
+            )
+        } else {
+            return (
+                <><option selected disabled hidden>Choose country</option></>
+            )
+        }
+    }
+
 
     return (
         <html lang="en">
@@ -70,66 +142,62 @@ function Profile() {
                 <div >
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <form class="modal-form"  onSubmit={(event) => event.preventDefault()}>
+                            <form class="modal-form" onSubmit={handleSubmit}>
                                 <div class="form-title">
                                     <h3>Edit profile info</h3>
 
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">profile image</label>
-                                    <img src={loggedUser.photo}/>
-                                    <input class="form-control" type="file" />
+                                    <img src={loggedUser.photo} />
+                                    <input class="form-control" type="file"
+        onChange={(event) => {
+          setImageUpload(event.target.files[0]);
+        }} />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">name: </label>
-                                    <label class="form-label">{loggedUser.name}</label>
-
-
-                                    <input class="form-control" type="text" value={newName}   onChange={(e) => setName(e.target.value)}   placeholder="Type your new name..." />
+                                    <label class="form-label">Name</label>
+                                    <input class="form-control" type="text" Value={loggedUser.username} onChange={handleNameChange} placeholder="Type your new name..." />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">email: </label>
-                                    <label class="form-label">{loggedUser.email}</label>
-
-
-                                    <input class="form-control" type="email"  value={newEmail} onChange={(e) => setEmail(e.target.value)} placeholder="Type your new email..."  /></div>
                                 <div class="form-group">
                                     <label class="form-label">Country</label>
-                                    <select class="form-select">
-                                        <option selected>choose Country</option>
-                                        <option value="primary">France</option>
-                                        <option value="secondary">Belgique</option>
+                                    <select class="form-select" Value={loggedUser.country} onChange={handleCountryChange} >
+                                        {checkCountry(loggedUser)}
+                                        <option value="France">France</option>
+                                        <option value="Belgique">Belgique</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">City</label>
-                                    <select class="form-select">
-                                        <option selected>Choose City</option>
-                                        <option value="primary">Paris</option>
-                                        <option value="secondary">Lyon</option>
-                                        <option value="secondary">Marseille</option>
-                                        <option value="secondary">Toulouse</option>
-                                        <option value="primary">Lille</option>
-                                        <option value="secondary">Nice</option>
-                                        <option value="secondary">Nantes</option>
-                                        <option value="secondary">Strasbourg</option>
-                                        <option value="primary">Rennes</option>
-                                        <option value="secondary">Grenoble</option>
-                                        <option value="secondary">Rouen</option>
-                                        <option value="secondary">Toulon</option>
-                                        <option value="secondary">Montpelier</option>
-                                        <option value="primary">Douai et Lens</option>
-                                        <option value="secondary">Avignon</option>
-                                        <option value="secondary">Saint-Etienne</option>
+                                    <select class="form-select" Value={loggedUser.city} onChange={handleCityChange} >
+                                        {checkCity(loggedUser)}
+                                        <option value="Paris">Paris</option>
+                                        <option value="Lyon">Lyon</option>
+                                        <option value="Marseille">Marseille</option>
+                                        <option value="Toulouse">Toulouse</option>
+                                        <option value="Lille">Lille</option>
+                                        <option value="Nice">Nice</option>
+                                        <option value="Nantes">Nantes</option>
+                                        <option value="Strasbourg">Strasbourg</option>
+                                        <option value="Rennes">Rennes</option>
+                                        <option value="Grenoble">Grenoble</option>
+                                        <option value="Rouen">Rouen</option>
+                                        <option value="Toulon">Toulon</option>
+                                        <option value="Montpelier">Montpelier</option>
+                                        <option value="Douai et Lens">Douai et Lens</option>
+                                        <option value="Avignon">Avignon</option>
+                                        <option value="Saint-Etienne">Saint-Etienne</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Phone Number</label>
-                                    <span>{loggedUser.phone}</span>
-
-                                    <input class="form-control" type="text" value={newPhone} onChange={(e) => setPhone(e.target.value)}   placeholder="Type your number..." />
+                                    <label class="form-label">Adress</label>
+                                    <input class="form-control" type="text" value={loggedUser.adress} onChange={handleAdressChange} placeholder="Type exact adress..." />
                                 </div>
-                                <button class="form-btn"   onClick={()=>updateUser(newName,newEmail,newPhone)}>save profile info</button>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input class="form-control" type="text" value={loggedUser.phone} onChange={handlePhoneChange} placeholder="Type your number..." />
+                                </div>
+                                <button class="form-btn" type="submit" >save profile info</button>
                             </form>
                         </div>
                     </div>

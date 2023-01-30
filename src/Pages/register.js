@@ -7,8 +7,7 @@ import {  db } from "../firebase.config";
 import {
   auth,
   createUserWithEmailAndPassword,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
+  
 } from "../firebase.config";
 var isvalidate=false;
 function Register() {

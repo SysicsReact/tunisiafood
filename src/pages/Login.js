@@ -33,10 +33,12 @@ function Login() {
             email: user.email,
             photo: user.photoURL,
           });
+
          }
         } catch (err) {
           console.error(err);
         }
+        localStorage.setItem("loggedUser",JSON.stringfy(testUser))
       };
 
     useEffect(() => {
