@@ -141,7 +141,7 @@ left: 1%;
 .slide-radio3:checked ~ .previous .numb2, 
 .slide-radio4:checked ~ .previous .numb3 {
   display: block;
-  z-index: 1
+  z-index: 0
 }
 /* Slider pagination active css */
 .slide-radio1:checked ~ .slider-pagination .page1, 
