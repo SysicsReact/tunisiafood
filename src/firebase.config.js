@@ -1,7 +1,7 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getDatabase } from "firebase/database";
-import { getAuth,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+import { GoogleAuthProvider,getAuth,signInWithPopup,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDLsfryMC2qrcB35qgmwhm8c_oKAHyPH-M",
@@ -47,7 +47,13 @@ const logout = () => {
 };
 
 
-export { app, db, storage,auth,
+
+
+
+
+
+
+export { app, db, storage,auth, signInWithGoogle,
   logInWithEmailAndPassword,
   sendPasswordReset,
   createUserWithEmailAndPassword,
