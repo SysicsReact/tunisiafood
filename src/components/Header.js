@@ -10,7 +10,9 @@ function Dashboard() {
     function loggedUser(user) {
         if (user) {
             return (
-                <><button className="dashboard__btn" onClick={logout}> <Link to="/"> Logout </Link> </button><span><Link to="/MyProfile"> profile </Link></span></>
+                <><button className="dashboard__btn" onClick={logout}> 
+                <Link to="/"> Logout </Link> </button>
+                <span><Link to="MyProfile"> profile </Link></span></>
             )
         } else {
             return (
@@ -41,25 +43,23 @@ function Dashboard() {
                     <div className="header-content">
                         <div className="header-media-group">
                             <button className="header-user"> <img src="assets/images/user.png" alt="user" /> </button>
-                            <a href="index.html"><img src="assets/images/Logo.jpg" alt="logo" /></a>
+                            <a className="header-logo">
+                            <Link to="/">
+                                <img src="assets/images/Logo.png" alt="logo" />
+                            </Link>
+                        </a>
                             <button className="header-src"><i className="fas fa-search"></i></button>
                         </div>
 
-                        <a href="index.html" className="header-logo">
+                        <a className="header-logo">
                             <Link to="/">
-                                <img src="assets/images/Logo.jpg" alt="logo" />
+                                <img src="assets/images/Logo.png" alt="logo" />
                             </Link>
                         </a>
-                        <li className="header-widget" title="My Account">
 
-                            <img src="assets/images/user.png" alt="user" />
-                            <div>
-                                {loggedUser(user)}
-                            </div>
-                        </li>
 
                         <form className="header-form">
-                            <input type="text" placeholder="Search anything..." />
+                            <input type="text" placeholder="Cherchez..." />
                             <button><i className="fas fa-search"></i></button>
                         </form>
 
@@ -76,8 +76,15 @@ function Dashboard() {
                                 <i className="fas fa-shopping-basket"></i>
                                 <sup>9+</sup>
                                 <span>total price<small>$345.00</small></span>
+                                <span><small></small></span>
                             </button>
                         </div>
+<li className="header-widget" title="My Account">
+<img src="assets/images/user.png" alt="user" />
+<div>
+    {loggedUser(user)}
+</div>
+                        </li>
                     </div>
                 </div>
             </header>

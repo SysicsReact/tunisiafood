@@ -39,72 +39,131 @@ function About() {
                         </ol>
                     </div>
                 </section>
-               <section className="inner-section about-company">
+            <section className="inner-section about-company">
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6">
                         <div className="about-content">
-                            <h2>Our Motive is to Provide Best for Those Who Deserve</h2>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis exercitationem commodi aliquam necessitatibus vero reiciendis quaerat illo est fuga ea temporibus natus doloremque ipsum voluptas quod deserunt expedita reprehenderit pariatur quidem quisquam, recusandae animi non! Voluptas totam repudiandae rerum molestiae possimus quis numquam sapiente sunt architecto quisquam Aliquam odio optio</p>
+                            <h2>Notre objectif est de fournir le meilleur pour ceux qui le méritent.</h2>
+                            <p>Pour tout est une question de sens et de souvenirs d’enfance de réunions de famille. L’odeur des épices fraîches, le goût des produits typiques, l’une de nos gourmandises spéciales et même, le son des festins bruyants partagés avec nos proches. Vous l’aurez compris, nous partageons l’amour comme nous partageons la nourriture : de la manière la plus authentique, mais toujours avec une touche locale.</p>
                         </div>
                         <ul className="about-list">
                             <li>
-                                <h3>34785</h3>
-                                <h6>registered users</h6>
+                                <h3>1785</h3>
+                                <h6>Clients fidèles</h6>
                             </li>
                             <li>
-                                <h3>2623</h3>
-                                <h6>per day visitors</h6>
+                                <h3>5623</h3>
+                                <h6>Visiteurs/ mois</h6>
                             </li>
                             <li>
                                 <h3>189</h3>
-                                <h6>total products</h6>
+                                <h6>Produits divers</h6>
                             </li>
                         </ul>
                     </div>
                     <div className="col-lg-6">
                         <div className="about-img">
-                            <img src="assets/images/about/01.jpg" alt="about"/>
-                            <img src="assets/images/about/02.jpg" alt="about"/>
-                            <img src="assets/images/about/03.jpg" alt="about"/>
-                            <img src="assets/images/about/04.jpg" alt="about"/>
+                            <img src="assets/images/about/1.jpg" alt="about"/>
+                            <img src="assets/images/about/2.jpg" alt="about"/>
+                            <img src="assets/images/about/4.jpg" alt="about"/>
+                            <img src="assets/images/about/5.jpg" alt="about"/>
                         </div>
                     </div>
                 </div>
             </div>
-               </section>
-               <section className="inner-section about-testimonial">
+            </section>
+            <section className="inner-section about-testimonial">
             <div className="container">
                 <ul className="testi-slider slider-arrow">
                     <li>
                         <div className="testi-content">
                             <a className="testi-img" href="#">
-                                <img src="assets/images/testimonial/01.jpg" alt="testimonial"/>
+                                <img src="assets/images/about/01.jpg" alt="testimonial"/>
                             </a>
                             <div className="testi-quote">
                                 <i className="icofont-quote-left"></i>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit neque earum sapiente vitae obcaecati magnam doloribus magni provident ab ipsam sint dolores repellat inventore sequi temporibus natus.</p>
-                                <h4>tahmina labonno</h4>
-                                <h6>Former MD - joomtech.com</h6>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="testi-content">
-                            <a className="testi-img" href="#">
-                                <img src="assets/images/testimonial/02.jpg" alt="testimonial"/>
-                            </a>
-                            <div className="testi-quote">
-                                <i className="icofont-quote-left"></i>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit neque earum sapiente vitae obcaecati magnam doloribus magni provident ab ipsam sint dolores repellat inventore sequi temporibus natus.</p>
-                                <h4>miron mahmud</h4>
-                                <h6>Senior Accountant - farmfresh.com</h6>
+                                <p>Tout ce que j'ai acheté était exceptionnel. L'entreprise est vraiment fiable et rapide, je donnerais 5/5 étoiles pour le goût et 5 autres pour le service.</p>
+                                <h4>Maryam Abbassi</h4>
+                                <h6>Assisstante financière</h6>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
-               </section>
+            </section>
+        <section class="about-choose">
+            <div class="container">
+                <div class="row">
+                    <div class="col-11 col-md-9 col-lg-7 col-xl-6 mx-auto">
+                        <div class="section-heading">
+                            <h2>Pourquoi les consommateurs nous choisissent</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="choose-card">
+                            <div class="choose-icon">
+                                <i class="icofont-fruits"></i>
+                            </div>
+                            <div class="choose-text">
+                                <h4>100% aliments et ingrédients frais </h4>
+                                <p>
+Nous croyons que notre application conséquente et continue du principe « la qualité d'abord » est le secret de notre réussite.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="choose-card">
+                            <div class="choose-icon">
+                                <i class="icofont-vehicle-delivery-van"></i>
+                            </div>
+                            <div class="choose-text">
+                                <h4>
+    Livraison rapide</h4>
+                                <p>A partir de la réception de la demande d’achat, nous respectons les délais définis. Nous assurons la livraison de tout les produits,dans des courtes délais où que vous soyez.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="choose-card">
+                            <div class="choose-icon">
+                                <i class="icofont-loop"></i>
+                            </div>
+                            <div class="choose-text">
+                                <h4>convivialité et sécurité des données</h4>
+                                <p>Nous faisons de la commande de nourriture une expérience agréable pour nos détaillants et nos clients.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="choose-card">
+                            <div class="choose-icon">
+                                <i class="icofont-support"></i>
+                            </div>
+                            <div class="choose-text">
+                                <h4>
+Équipe d'assistance instantanée</h4>
+                                <p>L'assistance via messagerie instantanée. Veuillez vous identifier pour utiliser la messagerie instantanée avec un membre de l'équipe d'assistance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="news-part" style={{ backgroundImage: "url(assets/images/bann.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px", }}>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-5 col-lg-6 col-xl-7">
+                        <div class="news-text">
+                            <h2>Get 20% Discount for Subscriber</h2>
+                            <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
                 <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>

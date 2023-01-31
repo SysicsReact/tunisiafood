@@ -60,12 +60,13 @@ function Login() {
                 <link rel="stylesheet" href="assets/css/user-auth.css" />
             </head>
             <body>
+                <br></br><br></br><br></br><br></br><br></br>
                 <section className="user-form-part">
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                                 <div className="user-form-logo">
-                                    <img src="assets/images/logo.png" alt="logo" />
+                                  
                                 </div>
                                 <div className="user-form-card">
                                     <div className="user-form-title">
