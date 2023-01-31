@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 import {  auth, db } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {  ref, onValue } from "firebase/database";
-
+import { useSelector } from 'react-redux'
+import { selectIsLoggedIn,selectuserID } from '../redux/slice/authSlice'
+import {  useNavigate } from "react-router-dom";
 function MyProfile() {
-    var logged = null
-    const [user] = useAuthState(auth);
-    if (logged == null) {
-        const starCountRef = ref(db, 'users/' + user.uid);
-        onValue(starCountRef, (snapshot) => {
-            const data = snapshot.val();
-            logged = data
-        });
-    }
-   
-
-
+    
+    const issignIN=useSelector(selectIsLoggedIn);
+    const navigate = useNavigate();
+    const userID=useSelector(selectuserID)
+    useEffect(() => {
+        if(!issignIN)navigate("/")
+        else{
+            console.log(userID)
+        }
+       }, []);
     return (
         <html lang="en">
             <head>
@@ -70,14 +70,14 @@ function MyProfile() {
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-label">name</label>
-                                                    <h5>{logged.username}</h5>
+                                                    <h5>test</h5>
 
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-label">Email</label>
-                                                    <h5>{logged.email}</h5>
+                                                    <h5>test</h5>
                                                 </div>
                                             </div>
 

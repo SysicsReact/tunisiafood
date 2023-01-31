@@ -1,11 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase.config";
 import $ from "jquery";
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
+import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
 function Dashboard() {
     const [user] = useAuthState(auth);
-   
+    const[displayName,setDisplayName]=useState("");
+    const dispatch=useDispatch();
+    //monitor currently siggnin user
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              const uid = user.uid;
+              //console.log(user.displayName)
+              if(user.displayName==null)
+              {
+                const u1=user.email.substring(0,user.email.indexOf("@"));
+                const uname=u1.charAt(0).toUpperCase()+u1.slice(1)
+                setDisplayName(uname)
+              }
+              else 
+              setDisplayName(user.displayName)
+
+
+              dispatch(SET_ACTIVE_USER({
+                email: user.email,
+                userName: user.displayName?user.displayName:displayName,
+                userID: user.uid
+              }))
+            } else {
+              // User is signed out
+              // ...
+                setDisplayName("")
+                dispatch(Remove_ACTIVE_USER());
+            }
+          });
+    },[dispatch,displayName])
 
     function loggedUser(user) {
         if (user) {
@@ -20,6 +54,7 @@ function Dashboard() {
             )
         }
     }
+    
     return (
         <html lang="en">
             <head>
@@ -82,7 +117,17 @@ function Dashboard() {
 <li className="header-widget" title="My Account">
 <img src="assets/images/user.png" alt="user" />
 <div>
-    {loggedUser(user)}
+    <ShowOnLogin>
+        <a href="#">Hi {displayName}</a>
+        <span><Link to="MyProfile"> profile </Link></span>
+        <button className="dashboard__btn" onClick={logout}> 
+        <Link to="/"> Logout </Link> </button>
+
+    </ShowOnLogin>
+
+    <ShowOnLogOut>
+                <span><Link to="/Login"> join </Link></span>
+    </ShowOnLogOut>
 </div>
                         </li>
                     </div>
