@@ -19,26 +19,11 @@ function Login() {
 
         try {
           const res = await signInWithPopup(auth, googleProvider);
-          const user = res.user;
-      
-          const starCountRef = ref(db, 'users/' + user.uid );
-          onValue(starCountRef, (snapshot) => {
-            const data = snapshot.val();
-            testUser=data
             // updateStarCount(postElement, data);
-          });
-        if (!testUser) {           
-          set(ref(db, 'users/' + user.uid), {
-            username: user.displayName,
-            email: user.email,
-            photo: user.photoURL,
-          });
-
-         }
+        
         } catch (err) {
           console.error(err);
         }
-        localStorage.setItem("loggedUser",JSON.stringfy(testUser))
       };
 
     useEffect(() => {

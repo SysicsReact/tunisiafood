@@ -33,19 +33,7 @@ function Register() {
   };
   function writeUserData(userId, name, email) {
     
-    set(ref(db, 'users/' + userId), {
-      username: name,
-      email: email,
-    });
-    /*get(child(db, `users/${userId}`)).then((snapshot) => {
-        if (snapshot.exists()) {
-            console.log(snapshot)
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });*/
+   
   }
 
 useEffect(() => {

@@ -4,14 +4,13 @@ import { getDatabase, ref, set } from "firebase/database";
 import { GoogleAuthProvider,getAuth,signInWithPopup,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDLsfryMC2qrcB35qgmwhm8c_oKAHyPH-M",
-    authDomain: "coujinatn.firebaseapp.com",
-    databaseURL: "https://coujinatn-default-rtdb.firebaseio.com",
-    projectId: "coujinatn",
-    storageBucket: "coujinatn.appspot.com",
-    messagingSenderId: "685348317976",
-    appId: "1:685348317976:web:acd1591fed31c60f164c6d",
-    measurementId: "G-D7REECDK62"
+  apiKey: "AIzaSyCpajBxsVUdz7VMFWI9tPQihxQPoXv0F2Y",
+  authDomain: "startnewproject-983bc.firebaseapp.com",
+  projectId: "startnewproject-983bc",
+  storageBucket: "startnewproject-983bc.appspot.com",
+  messagingSenderId: "23766145234",
+  appId: "1:23766145234:web:fb671d70851b3a00c2750b",
+  measurementId: "G-5ZR2XVL61K"
   };
 
 const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
