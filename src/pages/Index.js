@@ -4,12 +4,13 @@ import Product from "../components/Product";
 import { Link,useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase.config";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import Loader from "../components/loader/Loader";
 
 function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const navigate = useNavigate();
-   
+    const [isLoading, setIsLoading ] = useState(false);
    
 
 
@@ -31,8 +32,10 @@ function Dashboard() {
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
                 <link rel="stylesheet" href="assets/css/slider.css" />
+                <link rel="stylesheet" href="./components/loader/loader.css" />
             </head>
             <body>
+            {isLoading && <Loader/>}
                 <div className="backdrop"></div>
 
 

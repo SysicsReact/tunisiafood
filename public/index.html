@@ -4,9 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to Firebase Hosting</title>
-    <!-- update the version number as needed -->
     <script defer src="/__/firebase/9.16.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/9.16.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/9.16.0/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/9.16.0/firebase-firestore-compat.js"></script>
@@ -16,10 +14,6 @@
     <script defer src="/__/firebase/9.16.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/9.16.0/firebase-remote-config-compat.js"></script>
     <script defer src="/__/firebase/9.16.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <style media="screen">
@@ -36,26 +30,19 @@
         body { border-top: 16px solid #ffa100; }
       }
     </style>
-    <!-- FONTS -->
     <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css">
-
-    <!-- VENDOR -->
     <link rel="stylesheet" href="assets/vendor/venobox/venobox.min.css">
     <link rel="stylesheet" href="assets/vendor/slickslider/slick.min.css">
     <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css">
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
-
-    <!-- CUSTOM -->
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/home-classic.css">
-    <!--=====================================
-                CSS LINK PART END
-    =======================================-->
   </head>
   <body>
     <App></App>
+    <div id="loader"></div>
     <div id="root"></div>
     <div id="message">
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>

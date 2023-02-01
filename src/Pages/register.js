@@ -1,46 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import {  ref, set } from "firebase/database";
 import {  db } from "../firebase.config";
-
-import {
-  auth,
-  createUserWithEmailAndPassword,
-  
-} from "../firebase.config";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../components/loader/Loader";
+import {auth, createUserWithEmailAndPassword,} from "../firebase.config";
+import { doc, setDoc } from "@firebase/firestore";
 var isvalidate=false;
-function Register() {
+
+
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading ] = useState(false);
   
-  const register = async (name,email,password) => {
-   
-   createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
-    // Signed in 
+
+  const resgisterUser = (e) => {
+    e.preventDefault();
+    setIsLoading(true)
+    createUserWithEmailAndPassword(auth,email,password)
+    .then((userCredential) => {
     const user = userCredential.user;
+    toast.success("inscrit avec succès");
     writeUserData(auth.currentUser.uid,name,auth.currentUser.email);
+    
   })
   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });     
+    toast.error("Quelque chose s'est mal passé");
+    setIsLoading(false)
+  });   
+}
+const writeUserData= async(userId, name, email)=>{
 
-  };
-  function writeUserData(userId, name, email) {
+    const userRef = doc(db, "users", userId);
     
-   
+    await setDoc(userRef, {
+      userName: name,
+      email:email,
+  }).then(()=>{
+    toast.success("vos donnessera engistre");
+    navigate("/")
+    setIsLoading(false)
+  }).catch((error) => {
+    setIsLoading(false)
+    toast.error(error.message);
+    // Handle Errors here.
+    // ...
+  });
   }
 
-useEffect(() => {
-    
-    if (user) navigate("/Profile");
-  }, [user, loading]);
-  
+
+  const register = async (name,email,password) => {
+   
+   
+  };
 
   return (
     <html lang="en">
@@ -58,48 +76,47 @@ useEffect(() => {
             <link rel="stylesheet" href="assets/css/user-auth.css" />
         </head>
         <body>
+        <ToastContainer /> 
+        {isLoading && <Loader/>}
             <section className="user-form-part">
                 <div className="container">
                     <div className="row justify-content-center">
+                        <br></br>  <br></br>  <br></br>  <br></br>
                         <div className="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                             <div className="user-form-logo">
-                                <img src="assets/images/logo.png" alt="logo" />
+                                <img src="" alt="logo" />
                             </div>
                             <div className="user-form-card">
                                 <div className="user-form-title">
-                                    <h2>welcome!</h2>
-                                    <p>Use your credentials to access</p>
+                                    <h2>bienvenu!</h2>
+                                    <p>Entrez vos identifiants pour vous inscrire</p>
                                 </div>
                                 <div className="user-form-group">
-                                   
-                                    <div className="user-form-divider">
-                                        <p>or</p>
-                                    </div>
-                                    <form className="user-form"  onSubmit={(event) => event.preventDefault()}>
+                                    <form className="user-form"  onSubmit={resgisterUser}>
                                     <div className="form-group">
-                                            <input type="text" className="form-control" value={name}  onChange={(e) => setName(e.target.value)} placeholder="Full name" />
+                                            <input type="text" className="form-control" 
+                                            value={name}  onChange={(e) => setName(e.target.value)} required placeholder="Votre nom" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="email" className="form-control"  value={email}  onChange={(e) => setEmail(e.target.value)}    placeholder="E-mail Address" />
+                                            <input type="email" className="form-control"  
+                                            value={email}  onChange={(e) => setEmail(e.target.value)}  required  placeholder="Votre Adresse E-mail" />
                                         </div>
                                         <div className="form-group">
-                                            <input type="password" className="form-control"  value={password}  onChange={(e) => setPassword(e.target.value)}   placeholder="Password" />
+                                            <input type="password" className="form-control"  
+                                            value={password}  onChange={(e) => setPassword(e.target.value)} required  placeholder="Mot de pass" />
                                         </div>
                                         <div className="form-check mb-3">
                                             <input className="form-check-input" type="checkbox" value="" id="check" />
                                             <label className="form-check-label" for="check">Remember Me</label>
                                         </div>
                                         <div className="form-button">
-                                            <button type="" onClick={() => register(name,email,password)}>Register</button>
-                                            <p>Forgot your password?<a >reset here</a></p>
+                                            <button type="submit" >S'inscrire</button>
+                                            <p>Mot de pass oublié?<a >Réinitialiser ici</a></p>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                             <div className="user-form-remind">
-                            </div>
-                            <div className="user-form-footer">
-                                <p>TunisianFood | &COPY; Copyright by TunisianFood</p>
                             </div>
                         </div>
                     </div>

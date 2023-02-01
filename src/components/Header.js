@@ -7,24 +7,50 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
-function Dashboard() {
+import { async } from "q";
+import { doc, getDoc, setDoc } from "@firebase/firestore";
+import Loader from "../components/loader/Loader";
+
+
+const Dashboard=()=> {
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
     const dispatch=useDispatch();
+    const [isLoading, setIsLoading ] = useState(true);
     //monitor currently siggnin user
     useEffect(()=>{
+        setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
               const uid = user.uid;
+              if(uid){
+                const docRef = doc(db, "users", uid);
+                
+                getDoc(docRef).then(docSnap => {
+                    if (docSnap.exists()) {
+                        setDisplayName(docSnap.data().userName)
+                        setIsLoading(false);
+                    } else {
+                        const writeUserData= async(userId, name, email,docRef)=>{
+                            const userRef = doc(db, "users", userId);
+                            console.log(userRef)
+                            await setDoc(docRef, {
+                              userName: name,
+                              email:email,
+                          }).then(()=>{
+                            setDisplayName(name)
+                            setIsLoading(false);
+                          }).catch((error) => {
+                            setIsLoading(false);
+                          });
+                          }
+                    }
+                  }) 
+                }
+          
+              
               //console.log(user.displayName)
-              if(user.displayName==null)
-              {
-                const u1=user.email.substring(0,user.email.indexOf("@"));
-                const uname=u1.charAt(0).toUpperCase()+u1.slice(1)
-                setDisplayName(uname)
-              }
-              else 
-              setDisplayName(user.displayName)
+              
 
 
               dispatch(SET_ACTIVE_USER({
@@ -44,9 +70,12 @@ function Dashboard() {
     function loggedUser(user) {
         if (user) {
             return (
-                <><button className="dashboard__btn" onClick={logout}> 
+                <>
+
+                <button className="dashboard__btn" onClick={logout}> 
                 <Link to="/"> Logout </Link> </button>
-                <span><Link to="MyProfile"> profile </Link></span></>
+                <span><Link to="MyProfile"> profile </Link></span>
+                </>
             )
         } else {
             return (
@@ -116,20 +145,24 @@ function Dashboard() {
                         </div>
 <li className="header-widget" title="My Account">
 <img src="assets/images/user.png" alt="user" />
+<ShowOnLogin>
+<li className="navbar-item dropdown" >  
+ {displayName}
+            <ul className="dropdown-position-list">
+                <li><Link to="/MyProfile"> Hi {displayName} </Link></li>
+                <li><Link to="MyProfile"> profile </Link></li>
+                <li><button className="dashboard__btn"
+                    onClick={logout}> 
+                <Link to="/"> Logout </Link> </button></li>
+            </ul>
+            </li>
+</ShowOnLogin>
 <div>
-    <ShowOnLogin>
-        <a href="#">Hi {displayName}</a>
-        <span><Link to="MyProfile"> profile </Link></span>
-        <button className="dashboard__btn" onClick={logout}> 
-        <Link to="/"> Logout </Link> </button>
-
-    </ShowOnLogin>
-
     <ShowOnLogOut>
                 <span><Link to="/Login"> join </Link></span>
     </ShowOnLogOut>
 </div>
-                        </li>
+</li>
                     </div>
                 </div>
             </header>
