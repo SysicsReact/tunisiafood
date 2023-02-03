@@ -12,7 +12,7 @@ function Dashboard() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading ] = useState(false);
    
-
+    
 
     return (
         <html lang="en">
@@ -36,9 +36,11 @@ function Dashboard() {
             </head>
             <body>
             {isLoading && <Loader/>}
+            {!isLoading &&
+            <div>
                 <div className="backdrop"></div>
 
-
+            
 
             <section className="home-classic-slider slider-arrow">
                     <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
@@ -369,7 +371,8 @@ function Dashboard() {
                 </div>
             </div>
         </section>
-
+        </div>
+    }
                 
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>

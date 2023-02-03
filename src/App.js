@@ -15,19 +15,23 @@ import { Route, Routes } from "react-router-dom";
 import React, { Component } from 'react'
 import $ from"jquery";
  import { jQuerycode } from "./components/Jq.js";
-
+ import Loader from "./components/loader/Loader";
+ let test=false;
  class  App extends Component {
   componentDidMount()
   {
    
       jQuerycode();
+      
   }
   
-  
+ 
  render(){
+  test=localStorage.getItem("isCompleting");
+
   return(
     <>
-    
+    {!test&&<Loader/>}
     <div>
         <Header/>
         <Navbar/>

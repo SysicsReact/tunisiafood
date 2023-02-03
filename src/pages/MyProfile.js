@@ -12,10 +12,7 @@ function MyProfile() {
     const navigate = useNavigate();
     const userID=useSelector(selectuserID)
     useEffect(() => {
-        if(!issignIN)navigate("/")
-        else{
-            console.log(userID)
-        }
+        
        }, []);
     return (
         <html lang="en">

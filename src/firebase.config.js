@@ -38,8 +38,23 @@ const logout = () => {
   signOut(auth);
 };
 
+let isLoading=false;
+let isTesting=false;
 
-
+const changeIsLoading=(state)=>{
+  isLoading=state;
+  localStorage.setItem("isCompleting",false);
+}
+const changeIsTesting=(state)=>{
+  isTesting=state;
+  localStorage.setItem("isCompleting",false);
+}
+const testLoading=()=>{
+  if(isTesting==true&&isLoading==true){
+    localStorage.setItem("isCompleting",true);
+  }
+ return isTesting==true && isLoading==true;
+}
 
 
 
@@ -48,4 +63,4 @@ const logout = () => {
 export { app, db, storage, auth ,
   sendPasswordReset,
   createUserWithEmailAndPassword,
-  logout };
+  logout,changeIsLoading,changeIsTesting,testLoading };
