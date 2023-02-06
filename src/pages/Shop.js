@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, QuerySnapshot } from "firebase/firestore";
 import { db } from "../firebase.config";
 import Loader from "../components/loader/Loader";
+import Intro from "../components/Intro";
 function selectItem(state) {
     return state.products.map(product => product)
   }
@@ -207,6 +208,7 @@ class Shop extends Component {
                 </div>
             </div>
                 </section>
+                <Intro></Intro>
                 <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
@@ -224,7 +226,6 @@ class Shop extends Component {
         </html>
     );
     }
-    
 }
 const mapStateToProps = (state) =>{
     return{

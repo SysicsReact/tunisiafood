@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading } from "../firebase.config";
 import $ from "jquery";
 import { onAuthStateChanged } from "firebase/auth";
@@ -180,16 +180,15 @@ const Dashboard=()=> {
 <li className="header-widget" title="My Account">
 <img src="assets/images/user.png" alt="user" />
 {isLoggedIn &&
-<li className="navbar-item dropdown" >  
- {displayName}
+<span className="navbar-item dropdown" >  
+<NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
             <ul className="dropdown-position-list">
-                <li><Link to="/MyProfile"> Hi {displayName} </Link></li>
                 <li><Link to="MyProfile"> profile </Link></li>
                 <li><button className="dashboard__btn"
                     onClick={logout}> 
                 <Link to="/"> Logout </Link> </button></li>
             </ul>
-            </li>
+            </span>
         }
 <div>
     {!isLoggedIn&&

@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
+import SingleProduct from "./pages/SingleProduct";
 import MyProfile from "./pages/MyProfile";
 import './App.css';
 import { Route, Routes } from "react-router-dom";
@@ -47,6 +48,7 @@ import $ from"jquery";
       <Route path="/MyProfile" element={<MyProfile/>}/>
       <Route path="/Shop" element={<Shop/>}/>
       <Route path="/Blog" element={<Blog/>}/>
+      <Route path="/SingleProduct" element={<SingleProduct/>}/>
 
     </Routes>
     <div>

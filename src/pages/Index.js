@@ -5,7 +5,7 @@ import { Link,useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase.config";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import Loader from "../components/loader/Loader";
-
+import Intro from "../components/Intro";
 function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
@@ -40,25 +40,23 @@ function Dashboard() {
             <div>
                 <div className="backdrop"></div>
 
-            
-
             <section className="home-classic-slider slider-arrow">
                     <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
                     <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-lg-6">
                             <div className="banner-content">
-                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
-                                <p>get your organic food with our dairy items.</p>
+                                <h1>Nous partageons l’amour comme nous partageons la nourriture</h1>
+                                <p>Avec nous tout est une question de sens et de souvenirs d’enfance de réunions de famille. L’odeur des épices fraîches, le goût des plats traditionnels. </p>
                                 <div className="banner-btn">
-                                    <a className="btn btn-inline" href="front/shop-4column.html">
+                                <Link to="/Shop"><a className="btn btn-inline">
                                         <i className="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
-                                    </a>
-                                    <a className="btn btn-outline" href="offer.html">
-                                        <i className="icofont-sale-discount"></i>
-                                        <span>get offer</span>
-                                    </a>
+                                        <span>Achat</span>
+                                    </a></Link>
+                                    <Link to="/Contact">  <a className="btn btn-outline">
+                                   <i className="icofont-sale-discount"></i>
+                                        <span>Contact</span>
+                                    </a></Link>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +71,8 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-heading">
-                            <h2>recently sold items</h2>
+                            <h2>
+    Articles vendus récemment</h2>
                         </div>
                     </div>
                 </div>
@@ -84,16 +83,16 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                            <a href="front/shop-4column.html" className="btn btn-outline">
+                        <Link to="/Shop"> <a className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
-                                <span>show more</span>
-                            </a>
+                                <span>Voir Plus</span>
+                            </a></Link>
                         </div>
                     </div>
                 </div>
                 </div>
             </section>
-        <div className="section promo-part">
+             <div className="section promo-part">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
@@ -109,7 +108,7 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-heading">
-                            <h2>our featured items</h2>
+                            <h2>Articles à la une</h2>
                         </div>
                     </div>
                 </div>
@@ -306,21 +305,26 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                            <a href="shop-4column.html" className="btn btn-outline">
+                           <Link to="/Shop"> <a className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
-                                <span>show more</span>
-                            </a>
+                                <span>Voir Plus</span>
+                            </a></Link>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <Intro/>
+    
         <section className="section blog-part">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
+                    <div className="section-heading">
+                            <h2>   </h2>
+                        </div>
                         <div className="section-heading">
-                            <h2>Read our articles</h2>
+                            <h2>Lire nos articles</h2>
                         </div>
                     </div>
                 </div>
@@ -362,10 +366,10 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                            <a href="blog-grid.html" className="btn btn-outline">
+                        <Link to="/Blog"> <a href="blog-grid.html" className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
-                                <span>view all blog</span>
-                            </a>
+                                <span> Voir tous les blogs</span>
+                            </a></Link>
                         </div>
                     </div>
                 </div>

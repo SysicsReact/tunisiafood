@@ -22,7 +22,7 @@ return(
                 <link rel="stylesheet" href="assets/css/slider.css" />
             </head>
 <body>
-          <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+          <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
             <div class="container">
                 <h2>blogs</h2>
                 <ol class="breadcrumb">
