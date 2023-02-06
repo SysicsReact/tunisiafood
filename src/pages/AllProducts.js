@@ -1,80 +1,31 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { createProduct } from "../store/actions/productActions";
-import { toast } from "react-toastify";
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, QuerySnapshot } from "firebase/firestore";
+import { ref as sRef } from 'firebase/storage';
 import { db } from "../firebase.config";
-import Loader from "../components/loader/Loader";
-import Intro from "../components/Intro";
-function selectItem(state) { 
-    return state.products.map(product => product)
-  }
-                //
-               
-                const  GetAllProds = async (state)=>{
-                    
-                   // state.setState({isLoading:true})
-                   state.setState({isLoading:true})
-                    const prodsRef = collection(db, "products");
-                  
-                    const querySnapshot = await getDocs(prodsRef);
-                    if (!querySnapshot.empty){
-                        querySnapshot.forEach((doc) => {
-                            // doc.data() is never undefined for query doc snapshots
-                            console.log(doc.id, " => ", doc.data());
-                          }); 
-                         
-                         //return querySnapshot;
-                    }
-                    else{
-                       // return null;
-                    }
+import { query, onSnapshot } from "firebase/firestore";
+import { collection, doc } from "firebase/firestore";
 
-                }
-                
-          
-                //
-  const selectItemsWhoseNamesStartWith = (items, namePrefix) =>
-  items.filter(item => item.decription==namePrefix)
-class Shop extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            prods: {},
-            isLoading:false
-        };
-      }
-     
-    render()
-    {
-        //this.setState({isLoading:true})
-        //GetAllProds(this.state)
-       
-        const  products  = selectItem(this.props);
-        const productsbydesc=selectItemsWhoseNamesStartWith(selectItem(this.props),"Stupid ugly Burger")
-        console.log(productsbydesc)
-        //hey(selectItem(this.props))
-       /* ps(this.props);
-        //console.log(test(selectItemsWhoseNamesStartWith(this.props,1)))
-        console.log(selectItem(this.props))
-        for (let index = 0; index < this.props.products.length; index++) {
-            console.log(selectItemsWhoseNamesStartWith(this.props,index+1));
-            
-        }*/
-        
+function AllProducts() {
+     const [products, setProducts] = useState([]);
+     useEffect(() => {
+          const q = query(collection(db, "products"));
+          onSnapshot(q, (querySnapshot) => {
+            setProducts(
+              querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+              }))
+            );
+          });
+        }, []);
 
-       
     return (
         <html lang="en">
             <head>
-
                 <meta charset="UTF-8" />
                 <meta name="title" content="Tunisian Food" />
                 <meta name="keywords" content="organic, food, shop, ecommerce, store, agriculture, vegetables, farm, grocery, natural, online store" />
-
-                <title>Tunisian Food - Shop</title>
-
+                <title>Tout les produits</title>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -84,10 +35,9 @@ class Shop extends Component {
                 <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
+                <link rel="stylesheet" href="assets/css/profile.css" />
             </head>
-            <body>
-                
-                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+            <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div class="container">
                         <h2>Tout Les Produits</h2>
                         <ol class="breadcrumb">
@@ -95,17 +45,8 @@ class Shop extends Component {
                             <li class="breadcrumb-item active" aria-current="page">Shop</li>
                         </ol>
                     </div>
-                </section>
-                <section>
-                    <div>
-                    {products.map(product => (
-            <p key={product.id}>
-              {product.name} : {product.price}
-            </p>
-          ))}
-                    </div>
-                </section>
-                <section class="inner-section shop-part">
+            </section>
+            <section class="inner-section shop-part">
             <div class="container">
                 <div class="row content-reverse">
                     <div class="col-lg-3">
@@ -129,19 +70,32 @@ class Shop extends Component {
                             </div>
                         </div>
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                            {products.map(product=>
-                                (
+                        {products.map((e) => {
+                    return (
                                 <div class="col">
                                 <div class="product-card">
                                     <div class="product-media">
                                         <div class="product-label">
-                                            <label class="label-text new">new</label>
+                                             {e.data.tag=="nouveau"&&
+                                            <label class="label-text new">{e.data.tag}</label>}
+
+                                            {e.data.tag=="solde"&&
+                                            <label class="label-text sale">{e.data.tag}</label>}
+
+                                            {e.data.tag=="populaire"&&
+                                            <label class="label-text feat">{e.data.tag}</label>}
+
                                         </div>
                                         <button class="product-wish wish">
-                                            <i class="fas fa-heart"></i>
+                                        {e.data.category=="plat"&&
+                                            <label class="label-text order">{e.data.category}</label>}
+                                        {e.data.category=="epice"&&
+                                            <label class="label-text rate">{e.data.category}</label>}
+                                        {e.data.category=="sucré"&&
+                                            <label class="label-text sucre">{e.data.category}</label>}
                                         </button>
                                         <a class="product-image" href="product-video.html">
-                                            <img src="assets/images/product/01.jpg" alt="product"/>
+                                            <img src={e.data.photo} alt="product"/>
                                         </a>
                                         <div class="product-widget">
                                             <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -156,18 +110,17 @@ class Shop extends Component {
                                             <i class="active icofont-star"></i>
                                             <i class="active icofont-star"></i>
                                             <i class="icofont-star"></i>
-                                            <a href="product-video.html">(3)</a>
                                         </div>
                                         <h6 class="product-name">
-                                            <a href="product-video.html" key={product.id}>{product.name}</a>
+                                            <a href="product-video.html">{e.data.name}</a>
                                         </h6>
                                         <h6 class="product-price">
-                                            <del>${product.price}</del>
-                                            <span>$28<small>/piece</small></span>
+                                            <del>€{e.data.price}</del>
+                                            <span>€{e.data.price}<small>/Plat</small></span>
                                         </h6>
                                         <button class="product-add" title="Add to Cart">
                                             <i class="fas fa-shopping-basket"></i>
-                                            <span>add</span>
+                                            <span>Ajouter</span>
                                         </button>
                                         <div class="product-action">
                                             <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
@@ -177,8 +130,8 @@ class Shop extends Component {
                                     </div>
                                 </div>
                             </div>
-                                )
-                                )}
+                               );
+                              })}
                             
                         </div>
                         <div class="row">
@@ -209,7 +162,10 @@ class Shop extends Component {
                 </div>
             </div>
                 </section>
-                <Intro></Intro>
+            <body>
+            
+
+
                 <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
@@ -223,15 +179,10 @@ class Shop extends Component {
                 <script src="assets/js/venobox.js"></script>
                 <script src="assets/js/slick.js"></script>
                 <script src="assets/js/main.js"></script>
+
             </body>
         </html>
     );
-    }
-}
-const mapStateToProps = (state) =>{
-    return{
-        products: state.product.products
-    }
 }
 
-export default connect(mapStateToProps) (Shop);
+export default AllProducts;

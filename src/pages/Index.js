@@ -49,7 +49,7 @@ function Dashboard() {
                                 <h1>Nous partageons l’amour comme nous partageons la nourriture</h1>
                                 <p>Avec nous tout est une question de sens et de souvenirs d’enfance de réunions de famille. L’odeur des épices fraîches, le goût des plats traditionnels. </p>
                                 <div className="banner-btn">
-                                <Link to="/Shop"><a className="btn btn-inline">
+                                <Link to="/AllProducts"><a className="btn btn-inline">
                                         <i className="fas fa-shopping-basket"></i>
                                         <span>Achat</span>
                                     </a></Link>

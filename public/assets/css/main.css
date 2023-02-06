@@ -1814,11 +1814,14 @@ tbody tr td:last-child {
 }
 
 .label-text.off {
-  background: var(--red);
+  background: var(--fuchsia);
 }
 
 .label-text.new {
   background: var(--green);
+}
+.label-text.sucre {
+  background: var(--#FF00FF);
 }
 
 .label-text.sale {
@@ -1839,8 +1842,9 @@ tbody tr td:last-child {
 
 .product-wish {
   position: absolute;
-  top: 0px;
+  top: -3px;
   right: 0px;
+  margin-bottom: 5px;
   font-size: 18px;
   color: var(--gray-chalk);
 }
@@ -1851,6 +1855,7 @@ tbody tr td:last-child {
 
 .product-image img {
   width: 100%;
+  border-radius: 5px;
 }
 
 .product-widget {

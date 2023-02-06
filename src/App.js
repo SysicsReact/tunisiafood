@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
+import AllProducts from "./pages/AllProducts";
 import SingleProduct from "./pages/SingleProduct";
 import MyProfile from "./pages/MyProfile";
 import './App.css';
@@ -49,6 +50,7 @@ import $ from"jquery";
       <Route path="/Shop" element={<Shop/>}/>
       <Route path="/Blog" element={<Blog/>}/>
       <Route path="/SingleProduct" element={<SingleProduct/>}/>
+      <Route path="/AllProducts" element={<AllProducts/>}/>
 
     </Routes>
     <div>
