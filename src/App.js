@@ -5,6 +5,7 @@ import Reset from "./pages/resetPwd";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Cart from "./components/Cart";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
@@ -14,7 +15,7 @@ import SingleProduct from "./pages/SingleProduct";
 import MyProfile from "./pages/MyProfile";
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import $ from"jquery";
  import { jQuerycode } from "./components/Jq.js";
  import Loader from "./components/loader/Loader";
@@ -22,15 +23,11 @@ import $ from"jquery";
  class  App extends Component {
   componentDidMount()
   {
-   
-      jQuerycode();
-      
+      jQuerycode();   
   }
   
- 
  render(){
   test=localStorage.getItem("isCompleting");
-
   return(
     <>
     {!test&&<Loader/>}
@@ -38,7 +35,6 @@ import $ from"jquery";
         <Header/>
         <Navbar/>
     </div>
-  
     <Routes>
       <Route path="/" element={<Index/>}/>
       <Route path="/Login" element={<Login/>}/>
@@ -51,6 +47,7 @@ import $ from"jquery";
       <Route path="/Blog" element={<Blog/>}/>
       <Route path="/SingleProduct" element={<SingleProduct/>}/>
       <Route path="/AllProducts" element={<AllProducts/>}/>
+      <Route path="/Cart" elemnt={<Cart/>}/>
 
     </Routes>
     <div>

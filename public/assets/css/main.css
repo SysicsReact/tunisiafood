@@ -1821,7 +1821,7 @@ tbody tr td:last-child {
   background: var(--green);
 }
 .label-text.sucre {
-  background: var(--#FF00FF);
+  background: var(--aqua);
 }
 
 .label-text.sale {
@@ -1961,6 +1961,21 @@ tbody tr td:last-child {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-bottom: 13px;
+}
+.product-mass {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  color: var(--primary);
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

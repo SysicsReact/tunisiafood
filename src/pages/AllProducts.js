@@ -5,7 +5,9 @@ import { db } from "../firebase.config";
 import { query, onSnapshot } from "firebase/firestore";
 import { collection, doc } from "firebase/firestore";
 
+
 function AllProducts() {
+
      const [products, setProducts] = useState([]);
      useEffect(() => {
           const q = query(collection(db, "products"));
@@ -37,6 +39,8 @@ function AllProducts() {
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/profile.css" />
             </head>
+               <div className="backdrop"></div>
+               <a class="backtop fas fa-arrow-up" href="#"></a>
             <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div class="container">
                         <h2>Tout Les Produits</h2>
@@ -72,7 +76,9 @@ function AllProducts() {
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
                         {products.map((e) => {
                     return (
+                                
                                 <div class="col">
+                                   
                                 <div class="product-card">
                                     <div class="product-media">
                                         <div class="product-label">
@@ -104,13 +110,9 @@ function AllProducts() {
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <div class="product-rating">
-                                            <i class="active icofont-star"></i>
-                                            <i class="active icofont-star"></i>
-                                            <i class="active icofont-star"></i>
-                                            <i class="active icofont-star"></i>
-                                            <i class="icofont-star"></i>
-                                        </div>
+                                      
+                                            <i class="product-mass">200 G</i>
+                                      
                                         <h6 class="product-name">
                                             <a href="product-video.html">{e.data.name}</a>
                                         </h6>
@@ -161,11 +163,8 @@ function AllProducts() {
                     </div>
                 </div>
             </div>
-                </section>
+            </section>
             <body>
-            
-
-
                 <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>

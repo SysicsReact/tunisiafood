@@ -37,9 +37,10 @@ function Dashboard() {
             <body>
             {isLoading && <Loader/>}
             {!isLoading &&
+            
             <div>
                 <div className="backdrop"></div>
-
+                <a class="backtop fas fa-arrow-up" href="#"></a>
             <section className="home-classic-slider slider-arrow">
                     <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
                     <div className="container">

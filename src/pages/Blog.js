@@ -22,6 +22,8 @@ return(
                 <link rel="stylesheet" href="assets/css/slider.css" />
             </head>
 <body>
+<div className="backdrop"></div>
+               <a class="backtop fas fa-arrow-up" href="#"></a>
           <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
             <div class="container">
                 <h2>blogs</h2>
