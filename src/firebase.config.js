@@ -3,6 +3,9 @@ import { getStorage } from "firebase/storage";
 import { getDatabase, ref, set } from "firebase/database";
 import { GoogleAuthProvider,getAuth,signInWithPopup,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
 import { getFirestore } from "@firebase/firestore";
+import { useState } from "react";
+import Dashboard from "./pages/Index";
+import { updatex } from "./components/Header";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCpajBxsVUdz7VMFWI9tPQihxQPoXv0F2Y",
@@ -56,11 +59,21 @@ const testLoading=()=>{
  return isTesting==true && isLoading==true;
 }
 
+let cartcount=0;
 
+function SetCartDetails(value){
+  cartcount=value;
+  updatex(value)
+}
+
+function GetCardDetails(){
+ if (cartcount==0) return null;
+  return cartcount;
+}
 
 
 
 export { app, db, storage, auth ,
   sendPasswordReset,
   createUserWithEmailAndPassword,
-  logout,changeIsLoading,changeIsTesting,testLoading };
+  logout,changeIsLoading,changeIsTesting,testLoading,SetCartDetails,GetCardDetails };

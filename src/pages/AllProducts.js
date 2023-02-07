@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ref as sRef } from 'firebase/storage';
-import { db } from "../firebase.config";
+import { SetCartDetails, db } from "../firebase.config";
 import { query, onSnapshot } from "firebase/firestore";
 import { collection, doc } from "firebase/firestore";
 
@@ -20,7 +20,14 @@ function AllProducts() {
             );
           });
         }, []);
-
+const [cart, setCart] = useState([]);
+const addToCart = (product) => {
+    console.log("We are in Add to cart");
+    
+    setCart([...cart, product]);
+    console.log(cart.length);
+    SetCartDetails(cart);
+};
     return (
         <html lang="en">
             <head>
@@ -120,7 +127,7 @@ function AllProducts() {
                                             <del>€{e.data.price}</del>
                                             <span>€{e.data.price}<small>/Plat</small></span>
                                         </h6>
-                                        <button class="product-add" title="Add to Cart">
+                                        <button onClick={() => addToCart(e.data)} class="product-add" title="Add to Cart">
                                             <i class="fas fa-shopping-basket"></i>
                                             <span>Ajouter</span>
                                         </button>

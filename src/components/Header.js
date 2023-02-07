@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading } from "../firebase.config";
+import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails } from "../firebase.config";
 import $ from "jquery";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
@@ -12,9 +12,14 @@ import { doc, getDoc, setDoc } from "@firebase/firestore";
 import Loader from "../components/loader/Loader";
 import Cart from "./Cart";
 
-
+let x=0;
+export function updatex(value)
+{
+    x=value;
+}
 const Dashboard=()=> {
   
+    
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
     const dispatch=useDispatch();
@@ -22,11 +27,14 @@ const Dashboard=()=> {
     const[test, setTest]=useState(true)
     const [completeLoading,setCompleLoading]=useState(false)
     const [isLoggedIn,setIsloggin]=useState(false); 
+    const[value,SetValue]=useState(0);
     //monitor currently siggnin user
     useEffect(()=>{
+        
        // setIsLoading(true);
-    
+     
         onAuthStateChanged(auth, (user) => {
+          
             if (user) {
               const uid = user.uid;
               setIsloggin(true);
@@ -172,9 +180,9 @@ const Dashboard=()=> {
                                 <i className="fas fa-heart"></i>
                                 <sup>0</sup>
                             </a>
-                            <button className="header-widget header-cart" title="Cartlist">
+                            <button onClick={() => SetValue(GetCardDetails().length)} className="header-widget header-cart" title="Cartlist">
                                 <i className="fas fa-shopping-basket"></i>
-                                <sup>9+</sup>
+                                <sup  >{value}</sup>
                                 <span>total price<small>$345.00</small></span>
                                 <span><small></small></span>
                             </button>
