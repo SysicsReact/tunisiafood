@@ -1,16 +1,109 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { auth, db, logout } from "../firebase.config";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading } from "../firebase.config";
 import $ from "jquery";
-function Dashboard() {
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
+import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
+import { async } from "q";
+import { doc, getDoc, setDoc } from "@firebase/firestore";
+
+
+const Dashboard=()=> {
+  
     const [user] = useAuthState(auth);
-   
+    const[displayName,setDisplayName]=useState("");
+    const dispatch=useDispatch();
+    const[test, setTest]=useState(true)
+    const [completeLoading,setCompleLoading]=useState(true)
+    const [isLoggedIn,setIsloggin]=useState(true); 
+    //monitor currently siggnin user
+    useEffect(()=>{
+       // setIsLoading(true);
+    
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              const uid = user.uid;
+              setIsloggin(true);
+              if(uid){
+                const docRef = doc(db, "users", uid);
+                
+                getDoc(docRef).then(docSnap => {
+                    if (docSnap.exists()) {
+                        setDisplayName(docSnap.data().userName)
+                        changeIsLoading(false);
+                        changeIsTesting(false);
+                        setCompleLoading(testLoading())
+                        localStorage.setItem("isCompleting",true);
+                        //changeIsTesting(false);
+                       
+                    } else {
+                        
+                        const writeUserData= async(userId, name, email,docRef)=>{
+                            const userRef = doc(db, "users", userId);
+                            console.log(userRef)
+                            await setDoc(docRef, {
+                              userName: name,
+                              email:email,
+                          }).then(()=>{
+                            setDisplayName(name)
+                            changeIsLoading(true);
+                            changeIsTesting(true);
+                            setCompleLoading(testLoading())
+
+                            //changeIsTesting(false);
+                            
+                          }).catch((error) => {
+                            changeIsLoading(true);
+                            changeIsTesting(true);
+                            setCompleLoading(testLoading())
+                           
+                          });
+                          }
+                    }
+                  }) 
+                }
+          
+              
+              //console.log(user.displayName)
+              
+
+
+              dispatch(SET_ACTIVE_USER({
+                email: user.email,
+                userName: user.displayName?user.displayName:displayName,
+                userID: user.uid
+              }))
+              setIsloggin(true);
+            } else {
+              // User is signed out
+              // ...
+             
+                setDisplayName("")
+                dispatch(Remove_ACTIVE_USER());
+                changeIsLoading(true);
+                changeIsTesting(true);
+                
+                setCompleLoading(testLoading())
+                setIsloggin(false);
+            }
+          });
+          setCompleLoading(testLoading())
+    },[dispatch,displayName,completeLoading])
+
+    
 
     function loggedUser(user) {
         if (user) {
             return (
-                <><button className="dashboard__btn" onClick={logout}> <Link to="/"> Logout </Link> </button><span><Link to="/MyProfile"> profile </Link></span></>
+                <>
+
+                <button className="dashboard__btn" onClick={logout}> 
+                <Link to="/"> Logout </Link> </button>
+                <span><Link to="MyProfile"> profile </Link></span>
+                </>
             )
         } else {
             return (
@@ -18,7 +111,9 @@ function Dashboard() {
             )
         }
     }
+    
     return (
+        
         <html lang="en">
             <head>
                 <meta charset="UTF-8" />
@@ -36,30 +131,30 @@ function Dashboard() {
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
+           
             <header className="header-part">
+                
                 <div className="container">
                     <div className="header-content">
                         <div className="header-media-group">
                             <button className="header-user"> <img src="assets/images/user.png" alt="user" /> </button>
-                            <a href="index.html"><img src="assets/images/Logo.jpg" alt="logo" /></a>
+                            <a className="header-logo">
+                            <Link to="/">
+                                <img src="assets/images/Logo.png" alt="logo" />
+                            </Link>
+                        </a>
                             <button className="header-src"><i className="fas fa-search"></i></button>
                         </div>
 
-                        <a href="index.html" className="header-logo">
+                        <a className="header-logo">
                             <Link to="/">
-                                <img src="assets/images/Logo.jpg" alt="logo" />
+                                <img src="assets/images/Logo.png" alt="logo" />
                             </Link>
                         </a>
-                        <li className="header-widget" title="My Account">
 
-                            <img src="assets/images/user.png" alt="user" />
-                            <div>
-                                {loggedUser(user)}
-                            </div>
-                        </li>
 
                         <form className="header-form">
-                            <input type="text" placeholder="Search anything..." />
+                            <input type="text" placeholder="Cherchez..." />
                             <button><i className="fas fa-search"></i></button>
                         </form>
 
@@ -76,11 +171,33 @@ function Dashboard() {
                                 <i className="fas fa-shopping-basket"></i>
                                 <sup>9+</sup>
                                 <span>total price<small>$345.00</small></span>
+                                <span><small></small></span>
                             </button>
                         </div>
+<li className="header-widget" title="My Account">
+<img src="assets/images/user.png" alt="user" />
+{isLoggedIn &&
+<span className="navbar-item dropdown" >  
+<NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
+            <ul className="dropdown-position-list">
+                <li><Link to="MyProfile"> profile </Link></li>
+                <li><button className="dashboard__btn"
+                    onClick={logout}> 
+                <Link to="/"> Logout </Link> </button></li>
+            </ul>
+            </span>
+        }
+<div>
+    {!isLoggedIn&&
+                <span><Link to="/Login"> join </Link></span>
+            }
+</div>
+</li>
                     </div>
                 </div>
             </header>
+            
+          
             <aside class="cart-sidebar">
             <div class="cart-header">
                 <div class="cart-total">

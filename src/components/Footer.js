@@ -4,7 +4,7 @@ class Footer extends React.Component{
      render() {
           return (
                <html lang="en">
-                                   <head>
+        <head>
                <meta charset="UTF-8"/>
                <meta name="name" content="Greeny"/>
                <meta name="title" content="Greeny - eCommerce HTML Template"/>
@@ -19,16 +19,16 @@ class Footer extends React.Component{
                <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css"/>
                <link rel="stylesheet" href="assets/css/main.css"/>
                <link rel="stylesheet" href="assets/css/home-classic.css"/>
-           </head>
+        </head>
         <footer class="footer-part">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
                             <a class="footer-logo" href="#">
-                                <img src="assets/images/logo.png" alt="logo"/>
+                                <img src="assets/images/logoSmall.png" alt="logo"/>
                             </a>
-                            <p class="footer-desc">Adipisci asperiores ipsum ipsa repellat consequatur repudiandae quisquam assumenda dolor perspiciatis sit ipsum dolor amet.</p>
+                            <p class="footer-desc">Un voyage à travers les souvenirs, les recettes secrètes de famille et la bistronomie moderne de La Tunisie.</p>
                             <ul class="footer-social">
                                 <li><a class="icofont-facebook" href="#"></a></li>
                                 <li><a class="icofont-twitter" href="#"></a></li>
@@ -40,7 +40,7 @@ class Footer extends React.Component{
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget contact">
-                            <h3 class="footer-title">contact us</h3>
+                            <h3 class="footer-title">Contactez-nous</h3>
                             <ul class="footer-contact">
                                 <li>
                                     <i class="icofont-ui-email"></i>
@@ -52,45 +52,51 @@ class Footer extends React.Component{
                                 <li>
                                     <i class="icofont-ui-touch-phone"></i>
                                     <p>
-                                        <span>+120 279 532 13</span>
-                                        <span>+120 279 532 14</span>
+                                        <span>+216 50 450 960</span>
+                                        <span>+216 50 450 960</span>
                                     </p>
                                 </li>
                                 <li>
                                     <i class="icofont-location-pin"></i>
-                                    <p>1Hd- 50, 010 Avenue, NY 90001 United States</p>
+                                    <p>Tunisie, Sfax</p>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
-                            <h3 class="footer-title">quick Links</h3>
+                            <h3 class="footer-title">Liens</h3>
                             <div class="footer-links">
                                 <ul>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="#">Order Tracking</a></li>
-                                    <li><a href="#">Best Seller</a></li>
-                                    <li><a href="#">New Arrivals</a></li>
+                                <li><Link to="/">Accueil</Link>
+                                </li>
+                                <li><Link to="Profile">Mon Profile</Link>
+                                </li>
+                                <li><Link to="Category">Catégories</Link>
+                                </li>
+                                <li><Link to="Contact">Contacts</Link>
+                                </li>
                                 </ul>
                                 <ul>
-                                    <li><a href="#">Location</a></li>
-                                    <li><a href="#">Affiliates</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                    <li><a href="#">Carrer</a></li>
-                                    <li><a href="#">Faq</a></li>
+                                <li><Link to="Shop">Shop</Link>
+                                </li>
+                                <li><Link to="About">Concept</Link>
+                                </li>
+                                <li><Link to="Blog">Blogs</Link>
+                                </li>
+                                <li><Link to="Coming">Bientôt disponible</Link>
+                                </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
-                            <h3 class="footer-title">Download App</h3>
-                            <p class="footer-desc">Lorem ipsum dolor sit amet tenetur dignissimos ipsum eligendi autem obcaecati minus ducimus totam reprehenderit exercitationem!</p>
+                            <h3 class="footer-title">Tunisian Food</h3>
+                            <p class="footer-desc">L’authenticité est le mot parfait pour décrire notre cuisine méditerranéenne qui se concentre sur des plats simples à partager avec des ingrédients nutritifs et de saison!</p>
                             <div class="footer-app">
-                                <a href="#"><img src="assets/images/google-store.png" alt="google"/></a>
-                                <a href="#"><img src="assets/images/app-store.png" alt="app"/></a>
+                            <Link to="Coming"><img src="assets/images/google-store.png" alt="google"/></Link>
+                            <Link to="Coming"><img src="assets/images/app-store.png" alt="app"/></Link>
                             </div>
                         </div>
                     </div>
@@ -98,13 +104,7 @@ class Footer extends React.Component{
                 <div class="row">
                     <div class="col-12">
                         <div class="footer-bottom">
-                            <p class="footer-copytext">&copy;  All Copyrights Reserved by <a target="_blank" href="https://themeforest.net/user/mironcoder">Mironcoder</a></p>
-                            <div class="footer-card">
-                                <a href="#"><img src="assets/images/payment/jpg/01.jpg" alt="payment"/></a>
-                                <a href="#"><img src="assets/images/payment/jpg/02.jpg" alt="payment"/></a>
-                                <a href="#"><img src="assets/images/payment/jpg/03.jpg" alt="payment"/></a>
-                                <a href="#"><img src="assets/images/payment/jpg/04.jpg" alt="payment"/></a>
-                            </div>
+                            <p class="footer-copytext">&copy;  Tous droits d'auteur réservés par <a target="_blank" href="https://themeforest.net/user/mironcoder">Sysics Studio</a></p>
                         </div>
                     </div>
                 </div>

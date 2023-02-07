@@ -1,11 +1,12 @@
 
-import { db,auth, logInWithEmailAndPassword } from "../firebase.config";
+import { db,auth } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {  ref, set,onValue } from "firebase/database";
-import { GoogleAuthProvider,signInWithPopup} from "firebase/auth";
-
+import { GoogleAuthProvider,signInWithEmailAndPassword,signInWithPopup} from "firebase/auth";
+import {  ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -15,30 +16,35 @@ function Login() {
     const googleProvider = new GoogleAuthProvider();
     var testUser;
 
+    const logInWithEmailAndPassword = async (email, password) => {
+       console.log(email,password)
+          await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            const user = userCredential.user;
+            toast.success("Connecté avec succès")
+            //navigate("/")
+                })
+                .catch((error) => {
+                    toast.error("error.message")
+                });
+        
+      };
+      
+
+const loginUser = (e) => {
+    e.preventDefault()
+    logInWithEmailAndPassword(email, password)
+    
+};
     const signInWithGoogle = async () => {
 
         try {
           const res = await signInWithPopup(auth, googleProvider);
-          const user = res.user;
-      
-          const starCountRef = ref(db, 'users/' + user.uid );
-          onValue(starCountRef, (snapshot) => {
-            const data = snapshot.val();
-            testUser=data
+          
             // updateStarCount(postElement, data);
-          });
-        if (!testUser) {           
-          set(ref(db, 'users/' + user.uid), {
-            username: user.displayName,
-            email: user.email,
-            photo: user.photoURL,
-          });
-
-         }
+        
         } catch (err) {
           console.error(err);
         }
-        localStorage.setItem("loggedUser",JSON.stringfy(testUser))
       };
 
     useEffect(() => {
@@ -60,12 +66,14 @@ function Login() {
                 <link rel="stylesheet" href="assets/css/user-auth.css" />
             </head>
             <body>
+            <ToastContainer /> 
+                <br></br><br></br><br></br><br></br><br></br>
                 <section className="user-form-part">
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                                 <div className="user-form-logo">
-                                    <img src="assets/images/logo.png" alt="logo" />
+                                  
                                 </div>
                                 <div className="user-form-card">
                                     <div className="user-form-title">
@@ -82,7 +90,7 @@ function Login() {
                                         <div className="user-form-divider">
                                             <p>or</p>
                                         </div>
-                                        <form className="user-form"  onSubmit={(event) => event.preventDefault()}>
+                                        <form className="user-form"  onSubmit={loginUser}>
                                             <div className="form-group">
                                                 <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
                                             </div>
@@ -94,7 +102,7 @@ function Login() {
                                                 <label className="form-check-label" for="check">Remember Me</label>
                                             </div>
                                             <div className="form-button">
-                                                <button  onClick={() => logInWithEmailAndPassword(email, password)}> login</button>
+                                                <button type="submit"> login</button>
                                                 <p>Forgot your password?<a ><Link to="/Reset"> reset </Link></a></p>
                                             </div>
                                         </form>

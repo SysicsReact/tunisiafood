@@ -4,14 +4,13 @@ import Product from "../components/Product";
 import { Link,useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase.config";
 import { query, collection, getDocs, where } from "firebase/firestore";
-
+import Intro from "../components/Intro";
 function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const navigate = useNavigate();
    
-   
-
+    
 
     return (
         <html lang="en">
@@ -31,344 +30,37 @@ function Dashboard() {
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
                 <link rel="stylesheet" href="assets/css/slider.css" />
+                <link rel="stylesheet" href="./components/loader/loader.css" />
             </head>
             <body>
+           
+            <div>
                 <div className="backdrop"></div>
 
-
-                <nav className="navbar-part">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="navbar-content">
-                                    <ul className="navbar-list">
-                                    <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="/" className="navbar-link" >  Home </Link></span>
-                                        </li>
-                                        <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="Shop/" className="navbar-link" >  shop </Link></span>
-                                        </li>
-                                        <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="About/" className="navbar-link" >  About Us</Link></span>
-                                        </li>
-                                        <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="Category/" className="navbar-link" >  Categories</Link></span>
-                                        </li>
-                                        <li className="navbar-item dropdown">
-                                            pages
-                                            <ul className="dropdown-position-list">
-                                                <li><a href="front/faq.html">faqs</a></li>
-                                                <li><a href="front/offer.html">offers</a></li>
-                                                <li><a href="front/error.html">404 Error</a></li>
-                                                <li><a href="front/email-template.html">email template</a></li>
-                                            </ul>
-                                        </li>
-                                        <li className="navbar-item dropdown">
-                                            authentic
-                                            <ul className="dropdown-position-list">
-                                                <li><a href="front/login.html">login</a></li>
-                                                <li><a href="front/register.html">register</a></li>
-                                                <li><a href="front/reset-password.html">reset password</a></li>
-                                                <li><a href="front/change-password.html">change password</a></li>
-                                            </ul>
-                                        </li>
-                                        <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="Blogs/" className="navbar-link" >  Blogs </Link></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            <aside className="category-sidebar">
-            <div className="category-header">
-                <h4 className="category-title">
-                    <i className="fas fa-align-left"></i>
-                    <span>categories</span>
-                </h4>
-                <button className="category-close"><i className="icofont-close"></i></button>
-            </div>
-            <ul className="category-list">
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-vegetable"></i>
-                        <span>vegetables</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">asparagus</a></li>
-                        <li><a href="#">broccoli</a></li>
-                        <li><a href="#">carrot</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-groceries"></i>
-                        <span>groceries</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Grains & Bread</a></li>
-                        <li><a href="#">Dairy & Eggs</a></li>
-                        <li><a href="#">Oil & Fat</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-fruit"></i>
-                        <span>fruits</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Apple</a></li>
-                        <li><a href="#">Orange</a></li>
-                        <li><a href="#">Strawberry</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-dairy-products"></i>
-                        <span>dairy farm</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Egg</a></li>
-                        <li><a href="#">milk</a></li>
-                        <li><a href="#">butter</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-crab"></i>
-                        <span>sea foods</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Lobster</a></li>
-                        <li><a href="#">Octopus</a></li>
-                        <li><a href="#">Shrimp</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-salad"></i>
-                        <span>diet foods</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Salmon</a></li>
-                        <li><a href="#">Potatoes</a></li>
-                        <li><a href="#">Greens</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-dried-fruit"></i>
-                        <span>dry foods</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">noodles</a></li>
-                        <li><a href="#">Powdered milk</a></li>
-                        <li><a href="#">nut & yeast</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-fast-food"></i>
-                        <span>fast foods</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">mango</a></li>
-                        <li><a href="#">plumsor</a></li>
-                        <li><a href="#">raisins</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-cheers"></i>
-                        <span>drinks</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Wine</a></li>
-                        <li><a href="#">Juice</a></li>
-                        <li><a href="#">Water</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-beverage"></i>
-                        <span>coffee</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Cappuchino</a></li>
-                        <li><a href="#">Espresso</a></li>
-                        <li><a href="#">Latte</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-barbecue"></i>
-                        <span>meats</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Meatball</a></li>
-                        <li><a href="#">Sausage</a></li>
-                        <li><a href="#">Poultry</a></li>
-                    </ul>
-                </li>
-                <li className="category-item">
-                    <a className="category-link dropdown-link" href="#">
-                        <i className="flaticon-fish"></i>
-                        <span>fishes</span>
-                    </a>
-                    <ul className="dropdown-list">
-                        <li><a href="#">Agujjim</a></li>
-                        <li><a href="#">saltfish</a></li>
-                        <li><a href="#">pazza</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div className="category-footer">
-                <p>All Rights Reserved by <a href="#">Mironcoder</a></p>
-            </div>
-            </aside>
-
-                <div className="mobile-menu">
-                    <a href="index.html" title="Home Page">
-                        <i className="fas fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                    <button className="cate-btn" title="Category List">
-                        <i className="fas fa-list"></i>
-                        <span>category</span>
-                    </button>
-                    <button className="cart-btn" title="Cartlist">
-                        <i className="fas fa-shopping-basket"></i>
-                        <span>cartlist</span>
-                        <sup>9+</sup>
-                    </button>
-                    <a href="front/wishlist.html" title="Wishlist">
-                        <i className="fas fa-heart"></i>
-                        <span>wishlist</span>
-                        <sup>0</sup>
-                    </a>
-                    <a href="front/compare.html" title="Compare List">
-                        <i className="fas fa-random"></i>
-                        <span>compare</span>
-                        <sup>0</sup>
-                    </a>
-                </div>
-                <div className="modal fade" id="product-view">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <button className="modal-close icofont-close" data-bs-dismiss="modal"></button>
-                            <div className="product-view">
-                                <div className="row">
-                                    <div className="col-md-6 col-lg-6">
-                                        <div className="view-gallery">
-                                            <div className="view-label-group">
-                                                <label className="view-label new">new</label>
-                                                <label className="view-label off">-10%</label>
-
-                                            </div>
-                                            <ul className="preview-slider slider-arrow">
-                                                <li><img src="assets/images/Home-1.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/Home-1.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/Home-1.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                            </ul>
-                                            <ul className="thumb-slider">
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                                <li><img src="assets/images/product/01.jpg" alt="product" /></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6 col-lg-6">
-                                        <div className="view-details">
-                                            <h3 className="view-name">
-                                                existing product name
-                                            </h3>
-                                            <div className="view-meta">
-                                                <p>SKU:<span>1234567</span></p>
-                                                <p>BRAND: radhuni</p>
-                                            </div>
-                                            <div className="view-rating">
-                                                <i className="active icofont-star"></i>
-                                                <i className="active icofont-star"></i>
-                                                <i className="active icofont-star"></i>
-                                                <i className="active icofont-star"></i>
-                                                <i className="icofont-star"></i>
-                                                <a href="front/product-video.html">(3 reviews)</a>
-                                            </div>
-                                            <h3 className="view-price">
-                                                <del>$38.00</del>
-                                                <span>$24.00<small>/per kilo</small></span>
-                                            </h3>
-                                            <p className="view-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit non tempora magni repudiandae sint suscipit tempore quis maxime explicabo veniam eos reprehenderit fuga</p>
-                                            <div className="view-list-group">
-                                                <label className="view-list-title">tags:</label>
-                                                <ul className="view-tag-list">
-                                                    <li>organic</li>
-                                                    <li>vegetable</li>
-                                                    <li>chilis</li>
-                                                </ul>
-                                            </div>
-                                            <div className="view-list-group">
-                                                <label className="view-list-title">Share:</label>
-                                            </div>
-                                            <div className="view-add-group">
-                                                <button className="product-add" title="Add to Cart">
-                                                    <i className="fas fa-shopping-basket"></i>
-                                                    <span>add to cart</span>
-                                                </button>
-                                                <div className="product-action">
-                                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1" />
-                                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                                </div>
-                                            </div>
-                                            <div className="view-action-group">
-                                                <i className="icofont-heart"></i>
-                                                <span>add to wish</span>
-                                                <a className="view-compare" href="front/compare.html" title="Compare This Item">
-                                                    <i className="fas fa-random"></i>
-                                                    <span>Compare This</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <section className="home-classic-slider slider-arrow">
-                    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+            <section className="home-classic-slider slider-arrow">
+                    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
                     <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-lg-6">
                             <div className="banner-content">
-                                <h1>enjoy your healthy life with our fresh vegetables.</h1>
-                                <p>get your organic food with our dairy items.</p>
+                                <h1>Nous partageons l’amour comme nous partageons la nourriture</h1>
+                                <p>Avec nous tout est une question de sens et de souvenirs d’enfance de réunions de famille. L’odeur des épices fraîches, le goût des plats traditionnels. </p>
                                 <div className="banner-btn">
-                                    <a className="btn btn-inline" href="front/shop-4column.html">
+                                <Link to="/AllProducts"><a className="btn btn-inline">
                                         <i className="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
-                                    </a>
-                                    <a className="btn btn-outline" href="offer.html">
-                                        <i className="icofont-sale-discount"></i>
-                                        <span>get offer</span>
-                                    </a>
+                                        <span>Achat</span>
+                                    </a></Link>
+                                    <Link to="/Contact">  <a className="btn btn-outline">
+                                   <i className="icofont-sale-discount"></i>
+                                        <span>Contact</span>
+                                    </a></Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                     </div>
-                </section>
+            </section>
 
           
             <section className="section recent-part">
@@ -376,7 +68,8 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-heading">
-                            <h2>recently sold items</h2>
+                            <h2>
+    Articles vendus récemment</h2>
                         </div>
                     </div>
                 </div>
@@ -387,16 +80,16 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                            <a href="front/shop-4column.html" className="btn btn-outline">
+                        <Link to="/Shop"> <a className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
-                                <span>show more</span>
-                            </a>
+                                <span>Voir Plus</span>
+                            </a></Link>
                         </div>
                     </div>
                 </div>
                 </div>
             </section>
-        <div className="section promo-part">
+             <div className="section promo-part">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
@@ -412,7 +105,7 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-heading">
-                            <h2>our featured items</h2>
+                            <h2>Articles à la une</h2>
                         </div>
                     </div>
                 </div>
@@ -609,21 +302,26 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                            <a href="shop-4column.html" className="btn btn-outline">
+                           <Link to="/Shop"> <a className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
-                                <span>show more</span>
-                            </a>
+                                <span>Voir Plus</span>
+                            </a></Link>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <Intro/>
+    
         <section className="section blog-part">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
+                    <div className="section-heading">
+                            <h2>   </h2>
+                        </div>
                         <div className="section-heading">
-                            <h2>Read our articles</h2>
+                            <h2>Lire nos articles</h2>
                         </div>
                     </div>
                 </div>
@@ -665,16 +363,17 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                            <a href="blog-grid.html" className="btn btn-outline">
+                        <Link to="/Blog"> <a href="blog-grid.html" className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
-                                <span>view all blog</span>
-                            </a>
+                                <span> Voir tous les blogs</span>
+                            </a></Link>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
+        </div>
+    
                 
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>

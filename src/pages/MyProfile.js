@@ -1,22 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {  auth, db } from "../firebase.config";
+import { auth, db } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {  ref, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
+import { useSelector } from 'react-redux'
+import { selectIsLoggedIn, selectuserID } from '../redux/slice/authSlice'
+import { useNavigate } from "react-router-dom";
+import { query, where, onSnapshot, documentId, updateDoc, doc, collection } from "firebase/firestore";
 
 function MyProfile() {
-    var logged = null
+
+    //---------declarations
+
     const [user] = useAuthState(auth);
-    if (logged == null) {
-        const starCountRef = ref(db, 'users/' + user.uid);
-        onValue(starCountRef, (snapshot) => {
-            const data = snapshot.val();
-            logged = data
+    const [loggedUser, setLoggedUser] = useState({})
+    const issignIN = useSelector(selectIsLoggedIn);
+    const navigate = useNavigate();
+    const userID = useSelector(selectuserID)
+
+    //-----------get userby ID    
+
+    useEffect(() => {
+        const q = query(
+            collection(db, "users"),
+            where(documentId(), "==", user.uid)
+        );
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setLoggedUser(doc.data());
+                console.log(loggedUser)
+            });
         });
-    }
-   
-
-
+    }, []);
+    
     return (
         <html lang="en">
             <head>
@@ -57,7 +73,7 @@ function MyProfile() {
                                 <div class="account-card">
                                     <div class="account-title">
                                         <h4>Your Profile</h4>
-                                        
+
                                         <button data-bs-toggle="modal"><Link to="/Profile">Edit Profile</Link></button>
                                     </div>
                                     <div class="account-content">
@@ -70,14 +86,14 @@ function MyProfile() {
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-label">name</label>
-                                                    <h5>{logged.username}</h5>
+                                                    <h5>{loggedUser.userName}</h5>
 
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="form-group">
                                                     <label class="form-label">Email</label>
-                                                    <h5>{logged.email}</h5>
+                                                    <h5>{loggedUser.email}</h5>
                                                 </div>
                                             </div>
 

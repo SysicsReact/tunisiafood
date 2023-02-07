@@ -1,33 +1,39 @@
-import Index from "./pages/Index";
-import Login from "./pages/Login";
-import Register from "./pages/register";
-import Reset from "./pages/resetPwd";
+import Index from "./Pages/Index";
+import Login from "./Pages/Login";
+import Register from "./Pages/register";
+import Reset from "./Pages/resetPwd";
 import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Profile from "./pages/Profile";
-import About from "./pages/About";
-import Shop from "./pages/Shop";
-import MyProfile from "./pages/MyProfile";
+import Profile from "./Pages/Profile";
+import About from "./Pages/About";
+import Blog from "./Pages/Blog";
+import Shop from "./Pages/Shop";
+import AllProducts from "./Pages/AllProducts";
+import SingleProduct from "./Pages/SingleProduct";
+import MyProfile from "./Pages/MyProfile";
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import React, { Component } from 'react'
 import $ from"jquery";
  import { jQuerycode } from "./components/Jq.js";
-
+ let test=false;
  class  App extends Component {
   componentDidMount()
   {
    
       jQuerycode();
+      
   }
   
-  
+ 
  render(){
+
   return(
     <>
-    
     <div>
         <Header/>
+        <Navbar/>
     </div>
   
     <Routes>
@@ -39,6 +45,9 @@ import $ from"jquery";
       <Route path="/About" element={<About/>}/>
       <Route path="/MyProfile" element={<MyProfile/>}/>
       <Route path="/Shop" element={<Shop/>}/>
+      <Route path="/Blog" element={<Blog/>}/>
+      <Route path="/SingleProduct" element={<SingleProduct/>}/>
+      <Route path="/AllProducts" element={<AllProducts/>}/>
 
     </Routes>
     <div>

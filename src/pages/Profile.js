@@ -1,85 +1,145 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { auth, db,storage } from "../firebase.config";
+import { auth, db, storage } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {  ref, onValue, update } from "firebase/database";
+import { ref, onValue, update } from "firebase/database";
 import { ref as sRef } from 'firebase/storage';
+import { query, where, onSnapshot, documentId, updateDoc, doc, collection } from "firebase/firestore";
 
 
 import {
 
     uploadBytes,
     getDownloadURL,
-   
+
 } from "firebase/storage";
 import { v4 } from "uuid";
 
+import { ToastContainer, toast } from 'react-toastify';
+
+
 function Profile() {
+
+    //--------declarations
+
     const [user] = useAuthState(auth);
-    const [username,setName] = useState('');
-    
-    const [newPhone,setPhone] = useState('');
-    const [city,setCity] = useState('');
-    const [country,setCountry] = useState('');
-    const [adress,setAdress] = useState('');
+    var uid = user.uid
+    const [username, setName] = useState({})
+    const [loggedUser, setLoggedUser] = useState({})
+    const [newPhone, setPhone] = useState({ changeState: 0 });
+    const [city, setCity] = useState({ changeState: 0 });;
+    const [country, setCountry] = useState({ changeState: 0 });;
+    const [adress, setAdress] = useState({ changeState: 0 });;
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
-    var loggedUser;
+    const notifySuccess = () => toast.success("User updated with sucess");
 
-    const starCountRef = ref(db, 'users/' + user.uid);
-    onValue(starCountRef, (snapshot) => {
-        loggedUser = snapshot.val();
-    });
+    //-------get user by ID
 
-    
-  
-    const uploadFile = () => {
-      const imageRef = sRef(storage, `images/${imageUpload.name + v4()}`);
-      uploadBytes(imageRef, imageUpload).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setImageUrls((prev) => [prev, url]);
+    useEffect(() => {
+
+        const q = query(
+            collection(db, "users"),
+            where(documentId(), "==", uid)
+        );
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setLoggedUser(doc.data());
+            });
         });
-      });
+    }, [loggedUser]);
+
+
+    //----------upload file
+
+    const uploadFile = async () => {
+        if (!imageUpload) {
+            return updateUser();
+        }
+        const imageRef = sRef(storage, `products/${imageUpload.name + v4()}`);
+        uploadBytes(imageRef, imageUpload).then(async (snapshot) => {
+            await getDownloadURL(snapshot.ref).then((url) => {
+                const washingtonRef = doc(db, "users", user.uid);
+                updateDoc(washingtonRef, {
+                    photo: url
+                });
+            });
+        });
+        updateUser()
+    }
+
+    //--------update user    
+
+    const updateUser = async (e) => {
+
+        if (city.changeState == 1) {
+            const washingtonRef = doc(db, "users", user.uid);
+            await updateDoc(washingtonRef, {
+                city: city.City
+            });
+        }
+        if (username.changeState == 1) {
+            const washingtonRef = doc(db, "users", user.uid);
+            await updateDoc(washingtonRef, {
+                userName: username.username
+            });
+        }
+        if (country.changeState == 1) {
+            const washingtonRef = doc(db, "users", user.uid);
+            await updateDoc(washingtonRef, {
+                country: country.country
+            });
+        }
+        if (newPhone.changeState == 1) {
+            const washingtonRef = doc(db, "users", user.uid);
+            await updateDoc(washingtonRef, {
+                phone: newPhone.phone
+            });
+        }
+        if (adress.changeState == 1) {
+            const washingtonRef = doc(db, "users", user.uid);
+            await updateDoc(washingtonRef, {
+                adress: adress.adress
+            });
+        }
+        notifySuccess()
+
     };
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        uploadFile()
-        update(ref(db, `users/${user.uid}`), {
-            username: username.username,
-            country: country.country,
-            city: city.City,
-            phone: newPhone.phone,
-            adress: adress.adress,
-            photo:imageUrls[1]
-
-
-        });
-
-    };
-    
+    //-----handling changes    
 
     function handleNameChange(event) {
-            setName({ username: event.target.value });
+        setName({
+            username: event.target.value,
+            changeState: 1
+        });
     }
     function handlePhoneChange(event) {
-        setPhone({ phone: event.target.value });
+        setPhone({
+            phone: event.target.value,
+            changeState: 1
+        });
     }
-
-
     function handleCityChange(event) {
-        setCity({ City: event.target.value });
+        setCity({
+            City: event.target.value,
+            changeState: 1
+        });
     }
-
- 
     function handleCountryChange(event) {
-        setCountry({ country: event.target.value });
+        setCountry({
+            country: event.target.value,
+            changeState: 1
+        });
+    }
+    function handleAdressChange(event) {
+        setAdress({
+            adress: event.target.value,
+            changeState: 1
+        });
     }
 
-    function handleAdressChange(event) {
-        setAdress({ adress: event.target.value });
-    }
+    //--------html conditions
 
     function checkCity(loggedUser) {
         if (loggedUser.city) {
@@ -129,6 +189,7 @@ function Profile() {
             </head>
 
             <body>
+                <ToastContainer />
                 <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div class="container">
                         <h2>Edit profile</h2>
@@ -142,26 +203,26 @@ function Profile() {
                 <div >
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <form class="modal-form" onSubmit={handleSubmit}>
+                            <form class="modal-form" onSubmit={(event) => event.preventDefault()}>
                                 <div class="form-title">
                                     <h3>Edit profile info</h3>
 
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">profile image</label>
-                                    <img src={loggedUser.photo} />
+                                    <img src={loggedUser.photo} height="200" />
                                     <input class="form-control" type="file"
-        onChange={(event) => {
-          setImageUpload(event.target.files[0]);
-        }} />
+                                        onChange={(event) => {
+                                            setImageUpload(event.target.files[0]);
+                                        }} />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Name</label>
-                                    <input class="form-control" type="text" Value={loggedUser.username} onChange={handleNameChange} placeholder="Type your new name..." />
+                                    <input class="form-control" type="text" defaultValue={loggedUser.userName} onChange={handleNameChange} placeholder="Type your new name..." />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Country</label>
-                                    <select class="form-select" Value={loggedUser.country} onChange={handleCountryChange} >
+                                    <select class="form-select" onChange={handleCountryChange} >
                                         {checkCountry(loggedUser)}
                                         <option value="France">France</option>
                                         <option value="Belgique">Belgique</option>
@@ -169,7 +230,7 @@ function Profile() {
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">City</label>
-                                    <select class="form-select" Value={loggedUser.city} onChange={handleCityChange} >
+                                    <select class="form-select" onChange={handleCityChange} >
                                         {checkCity(loggedUser)}
                                         <option value="Paris">Paris</option>
                                         <option value="Lyon">Lyon</option>
@@ -191,13 +252,13 @@ function Profile() {
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Adress</label>
-                                    <input class="form-control" type="text" value={loggedUser.adress} onChange={handleAdressChange} placeholder="Type exact adress..." />
+                                    <input class="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Type exact adress..." />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Phone Number</label>
-                                    <input class="form-control" type="text" value={loggedUser.phone} onChange={handlePhoneChange} placeholder="Type your number..." />
+                                    <input class="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Type your number..." />
                                 </div>
-                                <button class="form-btn" type="submit" >save profile info</button>
+                                <button class="form-btn" type="submit" onClick={() => uploadFile()} >save profile info</button>
                             </form>
                         </div>
                     </div>
@@ -222,5 +283,6 @@ function Profile() {
         </html>
     );
 }
+
 
 export default Profile;
