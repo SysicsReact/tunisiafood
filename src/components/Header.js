@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails } from "../firebase.config";
-import $ from "jquery";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
@@ -19,8 +18,7 @@ export function updatex(value)
     x=value;
 }
 const Dashboard=()=> {
-  
-    
+
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
     const dispatch=useDispatch();
@@ -28,26 +26,19 @@ const Dashboard=()=> {
     const[test, setTest]=useState(true)
     const [completeLoading,setCompleLoading]=useState(false)
     const [isLoggedIn,setIsloggin]=useState(false); 
-    const[valueCardDetails,SetCardValueDetails]=useState(0);
-       
+    const[valueCardDetails,SetCardValueDetails]=useState(0); 
     const [products, setProducts] = useState([]);
     const [value, setValue] = useState("");
-    const [result, setResult] = useState([]);
-             
-             
+    const [result, setResult] = useState([]);  
     //monitor currently siggnin user
     useEffect(()=>{
-        
        // setIsLoading(true);
-     
         onAuthStateChanged(auth, (user) => {
-          
             if (user) {
               const uid = user.uid;
               setIsloggin(true);
               if(uid){
                 const docRef = doc(db, "users", uid);
-                
                 getDoc(docRef).then(docSnap => {
                     if (docSnap.exists()) {
                         setDisplayName(docSnap.data().userName)
@@ -56,10 +47,8 @@ const Dashboard=()=> {
                         changeIsTesting(true);
                         setCompleLoading(testLoading())
                         localStorage.setItem("isCompleting",true);
-                        //changeIsTesting(false);
-                       
-                    } else {
-                        
+                        //changeIsTesting(false); 
+                    } else {   
                         const writeUserData= async(userId, name, email,docRef)=>{
                             const userRef = doc(db, "users", userId);
                             console.log(userRef)
@@ -72,9 +61,7 @@ const Dashboard=()=> {
                             changeIsLoading(true);
                             changeIsTesting(true);
                             setCompleLoading(testLoading())
-
                             //changeIsTesting(false);
-                            
                           }).catch((error) => {
                             setIsLoading(false);
                             changeIsLoading(true);
@@ -86,12 +73,7 @@ const Dashboard=()=> {
                     }
                   }) 
                 }
-          
-              
               //console.log(user.displayName)
-              
-
-
               dispatch(SET_ACTIVE_USER({
                 email: user.email,
                 userName: user.displayName?user.displayName:displayName,
@@ -101,22 +83,16 @@ const Dashboard=()=> {
             } else {
               // User is signed out
               // ...
-             
                 setDisplayName("")
                 dispatch(Remove_ACTIVE_USER());
                 changeIsLoading(true);
                 changeIsTesting(true);
-                
                 setCompleLoading(testLoading())
                 setIsloggin(false);
             }
           });
           setCompleLoading(testLoading())
     },[dispatch,displayName,completeLoading])
-
-
-
-
 
 
     useEffect(() => {
@@ -128,15 +104,11 @@ const Dashboard=()=> {
                 querySnapshot.forEach((doc) => {
                     products.push(doc.data())
                 });
-
             });
         }
-
         if (value.length > 0) {
             setResult([]);
-
             let searchQuery = value.toLowerCase();
-
             for (const key in products) {
                 let fruit = products[key].description.toLowerCase();
                 if (fruit.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
@@ -149,14 +121,11 @@ const Dashboard=()=> {
         } else {
             setResult([]);
         }
-
-    }, [value]);
-            
+    }, [value]);    
     function loggedUser(user) {
         if (user) {
             return (
                 <>
-
                 <button className="dashboard__btn" onClick={logout}> 
                 <Link to="/"> Logout </Link> </button>
                 <span><Link to="MyProfile"> profile </Link></span>
@@ -167,10 +136,8 @@ const Dashboard=()=> {
                 <span><Link to="/Login"> join </Link></span>
             )
         }
-    }
-    
-    return (
-        
+    } 
+    return (  
         <html lang="en">
             <head>
                 <meta charset="UTF-8" />
@@ -189,9 +156,7 @@ const Dashboard=()=> {
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
             {(!completeLoading) &&<Loader/>}
-           
-            <header className="header-part">
-                
+            <header className="header-part">  
                 <div className="container">
                     <div className="header-content">
                         <div className="header-media-group">
@@ -203,19 +168,15 @@ const Dashboard=()=> {
                         </a>
                             <button className="header-src"><i className="fas fa-search"></i></button>
                         </div>
-
                         <a className="header-logo">
                             <Link to="/">
                                 <img src="assets/images/Logo.png" alt="logo" />
                             </Link>
                         </a>
-
                         <form className="header-form">
-
 
 <div class="dropdown">
     <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
-
     <div id="myDropdown" class="dropdown-content show">
         {result.slice(0,5).map((result, Index) => (
             <a  key={Index}>
@@ -274,10 +235,8 @@ const Dashboard=()=> {
 </li>
                     </div>
                 </div>
-              
             </header>
             <Cart/>
-
             <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
             <script src="assets/vendor/bootstrap/popper.min.js"></script>
             <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
@@ -285,7 +244,6 @@ const Dashboard=()=> {
             <script src="assets/vendor/niceselect/nice-select.min.js"></script>
             <script src="assets/vendor/slickslider/slick.min.js"></script>
             <script src="assets/vendor/venobox/venobox.min.js"></script>
-
             <script src="assets/js/nice-select.js"></script>
             <script src="assets/js/countdown.js"></script>
             <script src="assets/js/accordion.js"></script>
@@ -294,8 +252,5 @@ const Dashboard=()=> {
             <script src="assets/js/main.js"></script>
         </html>
     );
-
 }
-
-
 export default Dashboard;
