@@ -98,6 +98,44 @@ const Dashboard=()=> {
           setCompleLoading(testLoading())
     },[dispatch,displayName,completeLoading])
 
+
+
+
+
+
+    useEffect(() => {
+        if (products.length == 0) {
+            const q = query(
+                collection(db, "products"),
+            );
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    products.push(doc.data())
+                });
+
+            });
+        }
+
+        if (value.length > 0) {
+            setResult([]);
+
+            let searchQuery = value.toLowerCase();
+
+            for (const key in products) {
+                let fruit = products[key].description.toLowerCase();
+                if (fruit.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
+
+                    setResult(prevResult => {
+                        return [...prevResult, products[key]]
+                    });
+                }
+            }
+        } else {
+            setResult([]);
+        }
+
+    }, [value]);
+            
     function loggedUser(user) {
         if (user) {
             return (
@@ -156,11 +194,32 @@ const Dashboard=()=> {
                             </Link>
                         </a>
 
-
                         <form className="header-form">
-                            <input type="text" placeholder="Cherchez..." />
-                            <button><i className="fas fa-search"></i></button>
-                        </form>
+
+
+<div class="dropdown">
+    <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
+
+    <div id="myDropdown" class="dropdown-content show">
+        {result.map((result, Index) => (
+            <a  key={Index}>
+                <img src={result.photo} class="mx-3 rounded" height="30"/>
+                {result.name}
+                </a>
+
+        ))}
+       
+    </div>
+</div>
+
+
+
+
+
+<button><i className="fas fa-search"></i></button>
+
+
+</form>
 
                         <div className="header-widget-group">
                             <a href="front/compare.html" className="header-widget" title="Compare List">
