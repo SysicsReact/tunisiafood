@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Product from "../components/Product";
 import { Link,useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../firebase.config";
-import { query, collection, getDocs, where } from "firebase/firestore";
 import Loader from "../components/loader/Loader";
 import Intro from "../components/Intro";
+import { useSelector, useDispatch } from "react-redux";
+import useFetchCollection from "../components/customHooks/useFetchCollection";
+import { STORE_PRODUCTS,selectProducts } from "../redux/slice/productSlice";
+
 function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const navigate = useNavigate();
-    const [isLoading, setIsLoading ] = useState(false);
-   
-    
+    //const [isLoading, setIsLoading ] = useState(false);
+    const {data, isLoading} = useFetchCollection("products")
+    const products = useSelector(selectProducts)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(
+            STORE_PRODUCTS({
+                products:  data,
+            })
+          );
+    },[dispatch,data]);
+
 
     return (
         <html lang="en">
@@ -37,7 +48,6 @@ function Dashboard() {
             <body>
             {isLoading && <Loader/>}
             {!isLoading &&
-            
             <div>
                 <div className="backdrop"></div>
                 <a class="backtop fas fa-arrow-up" href="#"></a>
@@ -65,8 +75,6 @@ function Dashboard() {
                 </div>
                     </div>
             </section>
-
-          
             <section className="section recent-part">
                 <div className="container">
                 <div className="row">
@@ -78,8 +86,64 @@ function Dashboard() {
                     </div>
                 </div>
                 <div>
-                <div> <Product /> </div>
-               
+                <div>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+                        
+                {!isLoading &&products.slice(0,10).map((e) => {
+                       const { id, tag, category,photo,name,price } = e;
+                      
+                    return (
+                        <div class="col">
+                            <div class="product-card">
+                                <div class="product-media">
+                                    <div class="product-label">
+                                        <label class="label-text sale">sale</label>
+                                    </div>
+                                    <button class="product-wish wish">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                    <a class="product-image" href="front/product-video.html">
+                                        <img src={photo} alt="product"/>
+                                    </a>
+                                    <div class="product-widget">
+                                        <a title="Product Compare" href="Shop.js" class="fas fa-random"></a>
+                                        <a title="Product Video" href="Shop.js" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                        <a title="Product View" href="Shop.js" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <div class="product-rating">
+                                        <i class="active icofont-star"></i>
+                                        <i class="active icofont-star"></i>
+                                        <i class="active icofont-star"></i>
+                                        <i class="active icofont-star"></i>
+                                        <i class="icofont-star"></i>
+                                        <a href="product-video.html">(3)</a>
+                                    </div>
+                                    <h6 class="product-name">
+                                        <a href="product-video.html">{name}</a>
+                                    </h6>
+                                    <h6 class="product-price">
+                                        <del>${price}</del>
+                                        <span>${price}<small>/plat</small></span>
+                                    </h6>
+                                    <button class="product-add" title="Add to Cart">
+                                        <i class="fas fa-shopping-basket"></i>
+                                        <span>Ajouter</span>
+                                    </button>
+                                    <div class="product-action">
+                                        <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                        <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                        <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                     );
+                    })}
+                              
+              </div>
+                     </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
@@ -114,17 +178,21 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
+                {!isLoading &&products.slice(0,4).map((e) => {
+                       const { id, tag, category,photo,name,price, description } = e;
+                      
+                    return (
                     <div className="col">
                         <div className="feature-card">
                             <div className="feature-media">
                                 <div className="feature-label">
-                                    <label className="label-text feat">feature</label>
+                                    <label className="label-text feat">{tag}</label>
                                 </div>
                                 <button className="feature-wish wish">
                                     <i className="fas fa-heart"></i>
                                 </button>
                                 <a className="feature-image" href="product-video.html">
-                                    <img src="assets/images/product/09.jpg" alt="product"/>
+                                    <img src={photo} alt="product"/>
                                 </a>
                                 <div className="feature-widget">
                                     <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
@@ -134,7 +202,7 @@ function Dashboard() {
                             </div>
                             <div className="feature-content">
                                 <h6 className="feature-name">
-                                    <a href="product-video.html">fresh organic green chilis</a>
+                                    <a href="product-video.html">{name}</a>
                                 </h6>
                                 <div className="feature-rating">
                                     <i className="active icofont-star"></i>
@@ -145,13 +213,13 @@ function Dashboard() {
                                     <a href="product-video.html">(3 Reviews)</a>
                                 </div>
                                 <h6 className="feature-price">
-                                    <del>$34</del>
-                                    <span>$28<small>/piece</small></span>
+                                    <del>${price}</del>
+                                    <span>${price}<small>/plat</small></span>
                                 </h6>
-                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
+                                <p className="feature-desc">{description}</p>
                                 <button className="product-add" title="Add to Cart">
                                     <i className="fas fa-shopping-basket"></i>
-                                    <span>add</span>
+                                    <span>Ajouter</span>
                                 </button>
                                 <div className="product-action">
                                     <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
@@ -161,147 +229,8 @@ function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="col">
-                        <div className="feature-card">
-                            <div className="feature-media">
-                                <div className="feature-label">
-                                    <label className="label-text feat">feature</label>
-                                </div>
-                                <button className="feature-wish wish">
-                                    <i className="fas fa-heart"></i>
-                                </button>
-                                <a className="feature-image" href="product-video.html">
-                                    <img src="assets/images/product/09.jpg" alt="product"/>
-                                </a>
-                                <div className="feature-widget">
-                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
-                                </div>
-                            </div>
-                            <div className="feature-content">
-                                <h6 className="feature-name">
-                                    <a href="product-video.html">fresh organic green chilis</a>
-                                </h6>
-                                <div className="feature-rating">
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="icofont-star"></i>
-                                    <a href="product-video.html">(3 Reviews)</a>
-                                </div>
-                                <h6 className="feature-price">
-                                    <del>$34</del>
-                                    <span>$28<small>/piece</small></span>
-                                </h6>
-                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
-                                <button className="product-add" title="Add to Cart">
-                                    <i className="fas fa-shopping-basket"></i>
-                                    <span>add</span>
-                                </button>
-                                <div className="product-action">
-                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="feature-card">
-                            <div className="feature-media">
-                                <div className="feature-label">
-                                    <label className="label-text feat">feature</label>
-                                </div>
-                                <button className="feature-wish wish">
-                                    <i className="fas fa-heart"></i>
-                                </button>
-                                <a className="feature-image" href="product-video.html">
-                                    <img src="assets/images/product/09.jpg" alt="product"/>
-                                </a>
-                                <div className="feature-widget">
-                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
-                                </div>
-                            </div>
-                            <div className="feature-content">
-                                <h6 className="feature-name">
-                                    <a href="product-video.html">fresh organic green chilis</a>
-                                </h6>
-                                <div className="feature-rating">
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="icofont-star"></i>
-                                    <a href="product-video.html">(3 Reviews)</a>
-                                </div>
-                                <h6 className="feature-price">
-                                    <del>$34</del>
-                                    <span>$28<small>/piece</small></span>
-                                </h6>
-                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
-                                <button className="product-add" title="Add to Cart">
-                                    <i className="fas fa-shopping-basket"></i>
-                                    <span>add</span>
-                                </button>
-                                <div className="product-action">
-                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="feature-card">
-                            <div className="feature-media">
-                                <div className="feature-label">
-                                    <label className="label-text feat">feature</label>
-                                </div>
-                                <button className="feature-wish wish">
-                                    <i className="fas fa-heart"></i>
-                                </button>
-                                <a className="feature-image" href="product-video.html">
-                                    <img src="assets/images/product/09.jpg" alt="product"/>
-                                </a>
-                                <div className="feature-widget">
-                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
-                                </div>
-                            </div>
-                            <div className="feature-content">
-                                <h6 className="feature-name">
-                                    <a href="product-video.html">fresh organic green chilis</a>
-                                </h6>
-                                <div className="feature-rating">
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="icofont-star"></i>
-                                    <a href="product-video.html">(3 Reviews)</a>
-                                </div>
-                                <h6 className="feature-price">
-                                    <del>$34</del>
-                                    <span>$28<small>/piece</small></span>
-                                </h6>
-                                <p className="feature-desc">Lorem ipsum dolor sit consectetur adipisicing xpedita dicta amet olor ut eveniet commodi...</p>
-                                <button className="product-add" title="Add to Cart">
-                                    <i className="fas fa-shopping-basket"></i>
-                                    <span>add</span>
-                                </button>
-                                <div className="product-action">
-                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                      );
+                    })}
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
@@ -316,7 +245,6 @@ function Dashboard() {
             </div>
         </section>
         <Intro/>
-    
         <section className="section blog-part">
             <div className="container">
                 <div className="row">
@@ -377,8 +305,7 @@ function Dashboard() {
             </div>
         </section>
         </div>
-    }
-                
+    }   
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
                 <script src="assets/vendor/countdown/countdown.min.js"></script>
@@ -394,8 +321,5 @@ function Dashboard() {
             </body>
         </html>
     );
-
 }
-
-
 export default Dashboard;

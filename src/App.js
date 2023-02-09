@@ -19,6 +19,9 @@ import React, { Component, useState } from 'react'
 import $ from"jquery";
  import { jQuerycode } from "./components/Jq.js";
  import Loader from "./components/loader/Loader";
+import Product from "./components/Product";
+import ShopProduct from "./components/product/ShopProduct";
+import Contact from "./pages/Contact";
  let test=false;
  class  App extends Component {
   componentDidMount()
@@ -48,6 +51,8 @@ import $ from"jquery";
       <Route path="/SingleProduct" element={<SingleProduct/>}/>
       <Route path="/AllProducts" element={<AllProducts/>}/>
       <Route path="/Cart" elemnt={<Cart/>}/>
+      <Route path="/ShopProduct" element={<ShopProduct/>}/>
+      <Route path="/Contact" element={<Contact/>}/>
 
     </Routes>
     <div>

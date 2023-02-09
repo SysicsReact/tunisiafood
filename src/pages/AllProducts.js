@@ -4,11 +4,18 @@ import { ref as sRef } from 'firebase/storage';
 import { SetCartDetails, db } from "../firebase.config";
 import { query, onSnapshot } from "firebase/firestore";
 import { collection, doc } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { STORE_PRODUCTS } from "../redux/slice/productSlice";
+import { data } from "jquery";
+
+
 
 
 function AllProducts() {
 
-     const [products, setProducts] = useState([]);
+   
+     const [_products, setProducts] = useState([]);
+     const dispatch = useDispatch();
      useEffect(() => {
           const q = query(collection(db, "products"));
           onSnapshot(q, (querySnapshot) => {
@@ -18,8 +25,19 @@ function AllProducts() {
                 data: doc.data(),
               }))
             );
+            dispatch(
+                STORE_PRODUCTS({
+                    products:  querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        data: doc.data(),
+                      }))
+                })
+              )
+
           });
+         
         }, []);
+        
 const [cart, setCart] = useState([]);
 const addToCart = (product) => {
     console.log("We are in Add to cart");
@@ -28,6 +46,8 @@ const addToCart = (product) => {
     console.log(cart.length);
     SetCartDetails(cart);
 };
+const filteredProducts = useSelector(STORE_PRODUCTS);
+console.log(filteredProducts);
     return (
         <html lang="en">
             <head>
@@ -81,7 +101,7 @@ const addToCart = (product) => {
                             </div>
                         </div>
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                        {products.map((e) => {
+                        {_products.map((e) => {
                     return (
                                 
                                 <div class="col">

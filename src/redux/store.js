@@ -1,12 +1,13 @@
 import {configureStore, combineReducers} from "@reduxjs/toolkit"
 import { auth } from "../firebase.config";
 import authReducer from "./slice/authSlice"
+import productReducer from "./slice/productSlice";
 
 const rootReducer=combineReducers({   
     auth:authReducer,
+    product:productReducer,
 
 });
-
 
 
 const store=configureStore({

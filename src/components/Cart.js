@@ -6,7 +6,7 @@ import {products} from "../pages/AllProducts";
 export default function Cart (){
     
      let data = GetCardDetails();
-
+console.log(data)
      
      return(
          
