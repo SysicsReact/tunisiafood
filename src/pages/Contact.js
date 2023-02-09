@@ -1,8 +1,36 @@
-import React, { Fragment } from 'react';
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Intro from '../components/Intro';
+import { serverTimestamp } from "firebase/firestore";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+import {  db } from "../firebase.config";
+import { collection, addDoc } from "firebase/firestore";
+
 function Contact()
 {
+
+    const [name, setName] = useState("");
+    const [subject, setSubject] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const notifySuccess = () => toast.success("Message sent with success");
+    const notifyError = (err) => toast.success(err);
+
+    const contactUs = async () => {
+        const docRef = await addDoc(collection(db, "contacts"), {
+          name: name,
+          email: email,
+          subject: subject,
+          message: message,
+          timestamp: serverTimestamp()
+        }).then(() => {
+          notifySuccess();
+    
+        }).catch((error) => {
+          notifyError(error.message);
+        });;
+      }
 return(
      <html lang='en'>
             <head>
@@ -77,29 +105,33 @@ return(
                             <h4>Drop Your Thoughts</h4>
                             <div class="form-group">
                                 <div class="form-input-group">
-                                    <input class="form-control" type="text" placeholder="Your Name"/>
+                                    <input class="form-control" type="text" value={name}
+                  onChange={(e) => setName(e.target.value)} placeholder="Your Name"/>
                                     <i class="icofont-user-alt-3"></i>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-input-group">
-                                    <input class="form-control" type="text" placeholder="Your Email"/>
+                                    <input class="form-control" type="text" value={email}
+                  onChange={(e) => setEmail(e.target.value)} placeholder="Your Email"/>
                                     <i class="icofont-email"></i>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-input-group">
-                                    <input class="form-control" type="text" placeholder="Your Subject"/>
+                                    <input class="form-control" type="text" value={subject}
+                  onChange={(e) => setSubject(e.target.value)} placeholder="Your Subject"/>
                                     <i class="icofont-book-mark"></i>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-input-group">
-                                    <textarea class="form-control" placeholder="Your Message"></textarea>
+                                    <textarea class="form-control" value={message}
+                  onChange={(e) => setMessage(e.target.value)} placeholder="Your Message"></textarea>
                                     <i class="icofont-paragraph"></i>
                                 </div>
                             </div>
-                            <button type="submit" class="form-btn-group">
+                            <button onClick={() => contactUs()} type="submit" class="form-btn-group">
                                 <i class="fas fa-envelope"></i>
                                 <span>send message</span>
                             </button>
