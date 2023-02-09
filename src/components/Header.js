@@ -11,6 +11,7 @@ import { async } from "q";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import Loader from "../components/loader/Loader";
 import Cart from "./Cart";
+import { query, where, onSnapshot, documentId, updateDoc, collection } from "firebase/firestore";
 
 let x=0;
 export function updatex(value)
@@ -27,7 +28,13 @@ const Dashboard=()=> {
     const[test, setTest]=useState(true)
     const [completeLoading,setCompleLoading]=useState(false)
     const [isLoggedIn,setIsloggin]=useState(false); 
-    const[value,SetValue]=useState(0);
+    const[valueCardDetails,SetCardValueDetails]=useState(0);
+       
+    const [products, setProducts] = useState([]);
+    const [value, setValue] = useState("");
+    const [result, setResult] = useState([]);
+             
+             
     //monitor currently siggnin user
     useEffect(()=>{
         
@@ -107,6 +114,44 @@ const Dashboard=()=> {
           setCompleLoading(testLoading())
     },[dispatch,displayName,completeLoading])
 
+
+
+
+
+
+    useEffect(() => {
+        if (products.length == 0) {
+            const q = query(
+                collection(db, "products"),
+            );
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    products.push(doc.data())
+                });
+
+            });
+        }
+
+        if (value.length > 0) {
+            setResult([]);
+
+            let searchQuery = value.toLowerCase();
+
+            for (const key in products) {
+                let fruit = products[key].description.toLowerCase();
+                if (fruit.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
+
+                    setResult(prevResult => {
+                        return [...prevResult, products[key]]
+                    });
+                }
+            }
+        } else {
+            setResult([]);
+        }
+
+    }, [value]);
+            
     function loggedUser(user) {
         if (user) {
             return (
@@ -165,11 +210,32 @@ const Dashboard=()=> {
                             </Link>
                         </a>
 
-
                         <form className="header-form">
-                            <input type="text" placeholder="Cherchez..." />
-                            <button><i className="fas fa-search"></i></button>
-                        </form>
+
+
+<div class="dropdown">
+    <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
+
+    <div id="myDropdown" class="dropdown-content show">
+        {result.slice(0,5).map((result, Index) => (
+            <a  key={Index}>
+                <img src={result.photo} class="mx-3 rounded" height="30"/>
+                {result.name}
+                </a>
+
+        ))}
+       
+    </div>
+</div>
+
+
+
+
+
+<button><i className="fas fa-search"></i></button>
+
+
+</form>
 
                         <div className="header-widget-group">
                             <a href="front/compare.html" className="header-widget" title="Compare List">
@@ -180,7 +246,7 @@ const Dashboard=()=> {
                                 <i className="fas fa-heart"></i>
                                 <sup>0</sup>
                             </a>
-                            <button onClick={() => SetValue(GetCardDetails().length)} className="header-widget header-cart" title="Cartlist">
+                            <button onClick={() => SetCardValueDetails(GetCardDetails().length)} className="header-widget header-cart" title="Cartlist">
                                 <i className="fas fa-shopping-basket"></i>
                                 <sup  >{value}</sup>
                                 <span>total price<small>$345.00</small></span>
