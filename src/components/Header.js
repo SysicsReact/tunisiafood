@@ -1,108 +1,148 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading } from "../firebase.config";
+import { auth, db, logout, changeIsLoading, changeIsTesting, testLoading } from "../firebase.config";
 import $ from "jquery";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
+import { SET_ACTIVE_USER, Remove_ACTIVE_USER } from "../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
 import { async } from "q";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
+import { query, where, onSnapshot, documentId, updateDoc, collection } from "firebase/firestore";
 
 
-const Dashboard=()=> {
-  
+const Dashboard = () => {
+
     const [user] = useAuthState(auth);
-    const[displayName,setDisplayName]=useState("");
-    const dispatch=useDispatch();
-    const[test, setTest]=useState(true)
-    const [completeLoading,setCompleLoading]=useState(true)
-    const [isLoggedIn,setIsloggin]=useState(true); 
+    const [displayName, setDisplayName] = useState("");
+    const [products, setProducts] = useState([]);
+    const [value, setValue] = useState("");
+    const [result, setResult] = useState([]);
+
+
+
+    const dispatch = useDispatch();
+    const [test, setTest] = useState(true)
+    const [completeLoading, setCompleLoading] = useState(true)
+    const [isLoggedIn, setIsloggin] = useState(true);
     //monitor currently siggnin user
-    useEffect(()=>{
-       // setIsLoading(true);
-    
+    useEffect(() => {
+        // setIsLoading(true);
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
-              const uid = user.uid;
-              setIsloggin(true);
-              if(uid){
-                const docRef = doc(db, "users", uid);
-                
-                getDoc(docRef).then(docSnap => {
-                    if (docSnap.exists()) {
-                        setDisplayName(docSnap.data().userName)
-                        changeIsLoading(false);
-                        changeIsTesting(false);
-                        setCompleLoading(testLoading())
-                        localStorage.setItem("isCompleting",true);
-                        //changeIsTesting(false);
-                       
-                    } else {
-                        
-                        const writeUserData= async(userId, name, email,docRef)=>{
-                            const userRef = doc(db, "users", userId);
-                            console.log(userRef)
-                            await setDoc(docRef, {
-                              userName: name,
-                              email:email,
-                          }).then(()=>{
-                            setDisplayName(name)
-                            changeIsLoading(true);
-                            changeIsTesting(true);
-                            setCompleLoading(testLoading())
+                const uid = user.uid;
+                setIsloggin(true);
+                if (uid) {
+                    const docRef = doc(db, "users", uid);
 
+                    getDoc(docRef).then(docSnap => {
+                        if (docSnap.exists()) {
+                            setDisplayName(docSnap.data().userName)
+                            changeIsLoading(false);
+                            changeIsTesting(false);
+                            setCompleLoading(testLoading())
+                            localStorage.setItem("isCompleting", true);
                             //changeIsTesting(false);
-                            
-                          }).catch((error) => {
-                            changeIsLoading(true);
-                            changeIsTesting(true);
-                            setCompleLoading(testLoading())
-                           
-                          });
-                          }
-                    }
-                  }) 
+
+                        } else {
+
+                            const writeUserData = async (userId, name, email, docRef) => {
+                                const userRef = doc(db, "users", userId);
+                                console.log(userRef)
+                                await setDoc(docRef, {
+                                    userName: name,
+                                    email: email,
+                                }).then(() => {
+                                    setDisplayName(name)
+                                    changeIsLoading(true);
+                                    changeIsTesting(true);
+                                    setCompleLoading(testLoading())
+
+                                    //changeIsTesting(false);
+
+                                }).catch((error) => {
+                                    changeIsLoading(true);
+                                    changeIsTesting(true);
+                                    setCompleLoading(testLoading())
+
+                                });
+                            }
+                        }
+                    })
                 }
-          
-              
-              //console.log(user.displayName)
-              
 
 
-              dispatch(SET_ACTIVE_USER({
-                email: user.email,
-                userName: user.displayName?user.displayName:displayName,
-                userID: user.uid
-              }))
-              setIsloggin(true);
+                //console.log(user.displayName)
+
+
+
+                dispatch(SET_ACTIVE_USER({
+                    email: user.email,
+                    userName: user.displayName ? user.displayName : displayName,
+                    userID: user.uid
+                }))
+                setIsloggin(true);
             } else {
-              // User is signed out
-              // ...
-             
+                // User is signed out
+                // ...
+
                 setDisplayName("")
                 dispatch(Remove_ACTIVE_USER());
                 changeIsLoading(true);
                 changeIsTesting(true);
-                
+
                 setCompleLoading(testLoading())
                 setIsloggin(false);
             }
-          });
-          setCompleLoading(testLoading())
-    },[dispatch,displayName,completeLoading])
+        });
+        setCompleLoading(testLoading())
+    }, [dispatch, displayName, completeLoading])
 
-    
+
+    useEffect(() => {
+        if (products.length == 0) {
+            const q = query(
+                collection(db, "products"),
+            );
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    products.push(doc.data())
+                });
+
+            });
+        }
+
+        if (value.length > 0) {
+            setResult([]);
+
+            let searchQuery = value.toLowerCase();
+
+            for (const key in products) {
+                let fruit = products[key].description.toLowerCase();
+                if (fruit.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
+
+                    setResult(prevResult => {
+                        return [...prevResult, products[key]]
+                    });
+                }
+            }
+        } else {
+            setResult([]);
+        }
+
+    }, [value]);
+
 
     function loggedUser(user) {
         if (user) {
             return (
                 <>
 
-                <button className="dashboard__btn" onClick={logout}> 
-                <Link to="/"> Logout </Link> </button>
-                <span><Link to="MyProfile"> profile </Link></span>
+                    <button className="dashboard__btn" onClick={logout}>
+                        <Link to="/"> Logout </Link> </button>
+                    <span><Link to="MyProfile"> profile </Link></span>
                 </>
             )
         } else {
@@ -111,9 +151,10 @@ const Dashboard=()=> {
             )
         }
     }
-    
+
     return (
-        
+
+
         <html lang="en">
             <head>
                 <meta charset="UTF-8" />
@@ -131,18 +172,18 @@ const Dashboard=()=> {
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
-           
+
             <header className="header-part">
-                
+
                 <div className="container">
                     <div className="header-content">
                         <div className="header-media-group">
                             <button className="header-user"> <img src="assets/images/user.png" alt="user" /> </button>
                             <a className="header-logo">
-                            <Link to="/">
-                                <img src="assets/images/Logo.png" alt="logo" />
-                            </Link>
-                        </a>
+                                <Link to="/">
+                                    <img src="assets/images/Logo.png" alt="logo" />
+                                </Link>
+                            </a>
                             <button className="header-src"><i className="fas fa-search"></i></button>
                         </div>
 
@@ -154,8 +195,30 @@ const Dashboard=()=> {
 
 
                         <form className="header-form">
-                            <input type="text" placeholder="Cherchez..." />
+
+
+                            <div class="dropdown">
+                                <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
+
+                                <div id="myDropdown" class="dropdown-content show">
+                                    {result.map((result, Index) => (
+                                        <a  key={Index}>
+                                            <img src={result.photo} class="mx-3 rounded" height="30"/>
+                                            {result.name}
+                                            </a>
+
+                                    ))}
+                                   
+                                </div>
+                            </div>
+
+
+
+
+
                             <button><i className="fas fa-search"></i></button>
+
+
                         </form>
 
                         <div className="header-widget-group">
@@ -174,151 +237,151 @@ const Dashboard=()=> {
                                 <span><small></small></span>
                             </button>
                         </div>
-<li className="header-widget" title="My Account">
-<img src="assets/images/user.png" alt="user" />
-{isLoggedIn &&
-<span className="navbar-item dropdown" >  
-<NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
-            <ul className="dropdown-position-list">
-                <li><Link to="MyProfile"> profile </Link></li>
-                <li><button className="dashboard__btn"
-                    onClick={logout}> 
-                <Link to="/"> Logout </Link> </button></li>
-            </ul>
-            </span>
-        }
-<div>
-    {!isLoggedIn&&
-                <span><Link to="/Login"> join </Link></span>
-            }
-</div>
-</li>
+                        <li className="header-widget" title="My Account">
+                            <img src="assets/images/user.png" alt="user" />
+                            {isLoggedIn &&
+                                <span className="navbar-item dropdown" >
+                                    <NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
+                                    <ul className="dropdown-position-list">
+                                        <li><Link to="MyProfile"> profile </Link></li>
+                                        <li><button className="dashboard__btn"
+                                            onClick={logout}>
+                                            <Link to="/"> Logout </Link> </button></li>
+                                    </ul>
+                                </span>
+                            }
+                            <div>
+                                {!isLoggedIn &&
+                                    <span><Link to="/Login"> join </Link></span>
+                                }
+                            </div>
+                        </li>
                     </div>
                 </div>
             </header>
-            
-          
+
+
             <aside class="cart-sidebar">
-            <div class="cart-header">
-                <div class="cart-total">
-                    <i class="fas fa-shopping-basket"></i>
-                    <span>total item (5)</span>
+                <div class="cart-header">
+                    <div class="cart-total">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span>total item (5)</span>
+                    </div>
+                    <button class="cart-close"><i class="icofont-close"></i></button>
                 </div>
-                <button class="cart-close"><i class="icofont-close"></i></button>
-            </div>
-            <ul class="cart-list">
-                <li class="cart-item">
-                    <div class="cart-media">
-                        <a href="#"><img src="assets/images/product/01.jpg" alt="product"/></a>
-                        <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                    <div class="cart-info-group">
-                        <div class="cart-info">
-                            <h6><a href="product-single.html">existing product name</a></h6>
-                            <p>Unit Price - $8.75</p>
+                <ul class="cart-list">
+                    <li class="cart-item">
+                        <div class="cart-media">
+                            <a href="#"><img src="assets/images/product/01.jpg" alt="product" /></a>
+                            <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
                         </div>
-                        <div class="cart-action-group">
-                            <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                        <div class="cart-info-group">
+                            <div class="cart-info">
+                                <h6><a href="product-single.html">existing product name</a></h6>
+                                <p>Unit Price - $8.75</p>
                             </div>
-                            <h6>$56.98</h6>
-                        </div>
-                    </div>
-                </li> 
-                <li class="cart-item">
-                    <div class="cart-media">
-                        <a href="#"><img src="assets/images/product/02.jpg" alt="product"/></a>
-                        <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                    <div class="cart-info-group">
-                        <div class="cart-info">
-                            <h6><a href="product-single.html">existing product name</a></h6>
-                            <p>Unit Price - $8.75</p>
-                        </div>
-                        <div class="cart-action-group">
-                            <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                            <div class="cart-action-group">
+                                <div class="product-action">
+                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1" />
+                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                </div>
+                                <h6>$56.98</h6>
                             </div>
-                            <h6>$56.98</h6>
                         </div>
-                    </div>
-                </li>
-                <li class="cart-item">
-                    <div class="cart-media">
-                        <a href="#"><img src="assets/images/product/03.jpg" alt="product"/></a>
-                        <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                    <div class="cart-info-group">
-                        <div class="cart-info">
-                            <h6><a href="product-single.html">existing product name</a></h6>
-                            <p>Unit Price - $8.75</p>
+                    </li>
+                    <li class="cart-item">
+                        <div class="cart-media">
+                            <a href="#"><img src="assets/images/product/02.jpg" alt="product" /></a>
+                            <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
                         </div>
-                        <div class="cart-action-group">
-                            <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                        <div class="cart-info-group">
+                            <div class="cart-info">
+                                <h6><a href="product-single.html">existing product name</a></h6>
+                                <p>Unit Price - $8.75</p>
                             </div>
-                            <h6>$56.98</h6>
-                        </div>
-                    </div>
-                </li>
-                <li class="cart-item">
-                    <div class="cart-media">
-                        <a href="#"><img src="assets/images/product/04.jpg" alt="product"/></a>
-                        <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                    <div class="cart-info-group">
-                        <div class="cart-info">
-                            <h6><a href="front/product-single.html">existing product name</a></h6>
-                            <p>Unit Price - $8.75</p>
-                        </div>
-                        <div class="cart-action-group">
-                            <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                            <div class="cart-action-group">
+                                <div class="product-action">
+                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1" />
+                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                </div>
+                                <h6>$56.98</h6>
                             </div>
-                            <h6>$56.98</h6>
                         </div>
-                    </div>
-                </li>
-                <li class="cart-item">
-                    <div class="cart-media">
-                        <a href="#"><img src="assets/images/product/05.jpg" alt="product"/></a>
-                        <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                    <div class="cart-info-group">
-                        <div class="cart-info">
-                            <h6><a href="front/product-single.html">existing product name</a></h6>
-                            <p>Unit Price - $8.75</p>
+                    </li>
+                    <li class="cart-item">
+                        <div class="cart-media">
+                            <a href="#"><img src="assets/images/product/03.jpg" alt="product" /></a>
+                            <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
                         </div>
-                        <div class="cart-action-group">
-                            <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                        <div class="cart-info-group">
+                            <div class="cart-info">
+                                <h6><a href="product-single.html">existing product name</a></h6>
+                                <p>Unit Price - $8.75</p>
                             </div>
-                            <h6>$56.98</h6>
+                            <div class="cart-action-group">
+                                <div class="product-action">
+                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1" />
+                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                </div>
+                                <h6>$56.98</h6>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="cart-footer">
-                <button class="coupon-btn">Do you have a coupon code?</button>
-                <form class="coupon-form">
-                    <input type="text" placeholder="Enter your coupon code"/>
-                    <button type="submit"><span>apply</span></button>
-                </form>
-                <a class="cart-checkout-btn" href="front/checkout.html">
-                    <span class="checkout-label">Proceed to Checkout</span>
-                    <span class="checkout-price">$369.78</span>
-                </a>
-            </div>
+                    </li>
+                    <li class="cart-item">
+                        <div class="cart-media">
+                            <a href="#"><img src="assets/images/product/04.jpg" alt="product" /></a>
+                            <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                        <div class="cart-info-group">
+                            <div class="cart-info">
+                                <h6><a href="front/product-single.html">existing product name</a></h6>
+                                <p>Unit Price - $8.75</p>
+                            </div>
+                            <div class="cart-action-group">
+                                <div class="product-action">
+                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1" />
+                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                </div>
+                                <h6>$56.98</h6>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cart-item">
+                        <div class="cart-media">
+                            <a href="#"><img src="assets/images/product/05.jpg" alt="product" /></a>
+                            <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                        <div class="cart-info-group">
+                            <div class="cart-info">
+                                <h6><a href="front/product-single.html">existing product name</a></h6>
+                                <p>Unit Price - $8.75</p>
+                            </div>
+                            <div class="cart-action-group">
+                                <div class="product-action">
+                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1" />
+                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                </div>
+                                <h6>$56.98</h6>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="cart-footer">
+                    <button class="coupon-btn">Do you have a coupon code?</button>
+                    <form class="coupon-form">
+                        <input type="text" placeholder="Enter your coupon code" />
+                        <button type="submit"><span>apply</span></button>
+                    </form>
+                    <a class="cart-checkout-btn" href="front/checkout.html">
+                        <span class="checkout-label">Proceed to Checkout</span>
+                        <span class="checkout-price">$369.78</span>
+                    </a>
+                </div>
             </aside>
             <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
             <script src="assets/vendor/bootstrap/popper.min.js"></script>
