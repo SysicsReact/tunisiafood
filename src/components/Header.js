@@ -10,6 +10,7 @@ import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
 import { async } from "q";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import Loader from "../components/loader/Loader";
+import { query, where, onSnapshot, documentId, updateDoc, collection } from "firebase/firestore";
 
 
 const Dashboard=()=> {
@@ -21,6 +22,12 @@ const Dashboard=()=> {
     const[test, setTest]=useState(true)
     const [completeLoading,setCompleLoading]=useState(false)
     const [isLoggedIn,setIsloggin]=useState(false); 
+       
+    const [products, setProducts] = useState([]);
+    const [value, setValue] = useState("");
+    const [result, setResult] = useState([]);
+             
+             
     //monitor currently siggnin user
     useEffect(()=>{
        // setIsLoading(true);
