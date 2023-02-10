@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { GetCardDetails } from "../firebase.config";
-import {products} from "../Pages/AllProducts";
+import {products} from "../pages/AllProducts";
 
 export default function Cart (){
     
