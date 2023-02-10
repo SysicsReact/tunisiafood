@@ -1,7 +1,9 @@
 import React from 'react'
 
-function productList() {
+const ProductList= (products)=> {
+   
   return (
+    
     <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -89,4 +91,4 @@ function productList() {
   )
 }
 
-export default productList
+export default ProductList

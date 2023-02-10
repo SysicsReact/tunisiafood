@@ -4,7 +4,7 @@ import useFetchCollection from '../customHooks/useFetchCollection'
 import { STORE_PRODUCTS, selectProducts } from '../../redux/slice/productSlice'
 import { Link } from 'react-router-dom'
 import Intro from '../Intro'
-import productList from './productList'
+import ProductList from './productList'
 
 const ShopProduct = () => {
     const {data, isLoading} = useFetchCollection("products")
@@ -174,7 +174,8 @@ const ShopProduct = () => {
                         {!grid &&products.slice(0,12).map((e) => {
                        const { id, tag, category,photo,name,price,description } = e;
                     return (
-                         <productList />
+                        
+                        <ProductList {...products} />
                                );
                               })}
                     </div> }      
