@@ -4,7 +4,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import { GoogleAuthProvider,getAuth,signInWithPopup,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
 import { getFirestore } from "@firebase/firestore";
 import { useState } from "react";
-import Dashboard from "./pages/Index";
+import Dashboard from "./Pages/Index";
 import { updatex } from "./components/Header";
 
 const firebaseConfig = {
