@@ -1,11 +1,15 @@
-import {React, useEffect } from 'react'
+import {React, useEffect, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import useFetchCollection from '../customHooks/useFetchCollection'
 import { STORE_PRODUCTS, selectProducts } from '../../redux/slice/productSlice'
+import { Link } from 'react-router-dom'
+import Intro from '../Intro'
+import productList from './productList'
 
 const ShopProduct = () => {
     const {data, isLoading} = useFetchCollection("products")
     const products = useSelector(selectProducts)
+    const [grid, setGrid] = useState(true);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(
@@ -39,7 +43,7 @@ const ShopProduct = () => {
                     <div class="container">
                         <h2>Tout Les Produits</h2>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">Accueil</li>
+                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
                             <li class="breadcrumb-item active" aria-current="page">Shop</li>
                         </ol>
                     </div>
@@ -74,31 +78,30 @@ const ShopProduct = () => {
                             <div class="col-lg-12">
                                 <div class="top-filter">
                                     <div class="filter-show">
-                                        <label class="filter-label">Show :</label>
+                                        <label class="filter-label">Afficher :</label>
                                         <select class="form-select filter-select">
-                                            <option value="1">12</option>
-                                            <option value="2">24</option>
-                                            <option value="3">36</option>
+                                            <option value="1">9</option>
+                                            <option value="2">12</option>
+                                            <option value="3">15</option>
                                         </select>
                                     </div>
                                     <div class="filter-short">
-                                        <label class="filter-label">Short by :</label>
+                                        <label class="filter-label">Filtrer Par:</label>
                                         <select class="form-select filter-select">
-                                            <option selected>default</option>
-                                            <option value="3">trending</option>
-                                            <option value="1">featured</option>
-                                            <option value="2">recommend</option>
+                                            <option selected>Par Défaut</option>
+                                            <option value="3">Catégory</option>
+                                            <option value="1">Les plus plopulaires</option>
+                                            <option value="2">Recommenddé</option>
                                         </select>
                                     </div>
                                     <div class="filter-action">
-                                    <form>
-                                <input class="shop-widget-search" type="text" placeholder="Search..."/>
-                            </form>
                                     </div>
                                     <div class="filter-action">
-                                        <a href="shop-3column.html" class="active" title="Three Column"><i class="fas fa-th"></i></a>
-                                        <a href="shop-2column.html" title="Two Column"><i class="fas fa-th-large"></i></a>
-                                        <a href="shop-1column.html" title="One Column"><i class="fas fa-th-list"></i></a>
+                                        <button  className="header-widget" title="Three Column">
+                                            <i class="fas fa-th" onClick={()=>setGrid(true)}></i></button>
+                                       <button className="header-widget" title="Item List"> 
+                                       <i class="fas fa-th-list" onClick={()=>setGrid(false)}>
+                                        </i></button>
                                     </div>
                                 </div>
                             </div>
@@ -107,13 +110,12 @@ const ShopProduct = () => {
                             <div class="col-lg-12">
                             </div>
                         </div>
+                        {!isLoading &&
             <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                        {!isLoading &&products.slice(0,12).map((e) => {
+                        {grid &&products.slice(0,12).map((e) => {
                        const { id, tag, category,photo,name,price } = e;
-                    return (
-                                
-                                <div class="col">
-                                   
+                    return (    
+                            <div class="col">   
                                 <div class="product-card">
                                     <div class="product-media">
                                         <div class="product-label">
@@ -169,10 +171,17 @@ const ShopProduct = () => {
                             </div>
                                );
                               })}
-                    </div>        
+                        {!grid &&products.slice(0,12).map((e) => {
+                       const { id, tag, category,photo,name,price,description } = e;
+                    return (
+                         <productList />
+                               );
+                              })}
+                    </div> }      
             </div>
             </div></div>
             </section>
+            <Intro/>
      <body>
          <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
          <script src="assets/vendor/bootstrap/popper.min.js"></script>
