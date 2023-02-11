@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { auth, db, storage } from "../firebase.config";
+import { auth, db, storage, changeIsLoading, changeIsTesting, testLoading } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { ref, onValue, update } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
+import { onAuthStateChanged } from "firebase/auth";
+import { selectuserID } from '../redux/slice/authSlice'
 import { ref as sRef } from 'firebase/storage';
-import { query, where, onSnapshot, documentId, updateDoc, doc, collection } from "firebase/firestore";
+import { getDoc, updateDoc, doc } from "firebase/firestore";
+import Loader from "../components/loader/Loader";
 
 
 import {
@@ -23,9 +27,13 @@ function Profile() {
     //--------declarations
 
     const [user] = useAuthState(auth);
-    var uid = user.uid
     const [username, setName] = useState({})
     const [loggedUser, setLoggedUser] = useState({})
+    const [completeLoading, setCompleLoading] = useState(false)
+    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
+    const [test, setTest] = useState(true)
+    const userID = useSelector(selectuserID)
     const [newPhone, setPhone] = useState({ changeState: 0 });
     const [city, setCity] = useState({ changeState: 0 });;
     const [country, setCountry] = useState({ changeState: 0 });;
@@ -38,16 +46,26 @@ function Profile() {
 
     useEffect(() => {
 
-        const q = query(
-            collection(db, "users"),
-            where(documentId(), "==", uid)
-        );
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setLoggedUser(doc.data());
-            });
-        });
-    }, [loggedUser]);
+        // setIsLoading(true);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                if (uid) {
+                    const docRef = doc(db, "users", uid);
+                    getDoc(docRef).then(docSnap => {
+                        if (docSnap.exists()) {
+                            setLoggedUser(docSnap.data())
+                            setIsLoading(true);
+                            changeIsLoading(true);
+                            changeIsTesting(true);
+                            setCompleLoading(testLoading())
+                            localStorage.setItem("isCompleting", true);
+                        }
+                    })
+                }
+            }
+        })
+    }, [dispatch, completeLoading])
 
 
     //----------upload file

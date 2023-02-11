@@ -9,7 +9,6 @@ const productSlice = createSlice({
   initialState,
   reducers: {
      STORE_PRODUCTS(state,action){
-         
           state.products = action.payload.products
      }
   }
