@@ -120,7 +120,7 @@ dispatch(ADD_TO_CART(e));
                             <div class="col-lg-12">
                             </div>
                         </div>
-                        {!isLoading &&
+                        {grid &&
             <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
                         {grid &&products.slice(0,12).map((e) => {
                        const { id, tag, category,photo,name,price } = e;
@@ -177,16 +177,16 @@ dispatch(ADD_TO_CART(e));
                             </div>
                                );
                               })}
-                        {!grid &&products.slice(0,12).map((e) => {
+                        
+                    </div>
+                    }
+                    {!grid &&products.slice(0,12).map((e) => {
                        const { id, tag, category,photo,name,price,description } = e;
                     return (
                         
                         <ProductList {...products} />
                                );
-                              })}
-                    </div>
-                    
-                    }      
+                              })}      
             </div>
             </div></div>
             </section>
