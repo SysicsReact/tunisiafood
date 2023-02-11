@@ -3,14 +3,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails } from "../firebase.config";
 import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
 import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
+import { useDispatch, useSelector } from "react-redux";
 import { async } from "q";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import Loader from "../components/loader/Loader";
 import Cart from "./Cart";
 import { query, where, onSnapshot, documentId, updateDoc, collection } from "firebase/firestore";
+import { selectCarTotalQuantity } from "../redux/slice/cartSlice";
+import { CALCULATE_TOTAL_QUANTITY, selectCartItems } from "../redux/slice/cartSlice";
+
 
 let x=0;
 export function updatex(value)
@@ -18,10 +21,9 @@ export function updatex(value)
     x=value;
 }
 const Dashboard=()=> {
-
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading ] = useState(true);
     const[test, setTest]=useState(true)
     const [completeLoading,setCompleLoading]=useState(false)
@@ -30,6 +32,9 @@ const Dashboard=()=> {
     const [products, setProducts] = useState([]);
     const [value, setValue] = useState("");
     const [result, setResult] = useState([]);  
+    const cartItems = useSelector(selectCartItems);
+    const cartTotalQuantity = useSelector(selectCarTotalQuantity);
+    
     //monitor currently siggnin user
     useEffect(()=>{
        // setIsLoading(true);
@@ -93,7 +98,10 @@ const Dashboard=()=> {
           });
           setCompleLoading(testLoading())
     },[dispatch,displayName,completeLoading])
-
+    
+    useEffect(() => {
+        dispatch(CALCULATE_TOTAL_QUANTITY())
+       }, [dispatch, cartItems]);
 
     useEffect(() => {
         if (products.length == 0) {
@@ -173,8 +181,7 @@ const Dashboard=()=> {
                                 <img src="assets/images/Logo.png" alt="logo" />
                             </Link>
                         </a>
-                        <form className="header-form">
-
+<form className="header-form">
 <div class="dropdown">
     <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
     <div id="myDropdown" class="dropdown-content show">
@@ -184,36 +191,28 @@ const Dashboard=()=> {
                 {result.name}
                 </a>
 
-        ))}
-       
+        ))}  
     </div>
 </div>
-
-
-
-
-
 <button><i className="fas fa-search"></i></button>
-
-
 </form>
 
-                        <div className="header-widget-group">
-                            <a href="front/compare.html" className="header-widget" title="Compare List">
-                                <i className="fas fa-random"></i>
-                                <sup>0</sup>
-                            </a>
-                            <a href="wishlist.html" className="header-widget" title="Wishlist">
-                                <i className="fas fa-heart"></i>
-                                <sup>0</sup>
-                            </a>
-                            <button onClick={() => SetCardValueDetails(GetCardDetails().length)} className="header-widget header-cart" title="Cartlist">
-                                <i className="fas fa-shopping-basket"></i>
-                                <sup  >{value}</sup>
-                                <span>total price<small>$345.00</small></span>
-                                <span><small></small></span>
-                            </button>
-                        </div>
+    <div className="header-widget-group">
+        <a href="front/compare.html" className="header-widget" title="Compare List">
+            <i className="fas fa-random"></i>
+            <sup>0</sup>
+        </a>
+        <a href="wishlist.html" className="header-widget" title="Wishlist">
+            <i className="fas fa-heart"></i>
+            <sup>0</sup>
+        </a>
+        <button className="header-widget header-cart" title="Cartlist">
+            <i className="fas fa-shopping-basket"></i>
+            <sup  >{cartTotalQuantity}</sup>
+            <span>total price<small>$345.00</small></span>
+            <span><small></small></span>
+        </button>
+    </div>
 <li className="header-widget" title="My Account">
 <img src="assets/images/user.png" alt="user" />
 {isLoggedIn &&

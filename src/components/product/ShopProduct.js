@@ -5,6 +5,9 @@ import { STORE_PRODUCTS, selectProducts } from '../../redux/slice/productSlice'
 import { Link } from 'react-router-dom'
 import Intro from '../Intro'
 import ProductList from './productList'
+import { ADD_TO_CART } from '../../redux/slice/cartSlice'
+import {  ToastContainer, toast } from "react-toastify";
+
 
 const ShopProduct = () => {
     const {data, isLoading} = useFetchCollection("products")
@@ -18,7 +21,10 @@ const ShopProduct = () => {
             })
           );
     },[dispatch,data]);
-   
+
+   const addToCart = (e) => {
+dispatch(ADD_TO_CART(e));
+   };
   return (
      <html lang="en">
      <head>
@@ -37,6 +43,10 @@ const ShopProduct = () => {
          <link rel="stylesheet" href="assets/css/main.css" />
          <link rel="stylesheet" href="assets/css/profile.css" />
      </head>
+     <body>
+
+    
+     <ToastContainer></ToastContainer>
      <div className="backdrop"></div>
                <a class="backtop fas fa-arrow-up" href="#"></a>
             <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
@@ -115,7 +125,7 @@ const ShopProduct = () => {
                         {grid &&products.slice(0,12).map((e) => {
                        const { id, tag, category,photo,name,price } = e;
                     return (    
-                            <div class="col">   
+                            <div class="col">    
                                 <div class="product-card">
                                     <div class="product-media">
                                         <div class="product-label">
@@ -157,15 +167,11 @@ const ShopProduct = () => {
                                             <del>€{price}</del>
                                             <span>€{price}<small>/Plat</small></span>
                                         </h6>
-                                        <button class="product-add" title="Add to Cart">
+                                        <button class="product-add" title="Add to Cart" 
+                                        onClick={()=> addToCart(e)}>
                                             <i class="fas fa-shopping-basket"></i>
                                             <span>Ajouter</span>
                                         </button>
-                                        <div class="product-action">
-                                            <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                            <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                            <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -178,12 +184,14 @@ const ShopProduct = () => {
                         <ProductList {...products} />
                                );
                               })}
-                    </div> }      
+                    </div>
+                    
+                    }      
             </div>
             </div></div>
             </section>
             <Intro/>
-     <body>
+     
          <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
          <script src="assets/vendor/bootstrap/popper.min.js"></script>
          <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
