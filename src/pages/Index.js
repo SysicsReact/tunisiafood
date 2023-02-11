@@ -125,8 +125,8 @@ function Dashboard() {
                                     <div className="product-widget">
                                         <a title="Product Compare" href="" className="fas fa-random"></a>
                                         <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                        <button className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view">
-                                             <i title="Product View" ></i></button>
+                                        <button  data-bs-toggle="modal" data-bs-target="#product-view">
+                                             <i title="Product View" className="fas fa-eye" ></i></button>
                                     </div>
                                 </div>
                                 <div className="product-content">
