@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { GetCardDetails } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
+import {products} from "../Pages/AllProducts";
 
 const Cart = () => {
     let data = GetCardDetails();

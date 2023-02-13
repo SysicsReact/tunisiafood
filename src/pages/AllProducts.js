@@ -15,6 +15,7 @@ function AllProducts() {
 
    
      const [_products, setProducts] = useState([]);
+
      const dispatch = useDispatch();
      useEffect(() => {
           const q = query(collection(db, "products"));

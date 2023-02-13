@@ -1,38 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { auth, db } from "../firebase.config";
+import { auth, db, changeIsLoading, changeIsTesting, testLoading } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { ref, onValue } from "firebase/database";
+import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux'
 import { selectIsLoggedIn, selectuserID } from '../redux/slice/authSlice'
 import { useNavigate } from "react-router-dom";
-import { query, where, onSnapshot, documentId, updateDoc, doc, collection } from "firebase/firestore";
-
+import { doc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { getDoc } from "@firebase/firestore";
+import Loader from "../components/loader/Loader";
 function MyProfile() {
 
     //---------declarations
 
     const [user] = useAuthState(auth);
     const [loggedUser, setLoggedUser] = useState({})
+    const [completeLoading, setCompleLoading] = useState(false)
+
     const issignIN = useSelector(selectIsLoggedIn);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
+    const [test, setTest] = useState(true)
     const userID = useSelector(selectuserID)
+
 
     //-----------get userby ID    
 
     useEffect(() => {
-        const q = query(
-            collection(db, "users"),
-            where(documentId(), "==", user.uid)
-        );
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setLoggedUser(doc.data());
-                console.log(loggedUser)
-            });
-        });
-    }, []);
-    
+        // setIsLoading(true);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                if (uid) {
+                    const docRef = doc(db, "users", uid);
+                    getDoc(docRef).then(docSnap => {
+                        if (docSnap.exists()) {
+                            setLoggedUser(docSnap.data())
+                            setIsLoading(true);
+                            changeIsLoading(true);
+                            changeIsTesting(true);
+                            setCompleLoading(testLoading())
+                            localStorage.setItem("isCompleting", true);
+                        }
+                    })
+                }
+            }
+        })
+    }, [dispatch, completeLoading])
+
     return (
         <html lang="en">
             <head>

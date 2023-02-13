@@ -2,6 +2,8 @@ import {React, useEffect, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import useFetchCollection from '../customHooks/useFetchCollection'
 import { STORE_PRODUCTS, selectProducts } from '../../redux/slice/productSlice'
+import { SORT_PRODUCTS,selectFilteredProducts,FILTER_BY_CATEGORY,FILTER_BY_SEARCH,FILTER_BY_TAG } from '../../redux/slice/filterSlice'
+
 import { Link } from 'react-router-dom'
 import Intro from '../Intro'
 import ProductList from './productList'
@@ -13,6 +15,12 @@ const ShopProduct = () => {
     const {data, isLoading} = useFetchCollection("products")
     const products = useSelector(selectProducts)
     const [grid, setGrid] = useState(true);
+    const [sort, setSort] = useState("latest");
+    const [search, setSearch] = useState("");
+    const [tag, setTag] = useState("all");
+    const [category, setCategory] = useState("all");
+
+    const filteredProducts=useSelector(selectFilteredProducts)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(
@@ -25,6 +33,30 @@ const ShopProduct = () => {
    const addToCart = (e) => {
 dispatch(ADD_TO_CART(e));
    };
+   
+    useEffect(()=>{
+        dispatch(SORT_PRODUCTS({products,sort}));
+
+    },[dispatch,products,sort])
+
+    useEffect(()=>{
+        dispatch(FILTER_BY_CATEGORY({products,category}));
+    },[dispatch,products,category])
+
+    useEffect(()=>{
+        dispatch(FILTER_BY_SEARCH({products,search}));
+    },[dispatch,products,search])
+
+    useEffect(()=>{
+        dispatch(FILTER_BY_TAG({products,tag}));
+    },[dispatch,products,tag])
+
+    const clearFilters=()=>{
+        setSearch('')
+        setCategory('all')
+        setTag('all')
+        setSort('latest')
+    }
   return (
      <html lang="en">
      <head>
@@ -66,19 +98,19 @@ dispatch(ADD_TO_CART(e));
                             <h6 class="shop-widget-title">Filter</h6>
                             <div class="form-group">
                                     <label class="form-label">Trier par:</label>
-                                    <select class="form-select" >
+                                    <select class="form-select" value={sort} onChange={(e)=>setSort(e.target.value)} >
                                         <option value="latest">Les plus récents</option>
-                                        <option value="popular">Les plus populaires</option>
                                         <option value="lowest-price">Les moins chers</option>
                                         <option value="highest-price">Les plus chers</option>
                                     </select>
                             </div>
                             <div class="form-group">
                                     <label class="form-label">Catégory:</label>
-                                    <select class="form-select" >
+                                    <select class="form-select" value={category} onChange={(e)=>setCategory(e.target.value)}>
+                                    <option value="all" selected>All</option>
                                         <option value="sucré">Patisserie</option>
                                         <option value="plat">Nos Plats</option>
-                                        <option value="epices">Nos Epices</option>
+                                        <option value="epice">Nos Epices</option>
                                     </select>
                             </div>
                         </div>
@@ -97,14 +129,20 @@ dispatch(ADD_TO_CART(e));
                                     </div>
                                     <div class="filter-short">
                                         <label class="filter-label">Filtrer Par:</label>
-                                        <select class="form-select filter-select">
-                                            <option selected>Par Défaut</option>
-                                            <option value="3">Catégory</option>
-                                            <option value="1">Les plus plopulaires</option>
-                                            <option value="2">Recommenddé</option>
+                                        <select class="form-select filter-select" value={tag} onChange={(e)=>setTag(e.target.value)}>
+                                            <option value="all" selected>All</option>
+                                            <option value="populaire">populaire</option>
+                                            <option value="nouveau">nouveau</option>
+                                            <option value="solde">soldé</option>
+
+                                          
                                         </select>
                                     </div>
                                     <div class="filter-action">
+                                        <button class="btn btn-success" onClick={()=>clearFilters()} >Clear filters</button>
+                                    </div>
+                                    <div class="filter-action">
+                                        <input  class="form-select " type="text" value={search} onChange={(e)=>setSearch(e.target.value)} />
                                     </div>
                                     <div class="filter-action">
                                         <button  className="header-widget" title="Three Column">
@@ -122,7 +160,7 @@ dispatch(ADD_TO_CART(e));
                         </div>
                         {grid &&
             <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                        {grid &&products.slice(0,12).map((e) => {
+                        {grid &&filteredProducts.slice(0,12).map((e) => {
                        const { id, tag, category,photo,name,price } = e;
                     return (    
                             <div class="col">    
