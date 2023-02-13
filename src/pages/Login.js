@@ -1,11 +1,11 @@
 
-import { db,auth } from "../firebase.config";
+import { db, auth } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {  ref, set,onValue } from "firebase/database";
-import { GoogleAuthProvider,signInWithEmailAndPassword,signInWithPopup} from "firebase/auth";
-import {  ToastContainer, toast } from "react-toastify";
+import { ref, set, onValue } from "firebase/database";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
 import Loader from "../components/loader/Loader";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,50 +15,50 @@ function Login() {
     const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
     const googleProvider = new GoogleAuthProvider();
-    const [isLoading, setIsLoading ] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     var testUser;
 
     const logInWithEmailAndPassword = async (email, password) => {
-       console.log(email,password)
-          await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        console.log(email, password)
+        await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             const user = userCredential.user;
             setIsLoading(false)
             toast.success("Connecté avec succès")
             //navigate("/")
-                })
-                .catch((error) => {
-                    setIsLoading(false)
-                    toast.error("error.message")
-                });
-        
-      };
-      
+        })
+            .catch((error) => {
+                setIsLoading(false)
+                toast.error("error.message")
+            });
 
-const loginUser = (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    logInWithEmailAndPassword(email, password)
-    
-};
+    };
+
+
+    const loginUser = (e) => {
+        e.preventDefault()
+        setIsLoading(true)
+        logInWithEmailAndPassword(email, password)
+
+    };
     const signInWithGoogle = async () => {
 
         try {
-          const res = await signInWithPopup(auth, googleProvider);
-          
+            const res = await signInWithPopup(auth, googleProvider);
+
             // updateStarCount(postElement, data);
-        
+
         } catch (err) {
-          console.error(err);
+            console.error(err);
         }
-      };
+    };
 
     useEffect(() => {
-       if(user)navigate("/")
-      }, [user, loading]);
+        if (user) navigate("/")
+    }, [user, loading]);
     return (
         <html lang="en">
             <head>
-               
+
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -71,15 +71,14 @@ const loginUser = (e) => {
                 <link rel="stylesheet" href="assets/css/user-auth.css" />
             </head>
             <body>
-            <ToastContainer /> 
-        {isLoading && <Loader/>}
-                <br></br><br></br><br></br><br></br><br></br>
+                <ToastContainer />
+                {isLoading && <Loader />}
                 <section className="user-form-part">
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                                 <div className="user-form-logo">
-                                  
+                                    <img src="assets/images/logo.png" alt="logo" />
                                 </div>
                                 <div className="user-form-card">
                                     <div className="user-form-title">
@@ -96,7 +95,7 @@ const loginUser = (e) => {
                                         <div className="user-form-divider">
                                             <p>or</p>
                                         </div>
-                                        <form className="user-form"  onSubmit={loginUser}>
+                                        <form className="user-form" onSubmit={loginUser}>
                                             <div className="form-group">
                                                 <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
                                             </div>
