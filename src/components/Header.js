@@ -38,6 +38,7 @@ const Dashboard=()=> {
     
     //monitor currently siggnin user
     useEffect(()=>{
+        localStorage.clear();
        // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
