@@ -9,7 +9,6 @@ const Cart = () => {
     const cartTotalAmount = useSelector(selectCarTotalAmount);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const dispatch = useDispatch();
-
     const decreaseCart = (cart) => {
         dispatch(DECREASE_CART(cart));
     };

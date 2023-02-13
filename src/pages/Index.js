@@ -8,12 +8,14 @@ import { useSelector, useDispatch } from "react-redux";
 import useFetchCollection from "../components/customHooks/useFetchCollection";
 import { STORE_PRODUCTS, selectProducts } from "../redux/slice/productSlice";
 import { ADD_TO_CART } from "../redux/slice/cartSlice";
+import {Modal} from 'react-fade-modal';
 
 
 function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false)
     //const [isLoading, setIsLoading ] = useState(false);
     const {data, isLoading} = useFetchCollection("products")
     const products = useSelector(selectProducts)
@@ -28,7 +30,6 @@ function Dashboard() {
     const addToCart = (e) => {
         dispatch(ADD_TO_CART(e));
            };
-
     return (
         <html lang="en">
             <head>
@@ -50,7 +51,6 @@ function Dashboard() {
                 <link rel="stylesheet" href="./components/loader/loader.css" />
             </head>
             <body>
-  
             {isLoading && <Loader/>}
             {!isLoading &&
             <div>
@@ -98,16 +98,15 @@ function Dashboard() {
                        const { id, tag, category,photo,name,price } = e;
                       
                     return (
+                        <>  
                         <div className="col">
                             <div className="product-card">
                                 <div className="product-media">
                                     <div className="product-label">
                                     {tag=="nouveau"&&
                                             <label className="label-text new">{tag}</label>}
-
                                             {tag=="solde"&&
                                             <label className="label-text sale">{tag}</label>}
-
                                             {tag=="populaire"&&
                                             <label className="label-text feat">{tag}</label>}
                                     </div>
@@ -123,12 +122,51 @@ function Dashboard() {
                                         <img src={photo} alt="product"/>
                                     </a>
                                     <div className="product-widget">
-                                        <a title="Product Compare" href="" className="fas fa-random"></a>
+                                     <button onClick={() => setIsOpen(true)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
                                         <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                        <button  data-bs-toggle="modal" data-bs-target="#product-view">
-                                             <i title="Product View" className="fas fa-eye" ></i></button>
+                                        <button onClick={() => setIsOpen(true)} className="product-v"><i className="fas fa-random" style={{color:"white"}}></i></button>
                                     </div>
                                 </div>
+           {isOpen &&<Modal
+          setIsOpen={setIsOpen}>
+         <div className="row">
+            <div class="col">
+                <div class="product-standard">
+                    <div class="standard-label-group">
+                        <label class="standard-label off">-15%</label>
+                    </div>
+                    <div class="standard-media">
+                            <img class="standard-image" src={photo} alt="product"/>
+                    </div>
+                    <div class="standard-content">
+                        <h4 class="standard-name">
+                            <a href="product-video.html">fresh green chilis</a>
+                        </h4>
+                        <h5 class="standard-price">
+                            <del>$34</del>
+                            <span>$28<small>/piece</small></span>
+                        </h5>
+                        <p class="standard-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit molestias quaerat rem ullam ut nam quibusdam labore sed magnam eos Inventore quis corrupti nemo ipsa ratione culpa porro vitae.</p>
+                        <div class="standard-action-group">
+                            <button class="product-add" title="Add to Cart">
+                                <i class="fas fa-shopping-basket"></i>
+                                <span>add to cart</span>
+                            </button>
+                            <div class="product-action">
+                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                            </div>
+                            <button class="standard-wish wish" title="Add to Wishlist">
+                                <i class="fas fa-heart"></i>
+                                <span>add to wish</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          </Modal>}
                                 <div className="product-content">
                                     <div className="product-rating">
                                     <i className="product-mass">200 G</i>
@@ -152,12 +190,13 @@ function Dashboard() {
                                     </div>
                                 </div>
                             </div>
-                            </div>  
+                        </div>  
+                            </>
                      );
                     })}
                               
               </div>
-                     </div>
+               </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
@@ -339,6 +378,7 @@ function Dashboard() {
                 <script src="assets/vendor/slickslider/slick.min.js"></script>
                 <script src="assets/vendor/venobox/venobox.min.js"></script>
                 <script src="assets/js/nice-select.js"></script>
+                <script src="assets/js/modalview.js"></script>
                 <script src="assets/js/countdown.js"></script>
                 <script src="assets/js/accordion.js"></script>
                 <script src="assets/js/venobox.js"></script>
@@ -346,6 +386,5 @@ function Dashboard() {
                 <script src="assets/js/main.js"></script>
             </body>
         </html>
-    );
-}
+    );}
 export default Dashboard;

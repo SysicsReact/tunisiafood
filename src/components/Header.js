@@ -11,8 +11,8 @@ import { doc, getDoc, setDoc } from "@firebase/firestore";
 import Loader from "../components/loader/Loader";
 import Cart from "./Cart";
 import { query, where, onSnapshot, documentId, updateDoc, collection } from "firebase/firestore";
-import { selectCarTotalQuantity } from "../redux/slice/cartSlice";
-import { CALCULATE_TOTAL_QUANTITY, selectCartItems } from "../redux/slice/cartSlice";
+import { selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
+import { CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, selectCartItems } from "../redux/slice/cartSlice";
 
 
 let x=0;
@@ -34,6 +34,7 @@ const Dashboard=()=> {
     const [result, setResult] = useState([]);  
     const cartItems = useSelector(selectCartItems);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
+    const cartTotalAmount = useSelector(selectCarTotalAmount);
     
     //monitor currently siggnin user
     useEffect(()=>{
@@ -100,6 +101,7 @@ const Dashboard=()=> {
     },[dispatch,displayName,completeLoading])
     
     useEffect(() => {
+        dispatch(CALCULATE_SUBTOTAL())
         dispatch(CALCULATE_TOTAL_QUANTITY())
        }, [dispatch, cartItems]);
 
@@ -209,7 +211,7 @@ const Dashboard=()=> {
         <button className="header-widget header-cart" title="Cartlist">
             <i className="fas fa-shopping-basket"></i>
             <sup  >{cartTotalQuantity}</sup>
-            <span>total price<small>$345.00</small></span>
+            <span>total price<small>${cartTotalAmount.toFixed(2)}</small></span>
             <span><small></small></span>
         </button>
     </div>

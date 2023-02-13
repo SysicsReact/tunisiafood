@@ -90,6 +90,7 @@ $(window).on("scroll", function(){
  //         CART SIDEBAR FUNCTION
  //========================================
  $('.header-cart, .cart-btn').on('click', function(){
+  
      $('body').css('overflow', 'hidden');
      $('.cart-sidebar').addClass('active');
      $('.cart-close').on('click', function(){
@@ -98,7 +99,19 @@ $(window).on("scroll", function(){
          $('.backdrop').fadeOut();
      });
  });
- 
+  //========================================
+ //        Product View FUNCTION
+ //========================================
+ $('.header-cart1, .cart-btn1').on('click', function(){
+  
+    $('body').css('overflow', 'hidden');
+    $('.cart-sidebar1').addClass('active');
+    $('.cart-close1').on('click', function(){
+        $('body').css('overflow', 'inherit');
+        $('.cart-sidebar1').removeClass('active');
+        $('.backdrop1').fadeOut();
+    });
+});
  
  //========================================
  //       BACKDROP SIDEBAR FUNCTION
@@ -151,7 +164,12 @@ $(window).on("scroll", function(){
      $(this).hide();
      productAdd.css('display', 'flex');
  });
- 
+
+ $('#myBtn').on('click', function(){
+    alert("heyyy")
+    $("#product-view").css("display","block")
+});
+
  
  //========================================
  //      INCREMENT PRODUCT QUANTITY
