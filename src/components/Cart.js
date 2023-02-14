@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { GetCardDetails } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../redux/slice/authSlice";
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 
 const Cart = () => {
@@ -30,9 +29,6 @@ const Cart = () => {
    }, [dispatch, cartItems]);
    const url = window.location.href;
    console.log(url);
-   const checkout = () => {
-
-   };
      return(
        
           <aside class="cart-sidebar">
