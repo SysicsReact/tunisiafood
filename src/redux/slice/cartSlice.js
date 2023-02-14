@@ -4,6 +4,7 @@ const initialState = {
 cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")):[],
 cartTotalQuantity: 0,
 cartTotalAmount:0,
+previousURL:"",
 }
 
 const cartSlice = createSlice({
@@ -85,6 +86,9 @@ const cartSlice = createSlice({
           }, 0);
           state.cartTotalQuantity = totalQuantity;
         },
+        SAVE_URL(state, action){
+          state.previousURL = action.payload;
+        }
   }
 });
 
