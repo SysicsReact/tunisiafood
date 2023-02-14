@@ -38,7 +38,7 @@ const Dashboard=()=> {
     
     //monitor currently siggnin user
     useEffect(()=>{
-        localStorage.clear();
+      
        // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -56,14 +56,16 @@ const Dashboard=()=> {
                         localStorage.setItem("isCompleting",true);
                         //changeIsTesting(false); 
                     } else {   
-                        const writeUserData= async(userId, name, email,docRef)=>{
-                            const userRef = doc(db, "users", userId);
-                            console.log(userRef)
-                            await setDoc(docRef, {
-                              userName: name,
-                              email:email,
+
+                            const userRef = doc(db, "users", uid);
+                             setDoc(docRef, {
+                              userName: user.displayName,
+                              email:user.email,
+                              country:"",
+                              city:"",
+                              adress:""
                           }).then(()=>{
-                            setDisplayName(name)
+                            setDisplayName(user.displayName)
                             setIsLoading(true);
                             changeIsLoading(true);
                             changeIsTesting(true);
@@ -76,7 +78,7 @@ const Dashboard=()=> {
                             setCompleLoading(testLoading())
                            
                           });
-                          }
+                          
                     }
                   }) 
                 }
@@ -187,12 +189,13 @@ const Dashboard=()=> {
 <form className="header-form">
 <div class="dropdown">
     <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
-    <div id="myDropdown" class="dropdown-content show">
+    <div id="myDropdown" class="rounded dropdown-content show">
         {result.slice(0,5).map((result, Index) => (
             <a  key={Index}>
                 <img src={result.photo} class="mx-3 rounded" height="30"/>
                 {result.name}
                 </a>
+                
 
         ))}  
     </div>
