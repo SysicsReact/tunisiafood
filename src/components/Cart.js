@@ -1,23 +1,21 @@
 import React, { useEffect } from "react";
 import {  useNavigate } from "react-router-dom";
-
 import { GetCardDetails, auth, db } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     let data = GetCardDetails();
     const notifyError = () => toast.error("Complete your profile");
     const notifyErr = () => toast.error("Authentification required");
-
     const navigate = useNavigate();
     const cartItems = useSelector(selectCartItems);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
-    const isLoggedIn = useSelector();
     const dispatch = useDispatch();
     const decreaseCart = (cart) => {
         dispatch(DECREASE_CART(cart));
@@ -27,7 +25,6 @@ const Cart = () => {
     }
     const increaseCart = (cart) => {
         dispatch(ADD_TO_CART(cart));
-
     };
     const removeFromCart = (cart) => {
         dispatch(REMOVE_FROM_CART(cart));
@@ -37,31 +34,6 @@ const Cart = () => {
         dispatch(CALCULATE_TOTAL_QUANTITY())
     }, [dispatch, cartItems]);
 
-
-    const processToCheckout = () => {
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const uid = user.uid;
-                const docRef = doc(db, "users", uid);
-                getDoc(docRef).then(docSnap => {
-                    if (!docSnap.data().country || !docSnap.data().city || !docSnap.data().adress) {
-                        console.log(docSnap.data())
-                        notifyError()
-                        navigate("/profile")
-                    }else{
-                        console.log("sucess")
-                        //-------proceed with checkout process
-                    }
-                })
-            } else {
-                notifyErr()
-                navigate("/Login")
-            }
-        })
-
-
-    }
 
     return (
 
@@ -125,8 +97,8 @@ const Cart = () => {
                         return (
                             <>
                                 <div class="cart-footer">
-                                    <a class="cart-checkout-btn" >
-                                        <span class="checkout-label" onClick={() => processToCheckout()} >Checkout</span>
+                                   <a class="cart-checkout-btn" href="">
+                                   <Link to="/CartDetails"> <span class="checkout-label"  >Checkout</span></Link>
                                         <span class="checkout-price">${cartTotalAmount.toFixed(2)}</span>
                                     </a>
                                 </div>

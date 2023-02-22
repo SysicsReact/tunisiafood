@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useLocation,useNavigate, useParams } from "react-router-dom";
 import { auth, db, logout } from "../firebase.config";
 import Loader from "../components/loader/Loader";
 import Intro from "../components/Intro";
@@ -14,6 +14,7 @@ import {Modal} from 'react-fade-modal';
 function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
+    const[singleProduct,setSingleProduct]=useState([])
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false)
     //const [isLoading, setIsLoading ] = useState(false);
@@ -30,6 +31,21 @@ function Dashboard() {
     const addToCart = (e) => {
         dispatch(ADD_TO_CART(e));
            };
+    const ShowItem=(e)=>{
+        //alert(e);
+        setSingleProduct(e);
+        setIsOpen(true)
+           }
+    const view = async (idp) => {
+        navigate("/ProductItems", { state: { id: idp } });
+          };
+    const shortenText = (text, n) => {
+        if (text.length > n) {
+            const shortenedText = text.substring(0, n).concat("...");
+            return shortenedText;
+        }
+        return text;
+        };
     return (
         <html lang="en">
             <head>
@@ -93,13 +109,12 @@ function Dashboard() {
                 <div>
                 <div>
                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-                        
                 {!isLoading &&products.slice(0,10).map((e) => {
-                       const { id, tag, category,photo,name,price } = e;
+                       const { id, weight, tag, category, photo, name, price, discount, description } = e;
                       
                     return (
                         <>  
-                        <div className="col">
+                        <div className="col" key={id}>
                             <div className="product-card">
                                 <div className="product-media">
                                     <div className="product-label">
@@ -122,35 +137,48 @@ function Dashboard() {
                                         <img src={photo} alt="product"/>
                                     </a>
                                     <div className="product-widget">
-                                     <button onClick={() => setIsOpen(true)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
+                                        <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
                                         <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                        <button onClick={() => setIsOpen(true)} className="product-v"><i className="fas fa-random" style={{color:"white"}}></i></button>
+                                       <button onClick={() => ShowItem(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
                                 </div>
            {isOpen &&<Modal
-          setIsOpen={setIsOpen}>
-         <div className="row">
+          setIsOpen={setIsOpen}>  
+        <div className="row" key={singleProduct.id}>
             <div class="col">
                 <div class="product-standard">
-                    <div class="standard-label-group">
-                        <label class="standard-label off">-15%</label>
-                    </div>
                     <div class="standard-media">
-                            <img class="standard-image" src={photo} alt="product"/>
+                            <img class="product-image" src={singleProduct.photo} style={{width:"350px", borderRadius:"8px"}} alt="product"/>
+                            <button className="product-wish wish">
+                        {singleProduct.category=="plat"&&
+                                <label className="label-text order">{singleProduct.category}</label>}
+                        {singleProduct.category=="epice"&&
+                                <label className="label-text rate">{singleProduct.category}</label>}
+                        {singleProduct.category=="sucré"&&
+                                <label className="label-text sucre">{singleProduct.category}</label>}
+                    </button>
+                    <div class="product-label">
+                    {singleProduct.tag=="nouveau"&&
+                    <label className="label-text new">{singleProduct.tag}</label>}
+                    {singleProduct.tag=="solde"&&
+                    <label className="label-text sale">{singleProduct.tag}</label>}
+                    {singleProduct.tag=="populaire"&&
+                    <label className="label-text feat">{singleProduct.tag}</label>}
+                    </div>
                     </div>
                     <div class="standard-content">
                         <h4 class="standard-name">
-                            <a href="product-video.html">fresh green chilis</a>
+                            <a href="product-video.html">{singleProduct.name}</a>
                         </h4>
                         <h5 class="standard-price">
-                            <del>$34</del>
-                            <span>$28<small>/piece</small></span>
+                            <del> €{singleProduct.price}</del>
+                            <span> €{singleProduct.price}<small>/{singleProduct.weight} G</small></span>
                         </h5>
-                        <p class="standard-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit molestias quaerat rem ullam ut nam quibusdam labore sed magnam eos Inventore quis corrupti nemo ipsa ratione culpa porro vitae.</p>
+                        <p class="standard-desc">{singleProduct.description}</p>
                         <div class="standard-action-group">
-                            <button class="product-add" title="Add to Cart">
+                            <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
                                 <i class="fas fa-shopping-basket"></i>
-                                <span>add to cart</span>
+                                <span>Ajouter</span>
                             </button>
                             <div class="product-action">
                                 <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
@@ -159,8 +187,11 @@ function Dashboard() {
                             </div>
                             <button class="standard-wish wish" title="Add to Wishlist">
                                 <i class="fas fa-heart"></i>
-                                <span>add to wish</span>
+                                <span>Ajouter au wishlist</span>
                             </button>
+                    <button class="standard-wish wish" title="Add to Wishlist"
+                     onClick={() => view(singleProduct.id)}>
+                     Plus de Détails</button>
                         </div>
                     </div>
                 </div>
@@ -169,15 +200,24 @@ function Dashboard() {
           </Modal>}
                                 <div className="product-content">
                                     <div className="product-rating">
-                                    <i className="product-mass">200 G</i>
+                                    <i className="product-price" href="">{weight} G</i>
                                     </div>
                                     <h6 className="product-name">
                                         <a href="product-video.html">{name}</a>
                                     </h6>
                                     <h6 className="product-price">
-                                        <del>${price}</del>
-                                        <span>${price}<small>/plat</small></span>
-                                    </h6>
+                                    {discount!="0"&&
+                                    <>
+                                        <del> €{price}</del>
+                                        <span> € {Math.round((price-(price*discount)/100)*100)/100}<small></small></span>
+                                        </>
+                                    }
+                                    {discount=="0"&&
+                                        <>
+                                       
+                                        <span> € {price}<small></small></span>
+                                        </>
+                                    }</h6>
                                     <button className="product-add" title="Add to Cart"
                                     onClick={()=> addToCart(e)}>
                                         <i className="fas fa-shopping-basket"></i>
@@ -194,14 +234,13 @@ function Dashboard() {
                             </>
                      );
                     })}
-                              
               </div>
                </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                        <Link to="/Shop"> <a className="btn btn-outline">
+                        <Link to="/ShopProduct"> <a className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
                                 <span>Voir Plus</span>
                             </a></Link>
@@ -257,31 +296,23 @@ function Dashboard() {
                                             <label className="label-text sucre">{category}</label>}
                                 </button>
                                 <a className="feature-image" href="product-video.html">
-                                    <img src={photo} alt="product"/>
+                                    <img src={photo} style={{ borderRadius:"5px"}} alt={name}/>
                                 </a>
                                 <div className="feature-widget">
-                                    <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
-                                    <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="#" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
+                                        <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                       <button onClick={() => ShowItem(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                 </div>
                             </div>
                             <div className="feature-content">
                                 <h6 className="feature-name">
                                     <a href="product-video.html">{name}</a>
                                 </h6>
-                                <div className="feature-rating">
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="active icofont-star"></i>
-                                    <i className="icofont-star"></i>
-                                    <a href="product-video.html">(3 Reviews)</a>
-                                </div>
                                 <h6 className="feature-price">
                                     <del>${price}</del>
                                     <span>${price}<small>/plat</small></span>
                                 </h6>
-                                <p className="feature-desc">{description}</p>
+                                <p className="feature-desc">{shortenText(description, 150)}</p>
                                 <button className="product-add" title="Add to Cart">
                                     <i className="fas fa-shopping-basket"></i>
                                     <span>Ajouter</span>
@@ -300,7 +331,7 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                           <Link to="/Shop"> <a className="btn btn-outline">
+                           <Link to="/ShopProduct"> <a className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
                                 <span>Voir Plus</span>
                             </a></Link>
@@ -369,8 +400,8 @@ function Dashboard() {
                 </div>
             </div>
         </section>
-        </div>
-    }   
+            </div>
+            }   
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
                 <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
                 <script src="assets/vendor/countdown/countdown.min.js"></script>

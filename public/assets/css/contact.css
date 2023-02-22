@@ -4,8 +4,10 @@
 .contact-form {
   border-radius: 8px;
   padding: 30px 30px;
-  margin: 0px 2.5px 30px;
+  margin: auto;
+  width: 200%;
   background: var(--white);
+ 
 }
 
 .contact-form h4 {

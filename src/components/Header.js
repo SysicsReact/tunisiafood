@@ -169,6 +169,105 @@ const Dashboard=()=> {
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
             {(!completeLoading) &&<Loader/>}
+
+            {isLoggedIn &&
+            <aside class="nav-sidebar">
+            <div class="nav-header">
+                <a href="#"><img src="assets/images/logo.png" alt="logo"/></a>
+                <button class="nav-close"><i class="icofont-close"></i></button>
+            </div>
+            <div class="nav-content">
+               <div class="nav-profile">
+                    <a class="nav-user" href="#"><img src="assets/images/user.png" alt="user"/></a>
+                    <h4 class="nav-name"><a href="profile.html">{displayName}</a></h4>
+                </div> 
+                <ul class="nav-list">
+                    <li>
+                    <NavLink to="/MyProfile" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-bag-alt"></i>Profile</a></NavLink>
+                    </li>
+                    <li>
+                    <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-page"></i>
+                    Commandes</a></NavLink>
+                    <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-warning"></i>
+confidentialité</a></NavLink>
+                    </li>
+                    <li>
+                        <a class="nav-link dropdown-link" href="#"><i class="icofont-lock"></i>authentic</a>
+                    </li>
+                    <li>
+                    <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#" onClick={logout}><i class="icofont-logout"></i>Se déconnecter</a></NavLink>
+                    </li>
+
+                </ul>
+                <div class="nav-info-group">
+                    <div class="nav-info">
+                        <i class="icofont-ui-touch-phone"></i>
+                        <p>
+                            <small>Appelez-nous</small>
+                            <span>(+216) 50 450 960</span>
+                        </p>
+                    </div>
+                    <div class="nav-info">
+                        <i class="icofont-ui-email"></i>
+                        <p>
+                            <small>Envoyez-nous un email</small>
+                            <span>support@cooltoonsi.com</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="nav-footer">
+                    <p>Tous droits réservés par <a href="#">Cool Toonsi</a></p>
+                </div>
+            </div>
+
+        </aside>}
+        {!isLoggedIn &&
+            <aside class="nav-sidebar">
+            
+            <div class="nav-header">
+                <a href="#"><img src="assets/images/logo.png" alt="logo"/></a>
+                <button class="nav-close"><i class="icofont-close"></i></button>
+            </div>
+            <div class="nav-content">
+                <div class="nav-btn">
+                    <a href="login.html" class="btn btn-inline">
+                        <i class="fa fa-unlock-alt"></i>
+                        <span>join here</span>
+                    </a>
+                </div>
+                <ul class="nav-list">
+                    <li>
+                        <a class="nav-link dropdown-link" href="#"><i class="icofont-lock"></i>authentic</a>
+                        <ul class="dropdown-list">
+                            <li><a href="login.html">login</a></li>
+                            <li><a href="register.html">register</a></li>
+                            <li><a href="reset-password.html">reset password</a></li>
+                            <li><a href="change-password.html">change password</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="nav-info-group">
+                    <div class="nav-info">
+                        <i class="icofont-ui-touch-phone"></i>
+                        <p>
+                            <small>Appelez-nous</small>
+                            <span>(+216) 50 450 960</span>
+                        </p>
+                    </div>
+                    <div class="nav-info">
+                        <i class="icofont-ui-email"></i>
+                        <p>
+                            <small>Envoyez-nous un email</small>
+                            <span>support@cooltoonsi.com</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="nav-footer">
+                    <p>Tous droits réservés par <a href="#">Cool Toonsi</a></p>
+                </div>
+            </div>
+
+        </aside>}
             <header className="header-part">  
                 <div className="container">
                     <div className="header-content">
@@ -186,22 +285,20 @@ const Dashboard=()=> {
                                 <img src="assets/images/Logo.png" alt="logo" />
                             </Link>
                         </a>
-<form className="header-form">
-<div class="dropdown">
-    <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
-    <div id="myDropdown" class="rounded dropdown-content show">
-        {result.slice(0,5).map((result, Index) => (
-            <a  key={Index}>
-                <img src={result.photo} class="mx-3 rounded" height="30"/>
-                {result.name}
-                </a>
-                
-
-        ))}  
-    </div>
-</div>
-<button><i className="fas fa-search"></i></button>
-</form>
+                        <form className="header-form">
+                        <div class="dropdown">
+                            <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
+                            <div id="myDropdown" class="rounded dropdown-content show">
+                                {result.slice(0,5).map((result, Index) => (
+                                    <a  key={Index}>
+                                        <img src={result.photo} class="mx-3 rounded" height="30"/>
+                                        {result.name}
+                                    </a>
+                                ))}  
+                            </div>
+                        </div>
+                        <button><i className="fas fa-search"></i></button>
+                        </form>
 
     <div className="header-widget-group">
         <a href="front/compare.html" className="header-widget" title="Compare List">
@@ -219,24 +316,25 @@ const Dashboard=()=> {
             <span><small></small></span>
         </button>
     </div>
-<li className="header-widget" title="My Account">
+<li className="header-widget">
+    {!isLoggedIn&&
+               <span ><Link to="/Login"> join </Link></span>
+            }
 <img src="assets/images/user.png" alt="user" />
 {isLoggedIn &&
 <span className="navbar-item dropdown" >  
 <NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
             <ul className="dropdown-position-list">
                 <li><Link to="MyProfile"> profile </Link></li>
+                <li alt="Mes commandes"><Link to="/OrderHistory"> Commandes </Link></li>
                 <li><button className="dashboard__btn"
                     onClick={logout}> 
                 <Link to="/"> Logout </Link> </button></li>
             </ul>
             </span>
         }
-<div>
-    {!isLoggedIn&&
-                <span><Link to="/Login"> join </Link></span>
-            }
-</div>
+
+    
 </li>
                     </div>
                 </div>

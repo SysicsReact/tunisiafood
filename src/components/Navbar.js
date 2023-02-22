@@ -107,7 +107,7 @@ class Navbar extends React.Component{
             </div>
         </aside>
 
-            <div className="mobile-menu">
+        <div className="mobile-menu">
                     <a href="index.html" title="Home Page">
                         <i className="fas fa-home"></i>
                         
@@ -132,7 +132,7 @@ class Navbar extends React.Component{
                         <span>compare</span>
                         <sup>0</sup>
                     </a>
-            </div>
+        </div>
 
         <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
         <script src="assets/vendor/bootstrap/popper.min.js"></script>

@@ -4,12 +4,14 @@ import authReducer from "./slice/authSlice"
 import productReducer from "./slice/productSlice";
 import cartReducer from "./slice/cartSlice";
 import filterReducer from "./slice/filterSlice";
+import orderReducer from "./slice/orderSlice";
 
 const rootReducer=combineReducers({   
     auth:authReducer,
     product:productReducer,
     cart:cartReducer,
     filter: filterReducer,
+    orders: orderReducer,
 
 });
 

@@ -1,13 +1,14 @@
-
 import { db, auth } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ref, set, onValue } from "firebase/database";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../components/loader/Loader";
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+import CartDetails from "./CartDetails";
+import { selectPreviousURL } from "../redux/slice/cartSlice";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -16,21 +17,30 @@ function Login() {
     const navigate = useNavigate();
     const googleProvider = new GoogleAuthProvider();
     const [isLoading, setIsLoading] = useState(false);
-    var testUser;
+    const previousURL = useSelector(selectPreviousURL);
 
+    const redirectUser = () =>{
+        if (previousURL.includes("Cart")){
+            alert(previousURL)
+            console.log(previousURL)
+            navigate("/CartDetails");
+        }else{
+            navigate("/")
+        }
+    };
     const logInWithEmailAndPassword = async (email, password) => {
         console.log(email, password)
         await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             const user = userCredential.user;
             setIsLoading(false)
-            toast.success("Connecté avec succès")
+            toast.success("Connecté avec succès");
+            redirectUser()
             //navigate("/")
         })
             .catch((error) => {
                 setIsLoading(false)
                 toast.error("error.message")
             });
-
     };
 
 
@@ -44,8 +54,7 @@ function Login() {
 
         try {
             const res = await signInWithPopup(auth, googleProvider);
-
-            // updateStarCount(postElement, data);
+            redirectUser();
 
         } catch (err) {
             console.error(err);

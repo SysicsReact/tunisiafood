@@ -4023,6 +4023,20 @@ tbody tr td:last-child {
     margin-bottom: 10px;
   }
 }
+.my-buttonf{
+  border: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 6px;
+    letter-spacing: 0.3px;
+    padding: 5px 15px;
+    white-space: nowrap;
+    text-transform: capitalize;
+    text-align: center;
+    color: var(--primary);
+    background: var(--green-chalk);
+    text-shadow: var(--primary-tshadow);
+}
 
 .header-part {
   background: var(--white);
