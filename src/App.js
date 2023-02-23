@@ -37,7 +37,9 @@ class App extends Component {
 
   render() {
 
-
+    if(!localStorage.getItem("isCompleting")){
+      localStorage.setItem("isCompleting",true)
+    }
     test = localStorage.getItem("isCompleting");
     return (
       <>
