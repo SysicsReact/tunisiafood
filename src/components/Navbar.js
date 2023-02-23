@@ -107,32 +107,7 @@ class Navbar extends React.Component{
             </div>
         </aside>
 
-        <div className="mobile-menu">
-                    <a href="index.html" title="Home Page">
-                        <i className="fas fa-home"></i>
-                        
-                            <span><Link to="/">  Accueil </Link></span>
-                    </a>
-                    <button className="cate-btn" title="Category List">
-                        <i className="fas fa-list"></i>
-                        <span>Pages</span>
-                    </button>
-                    <button className="cart-btn" title="Cartlist">
-                        <i className="fas fa-shopping-basket"></i>
-                        <span>cartlist</span>
-                        <sup>9+</sup>
-                    </button>
-                    <a href="front/wishlist.html" title="Wishlist">
-                        <i className="fas fa-heart"></i>
-                        <span>wishlist</span>
-                        <sup>0</sup>
-                    </a>
-                    <a href="front/compare.html" title="Compare List">
-                        <i className="fas fa-random"></i>
-                        <span>compare</span>
-                        <sup>0</sup>
-                    </a>
-        </div>
+
 
         <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
         <script src="assets/vendor/bootstrap/popper.min.js"></script>

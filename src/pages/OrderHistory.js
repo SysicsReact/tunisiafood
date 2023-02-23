@@ -57,36 +57,40 @@ const OrderHistory = () => {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                    <div class="order-track">
-                                            <ul class="order-track-list">
-                                                <li class="order-track-item active">
-                                                    <i class="icofont-check"></i>
-                                                    <span>Commande Reçue</span>
-                                                </li>
-                                                <li class="order-track-item">
-                                                    <i class="icofont-close"></i>
-                                                    <span>Commande traitée</span>
-                                                </li>
-                                                <li class="order-track-item">
-                                                    <i class="icofont-close"></i>
-                                                    <span>Commande expédiée</span>
-                                                </li>
-                                                <li class="order-track-item">
-                                                    <i class="icofont-close"></i>
-                                                    <span>Commande livrée</span>
-                                                </li>
-                                            </ul>
-                            </div>
+                   
                     {filteredOrders.length === 0 ?
                        (
                         <p>No Order Found</p>
                        ):(
                         <>
-                            
+                           <div className="row">
+                            <div className="col-lg-12">
+                            <div className="section-heading">
+                                <h2>Historique de commande</h2>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-lg-12">
+                                <div class="orderlist-filter">
+                                    <h5>Total : <span>{filteredOrders.length}</span></h5>
+                                    <div class="filter-short">
+                                        <label class="form-label">Filtrer:</label>
+                                        <select class="form-select">
+                                            <option value="all" selected>Tout </option>
+                                            <option value="recieved">Réçue</option>
+                                            <option value="processed">Expédiée</option>
+                                            <option value="shipped">Livrée</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
                         {filteredOrders.map((order, index) =>
                             { const {id, price_total, state, timestamp, totalAmount} = order
                                 return(
                                     <>
+
                         <div class="orderlist">
                             <div class="orderlist-head">
                                 <h5 onClick={() => viewOrder(order.id)}>Commande : {index+1}</h5>

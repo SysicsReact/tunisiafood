@@ -8,17 +8,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { selectuserID } from '../redux/slice/authSlice'
 import { ref as sRef } from 'firebase/storage';
 import { getDoc, updateDoc, doc } from "firebase/firestore";
-import Loader from "../components/loader/Loader";
-
-
-import {
-
-    uploadBytes,
-    getDownloadURL,
-
-} from "firebase/storage";
+import {uploadBytes, getDownloadURL,} from "firebase/storage";
 import { v4 } from "uuid";
-
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -40,12 +31,11 @@ function Profile() {
     const [adress, setAdress] = useState({ changeState: 0 });;
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
-    const notifySuccess = () => toast.success("User updated with sucess");
+    const notifySuccess = () => toast.success("Vos étaient enregistrées");
 
     //-------get user by ID
 
     useEffect(() => {
-
         // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -69,7 +59,6 @@ function Profile() {
 
 
     //----------upload file
-
     const uploadFile = async () => {
         if (!imageUpload) {
             return updateUser();
@@ -85,9 +74,7 @@ function Profile() {
         });
         updateUser()
     }
-
     //--------update user    
-
     const updateUser = async (e) => {
 
         if (city.changeState == 1) {
@@ -123,9 +110,7 @@ function Profile() {
         notifySuccess()
 
     };
-
     //-----handling changes    
-
     function handleNameChange(event) {
         setName({
             username: event.target.value,
@@ -156,9 +141,7 @@ function Profile() {
             changeState: 1
         });
     }
-
     //--------html conditions
-
     function checkCity(loggedUser) {
         if (loggedUser.city) {
             return (
@@ -166,11 +149,10 @@ function Profile() {
             )
         } else {
             return (
-                <><option selected disabled hidden>Choose City</option></>
+                <><option selected disabled hidden>Choisir votre ville</option></>
             )
         }
     }
-
     function checkCountry(loggedUser) {
         if (loggedUser.country) {
             return (
@@ -178,7 +160,7 @@ function Profile() {
             )
         } else {
             return (
-                <><option selected disabled hidden>Choose country</option></>
+                <><option selected disabled hidden>Choisir votre pays</option></>
             )
         }
     }
@@ -210,9 +192,9 @@ function Profile() {
                 <ToastContainer />
                 <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div class="container">
-                        <h2>Edit profile</h2>
+                        <h2>Modifier votre profile</h2>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Home</Link></li>
+                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
                             <li class="breadcrumb-item active" aria-current="page">profile</li>
                         </ol>
                     </div>
@@ -223,23 +205,23 @@ function Profile() {
                         <div class="modal-content">
                             <form class="modal-form" onSubmit={(event) => event.preventDefault()}>
                                 <div class="form-title">
-                                    <h3>Edit profile info</h3>
+                                    <h3>Modifier vos données</h3>
 
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">profile image</label>
-                                    <img src={loggedUser.photo} height="200" />
+                                    <label class="form-label">Votre photo  </label> <span> : </span>
+                                    <img src={loggedUser.photo} style={{borderRadius:"50px",height:"100px"}} />
                                     <input class="form-control" type="file"
                                         onChange={(event) => {
                                             setImageUpload(event.target.files[0]);
                                         }} />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Name</label>
+                                    <label class="form-label">Votre Nom</label>
                                     <input class="form-control" type="text" defaultValue={loggedUser.userName} onChange={handleNameChange} placeholder="Type your new name..." />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Country</label>
+                                    <label class="form-label">Pays</label>
                                     <select class="form-select" onChange={handleCountryChange} >
                                         {checkCountry(loggedUser)}
                                         <option value="France">France</option>
@@ -247,7 +229,7 @@ function Profile() {
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">City</label>
+                                    <label class="form-label">Ville</label>
                                     <select class="form-select" onChange={handleCityChange} >
                                         {checkCity(loggedUser)}
                                         <option value="Paris">Paris</option>
@@ -269,11 +251,11 @@ function Profile() {
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Adress</label>
+                                    <label class="form-label">Adresse</label>
                                     <input class="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Type exact adress..." />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Phone Number</label>
+                                    <label class="form-label">Numéro de Téléphone</label>
                                     <input class="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Type your number..." />
                                 </div>
                                 <button class="form-btn" type="submit" onClick={() => uploadFile()} >save profile info</button>

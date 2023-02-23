@@ -24,6 +24,7 @@ const Dashboard=()=> {
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
     const dispatch = useDispatch();
+    const [logUser, setLogUser] = useState({})
     const [isLoading, setIsLoading ] = useState(true);
     const[test, setTest]=useState(true)
     const [completeLoading,setCompleLoading]=useState(false)
@@ -35,7 +36,26 @@ const Dashboard=()=> {
     const cartItems = useSelector(selectCartItems);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
+   
     
+    //-------get user by ID
+
+    useEffect(() => {
+        // setIsLoading(true);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                if (uid) {
+                    const docRef = doc(db, "users", uid);
+                    getDoc(docRef).then(docSnap => {
+                        if (docSnap.exists()) {
+                            setLogUser(docSnap.data())
+                        }
+                    })
+                }
+            }
+        })
+    }, [dispatch])
     //monitor currently siggnin user
     useEffect(()=>{
       
@@ -178,7 +198,7 @@ const Dashboard=()=> {
             </div>
             <div class="nav-content">
                <div class="nav-profile">
-                    <a class="nav-user" href="#"><img src="assets/images/user.png" alt="user"/></a>
+                    <a class="nav-user" href="#"><img src={logUser.photo} alt="user"/></a>
                     <h4 class="nav-name"><a href="profile.html">{displayName}</a></h4>
                 </div> 
                 <ul class="nav-list">
@@ -222,7 +242,7 @@ confidentialité</a></NavLink>
 
         </aside>}
         {!isLoggedIn &&
-            <aside class="nav-sidebar">
+        <aside class="nav-sidebar">
             
             <div class="nav-header">
                 <a href="#"><img src="assets/images/logo.png" alt="logo"/></a>
@@ -272,7 +292,7 @@ confidentialité</a></NavLink>
                 <div className="container">
                     <div className="header-content">
                         <div className="header-media-group">
-                            <button className="header-user"> <img src="assets/images/user.png" alt="user" /> </button>
+                            <button className="header-user"> <img src={logUser.photo} alt="user" /> </button>
                             <a className="header-logo">
                             <Link to="/">
                                 <img src="assets/images/Logo.png" alt="logo" />
@@ -320,7 +340,7 @@ confidentialité</a></NavLink>
     {!isLoggedIn&&
                <span ><Link to="/Login"> join </Link></span>
             }
-<img src="assets/images/user.png" alt="user" />
+<img src={logUser.photo} alt="user" />
 {isLoggedIn &&
 <span className="navbar-item dropdown" >  
 <NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
@@ -339,6 +359,32 @@ confidentialité</a></NavLink>
                     </div>
                 </div>
             </header>
+            <div className="mobile-menu">
+                    <a href="index.html" title="Home Page">
+                        <i className="fas fa-home"></i>
+                        
+                            <span><Link to="/">  Accueil </Link></span>
+                    </a>
+                    <button className="cate-btn" title="Category List">
+                        <i className="fas fa-list"></i>
+                        <span>Pages</span>
+                    </button>
+                    <button className="cart-btn" title="Cartlist">
+                        <i className="fas fa-shopping-basket"></i>
+                        <span>Chariot</span>
+                        <sup>{cartItems.length}</sup>
+                    </button>
+                    <a href="front/wishlist.html" title="Wishlist">
+                        <i className="fas fa-heart"></i>
+                        <span>wishlist</span>
+                        <sup>0</sup>
+                    </a>
+                    <a href="front/compare.html" title="Compare List">
+                        <i className="fas fa-random"></i>
+                        <span>compare</span>
+                        <sup>0</sup>
+                    </a>
+        </div>
             <Cart/>
             <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
             <script src="assets/vendor/bootstrap/popper.min.js"></script>

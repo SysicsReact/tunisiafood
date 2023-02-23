@@ -89,20 +89,20 @@ function MyProfile() {
                             <div class="col-lg-12">
                                 <div class="account-card">
                                     <div class="account-title">
-                                        <h4>Your Profile</h4>
+                                        <h4>Votre Profile</h4>
 
-                                        <button data-bs-toggle="modal"><Link to="/Profile">Edit Profile</Link></button>
+                                        <button data-bs-toggle="modal"><Link to="/Profile">Modifier</Link></button>
                                     </div>
                                     <div class="account-content">
                                         <div class="row">
                                             <div class="col-lg-2">
                                                 <div class="profile-image">
-                                                    <img src="assets/images/user.png" alt="user" />
+                                                    <img src={loggedUser.photo} alt="user" style={{borderRadius:"70px",height:"100px"}} />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="form-group">
-                                                    <label class="form-label">name</label>
+                                                    <label class="form-label">Prénom</label>
                                                     <h5>{loggedUser.userName}</h5>
 
                                                 </div>
@@ -124,7 +124,7 @@ function MyProfile() {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-heading">
-                            <h2>Order History</h2>
+                            <h2>Historique des commandes</h2>
                         </div>
                     </div>
                 </div>
