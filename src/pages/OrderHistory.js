@@ -116,10 +116,11 @@ const OrderHistory = () => {
                                             <label className="label-text feat" > Reçue </label>}
                                               {state=="1"&&
                                             <label className="label-text sale" > Expédiée </label>}
+                                              {state=="2"&&
+                                            <label className="label-text new" > Livrée </label>}
                                             </li>
                                         </ul>
                                        
-
                                     </div>
                                     <div class="col-lg-4">
                                         <ul class="orderlist-details">
@@ -138,18 +139,16 @@ const OrderHistory = () => {
                                             </li>
                                         </ul>
                                     </div>
+                                
                                     <div class="col-lg-3">
                                         <ul class="orderlist-details">
                                             <li>
                                                 <h6>Pour Plus de Détails...</h6>
                                             </li>
                                             <li class="my-buttonf">
-                                             
                                                 <button  className="my-buttonf" onClick={() => viewOrder(order.id)}>Cliquez-ici</button>
-                                                
                                             </li>
                                             <li>
-                                                
                                                 <p></p>
                                             </li>
                                         </ul>

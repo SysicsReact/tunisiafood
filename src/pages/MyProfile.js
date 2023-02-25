@@ -97,7 +97,13 @@ function MyProfile() {
                                         <div class="row">
                                             <div class="col-lg-2">
                                                 <div class="profile-image">
+                                                    {loggedUser.photo!=undefined&&
                                                     <img src={loggedUser.photo} alt="user" style={{borderRadius:"70px",height:"100px"}} />
+                                                    }
+                                                     {loggedUser.photo==undefined&&
+                                                    <img src={window.location.origin +'/assets/images/user.png'} alt="user" style={{borderRadius:"70px",height:"100px"}} />
+                                                    }
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">

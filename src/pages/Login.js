@@ -50,10 +50,11 @@ function Login() {
         logInWithEmailAndPassword(email, password)
 
     };
-    const signInWithGoogle = async () => {
-
+    const signInWithGoogle = async ()  => {
+        const provider = new GoogleAuthProvider();
         try {
-            const res = await signInWithPopup(auth, googleProvider);
+            const res = await signInWithPopup(auth, provider);
+            if(res)
             redirectUser();
 
         } catch (err) {

@@ -73,10 +73,12 @@ const OrderDetails = () => {
                                              </li>
                                              <li>
                                                   <h6>Etat</h6>
-                                                  {order.state=="0"&&
+                                             {order.state=="0"&&
                                             <label className="label-text feat" > Reçue </label>}
-                                              {order.state=="1"&&
+                                             {order.state=="1"&&
                                             <label className="label-text sale" > Expédiée </label>}
+                                             {order.state=="2"&&
+                                            <label className="label-text new" > Livrée </label>}
                                              </li>
                                              </ul>
                                         </div>

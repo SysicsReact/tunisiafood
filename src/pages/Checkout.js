@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {  json, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SAVE_URL, CALCULATE_TOTAL_QUANTITY, 
-     CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, 
+     CALCULATE_SUBTOTAL, REMOVE_FROM_CART, 
      selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
@@ -65,9 +65,9 @@ export default function Checkout() {
                   </a></Link>
               </div>
               <div class="cart-footer">
-                  <a class="cart-checkout-btn" href="#">
+              <Link to={"/ShopProduct"}>  <a class="cart-checkout-btn" href="#">
                       <span class="checkout-label">Parcourir les produits</span>
-                  </a>
+                  </a></Link>
               </div>
           </>
       ) : (

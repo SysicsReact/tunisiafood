@@ -76,14 +76,16 @@ const Dashboard=()=> {
                         localStorage.setItem("isCompleting",true);
                         //changeIsTesting(false); 
                     } else {   
-
                             const userRef = doc(db, "users", uid);
                              setDoc(docRef, {
                               userName: user.displayName,
                               email:user.email,
                               country:"",
                               city:"",
-                              adress:""
+                              adress:"",
+                              photo:auth.currentUser.photoURL,
+                              
+
                           }).then(()=>{
                             setDisplayName(user.displayName)
                             setIsLoading(true);
@@ -177,7 +179,7 @@ const Dashboard=()=> {
                 <meta name="name" content="Greeny" />
                 <meta name="title" content="Greeny - eCommerce HTML Template" />
                 <title>Classic Home - Greeny</title>
-                <link rel="icon" href="assets/images/favicon.png" />
+                <link rel="icon" href="assets/images/cook.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
                 <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css" />
@@ -193,12 +195,16 @@ const Dashboard=()=> {
             {isLoggedIn &&
             <aside class="nav-sidebar">
             <div class="nav-header">
-                <a href="#"><img src="assets/images/logo.png" alt="logo"/></a>
+                <a href="#"><img src={window.location.origin +'/assets/images/cook.png'}   alt="logo"/></a>
                 <button class="nav-close"><i class="icofont-close"></i></button>
             </div>
             <div class="nav-content">
                <div class="nav-profile">
+                  
+                    {logUser.photo!=undefined&&
                     <a class="nav-user" href="#"><img src={logUser.photo} alt="user"/></a>
+                    }
+                    
                     <h4 class="nav-name"><a href="profile.html">{displayName}</a></h4>
                 </div> 
                 <ul class="nav-list">
@@ -206,7 +212,7 @@ const Dashboard=()=> {
                     <NavLink to="/MyProfile" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-bag-alt"></i>Profile</a></NavLink>
                     </li>
                     <li>
-                    <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-page"></i>
+                    <NavLink to="/OrderHistory" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-page"></i>
                     Commandes</a></NavLink>
                     <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-warning"></i>
 confidentialité</a></NavLink>
@@ -231,7 +237,7 @@ confidentialité</a></NavLink>
                         <i class="icofont-ui-email"></i>
                         <p>
                             <small>Envoyez-nous un email</small>
-                            <span>support@cooltoonsi.com</span>
+                            <span>contact@cooktoonsi.com</span>
                         </p>
                     </div>
                 </div>
@@ -245,25 +251,20 @@ confidentialité</a></NavLink>
         <aside class="nav-sidebar">
             
             <div class="nav-header">
-                <a href="#"><img src="assets/images/logo.png" alt="logo"/></a>
+                <a href="#"><img src="assets/images/cook.png" alt="logo"/></a>
                 <button class="nav-close"><i class="icofont-close"></i></button>
             </div>
             <div class="nav-content">
                 <div class="nav-btn">
-                    <a href="login.html" class="btn btn-inline">
+                    <Link to="/Login"><a href="" class="btn btn-inline">
                         <i class="fa fa-unlock-alt"></i>
                         <span>join here</span>
-                    </a>
+                    </a></Link>
                 </div>
                 <ul class="nav-list">
                     <li>
-                        <a class="nav-link dropdown-link" href="#"><i class="icofont-lock"></i>authentic</a>
-                        <ul class="dropdown-list">
-                            <li><a href="login.html">login</a></li>
-                            <li><a href="register.html">register</a></li>
-                            <li><a href="reset-password.html">reset password</a></li>
-                            <li><a href="change-password.html">change password</a></li>
-                        </ul>
+                        <a class="nav-link dropdown-link" href="#">
+                        <i class="icofont-lock"></i>authentic</a>
                     </li>
                 </ul>
                 <div class="nav-info-group">
@@ -292,17 +293,24 @@ confidentialité</a></NavLink>
                 <div className="container">
                     <div className="header-content">
                         <div className="header-media-group">
-                            <button className="header-user"> <img src={logUser.photo} alt="user" /> </button>
+                            
+                            <button className="header-user">{logUser.photo!=undefined&&<img src={logUser.photo} alt="user" /> }
+                            {logUser.photo==undefined&&
+                             <img src={window.location.origin +'/assets/images/user.png'} alt="user" />
+                            }
+                              </button>
+                           
+                           
                             <a className="header-logo">
                             <Link to="/">
-                                <img src="assets/images/Logo.png" alt="logo" />
+                                <img src="assets/images/cook.png" alt="logo" />
                             </Link>
                         </a>
                             <button className="header-src"><i className="fas fa-search"></i></button>
                         </div>
                         <a className="header-logo">
                             <Link to="/">
-                                <img src="assets/images/Logo.png" alt="logo" />
+                                <img src="assets/images/cook.png" alt="logo" />
                             </Link>
                         </a>
                         <form className="header-form">
@@ -340,13 +348,20 @@ confidentialité</a></NavLink>
     {!isLoggedIn&&
                <span ><Link to="/Login"> join </Link></span>
             }
-<img src={logUser.photo} alt="user" />
+            
 {isLoggedIn &&
+
 <span className="navbar-item dropdown" >  
+{logUser.photo!=undefined&&
+            <img src={logUser.photo} alt="user" />
+            }
+            {logUser.photo==undefined&&
+            <img src={window.location.origin + '/assets/images/user.png'}  alt="user" />
+            }
 <NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
             <ul className="dropdown-position-list">
                 <li><Link to="MyProfile"> profile </Link></li>
-                <li alt="Mes commandes"><Link to="/OrderHistory"> Commandes </Link></li>
+                <li alt="Mes commandes"><Link to="OrderHistory"> Commandes </Link></li>
                 <li><button className="dashboard__btn"
                     onClick={logout}> 
                 <Link to="/"> Logout </Link> </button></li>
@@ -359,7 +374,7 @@ confidentialité</a></NavLink>
                     </div>
                 </div>
             </header>
-            <div className="mobile-menu">
+ <div className="mobile-menu">
                     <a href="index.html" title="Home Page">
                         <i className="fas fa-home"></i>
                         

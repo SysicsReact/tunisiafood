@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { auth, db, storage, changeIsLoading, changeIsTesting, testLoading } from "../firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
@@ -32,7 +32,7 @@ function Profile() {
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
     const notifySuccess = () => toast.success("Vos étaient enregistrées");
-
+    const navigate = useNavigate();
     //-------get user by ID
 
     useEffect(() => {
@@ -60,55 +60,74 @@ function Profile() {
 
     //----------upload file
     const uploadFile = async () => {
+       
         if (!imageUpload) {
-            return updateUser();
+            updateUser();
+            return 
         }
         const imageRef = sRef(storage, `products/${imageUpload.name + v4()}`);
+//to do add loader here
         uploadBytes(imageRef, imageUpload).then(async (snapshot) => {
             await getDownloadURL(snapshot.ref).then((url) => {
                 const washingtonRef = doc(db, "users", user.uid);
                 updateDoc(washingtonRef, {
                     photo: url
-                });
+                }).then(function()
+                {
+                    updateUser()
+                }
+                );
+                
+                if(url){
+                    
+                }
             });
-        });
-        updateUser()
+            
+        })
+        
     }
     //--------update user    
     const updateUser = async (e) => {
+       
+        try{
+            if (city.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    city: city.City
+                });
+            }
+            if (username.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    userName: username.username
+                });
+            }
+            if (country.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    country: country.country
+                });
+            }
+            if (newPhone.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    phone: newPhone.phone
+                });
+            }
+            if (adress.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    adress: adress.adress
+                });
+               
+            }
+            notifySuccess()
+            window.location.reload(false);
+        }catch (e) {
+            alert(e)
+          }
 
-        if (city.changeState == 1) {
-            const washingtonRef = doc(db, "users", user.uid);
-            await updateDoc(washingtonRef, {
-                city: city.City
-            });
-        }
-        if (username.changeState == 1) {
-            const washingtonRef = doc(db, "users", user.uid);
-            await updateDoc(washingtonRef, {
-                userName: username.username
-            });
-        }
-        if (country.changeState == 1) {
-            const washingtonRef = doc(db, "users", user.uid);
-            await updateDoc(washingtonRef, {
-                country: country.country
-            });
-        }
-        if (newPhone.changeState == 1) {
-            const washingtonRef = doc(db, "users", user.uid);
-            await updateDoc(washingtonRef, {
-                phone: newPhone.phone
-            });
-        }
-        if (adress.changeState == 1) {
-            const washingtonRef = doc(db, "users", user.uid);
-            await updateDoc(washingtonRef, {
-                adress: adress.adress
-            });
-        }
-        notifySuccess()
-
+        
     };
     //-----handling changes    
     function handleNameChange(event) {
@@ -210,7 +229,10 @@ function Profile() {
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Votre photo  </label> <span> : </span>
+                                    {loggedUser.photo!=undefined&&
                                     <img src={loggedUser.photo} style={{borderRadius:"50px",height:"100px"}} />
+                                    }
+                                    
                                     <input class="form-control" type="file"
                                         onChange={(event) => {
                                             setImageUpload(event.target.files[0]);

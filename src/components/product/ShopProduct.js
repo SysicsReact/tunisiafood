@@ -9,6 +9,7 @@ import ProductList from './productList'
 import { ADD_TO_CART } from '../../redux/slice/cartSlice'
 import {  ToastContainer, toast } from "react-toastify";
 import { Modal } from 'react-fade-modal';
+import Pagination from '../pagination/Pagination'
 
 
 const ShopProduct = () => {
@@ -24,6 +25,13 @@ const ShopProduct = () => {
     const filteredProducts=useSelector(selectFilteredProducts)
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    //pagination states
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage, setProductsPerPage] = useState(6);
+    //Get Current Products
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct )
     useEffect(() => {
         dispatch(
             STORE_PRODUCTS({
@@ -93,7 +101,6 @@ dispatch(ADD_TO_CART(e));
          <link rel="stylesheet" href="assets/css/profile.css" />
      </head>
      <body>
-
     
      <ToastContainer></ToastContainer>
      <div className="backdrop"></div>
@@ -178,7 +185,7 @@ dispatch(ADD_TO_CART(e));
                         </div>
                         {grid &&
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                        {grid &&filteredProducts.slice(0,12).map((e) => {
+                        {grid &&currentProducts.map((e) => {
                        const { id, tag, category,photo,name,discount, price } = e;
                     return (    
                             <div class="col" key={id}>    
@@ -208,68 +215,68 @@ dispatch(ADD_TO_CART(e));
                                         <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <button onClick={() => ShowItem(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
-          {isOpen &&<Modal
-          setIsOpen={setIsOpen}>  
-        <div className="row" >
-            <div class="col">
-                <div class="product-standard">
-                    <div class="standard-media">
-                            <img class="product-image" src={singleProduct.photo} style={{width:"250px", borderRadius:"8px"}} alt="product"/>
-                            <button className="product-wish wish">
-                        {singleProduct.category=="plat"&&
-                                <label className="label-text order">{singleProduct.category}</label>}
-                        {singleProduct.category=="epice"&&
-                                <label className="label-text rate">{singleProduct.category}</label>}
-                        {singleProduct.category=="sucré"&&
-                                <label className="label-text sucre">{singleProduct.category}</label>}
-                    </button>
-                    <div class="product-label">
-                    {singleProduct.tag=="nouveau"&&
-                    <label className="label-text new">{singleProduct.tag}</label>}
-                    {singleProduct.tag=="solde"&&
-                    <label className="label-text sale">{singleProduct.tag}</label>}
-                    {singleProduct.tag=="populaire"&&
-                    <label className="label-text feat">{singleProduct.tag}</label>}
-                    </div>
-                    </div>
-                    <div class="standard-content">
-                        <h4 class="standard-name">
-                            <a href="product-video.html">{singleProduct.name}</a>
-                        </h4>
-                        <h5 class="standard-price">
-                        {singleProduct.discount!="0"&&
-                                    <>
-                                        <del> €{singleProduct.price}</del>
-                                        <span> € {Math.round((singleProduct.price-(singleProduct.price*singleProduct.discount)/100)*100)/100}<small></small></span>
-                                        </>
-                                    }
-                                    {singleProduct.discount=="0"&&
-                                        <>
-                                       
-                                        <span> € {singleProduct.price}<small></small></span>
-                                        </>
-                                    } 
-                        </h5>
-                        <p class="standard-desc">{shortenText(singleProduct.description, 250)}</p>
-                        <div class="standard-action-group">
-                            <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
-                                <i class="fas fa-shopping-basket"></i>
-                                <span>Ajouter</span>
-                            </button>
-                            <button class="standard-wish wish" title="Add to Wishlist">
-                                <i class="fas fa-heart"></i>
-                                <span>Ajouter au wishlist</span>
-                            </button>
-                    <button class="standard-wish wish" title="Add to Wishlist" onClick={() => view(e.id)}><a href="">
-                     Plus de Détails</a>
-                   
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-          </Modal>}
+                                    {isOpen &&<Modal
+                                    setIsOpen={setIsOpen}>  
+                                    <div className="row" >
+                                        <div class="col">
+                                            <div class="product-standard">
+                                                <div class="standard-media">
+                                                        <img class="product-image" src={singleProduct.photo} style={{width:"250px", borderRadius:"8px"}} alt="product"/>
+                                                        <button className="product-wish wish">
+                                                    {singleProduct.category=="plat"&&
+                                                            <label className="label-text order">{singleProduct.category}</label>}
+                                                    {singleProduct.category=="epice"&&
+                                                            <label className="label-text rate">{singleProduct.category}</label>}
+                                                    {singleProduct.category=="sucré"&&
+                                                            <label className="label-text sucre">{singleProduct.category}</label>}
+                                                </button>
+                                                <div class="product-label">
+                                                {singleProduct.tag=="nouveau"&&
+                                                <label className="label-text new">{singleProduct.tag}</label>}
+                                                {singleProduct.tag=="solde"&&
+                                                <label className="label-text sale">{singleProduct.tag}</label>}
+                                                {singleProduct.tag=="populaire"&&
+                                                <label className="label-text feat">{singleProduct.tag}</label>}
+                                                </div>
+                                                </div>
+                                                <div class="standard-content">
+                                                    <h4 class="standard-name">
+                                                        <a href="product-video.html">{singleProduct.name}</a>
+                                                    </h4>
+                                                    <h5 class="standard-price">
+                                                    {singleProduct.discount!="0"&&
+                                                                <>
+                                                                    <del> €{singleProduct.price}</del>
+                                                                    <span> € {Math.round((singleProduct.price-(singleProduct.price*singleProduct.discount)/100)*100)/100}<small></small></span>
+                                                                    </>
+                                                                }
+                                                                {singleProduct.discount=="0"&&
+                                                                    <>
+                                                                
+                                                                    <span> € {singleProduct.price}<small></small></span>
+                                                                    </>
+                                                                } 
+                                                    </h5>
+                                                    <p class="standard-desc">{shortenText(singleProduct.description, 250)}</p>
+                                                    <div class="standard-action-group">
+                                                        <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                                            <i class="fas fa-shopping-basket"></i>
+                                                            <span>Ajouter</span>
+                                                        </button>
+                                                        <button class="standard-wish wish" title="Add to Wishlist">
+                                                            <i class="fas fa-heart"></i>
+                                                            <span>Ajouter au wishlist</span>
+                                                        </button>
+                                                <button class="standard-wish wish" title="Add to Wishlist" onClick={() => view(e.id)}><a href="">
+                                                Plus de Détails</a>
+                                            
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </Modal>}
                                     </div>
                                     <div class="product-content">
                                       
@@ -304,19 +311,27 @@ dispatch(ADD_TO_CART(e));
                               })}
                     </div>
                     }
-                    {!grid &&products.slice(0,12).map((e) => {
+                    {!grid &&products.map((e) => {
                        const { id, tag, category,photo,name,price,description } = e;
                     return (
                         
                         <ProductList {...products} />
                                );
                               })}  
-
-   
                       
+                   
+                <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                productsPerPage={productsPerPage}
+                totalProducts={filteredProducts.length}
+                />
+                </div>
+                </div>
+            
             </div>
-            </div></div>
             </section>
+
             <Intro/>
 
      

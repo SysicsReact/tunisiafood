@@ -69,20 +69,12 @@ class Navbar extends React.Component{
             </div>
             <ul className="category-list">
                 <li className="category-item">
-                <Link to="Category" className="category-link dropdown-link" >  
-                    Catégories</Link>
-                </li>
-                <li className="category-item">
-                <Link to="Shop" className="category-link dropdown-link" >  
+                <Link to="ShopProduct" className="category-link dropdown-link" >  
                     Shop</Link>
                 </li>
                 <li className="category-item">
-                <Link to="Shop" className="category-link dropdown-link" >  
+                <Link to="About" className="category-link dropdown-link" >  
                     A propos</Link>
-                </li>
-                <li className="category-item">
-                <Link to="Category" className="category-link dropdown-link" >  
-                    Catégories</Link>
                 </li>
                 <li className="category-item">
                 <Link to="Blog" className="category-link dropdown-link" >  

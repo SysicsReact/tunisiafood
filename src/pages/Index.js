@@ -73,12 +73,14 @@ function Dashboard() {
                 <div className="backdrop"></div>
                 <a className="backtop fas fa-arrow-up" href="#"></a>
             <section className="home-classic-slider slider-arrow">
-                    <div className="banner-part" style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
+                    <div className="banner-part" 
+                    style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
                     <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-lg-6">
                             <div className="banner-content">
-                                <h1>Nous partageons l’amour comme nous partageons la nourriture</h1>
+                                <h3 style={{color:"white"}}>
+                                    Nous partageons l’amour comme nous partageons la nourriture</h3>
                                 <p>Avec nous tout est une question de sens et de souvenirs d’enfance de réunions de famille. L’odeur des épices fraîches, le goût des plats traditionnels. </p>
                                 <div className="banner-btn">
                                 <Link to="/ShopProduct"><a className="btn btn-inline">
@@ -313,15 +315,10 @@ function Dashboard() {
                                     <span>${price}<small>/plat</small></span>
                                 </h6>
                                 <p className="feature-desc">{shortenText(description, 150)}</p>
-                                <button className="product-add" title="Add to Cart">
+                                <button className="product-add" onClick={()=> addToCart(e)}>
                                     <i className="fas fa-shopping-basket"></i>
                                     <span>Ajouter</span>
                                 </button>
-                                <div className="product-action">
-                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                </div>
                             </div>
                         </div>
                     </div>
