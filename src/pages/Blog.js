@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { db} from '../firebase.config';
 import { collection } from 'firebase/firestore';
 import { query, onSnapshot } from "firebase/firestore";
@@ -10,6 +10,7 @@ function Blog()
 
     const [blogs, setBlogs] = useState([]);
     const dispatch= useDispatch();
+    const navigate= useNavigate();
 
 
     useEffect(() => {
@@ -25,7 +26,9 @@ function Blog()
         });
         
       }, []);
-      console.log(blogs)
+      const view = async (idb) => {
+        navigate("/BlogDetails", { state: { id: idb } });
+              };
 return(
      <html lang='en'>
             <head>
@@ -68,11 +71,11 @@ return(
         {blogs.length!=0&&
     <>
      {blogs.map((blog, index) =>
-                            { const {author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
-                            console.log(blog.data.author)
+                            { const {id, author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
+                            
                                 return(
                                     <>
-                                    <div class="blog-card">
+                                    <div class="blog-card" key={id}>
                                     <div class="blog-media">
                                         <a class="blog-img" href="#">
                                             <img src={blog.data.photo} alt="blog"/>
@@ -90,10 +93,10 @@ return(
                                             </li>
                                         </ul>
                                         <h4 class="blog-title">
-                                            <a href="blog-details.html">{blog.data.title}</a>
+                                            <a href="">{blog.data.title}</a>
                                         </h4>
                                         <p class="blog-desc">{blog.data.shortDescription}</p>
-                                        <a class="blog-btn" href="blog-details.html">
+                                        <a class="blog-btn" href="" onClick={() => view(id)}>
                                             <span>Lire</span>
                                             <i class="icofont-arrow-right"></i>
                                         </a>

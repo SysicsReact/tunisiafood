@@ -68,7 +68,6 @@ function Login() {
     return (
         <html lang="en">
             <head>
-
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -92,25 +91,22 @@ function Login() {
                                 </div>
                                 <div className="user-form-card">
                                     <div className="user-form-title">
-                                        <h2>welcome!</h2>
-                                        <p>Use your credentials to access</p>
+                                        <h2>Bienvenu!</h2>
+                                        <p>Utilisez vos identifiants pour accéder</p>
                                     </div>
                                     <div className="user-form-group">
                                         <ul className="user-form-social">
-                                            <li><i className="fab fa-facebook-f"></i> Login with facebook</li>
-                                            <li><i className="fab fa-twitter"></i> Login with twitter</li>
-                                            <li><i className="fab fa-google"></i> <button onClick={signInWithGoogle} >Login with Google</button></li>
-                                            <li><i className="fab fa-instagram"></i> Login with instagram</li>
+                                            <li><i className="fab fa-google"></i> <button onClick={signInWithGoogle} >Login avec Google</button></li>
                                         </ul>
                                         <div className="user-form-divider">
-                                            <p>or</p>
+                                            <p>Ou</p>
                                         </div>
                                         <form className="user-form" onSubmit={loginUser}>
                                             <div className="form-group">
-                                                <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
+                                                <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Entrez Votre email" />
                                             </div>
                                             <div className="form-group">
-                                                <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
+                                                <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Entrez Votre password" />
                                             </div>
                                             <div className="form-check mb-3">
                                                 <input className="form-check-input" type="checkbox" value="" id="check" />
@@ -118,16 +114,16 @@ function Login() {
                                             </div>
                                             <div className="form-button">
                                                 <button type="submit"> login</button>
-                                                <p>Forgot your password?<a ><Link to="/Reset"> reset </Link></a></p>
+                                                <p>Mot de passe oublié?<a ><Link to="/Reset"> réinitialiser </Link></a></p>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div className="user-form-remind">
-                                    <p>Don't have any account?<a><Link to="/Register"> Register here </Link></a></p>
+                                    <p>Vous n'avez pas de compte?<a><Link to="/Register"> Inscrivez-vous ici </Link></a></p>
                                 </div>
                                 <div className="user-form-footer">
-                                    <p>TunisianFood | &COPY; Copyright by TunisianFood</p>
+                                    <p>Cook Tounsi | &COPY; Droit d'auteur par Cook Tounsi</p>
                                 </div>
                             </div>
                         </div>

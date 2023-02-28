@@ -40,10 +40,11 @@ const OrderDetails = () => {
         <ToastContainer></ToastContainer>
         <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div class="container">
-                         <h2>Tout Les Produits</h2>
+                         <h2>Détails de commande</h2>
                          <ol class="breadcrumb">
                               <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                              <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                              <li class="breadcrumb-item active" aria-current="page"><Link to="/OrderHistory">Commandes</Link></li>
+                              <li class="breadcrumb-item active" aria-current="page">Détails</li>
                          </ol>
                     </div>
           </section>
@@ -61,10 +62,10 @@ const OrderDetails = () => {
                                    <div class="row">
                                         <div class="col-lg-12">
                                         </div>
-                                        <div class="col-lg-5">
+                                        <div class="col-lg-4">
                                         <ul class="orderlist-details">
                                              <li>
-                                                  <h6>Identifiant</h6>
+                                                  <h6>Identifiant:</h6>
                                                   <p>{order.id}</p>
                                              </li>
                                              <li>
@@ -72,7 +73,7 @@ const OrderDetails = () => {
                                                   <p>{order.timestamp}</p>
                                              </li>
                                              <li>
-                                                  <h6>Etat</h6>
+                                                  <h6>Etat:</h6>
                                              {order.state=="0"&&
                                             <label className="label-text feat" > Reçue </label>}
                                              {order.state=="1"&&
@@ -85,31 +86,36 @@ const OrderDetails = () => {
                                         
                                         <div class="col-lg-4">
                                         <ul class="orderlist-details">
-                                        <li>
-                                                <h6>Passée le:</h6>
-                                                <p>{order.timestamp}</p>
-                                            
-                                            </li>
                                             <li>
-                                                <h6>Total</h6>
+                                                <h6>Prix:</h6>
                                                 <p>€ {order.price_total.toFixed(2)}</p>
                                             </li>
                                             <li>
-                                                <h6>Total<small>(H-TVA)</small></h6>
+                                                <h6>Frais de livraison:</h6>
+                                                <p>€ 10</p>
+                                            </li>
+                                            <li>
+                                                <h6>Total<small>(H-TVA)</small>:</h6>
                                                 <p>€ {(parseFloat(10) + parseFloat(order.price_total)).toFixed(2)}</p>
                                             </li>
                                         </ul>
-                                    </div>
-                                    
-                                             <div class="col-lg-3">
-                                             <div class="orderlist-deliver">
-                                             <h6>Delivery location</h6>
-                                             <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
-                                             </div>
                                         </div>
-                                         
-                                       
-                                   
+                                        <div class="col-lg-4">
+                                        <ul class="orderlist-details">
+                                            <li>
+                                                <h6>Pays:</h6>
+                                                <p>{order.shipping.country}</p>
+                                            </li>
+                                            <li>
+                                                <h6>Ville:</h6>
+                                                <p>{order.shipping.city}</p>
+                                            </li>
+                                            <li>
+                                                <h6>Adresse:</h6>
+                                                <p>{order.shipping.adress}</p>
+                                            </li>
+                                        </ul>
+                                        </div>
                                    </div>
                               </div>
                          </div>

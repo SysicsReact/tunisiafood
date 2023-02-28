@@ -13,6 +13,7 @@ import SingleProduct from "./pages/SingleProduct";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
+import BlogDetails from "./pages/BlogDetails";
 import ProductItem from "./components/product/ProductItems";
 import CartDetails from "./pages/CartDetails";
 import AllProducts from "./pages/AllProducts";
@@ -27,6 +28,7 @@ import ShopProduct from "./components/product/ShopProduct";
 import Contact from "./pages/Contact";
 import OrderHistory from "./pages/OrderHistory";
 import OrderDetails from "./pages/OrderDetails";
+import WishDetails from "./pages/WishDetails";
 let test = false;
 class App extends Component {
 
@@ -68,6 +70,8 @@ class App extends Component {
           <Route path="/Checkout" element={<Checkout/>} />
           <Route path="/OrderHistory" element={<OrderHistory/>} />
           <Route path="/OrderDetails" element={<OrderDetails/>} />
+          <Route path="/BlogDetails" element={<BlogDetails/>} />
+          <Route path="/WishDetails" element={<WishDetails/>} />
         </Routes>
         <div>
           <Footer />

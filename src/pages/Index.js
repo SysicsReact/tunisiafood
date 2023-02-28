@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useFetchCollection from "../components/customHooks/useFetchCollection";
 import { STORE_PRODUCTS, selectProducts } from "../redux/slice/productSlice";
 import { ADD_TO_CART } from "../redux/slice/cartSlice";
+import { ADD_TO_WISH, selectWishItems } from "../redux/slice/wishSlice";
 import {Modal} from 'react-fade-modal';
 
 
@@ -20,6 +21,7 @@ function Dashboard() {
     //const [isLoading, setIsLoading ] = useState(false);
     const {data, isLoading} = useFetchCollection("products")
     const products = useSelector(selectProducts)
+    const wishItems = useSelector(selectWishItems);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(
@@ -31,6 +33,9 @@ function Dashboard() {
     const addToCart = (e) => {
         dispatch(ADD_TO_CART(e));
            };
+    const addToWish = (e) => {
+        dispatch(ADD_TO_WISH(e));
+               };
     const ShowItem=(e)=>{
         //alert(e);
         setSingleProduct(e);
@@ -46,6 +51,7 @@ function Dashboard() {
         }
         return text;
         };
+    console.log(wishItems)
     return (
         <html lang="en">
             <head>
@@ -141,7 +147,7 @@ function Dashboard() {
                                     <div className="product-widget">
                                         <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
                                         <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                       <button onClick={() => ShowItem(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
+                                       <button onClick={()=> addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
                                 </div>
            {isOpen &&<Modal

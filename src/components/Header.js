@@ -13,6 +13,7 @@ import Cart from "./Cart";
 import { query, where, onSnapshot, documentId, updateDoc, collection } from "firebase/firestore";
 import { selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 import { CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, selectCartItems } from "../redux/slice/cartSlice";
+import { selectWishItems } from "../redux/slice/wishSlice";
 
 
 let x=0;
@@ -24,6 +25,7 @@ const Dashboard=()=> {
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [logUser, setLogUser] = useState({})
     const [isLoading, setIsLoading ] = useState(true);
     const[test, setTest]=useState(true)
@@ -34,6 +36,7 @@ const Dashboard=()=> {
     const [value, setValue] = useState("");
     const [result, setResult] = useState([]);  
     const cartItems = useSelector(selectCartItems);
+    const wishItems = useSelector(selectWishItems);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
    
@@ -129,7 +132,7 @@ const Dashboard=()=> {
         dispatch(CALCULATE_SUBTOTAL())
         dispatch(CALCULATE_TOTAL_QUANTITY())
        }, [dispatch, cartItems]);
-
+  
     useEffect(() => {
         if (products.length == 0) {
             const q = query(
@@ -333,9 +336,9 @@ confidentialité</a></NavLink>
             <i className="fas fa-random"></i>
             <sup>0</sup>
         </a>
-        <a href="wishlist.html" className="header-widget" title="Wishlist">
-            <i className="fas fa-heart"></i>
-            <sup>0</sup>
+       <a href="" className="header-widget" title="Wishlist">
+       <Link to="WishDetails"> <i className="fas fa-heart"></i></Link>
+            <sup>{wishItems.length}</sup>
         </a>
         <button className="header-widget header-cart" title="Cartlist">
             <i className="fas fa-shopping-basket"></i>
@@ -374,7 +377,7 @@ confidentialité</a></NavLink>
                     </div>
                 </div>
             </header>
- <div className="mobile-menu">
+            <div className="mobile-menu">
                     <a href="index.html" title="Home Page">
                         <i className="fas fa-home"></i>
                         
@@ -399,7 +402,7 @@ confidentialité</a></NavLink>
                         <span>compare</span>
                         <sup>0</sup>
                     </a>
-        </div>
+            </div>
             <Cart/>
             <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
             <script src="assets/vendor/bootstrap/popper.min.js"></script>

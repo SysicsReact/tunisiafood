@@ -28,21 +28,13 @@ class Navbar extends React.Component{
                                     <ul className="navbar-list">
                                     <li className="navbar-item dropdown-megamenu">
                                         <span className="feature-name"><Link to="/" className="navbar-link" >  
-                                        Home </Link></span>
+                                        Accueil </Link></span>
                                         </li>
                                         <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="Shop" className="navbar-link" >  shop </Link></span>
+                                        <span className="feature-name"><Link to="ShopProduct" className="navbar-link" >  Produits </Link></span>
                                         </li>
                                         <li className="navbar-item dropdown-megamenu">
                                         <span className="feature-name"><Link to="About" className="navbar-link" >Concept</Link></span>
-                                        </li>
-                                        <li className="navbar-item dropdown"><Link to="Category" className="navbar-link" >  
-                                            Catégories</Link>
-                                            <ul className="dropdown-position-list">
-                                                <li><a href="front/faq.html">Nos Plats</a></li>
-                                                <li><a href="front/offer.html">Nos Epices</a></li>
-                                                <li><a href="front/error.html">Produits Sucrés</a></li>
-                                            </ul>
                                         </li>
                                         <li className="navbar-item dropdown-megamenu">
                                         <span className="feature-name"><Link to="Blog" className="navbar-link" > Blog </Link></span>
@@ -70,7 +62,7 @@ class Navbar extends React.Component{
             <ul className="category-list">
                 <li className="category-item">
                 <Link to="ShopProduct" className="category-link dropdown-link" >  
-                    Shop</Link>
+                    Produits</Link>
                 </li>
                 <li className="category-item">
                 <Link to="About" className="category-link dropdown-link" >  
@@ -87,11 +79,6 @@ class Navbar extends React.Component{
                 <li className="category-item">
                 <Link to="Contact" className="category-link dropdown-link" >  
                     Contacts</Link>
-                    <ul className="dropdown-list">
-                        <li><a href="#">noodles</a></li>
-                        <li><a href="#">Powdered milk</a></li>
-                        <li><a href="#">nut & yeast</a></li>
-                    </ul>
                 </li>
             </ul>
             <div className="category-footer">

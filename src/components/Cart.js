@@ -42,7 +42,13 @@ const Cart = () => {
 
             {cartItems.length === 0 ? (
                 <>
-
+                                        <div class="cart-header">
+                        <div class="cart-total">
+                            <i class="fas fa-shopping-basket"></i>
+                            <span>totale: 0 </span>
+                        </div>
+                        <button class="cart-close"><i class="icofont-close"></i></button>
+                    </div>
                     <div class="cart-info-group">
                         <div class="cart-footer">
                             <h6 className="coupon-btn">Votre Chariot Est Vide !</h6>
@@ -51,9 +57,10 @@ const Cart = () => {
                     <div class="cart-footer">
                         <a class="cart-checkout-btn" href="#">
                             <span class="checkout-label">Parcourir les produits</span>
-                            <span class="checkout-price"><i class="fas fa-shopping-basket"></i></span>
+                            <span class="checkout-price"><i class=""></i></span>
                         </a>
                     </div>
+                    
                 </>
             ) : (
                 <>
