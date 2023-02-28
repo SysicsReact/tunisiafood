@@ -17,7 +17,8 @@ const Loader = () => {
   transform: "translate(-50%, -50%)",
   zIndex: "999"}}>
       
-          <img src="assets/images/load1.gif" alt="Loading..." />
+          <img src="assets/images/load1.gif" alt="Loading..." style={{ width: "100%",
+     height: "80%"}}/>
          
      </div>
     </div>,
