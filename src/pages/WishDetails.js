@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_WISH, REMOVE_FROM_WISH, CLEAR_WISH, selectWishItems } from "../redux/slice/wishSlice";
-import { ToastContainer, toast } from 'react-toastify';
+import { REMOVE_FROM_WISH, selectWishItems } from "../redux/slice/wishSlice";
+import { ADD_TO_CART } from "../redux/slice/cartSlice";
 import { Link } from "react-router-dom";
 
 const WishDetails = () => {
     const navigate = useNavigate();
     const wishItems = useSelector(selectWishItems);
     const dispatch = useDispatch();
-    const removeFromWish = (wish) => {
-        dispatch(REMOVE_FROM_WISH(wish));
-    } 
-    
-    
+    const addToCart = (wish) => {
+        dispatch(
+           
 
-    //Save order
+            ADD_TO_CART(wish),
+            
+            );
+            dispatch(
+           
+                REMOVE_FROM_WISH(wish),
+                
+                
+                );
+           };
+    const removeFromWish = (wish) => {
+        dispatch(
+            REMOVE_FROM_WISH(wish));
+    }
 
     return (
         <html lang="en">
@@ -37,10 +48,10 @@ const WishDetails = () => {
                 <a class="backtop fas fa-arrow-up" href="#"></a>
                 <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div class="container">
-                        <h2>Votre Liste</h2>
+                        <h2>Votre Liste des souhaits</h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Wish</li>
+                            <li class="breadcrumb-item active" aria-current="page">Liste des souhaits</li>
                         </ol>
                     </div>
                 </section>
@@ -78,37 +89,35 @@ const WishDetails = () => {
                             <div class="account-content">
                                 <div class="table-scroll">
                                     <table class="table-list">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Produit</th>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col">Catégorie</th>
-                                                <th scope="col">quantité</th>
-                                                <th scope="col">Prix Unitaire</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">action</th>
-                                            </tr>
-                                        </thead>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">shopping</th>
+                                        <th scope="col">action</th>
+                                    </tr>
+                                </thead>
                                         {wishItems.map((wish, index) => {
-                            const { id, name, price, photo, category, } = wish;
+                            const { id, name, price, photo,} = wish;
                             return (
                                 <>
                                         <tbody>
-                                            <tr key={id}>
-                                                <td class="table-image"><img src={photo} alt="product"/></td>
-                                                <td class="table-name"><h6>{name}</h6></td>
-                                                <td class="table-brand"><h6>{category}</h6></td>
-                                                <td class="table-quantity"><h6>Quantity</h6></td>
-                                                <td class="table-price"><h6>${price}<small>/kilo</small></h6></td>
-                                                <td class="table-price"><h6>$<small>/</small></h6></td>
-                                                <td class="table-action">
-                                                    <a class="view" href="" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i class="fas fa-eye"></i></a>
-                                                    <a class="trash" href="" title="Remove Wishlist" onClick={() => removeFromWish(wish)}><i class="icofont-trash"></i></a>
-                                                </td>
-                                            </tr>
+                                            <tr>
+                                        <td class="table-image"><img src={photo} alt="product"/></td>
+                                        <td class="table-name"><h6>{name}</h6></td>
+                                        <td class="table-price"><h6>${price}<small>/kilo</small></h6></td>
+                                        <td class="table-shop">
+                                            <button class="product-add" title="Ajouter" onClick={() => addToCart(wish)} >Ajouter</button>
+                                        </td>
+                                        <td class="table-action">
+                                            <a class="trash"  title="Supprimer" onClick={() => removeFromWish(wish)}><i class="icofont-trash"></i></a>
+                                        </td>
+                                    </tr>
                                         </tbody>
                                 </>)
                         })}
+
                                     </table>
                                 </div>
                             </div>

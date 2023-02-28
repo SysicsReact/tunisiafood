@@ -82,6 +82,12 @@ dispatch(ADD_TO_CART(e));
         }
         return text;
     };
+
+
+        
+        
+        
+        
   return (
      <html lang="en">
      <head>

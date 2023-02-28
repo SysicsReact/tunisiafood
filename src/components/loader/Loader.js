@@ -9,7 +9,7 @@ const Loader = () => {
     <div style={{ position: "fixed",
      width: "100vw",
      height: "100vh",
-     backgroundColor: "rgba(0, 0, 0, 1)",
+     backgroundColor: "rgb(244 245 244)",
      zIndex: "9",}} >
      <div style={{ position: "fixed",
   left: "50%",

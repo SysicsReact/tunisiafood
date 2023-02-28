@@ -10,9 +10,12 @@ import { STORE_PRODUCTS, selectProducts } from "../redux/slice/productSlice";
 import { ADD_TO_CART } from "../redux/slice/cartSlice";
 import { ADD_TO_WISH, selectWishItems } from "../redux/slice/wishSlice";
 import {Modal} from 'react-fade-modal';
+import { query, onSnapshot } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 
 
 function Dashboard() {
+    const [blogs, setBlogs] = useState([]);
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const[singleProduct,setSingleProduct]=useState([])
@@ -51,7 +54,24 @@ function Dashboard() {
         }
         return text;
         };
-    console.log(wishItems)
+        
+        useEffect(() => {
+            const q = query(collection(db, "blogs"));
+            onSnapshot(q, (querySnapshot) => {
+              setBlogs(
+                querySnapshot.docs.map((doc) => ({
+                  id: doc.id,
+                  data: doc.data(),
+                }))
+              );
+    
+            });
+            
+          }, []);
+          const viewB = async (idb) => {
+            navigate("/BlogDetails", { state: { id: idb } });
+                  };
+
     return (
         <html lang="en">
             <head>
@@ -231,11 +251,6 @@ function Dashboard() {
                                         <i className="fas fa-shopping-basket"></i>
                                         <span>Ajouter</span>
                                     </button>
-                                    <div className="product-action">
-                                        <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                        <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                        <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                    </div>
                                 </div>
                             </div>
                         </div>  
@@ -278,7 +293,7 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
-                {!isLoading &&products.slice(0,4).map((e) => {
+                {!isLoading &&products.slice(0,6).map((e) => {
                        const { id, tag, category,photo,name,price, description } = e;
                       
                     return (
@@ -309,7 +324,7 @@ function Dashboard() {
                                 <div className="feature-widget">
                                 <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
                                         <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                       <button onClick={() => ShowItem(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
+                                       <button onClick={() => addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                 </div>
                             </div>
                             <div className="feature-content">
@@ -344,6 +359,8 @@ function Dashboard() {
             </div>
         </section>
         <Intro/>
+
+       
         <section className="section blog-part">
             <div className="container">
                 <div className="row">
@@ -356,20 +373,26 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <div className="row">
+
+                {blogs.slice(0,1).map((blog, index) =>
+                            { const {id, author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
+                            
+                                return(
+                                    <>
+                                    <div className="row">
                     <div className="col-lg-12">
                         <div className="blog-slider slider-arrow">
                             <div className="blog-card">
                                 <div className="blog-media">
                                     <a className="blog-img" href="#">
-                                        <img src="assets/images/blog/blog.jpg" alt="blog"/>
+                                        <img src={blog.data.photo} alt="blog"/>
                                     </a>
                                 </div>
                                 <div className="blog-content">
                                     <ul className="blog-meta">
                                         <li>
                                             <i className="fas fa-user"></i>
-                                            <span>admin</span>
+                                            <span>{blog.data.author}</span>
                                         </li>
                                         <li>
                                             <i className="fas fa-calendar-alt"></i>
@@ -377,13 +400,13 @@ function Dashboard() {
                                         </li>
                                     </ul>
                                     <h4 className="blog-title">
-                                        <a href="blog-details.html">Voluptate blanditiis provident Lorem ipsum dolor sit amet</a>
+                                        <a href="blog-details.html">{blog.data.title}</a>
                                     </h4>
                                     <p className="blog-desc">
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias autem recusandae deleniti nam dignissimos sequi ...
+                                    {blog.data.shortDescription}
                                     </p>
-                                    <a className="blog-btn" href="#">
-                                        <span>read more</span>
+                                    <a className="blog-btn" href="" onClick={() => viewB(id)}>
+                                        <span>Lire</span>
                                         <i className="icofont-arrow-right"></i>
                                     </a>
                                 </div>
@@ -391,6 +414,12 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
+                                    </>
+                                ) })}
+                                  
+                
+
+
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
@@ -403,6 +432,7 @@ function Dashboard() {
                 </div>
             </div>
         </section>
+        
             </div>
             }   
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>

@@ -175,6 +175,7 @@ const Dashboard=()=> {
             )
         }
     } 
+    window.scrollTo(0, 0);
     return (  
         <html lang="en">
             <head>

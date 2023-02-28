@@ -25,9 +25,7 @@ class Footer extends React.Component{
                 <div class="row">
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
-                            <a class="footer-logo" href="#">
-                                <img src="assets/images/logoSmall.png" alt="logo"/>
-                            </a>
+                        <h3 class="footer-title">Cook Tounsi</h3>
                             <p class="footer-desc">Un voyage à travers les souvenirs, les recettes secrètes de famille et la bistronomie moderne de La Tunisie.</p>
                             <ul class="footer-social">
                                 <li><a class="icofont-facebook" href="#"></a></li>
@@ -45,20 +43,16 @@ class Footer extends React.Component{
                                 <li>
                                     <i class="icofont-ui-email"></i>
                                     <p>
-                                        <span>support@tunisianfood.com</span>
-                                        <span>carrer@tunisianfood.com</span>
+                                        <span>contact@cooktounsi.com</span>
+                                        <span>carrer@cooktounsi.com</span>
                                     </p>
                                 </li>
                                 <li>
                                     <i class="icofont-ui-touch-phone"></i>
                                     <p>
                                         <span>+216 50 450 960</span>
-                                        <span>+216 50 450 960</span>
+                                        <span>+216 42 226 434</span>
                                     </p>
-                                </li>
-                                <li>
-                                    <i class="icofont-location-pin"></i>
-                                    <p>Tunisie, Sfax</p>
                                 </li>
                             </ul>
                         </div>
@@ -72,19 +66,15 @@ class Footer extends React.Component{
                                 </li>
                                 <li><Link to="Profile">Mon Profile</Link>
                                 </li>
-                                <li><Link to="Category">Catégories</Link>
-                                </li>
                                 <li><Link to="Contact">Contacts</Link>
                                 </li>
                                 </ul>
                                 <ul>
-                                <li><Link to="Shop">Shop</Link>
+                                <li><Link to="ShopProduct">Shop</Link>
                                 </li>
                                 <li><Link to="About">Concept</Link>
                                 </li>
                                 <li><Link to="Blog">Blogs</Link>
-                                </li>
-                                <li><Link to="Coming">Bientôt disponible</Link>
                                 </li>
                                 </ul>
                             </div>
@@ -95,8 +85,7 @@ class Footer extends React.Component{
                             <h3 class="footer-title">Tunisian Food</h3>
                             <p class="footer-desc">L’authenticité est le mot parfait pour décrire notre cuisine méditerranéenne qui se concentre sur des plats simples à partager avec des ingrédients nutritifs et de saison!</p>
                             <div class="footer-app">
-                            <Link to="Coming"><img src="assets/images/google-store.png" alt="google"/></Link>
-                            <Link to="Coming"><img src="assets/images/app-store.png" alt="app"/></Link>
+                           
                             </div>
                         </div>
                     </div>
