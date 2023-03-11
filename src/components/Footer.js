@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 class Footer extends React.Component{
      render() {
+        window.scrollTo(0, 0);
           return (
                <html lang="en">
         <head>
@@ -82,10 +83,19 @@ class Footer extends React.Component{
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
-                            <h3 class="footer-title">Tunisian Food</h3>
-                            <p class="footer-desc">L’authenticité est le mot parfait pour décrire notre cuisine méditerranéenne qui se concentre sur des plats simples à partager avec des ingrédients nutritifs et de saison!</p>
-                            <div class="footer-app">
-                           
+                        <h3 class="footer-title">Liens</h3>
+                            <div class="footer-links">
+                                <ul>
+                                <li><Link to="/Politics">Confidentialité</Link>
+                                </li>
+                                <li><Link to="/Cgv">Conditions générales de ventes</Link>
+                                </li>
+                                </ul>
+                                <ul>
+                                <li><Link to="ShopProduct">Cookies</Link>
+                                </li>
+                               
+                                </ul>
                             </div>
                         </div>
                     </div>

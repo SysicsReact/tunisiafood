@@ -149,14 +149,6 @@ dispatch(ADD_TO_CART(e));
                     <div class="row">
                             <div class="col-lg-12">
                                 <div class="top-filter">
-                                    <div class="filter-show">
-                                        <label class="filter-label">Afficher :</label>
-                                        <select class="form-select filter-select">
-                                            <option value="1">9</option>
-                                            <option value="2">12</option>
-                                            <option value="3">15</option>
-                                        </select>
-                                    </div>
                                     <div class="filter-short">
                                         <label class="filter-label">Filtrer Par:</label>
                                         <select class="form-select filter-select" value={tag} onChange={(e)=>setTag(e.target.value)}>
@@ -164,8 +156,6 @@ dispatch(ADD_TO_CART(e));
                                             <option value="populaire">populaire</option>
                                             <option value="nouveau">nouveau</option>
                                             <option value="solde">soldé</option>
-
-                                          
                                         </select>
                                     </div>
                                     <div class="filter-action">
@@ -192,7 +182,7 @@ dispatch(ADD_TO_CART(e));
                         {grid &&
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
                         {grid &&currentProducts.map((e) => {
-                       const { id, tag, category,photo,name,discount, price } = e;
+                       const { id, tag, category,photo,name,discount, weight, price } = e;
                     return (    
                             <div class="col" key={id}>    
                                 <div class="product-card">
@@ -286,7 +276,7 @@ dispatch(ADD_TO_CART(e));
                                     </div>
                                     <div class="product-content">
                                       
-                                            <i class="product-mass">200 G</i>
+                                            <i class="product-mass">{weight} G</i>
                                       
                                         <h6 class="product-name">
                                             <a href="product-video.html">{name}</a>
@@ -313,6 +303,7 @@ dispatch(ADD_TO_CART(e));
                                     </div>
                                 </div>
                             </div>
+                            
                                );
                               })}
                     </div>
@@ -324,8 +315,6 @@ dispatch(ADD_TO_CART(e));
                         <ProductList {...products} />
                                );
                               })}  
-                      
-                   
                 <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}

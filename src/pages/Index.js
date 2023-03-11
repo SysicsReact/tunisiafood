@@ -202,7 +202,8 @@ function Dashboard() {
                             <del> €{singleProduct.price}</del>
                             <span> €{singleProduct.price}<small>/{singleProduct.weight} G</small></span>
                         </h5>
-                        <p class="standard-desc">{singleProduct.description}</p>
+                        <p class="standard-desc">{shortenText(singleProduct.description, 180)}</p>
+                        
                         <div class="standard-action-group">
                             <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
                                 <i class="fas fa-shopping-basket"></i>

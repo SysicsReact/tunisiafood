@@ -91,12 +91,18 @@ const OrderDetails = () => {
                                                 <p>€ {order.price_total.toFixed(2)}</p>
                                             </li>
                                             <li>
-                                                <h6>Frais de livraison:</h6>
-                                                <p>€ 10</p>
+                                                <h6>Livraison:</h6>
+                                                <p>{order.livraisonType.livraisonType}</p>
                                             </li>
                                             <li>
                                                 <h6>Total<small>(H-TVA)</small>:</h6>
-                                                <p>€ {(parseFloat(10) + parseFloat(order.price_total)).toFixed(2)}</p>
+                                                {order.livraisonType.livraisonType=="Livraison rapide"&&
+                                            <p>{(parseFloat(25) + parseFloat(order.price_total)).toFixed(2)}</p>}
+                                             {order.livraisonType.livraisonType=="Livraison Standard"&&
+                                            <p>{(parseFloat(10) + parseFloat(order.price_total)).toFixed(2)}</p>}   
+                                            {order.livraisonType.livraisonType=="Livraison Standard En europe"&&
+                                            <p>{(parseFloat(15) + parseFloat(order.price_total)).toFixed(2)}</p>}
+                                                
                                             </li>
                                         </ul>
                                         </div>

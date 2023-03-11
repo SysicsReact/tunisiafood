@@ -20,12 +20,14 @@ const CartDetails = () => {
     const userID = useSelector(selectuserID)
     const [newPhone, setPhone] = useState({ });
     const [city, setCity] = useState({ });;
-    const [country, setCountry] = useState({ });;
+    const [country, setCountry] = useState({ });
+    const[livraisonType,SetLivraison]=useState({ })
+    const[livraisonCost,SetLivraisonCost]=useState("10")
     const [adress, setAdress] = useState({ });;
     const [postal, setPostal] = useState({ });;
     const [carddetails,setCardDetails]=useState([])
-    const notifyError = () => toast.error("Complete your profile");
-    const notifyErr = () => toast.error("Authentification required");
+    const notifyError = () => toast.error("Completez votre profile");
+    const notifyErr = () => toast.error("Authentification requise");
     const navigate = useNavigate();
     const cartItems = useSelector(selectCartItems);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
@@ -50,11 +52,16 @@ const CartDetails = () => {
                 getDoc(docRef).then(docSnap => {
                     if (docSnap.exists()) {
                         setLoggedUser(docSnap.data())
+                        if (!docSnap.data().country || !docSnap.data().city || !docSnap.data().adress) {
+                            notifyError()
+                            navigate("/profile")
+                        } 
                     }
+
                 })
             }
-        
     })
+    
     }, [user])
     
     //-----handling changes    
@@ -74,6 +81,25 @@ const CartDetails = () => {
         setCountry({
             country: event.target.value,
         });
+    }
+    function handleLivraisonChange(event){
+        
+        SetLivraison({
+            livraisonType: event.target.value,
+        });
+        switch(event.target.value){
+                case "Livraison Standard":
+                    SetLivraisonCost("10")
+                    
+                break;
+                case "Livraison Standard En europe":
+                    SetLivraisonCost("15")
+                    break;
+                case "Livraison rapide":
+                    SetLivraisonCost("25")
+                    break;
+        }
+    
     }
     function handleAdressChange(event) {
         setAdress(
@@ -146,18 +172,17 @@ const CartDetails = () => {
                     shipping: shippingAddress,
                     state: 0,
                     user_id: uid,
+                    livraisonType,
                 };
                 getDoc(docRef).then(docSnap => {
                     if (!docSnap.data().country || !docSnap.data().city || !docSnap.data().adress) {
-                        console.log(docSnap.data())
-                        notifyError()
-                        navigate("/profile")
+                       // notifyError()
+                       // navigate("/profile")
                     }else{
-                        console.log("sucess")
                         //-------proceed with checkout process
                         try {
                             addDoc(collection(db, "orders"), orderConfig);
-                            toast.success("Product uploaded successfully.");
+                            toast.success("Votre commande était placé avec succès");
                             navigate("/Checkout");
                             dispatch(CLEAR_CART())
                           } catch (error) {
@@ -196,7 +221,6 @@ const CartDetails = () => {
             )
         }
     }
-    console.log(loggedUser)
     return (
         <html lang="en">
           <head>
@@ -280,8 +304,8 @@ const CartDetails = () => {
                                                 <td class="table-name"><h6>{name}</h6></td>
                                                 <td class="table-brand"><h6>{category}</h6></td>
                                                 <td class="table-quantity"><h6>{cartQuantity}</h6></td>
-                                                <td class="table-price"><h6>${price}<small>/kilo</small></h6></td>
-                                                <td class="table-price"><h6>${(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
+                                                <td class="table-price"><h6>€{price}<small>/kilo</small></h6></td>
+                                                <td class="table-price"><h6>€{(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
                                                 <td class="table-action">
                                                     <a class="view" href="" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i class="fas fa-eye"></i></a>
                                                     <a class="trash" href="" title="Remove Wishlist" onClick={() => removeFromCart(cart)}><i class="icofont-trash"></i></a>
@@ -296,15 +320,24 @@ const CartDetails = () => {
                                     <ul>
                                         <li>
                                             <span>Sub-total</span>
-                                            <span>${cartTotalAmount.toFixed(2)}</span>
+                                            <span>€{cartTotalAmount.toFixed(2)}</span>
                                         </li>
                                         <li>
+                                            <span>Livraison:</span>
+                                    <select class="form-select" onChange={handleLivraisonChange}>
+                                        <option value="Livraison Standard">Livraison Standard</option>
+                                        <option value="Livraison Standard En europe">Livraison Standard En europe</option>
+                                        <option value="Livraison rapide">Livraison rapide</option>
+                                    </select>
+                                        </li>
+                                        
+                                        <li>
                                             <span>Frais de livraison</span>
-                                            <span>$10.00</span>
+                                            <span>€{livraisonCost}</span>
                                         </li>
                                         <li>
                                             <span>Total<small>(Incl. VAT)</small></span>
-                                            <span>${(parseFloat(10) + parseFloat(cartTotalAmount)).toFixed(2)}</span>
+                                            <span>€{(parseFloat(livraisonCost) + parseFloat(cartTotalAmount)).toFixed(2)}</span>
                                         </li>
                                     </ul>
                                 </div>

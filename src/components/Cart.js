@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { GetCardDetails, auth, db } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
+import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, SAVE_URL, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { selectuserID } from "../redux/slice/authSlice";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -13,7 +15,11 @@ const Cart = () => {
     const notifyError = () => toast.error("Complete your profile");
     const notifyErr = () => toast.error("Authentification required");
     const navigate = useNavigate();
+    const [loggedUser, setLoggedUser] = useState({});
+    const [user] = useAuthState(auth);
     const cartItems = useSelector(selectCartItems);
+    const userID = useSelector(selectuserID)
+    const url = window.location.href;
     const cartTotalAmount = useSelector(selectCarTotalAmount);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const dispatch = useDispatch();
@@ -33,8 +39,29 @@ const Cart = () => {
         dispatch(CALCULATE_SUBTOTAL())
         dispatch(CALCULATE_TOTAL_QUANTITY())
     }, [dispatch, cartItems]);
-
-
+   
+    useEffect(()=>
+    {
+        onAuthStateChanged(auth, (user) => {
+        
+            const uid = user.uid;
+            const docRef = doc(db, "users", uid);
+            if (uid) {
+               
+                getDoc(docRef).then(docSnap => {
+                    if (docSnap.exists()) {
+                        setLoggedUser(docSnap.data())
+                    }
+                })
+            }
+        
+    })
+    }, [user])
+   
+    const processToCheckout = () => {
+      
+        navigate("/CartDetails")
+    }
     return (
 
         <aside class="cart-sidebar">
@@ -84,7 +111,7 @@ const Cart = () => {
                                         <div class="cart-info-group">
                                             <div class="cart-info">
                                                 <h6><a href="product-single.html">{name}</a></h6>
-                                                <p>Prix Unitaire ${price}</p>
+                                                <p>Prix Unitaire €{price}</p>
                                             </div>
                                             <div class="cart-action-group">
                                                 <div class="product-action">
@@ -92,7 +119,7 @@ const Cart = () => {
                                                     <h6>{cartQuantity}</h6>
                                                     <button class="action-plus" title="Quantity Plus" onClick={() => (increaseCart(cart))}><i class="icofont-plus"></i></button>
                                                 </div>
-                                                <h6>Prix : ${(price * cartQuantity).toFixed(2)}</h6>
+                                                <h6>Prix : €{(price * cartQuantity).toFixed(2)}</h6>
                                             </div>
                                         </div>
                                     </li>
@@ -105,7 +132,7 @@ const Cart = () => {
                             <>
                                 <div class="cart-footer">
                                    <a class="cart-checkout-btn" href="">
-                                   <Link to="/CartDetails"> <span class="checkout-label"  >Checkout</span></Link>
+                                   <span class="checkout-label" onClick={processToCheckout} >Checkout</span>
                                         <span class="checkout-price">${cartTotalAmount.toFixed(2)}</span>
                                     </a>
                                 </div>
