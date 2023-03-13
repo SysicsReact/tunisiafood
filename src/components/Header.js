@@ -165,13 +165,13 @@ const Dashboard=()=> {
             return (
                 <>
                 <button className="dashboard__btn" onClick={logout}> 
-                <Link to="/"> Logout </Link> </button>
+                <Link to="/"> Déconnecter </Link> </button>
                 <span><Link to="MyProfile"> profile </Link></span>
                 </>
             )
         } else {
             return (
-                <span><Link to="/Login"> join </Link></span>
+                <span><Link to="/Login"> S'inscrire </Link></span>
             )
         }
     } 
@@ -262,7 +262,7 @@ confidentialité</a></NavLink>
                 <div class="nav-btn">
                     <Link to="/Login"><a href="" class="btn btn-inline">
                         <i class="fa fa-unlock-alt"></i>
-                        <span>join here</span>
+                        <span>S'inscrire</span>
                     </a></Link>
                 </div>
                 <ul class="nav-list">
@@ -283,12 +283,12 @@ confidentialité</a></NavLink>
                         <i class="icofont-ui-email"></i>
                         <p>
                             <small>Envoyez-nous un email</small>
-                            <span>support@cooltoonsi.com</span>
+                            <span>contact@cooktounsi.com</span>
                         </p>
                     </div>
                 </div>
                 <div class="nav-footer">
-                    <p>Tous droits réservés par <a href="#">Cool Toonsi</a></p>
+                    <p>Tous droits réservés par <a href="#">Cook Tounsi</a></p>
                 </div>
             </div>
 
@@ -350,7 +350,7 @@ confidentialité</a></NavLink>
     </div>
 <li className="header-widget">
     {!isLoggedIn&&
-               <span ><Link to="/Login"> join </Link></span>
+               <span ><Link to="/Login"> S'inscrire </Link></span>
             }
             
 {isLoggedIn &&

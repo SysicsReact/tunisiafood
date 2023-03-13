@@ -351,6 +351,13 @@ const CartDetails = () => {
                     </div>
                     <form class="modal-content" onSubmit={(event) => event.preventDefault()}>
                         <div class="row">
+                        <div class="col-md-6 col-lg-4 alert fade show" >
+                                <div class="profile-card contact active" style={{backgroundColor:"aqua"}}>
+                                
+                                <label for="checkout-check">
+                            Si vous voulez, vous pouvez changer les détails de livraisons par ici et confirmer.</label>
+                                </div>
+                            </div>
                             <div class="col-md-6 col-lg-4 alert fade show">
                                 <div class="profile-card contact active">
                                     <h6>Pays</h6>
@@ -403,15 +410,14 @@ const CartDetails = () => {
                                     <input class="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Entrez Votre numéro de téléphone..." />
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
-                                <input type="checkbox" id="checkout-check"/>
-                                <label for="checkout-check">
-                            En effectuant cet achat, vous acceptez nos <a href="#">Termes et conditions</a>.</label>
-                                </div>
-                            </div>
+                           
                         </div>
                     </form>
+                    
+                                <input type="checkbox" id="checkout-check"/>
+                                <label for="checkout-check">
+                             En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>
+                               
                 </div>
                             <div class="checkout-proced">
                                 <button href="" class="btn btn-inline" onClick={processToCheckout} >procédez au payment</button>

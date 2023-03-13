@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 class Footer extends React.Component{
      render() {
-        window.scrollTo(0, 0);
           return (
                <html lang="en">
         <head>
@@ -94,7 +93,8 @@ class Footer extends React.Component{
                                 <ul>
                                 <li><Link to="ShopProduct">Cookies</Link>
                                 </li>
-                               
+                                <li><Link to="/Faq">FAQ</Link>
+                                </li>
                                 </ul>
                             </div>
                         </div>

@@ -40,10 +40,10 @@ class Navbar extends React.Component{
                                         <span className="feature-name"><Link to="Blog" className="navbar-link" > Blog </Link></span>
                                         </li>
                                         <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="Offre" className="navbar-link" > Offres </Link></span>
+                                        <span className="feature-name"><Link to="Contact" className="navbar-link" > Contacts </Link></span>
                                         </li>
                                         <li className="navbar-item dropdown-megamenu">
-                                        <span className="feature-name"><Link to="Contact" className="navbar-link" > Contacts </Link></span>
+                                        <span className="feature-name"><Link to="Faq" className="navbar-link" > FAQ </Link></span>
                                         </li>
                                     </ul>
                                 </div>

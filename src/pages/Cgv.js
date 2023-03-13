@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Cgv() {
+    window.scrollTo(0, 0);
   return (
      <html>
      <head>

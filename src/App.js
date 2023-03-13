@@ -44,6 +44,7 @@ class App extends Component {
       localStorage.setItem("isCompleting",true)
     }
     test = localStorage.getItem("isCompleting");
+    window.scrollTo(0, 0);
     return (
       <>
         {!test && <Loader />}

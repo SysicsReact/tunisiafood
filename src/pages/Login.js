@@ -20,6 +20,7 @@ function Login() {
     const previousURL = useSelector(selectPreviousURL);
 
     const redirectUser = () =>{
+        window.scrollTo(0, 0);
         if (previousURL.includes("Cart")){
             alert(previousURL)
             console.log(previousURL)

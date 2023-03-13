@@ -92,7 +92,7 @@ const OrderDetails = () => {
                                             </li>
                                             <li>
                                                 <h6>Livraison:</h6>
-                                                <p>{order.livraisonType.livraisonType}</p>
+                                                <p></p>
                                             </li>
                                             <li>
                                                 <h6>Total<small>(H-TVA)</small>:</h6>

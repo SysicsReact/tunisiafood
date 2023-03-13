@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Faq() {
+    window.scrollTo(0, 0);
   return (
      <html>
           <head>
@@ -13,10 +15,21 @@ function Faq() {
           <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
           <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
           <link rel="stylesheet" href="assets/css/main.css" />
-          <link rel="stylesheet" href="assets/css/user-auth.css" />
-          <link rel="stylesheet" href="assets/css/checkout.css"></link>
+          <link rel="stylesheet" href="assets/css/faq.css" />
+          
           </head>
           <body>
+          <div className="backdrop"></div>
+                <a class="backtop fas fa-arrow-up" href="#"></a>
+                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div class="container">
+                        <h2>QFP</h2>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li class="breadcrumb-item active" aria-current="page">Questions fréquemment posées</li>
+                        </ol>
+                    </div>
+                </section>
           <section class="inner-section faq-part">
             <div class="container">
                 <div class="row">
@@ -24,42 +37,44 @@ function Faq() {
                         <div class="faq-parent">
                             <div class="faq-child">
                                 <div class="faq-que">
-                                    <button>How to contact with Customer Service?</button>
+                                    <button>C'est quoi Cook Tounsi?</button>
                                 </div>
                                 <div class="faq-ans">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, repellendus ducimus? Culpa tempore saepe fuga excepturi eius! Nulla quam, minus, id ipsa ad distinctio rem nihil voluptatem eaque quaerat recusandae?</p>
+                                    <p>Cook Tounis est une platforme de vente en ligne des plats tunisiens, des épices et patisseries en Europe.</p>
                                 </div>
                             </div>
                             <div class="faq-child">
                                 <div class="faq-que">
-                                    <button>App installation failed, how to update system information?</button>
+                                    <button>Comment créer un compte?</button>
                                 </div>
                                 <div class="faq-ans">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, repellendus ducimus? Culpa tempore saepe fuga excepturi eius! Nulla quam, minus, id ipsa ad distinctio rem nihil voluptatem eaque quaerat recusandae?</p>
+                                    <p>Pour créer un compte vous devez aller à <Link to="/register">S'inscrire</Link>, entrez vos données et confirmez. </p>
                                 </div>
                             </div>
                             <div class="faq-child">
                                 <div class="faq-que">
-                                    <button>Website reponse taking time, how to improve?</button>
+                                    <button>Comment passer une commande?</button>
                                 </div>
                                 <div class="faq-ans">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, repellendus ducimus? Culpa tempore saepe fuga excepturi eius! Nulla quam, minus, id ipsa ad distinctio rem nihil voluptatem eaque quaerat recusandae?</p>
+                                    <p>Commencer par choisir parcourir les produits que vous voulez acheter, tapez Ajouter puis allez au Chariot, 
+                                        cliquez sur Achat, et tapez l'adresse de livraison, après vous devez choisir la méthode de livraison
+                                        et confirmez votre achat. </p>
                                 </div>
                             </div>
                             <div class="faq-child">
                                 <div class="faq-que">
-                                    <button>How do I create a account?</button>
+                                    <button>Comment nous contacter ?</button>
                                 </div>
                                 <div class="faq-ans">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, repellendus ducimus? Culpa tempore saepe fuga excepturi eius! Nulla quam, minus, id ipsa ad distinctio rem nihil voluptatem eaque quaerat recusandae?</p>
+                                    <p>Vous pouvez nous contacter via email: contact@cooktounsi.com. Vous pouvez aussi nous envoyer un message en allant à <Link to="/contact">contact</Link>.</p>
                                 </div>
                             </div>
                             <div class="faq-child">
                                 <div class="faq-que">
-                                    <button>I cannot find an answer to my question!</button>
+                                    <button>Je ne trouve pas de réponse à ma question !</button>
                                 </div>
                                 <div class="faq-ans">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, repellendus ducimus? Culpa tempore saepe fuga excepturi eius! Nulla quam, minus, id ipsa ad distinctio rem nihil voluptatem eaque quaerat recusandae?</p>
+                                    <p>Si vous ne trouvez pas de réponse claire à vos questions, vous pouvez nous envoyer un message décrivant votre problème <Link to="/contact">Ici</Link> et vous allez recevoir une réponse sur votre email. </p>
                                 </div>
                             </div>
                         </div>
