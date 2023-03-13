@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import SingleProduct from "./pages/SingleProduct";
 import Politics from "./pages/Politics";
 import About from "./pages/About";
+import { ToastContainer, toast } from 'react-toastify';
 import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
 import BlogDetails from "./pages/BlogDetails";
@@ -47,6 +48,7 @@ class App extends Component {
     window.scrollTo(0, 0);
     return (
       <>
+      <ToastContainer />
         {!test && <Loader />}
         <div>
           <Header />

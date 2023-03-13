@@ -65,7 +65,7 @@ const Cart = () => {
     return (
 
         <aside class="cart-sidebar">
-            <ToastContainer />
+            
 
             {cartItems.length === 0 ? (
                 <>

@@ -352,9 +352,9 @@ const CartDetails = () => {
                     <form class="modal-content" onSubmit={(event) => event.preventDefault()}>
                         <div class="row">
                         <div class="col-md-6 col-lg-4 alert fade show" >
-                                <div class="profile-card contact active" style={{backgroundColor:"aqua"}}>
+                                <div class="profile-card contact active" style={{backgroundColor:"#7ce4f5"}}>
                                 
-                                <label for="checkout-check">
+                                <label style={{Color:"white"}}>
                             Si vous voulez, vous pouvez changer les détails de livraisons par ici et confirmer.</label>
                                 </div>
                             </div>

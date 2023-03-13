@@ -27,7 +27,7 @@ const ShopProduct = () => {
     const dispatch = useDispatch();
     //pagination states
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage, setProductsPerPage] = useState(6);
+    const [productsPerPage, setProductsPerPage] = useState(8);
     //Get Current Products
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -104,7 +104,7 @@ dispatch(ADD_TO_CART(e));
          <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
          <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
          <link rel="stylesheet" href="assets/css/main.css" />
-         <link rel="stylesheet" href="assets/css/profile.css" />
+         
      </head>
      <body>
     
@@ -123,19 +123,29 @@ dispatch(ADD_TO_CART(e));
             <section class="inner-section shop-part">
             <div class="container">
                 <div class="row content-reverse">
-                    <div class="col-lg-3">
-                        <div class="shop-widget">
-                            <h6 class="shop-widget-title">Filter</h6>
-                            <div class="form-group">
+                   
+                    <div >
+                    <div class="row">
+                            <div class="col-lg-12">
+                                <div class="top-filter">
+                                    <div class="filter-short">
+                                        <select class="form-select filter-select" value={tag} onChange={(e)=>setTag(e.target.value)}>
+                                            <option value="all" selected>Tout</option>
+                                            <option value="populaire">populaire</option>
+                                            <option value="nouveau">nouveau</option>
+                                            <option value="solde">soldé</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-short">
                                     <label class="form-label">Trier par:</label>
                                     <select class="form-select" value={sort} onChange={(e)=>setSort(e.target.value)} >
                                         <option value="latest">Les plus récents</option>
                                         <option value="lowest-price">Les moins chers</option>
                                         <option value="highest-price">Les plus chers</option>
                                     </select>
-                            </div>
-                            <div class="form-group">
-                                    <label class="form-label">Catégory:</label>
+                                    </div>
+                                    <div class="filter-short">
+                                    <label class="filter-label">Catégory:</label>
                                     <select class="form-select" value={category} onChange={(e)=>setCategory(e.target.value)}>
                                     <option value="all" selected>All</option>
                                         <option value="sucré">Patisserie</option>
@@ -143,24 +153,6 @@ dispatch(ADD_TO_CART(e));
                                         <option value="epice">Nos Epices</option>
                                     </select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                    <div class="row">
-                            <div class="col-lg-12">
-                                <div class="top-filter">
-                                    <div class="filter-short">
-                                        <label class="filter-label">Filtrer Par:</label>
-                                        <select class="form-select filter-select" value={tag} onChange={(e)=>setTag(e.target.value)}>
-                                            <option value="all" selected>All</option>
-                                            <option value="populaire">populaire</option>
-                                            <option value="nouveau">nouveau</option>
-                                            <option value="solde">soldé</option>
-                                        </select>
-                                    </div>
-                                    <div class="filter-action">
-                                        <input  class="form-select " type="text" value={search} onChange={(e)=>setSearch(e.target.value)} />
-                                    </div>
                                     <div class="filter-action">
                                         <button class="header-widget" onClick={()=>clearFilters()} >
                                             <i className='fas fa-trash'></i></button>
@@ -180,7 +172,7 @@ dispatch(ADD_TO_CART(e));
                             </div>
                         </div>
                         {grid &&
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
                         {grid &&currentProducts.map((e) => {
                        const { id, tag, category,photo,name,discount, weight, price } = e;
                     return (    

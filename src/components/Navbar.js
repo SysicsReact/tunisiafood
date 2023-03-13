@@ -82,7 +82,7 @@ class Navbar extends React.Component{
                 </li>
             </ul>
             <div className="category-footer">
-                <p>All Rights Reserved by <a href="#">Tunisia Food</a></p>
+                <p>Tous droits réservés par <Link to="/">Cooktounsi</Link></p>
             </div>
         </aside>
 
