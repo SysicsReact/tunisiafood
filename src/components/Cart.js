@@ -40,24 +40,6 @@ const Cart = () => {
         dispatch(CALCULATE_TOTAL_QUANTITY())
     }, [dispatch, cartItems]);
    
-    useEffect(()=>
-    {
-        onAuthStateChanged(auth, (user) => {
-        
-            const uid = user.uid;
-            const docRef = doc(db, "users", uid);
-            if (uid) {
-               
-                getDoc(docRef).then(docSnap => {
-                    if (docSnap.exists()) {
-                        setLoggedUser(docSnap.data())
-                    }
-                })
-            }
-        
-    })
-    }, [user])
-   
     const processToCheckout = () => {
       
         navigate("/CartDetails")
