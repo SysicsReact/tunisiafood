@@ -326,7 +326,7 @@ function Dashboard() {
                 </div>
                 <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
                 {!isLoading &&products.slice(0,6).map((e) => {
-                       const { id, tag, category,photo,name,price, description } = e;
+                       const { id, tag, category,discount, photo,name,price, weight, description } = e;
                       
                     return (
                     <div className="col">
@@ -350,22 +350,32 @@ function Dashboard() {
                                         {category=="sucré"&&
                                             <label className="label-text sucre">{category}</label>}
                                 </button>
-                                <a className="feature-image" href="product-video.html">
+                                <a className="feature-image" href="" onClick={() => ShowItem(e)}>
                                     <img src={photo} style={{ borderRadius:"5px"}} alt={name}/>
                                 </a>
                                 <div className="feature-widget">
                                 <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
-                                        <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                        <a title="Product Video" href="" onClick={() => ShowItem(e)} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <button onClick={() => addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                 </div>
                             </div>
                             <div className="feature-content">
                                 <h6 className="feature-name">
-                                    <a href="product-video.html">{name}</a>
+                                    <a href="">{name}</a>
                                 </h6>
                                 <h6 className="feature-price">
-                                    <del>${price}</del>
-                                    <span>${price}<small>/plat</small></span>
+                                {discount!="0"&&
+                                    <>
+                                        <del> €{price}</del>
+                                        <span> € {Math.round((price-(price*discount)/100)*100)/100}<small></small></span>
+                                        </>
+                                    }
+                                    {discount=="0"&&
+                                        <>
+                                       
+                                        <span> € {price}<small></small></span>
+                                        </>
+                                    }
                                 </h6>
                                 <p className="feature-desc">{shortenText(description, 150)}</p>
                                 <button className="product-add" onClick={()=> addToCart(e)}>
@@ -392,7 +402,6 @@ function Dashboard() {
         </section>
         <Intro/>
 
-       
         <section className="section blog-part">
             <div className="container">
                 <div className="row">
@@ -416,7 +425,7 @@ function Dashboard() {
                         <div className="blog-slider slider-arrow">
                             <div className="blog-card">
                                 <div className="blog-media">
-                                    <a className="blog-img" href="#">
+                                    <a className="blog-img" href="" onClick={() => viewB(id)}>
                                         <img src={blog.data.photo} alt="blog"/>
                                     </a>
                                 </div>
@@ -432,7 +441,7 @@ function Dashboard() {
                                         </li>
                                     </ul>
                                     <h4 className="blog-title">
-                                        <a href="blog-details.html">{blog.data.title}</a>
+                                        <a href="" onClick={() => viewB(id)}>{blog.data.title}</a>
                                     </h4>
                                     <p className="blog-desc">
                                     {blog.data.shortDescription}

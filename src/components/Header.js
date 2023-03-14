@@ -15,8 +15,25 @@ import { selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/car
 import { CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, selectCartItems } from "../redux/slice/cartSlice";
 import { selectWishItems } from "../redux/slice/wishSlice";
 import { selectProducts } from "../redux/slice/productSlice";
-
-
+const locations={}
+function checkIfTrue(){
+    var str=window.location.href.toLowerCase()
+   var strsplit= str.split("/");
+   //alert(strsplit[strsplit.length-1]);
+   if(strsplit[strsplit.length-1]=="")
+   {
+    return true;
+   }
+   else{
+    if ((strsplit[strsplit.length-1].includes("product"))) {
+        return true;
+    }
+    else{
+        return false;
+    }
+   }
+   
+}
 let x=0;
 export function updatex(value)
 {
@@ -40,11 +57,26 @@ const Dashboard=()=> {
     const wishItems = useSelector(selectWishItems);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
+    const url = window.location.href;
+    const [search, setSearch ] = useState(false);
    
     
     //-------get user by ID
+    useEffect(()=>{
+        var str=window.location.href.toLowerCase()
+        if ((str.includes("product"))) {
+            setSearch(true)
+        }
+        else{
+            setSearch(false)
+        }
+    },[search,window.location])
 
     useEffect(() => {
+        const showSearch = async () => {
+            
+        }
+        
         // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -181,6 +213,7 @@ const Dashboard=()=> {
     const view = async (idp) => {
         navigate("/ProductItems", { state: { id: idp } });
           };
+    
     return (  
         <html lang="en">
             <head>
@@ -226,11 +259,9 @@ const Dashboard=()=> {
                     <NavLink to="/Politics" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-warning"></i>
 confidentialité</a></NavLink>
                     </li>
-                   
                     <li>
                     <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#" onClick={logout}><i class="icofont-logout"></i>Se déconnecter</a></NavLink>
                     </li>
-
                 </ul>
                 <div class="nav-info-group">
                     <div class="nav-info">
@@ -244,12 +275,12 @@ confidentialité</a></NavLink>
                         <i class="icofont-ui-email"></i>
                         <p>
                             <small>Envoyez-nous un email</small>
-                            <span>contact@cooktoonsi.com</span>
+                            <span>contact@cooktounsi.com</span>
                         </p>
                     </div>
                 </div>
                 <div class="nav-footer">
-                    <p>Tous droits réservés par <a href="#">Cool Toonsi</a></p>
+                    <p>Tous droits réservés par <a href="#">Cook Tounsi</a></p>
                 </div>
             </div>
 
@@ -314,7 +345,9 @@ confidentialité</a></NavLink>
                                 <img src="assets/images/cook.png" alt="logo" />
                             </Link>
                         </a>
-                        <form className="header-form">
+                       {checkIfTrue()&&
+                            <>
+                            <form className="header-form">
                         <div class="dropdown">
                             <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
                             <div id="myDropdown" class="rounded dropdown-content show">
@@ -330,6 +363,23 @@ confidentialité</a></NavLink>
                         </div>
                         <button><i className="fas fa-search"></i></button>
                         </form>
+                            </>
+                       }
+                       {!checkIfTrue()&&
+                            <>
+                                
+                            <form className="header-form">
+                        <div class="dropdown">
+                            <span style={{fontSize:"22px"}}>
+                                Pour nous tout est une question de sens et de souvenirs d’enfance .
+                            </span>
+                           
+                        </div>
+                        
+                        </form>
+                            </>
+                       }
+                        
 
     <div className="header-widget-group">
         <a href="front/compare.html" className="header-widget" title="Compare List">
