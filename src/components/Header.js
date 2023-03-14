@@ -371,7 +371,7 @@ confidentialité</a></NavLink>
                             <form className="header-form">
                         <div class="dropdown">
                             <span style={{fontSize:"22px"}}>
-                                Pour nous tout est une question de sens et de souvenirs d’enfance .
+                                Pour nous tout est une question de sens et de souvenirs d’enfance 
                             </span>
                            
                         </div>
