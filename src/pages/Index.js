@@ -100,7 +100,7 @@ function Dashboard() {
                 <a className="backtop fas fa-arrow-up" href="#"></a>
             <section className="home-classic-slider slider-arrow">
                     <div className="banner-part" 
-                    style={{ backgroundImage: "url(assets/images/banner2.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
+                    style={{ backgroundImage: "url(assets/images/chef.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
                     <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-lg-6">
@@ -161,7 +161,7 @@ function Dashboard() {
                                         {category=="sucré"&&
                                             <label className="label-text sucre">{category}</label>}
                                     </button>
-                                    <a className="product-image" href="front/product-video.html">
+                                    <a className="product-image"  onClick={() => ShowItem(e)}>
                                         <img src={photo} alt="product"/>
                                     </a>
                                     <div className="product-widget">
@@ -172,20 +172,20 @@ function Dashboard() {
                                 </div>
            {isOpen &&<Modal
           setIsOpen={setIsOpen}>  
-        <div className="row" key={singleProduct.id}>
-            <div class="col">
-                <div class="product-standard">
-                    <div class="standard-media">
-                            <img class="product-image" src={singleProduct.photo} style={{width:"350px", borderRadius:"8px"}} alt="product"/>
-                            <button className="product-wish wish">
-                        {singleProduct.category=="plat"&&
-                                <label className="label-text order">{singleProduct.category}</label>}
-                        {singleProduct.category=="epice"&&
-                                <label className="label-text rate">{singleProduct.category}</label>}
-                        {singleProduct.category=="sucré"&&
-                                <label className="label-text sucre">{singleProduct.category}</label>}
-                    </button>
-                    <div class="product-label">
+        
+                    <div class="product-view">
+                        <div class="row"key={singleProduct.id}>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="view-gallery">
+                                    <div class="product-wish wish">
+                                    {singleProduct.category=="plat"&&
+                                        <label class="view-label order">{singleProduct.category}</label>}
+                                    {singleProduct.category=="epice"&&
+                                        <label class="view-label rate">{singleProduct.category}</label>}
+                                    {singleProduct.category=="sucré"&&
+                                        <label class="view-label sucre">{singleProduct.category}</label>}   
+                                    </div>
+                                    <div class="product-label">
                     {singleProduct.tag=="nouveau"&&
                     <label className="label-text new">{singleProduct.tag}</label>}
                     {singleProduct.tag=="solde"&&
@@ -193,39 +193,70 @@ function Dashboard() {
                     {singleProduct.tag=="populaire"&&
                     <label className="label-text feat">{singleProduct.tag}</label>}
                     </div>
-                    </div>
-                    <div class="standard-content">
-                        <h4 class="standard-name">
-                            <a href="product-video.html">{singleProduct.name}</a>
-                        </h4>
-                        <h5 class="standard-price">
-                            <del> €{singleProduct.price}</del>
-                            <span> €{singleProduct.price}<small>/{singleProduct.weight} G</small></span>
-                        </h5>
-                        <p class="standard-desc">{shortenText(singleProduct.description, 180)}</p>
-                        
-                        <div class="standard-action-group">
-                            <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
-                                <i class="fas fa-shopping-basket"></i>
-                                <span>Ajouter</span>
-                            </button>
-                            <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                    <ul class="preview-slider slider-arrow"> 
+                                        <li><img src={singleProduct.photo} alt="product"/></li>
+                            
+                                    </ul>
+                                   
+                                </div>
                             </div>
-                            <button class="standard-wish wish" title="Add to Wishlist">
-                                <i class="fas fa-heart"></i>
-                                <span>Ajouter au wishlist</span>
-                            </button>
-                    <button class="standard-wish wish" title="Add to Wishlist"
-                     onClick={() => view(singleProduct.id)}>
-                     Plus de Détails</button>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="view-details">
+                                    <h3 class="view-name">
+                                        <a href="product-video.html">{singleProduct.name}</a>
+                                    </h3>
+                                    <div class="view-meta">
+                                        
+                                        <p>Catégorie:<a href="#">{singleProduct.category}</a></p>
+                                    </div>
+
+                                    <h3 class="view-price">
+                                        {singleProduct.discount!="0"&&
+                                    <>
+                                        <del> €{singleProduct.price}</del>
+                                        <span> € {Math.round((singleProduct.price-(singleProduct.price*singleProduct.discount)/100)*100)/100}<small></small></span>
+                                        </>
+                                    }
+                                    {singleProduct.discount=="0"&&
+                                        <>
+                                       
+                                        <span> € {singleProduct.price}<small>/{singleProduct.weight} G</small></span>
+                                        </>
+                                    }
+                                    </h3>
+                                    <p class="view-desc">{shortenText(singleProduct.description, 180)}</p>
+                                    <div class="view-list-group">
+                                        <label class="view-list-title">tags:</label>
+                                        <ul class="view-tag-list">
+                                            <li><a href="#">Tunisien</a></li>
+                                            <li><a href="#">Gastronomie</a></li>
+                                            <li><a href="#">Home Made</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="view-add-group">
+                                        <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                            <i class="fas fa-shopping-basket"></i>
+                                            <span>Ajouter</span>
+                                        </button>
+                                    </div>
+                                    <div class="view-action-group">
+                                        <a class="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
+                                            <i class="icofont-eye"></i>
+                                            <span>Voir plus de détails</span>
+                                        </a>
+                                    </div>
+                                    <br/>
+                                    <div class="view-action-group">
+                                        <a class="view-wish wish" href="" onClick={()=> addToWish(e)} title="Add Your Wishlist" >
+                                            <i class="icofont-heart"></i>
+                                            <span>Ajouter au wishlist</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+               
           </Modal>}
                                 <div className="product-content">
                                     <div className="product-rating">

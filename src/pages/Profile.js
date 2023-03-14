@@ -16,7 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 function Profile() {
 
     //--------declarations
-
+    
     const [user] = useAuthState(auth);
     const [username, setName] = useState({})
     const [loggedUser, setLoggedUser] = useState({})
@@ -53,6 +53,8 @@ function Profile() {
                         }
                     })
                 }
+            }else{
+                return navigate("/login");
             }
         })
     }, [dispatch, completeLoading])
@@ -65,7 +67,7 @@ function Profile() {
             updateUser();
             return 
         }
-        const imageRef = sRef(storage, `products/${imageUpload.name + v4()}`);
+        const imageRef = sRef(storage, `users/${imageUpload.name + v4()}`);
 //to do add loader here
         uploadBytes(imageRef, imageUpload).then(async (snapshot) => {
             await getDownloadURL(snapshot.ref).then((url) => {
@@ -209,6 +211,8 @@ function Profile() {
 
             <body>
                 <ToastContainer />
+                <div className="backdrop"></div>
+               <a class="backtop fas fa-arrow-up" href="#"></a>
                 <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div class="container">
                         <h2>Modifier votre profile</h2>
@@ -280,7 +284,7 @@ function Profile() {
                                     <label class="form-label">Numéro de Téléphone</label>
                                     <input class="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Type your number..." />
                                 </div>
-                                <button class="form-btn" type="submit" onClick={() => uploadFile()} >save profile info</button>
+                                <button class="btn btn-outline" type="submit" onClick={() => uploadFile()} >Sauvegarder</button>
                             </form>
                         </div>
                     </div>

@@ -26,23 +26,23 @@ class Navbar extends React.Component{
                             <div className="col-lg-12">
                                 <div className="navbar-content">
                                     <ul className="navbar-list">
-                                    <li className="navbar-item dropdown-megamenu">
+                                    <li className="navbar-item">
                                         <span className="feature-name"><Link to="/" className="navbar-link" >  
                                         Accueil </Link></span>
                                         </li>
-                                        <li className="navbar-item dropdown-megamenu">
+                                        <li className="navbar-item">
                                         <span className="feature-name"><Link to="ShopProduct" className="navbar-link" >  Produits </Link></span>
                                         </li>
-                                        <li className="navbar-item dropdown-megamenu">
+                                        <li className="navbar-item">
                                         <span className="feature-name"><Link to="About" className="navbar-link" >Concept</Link></span>
                                         </li>
-                                        <li className="navbar-item dropdown-megamenu">
+                                        <li className="navbar-item">
                                         <span className="feature-name"><Link to="Blog" className="navbar-link" > Blog </Link></span>
                                         </li>
-                                        <li className="navbar-item dropdown-megamenu">
+                                        <li className="navbar-item">
                                         <span className="feature-name"><Link to="Contact" className="navbar-link" > Contacts </Link></span>
                                         </li>
-                                        <li className="navbar-item dropdown-megamenu">
+                                        <li className="navbar-item">
                                         <span className="feature-name"><Link to="Faq" className="navbar-link" > FAQ </Link></span>
                                         </li>
                                     </ul>
@@ -61,23 +61,23 @@ class Navbar extends React.Component{
             </div>
             <ul className="category-list">
                 <li className="category-item">
-                <Link to="ShopProduct" className="category-link dropdown-link" >  
+                <Link to="ShopProduct" className="category-link " >  
                     Produits</Link>
                 </li>
                 <li className="category-item">
-                <Link to="About" className="category-link dropdown-link" >  
+                <Link to="About" className="category-link" >  
                     A propos</Link>
                 </li>
                 <li className="category-item">
-                <Link to="Blog" className="category-link dropdown-link" >  
+                <Link to="Blog" className="category-link" >  
                     Blogs</Link>
                 </li>
                 <li className="category-item">
-                <Link to="Blog" className="category-link dropdown-link" >  
+                <Link to="Blog" className="category-link" >  
                     Offres</Link>
                 </li>
                 <li className="category-item">
-                <Link to="Contact" className="category-link dropdown-link" >  
+                <Link to="Contact" className="category-link" >  
                     Contacts</Link>
                 </li>
             </ul>

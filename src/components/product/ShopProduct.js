@@ -195,7 +195,7 @@ dispatch(ADD_TO_CART(e));
                                         {category=="sucré"&&
                                             <label class="label-text sucre">{category}</label>}
                                         </button>
-                                        <a class="product-image" href="product-video.html">
+                                        <a class="product-image" href="">
                                             <img src={photo} alt="product"/>
                                         </a>
                                         <div className="product-widget">
@@ -229,7 +229,7 @@ dispatch(ADD_TO_CART(e));
                                                 </div>
                                                 <div class="standard-content">
                                                     <h4 class="standard-name">
-                                                        <a href="product-video.html">{singleProduct.name}</a>
+                                                        <a href="">{singleProduct.name}</a>
                                                     </h4>
                                                     <h5 class="standard-price">
                                                     {singleProduct.discount!="0"&&
@@ -271,7 +271,7 @@ dispatch(ADD_TO_CART(e));
                                             <i class="product-mass">{weight} G</i>
                                       
                                         <h6 class="product-name">
-                                            <a href="product-video.html">{name}</a>
+                                            <a href="">{name}</a>
                                         </h6>
                                         <h6 class="product-price">
                                         {discount!="0"&&

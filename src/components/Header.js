@@ -14,6 +14,7 @@ import { query, where, onSnapshot, documentId, updateDoc, collection } from "fir
 import { selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 import { CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, selectCartItems } from "../redux/slice/cartSlice";
 import { selectWishItems } from "../redux/slice/wishSlice";
+import { selectProducts } from "../redux/slice/productSlice";
 
 
 let x=0;
@@ -32,7 +33,7 @@ const Dashboard=()=> {
     const [completeLoading,setCompleLoading]=useState(false)
     const [isLoggedIn,setIsloggin]=useState(false); 
     const[valueCardDetails,SetCardValueDetails]=useState(0); 
-    const [products, setProducts] = useState([]);
+    const products = useSelector(selectProducts)
     const [value, setValue] = useState("");
     const [result, setResult] = useState([]);  
     const cartItems = useSelector(selectCartItems);
@@ -134,23 +135,25 @@ const Dashboard=()=> {
        }, [dispatch, cartItems]);
   
     useEffect(() => {
-        if (products.length == 0) {
+        /*if (products.length == 0) {
             const q = query(
                 collection(db, "products"),
             );
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     products.push(doc.data())
+                    console.log(doc.data())
                 });
+               
             });
-        }
+        }*/
         if (value.length > 0) {
             setResult([]);
             let searchQuery = value.toLowerCase();
             for (const key in products) {
                 let fruit = products[key].description.toLowerCase();
                 if (fruit.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
-
+                    
                     setResult(prevResult => {
                         return [...prevResult, products[key]]
                     });
@@ -166,7 +169,7 @@ const Dashboard=()=> {
                 <>
                 <button className="dashboard__btn" onClick={logout}> 
                 <Link to="/"> Déconnecter </Link> </button>
-                <span><Link to="MyProfile"> profile </Link></span>
+                <span><Link to="MyProfile"> Profile </Link></span>
                 </>
             )
         } else {
@@ -175,7 +178,9 @@ const Dashboard=()=> {
             )
         }
     } 
-   
+    const view = async (idp) => {
+        navigate("/ProductItems", { state: { id: idp } });
+          };
     return (  
         <html lang="en">
             <head>
@@ -218,12 +223,10 @@ const Dashboard=()=> {
                     <li>
                     <NavLink to="/OrderHistory" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-page"></i>
                     Commandes</a></NavLink>
-                    <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-warning"></i>
+                    <NavLink to="/Politics" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-warning"></i>
 confidentialité</a></NavLink>
                     </li>
-                    <li>
-                        <a class="nav-link dropdown-link" href="#"><i class="icofont-lock"></i>authentic</a>
-                    </li>
+                   
                     <li>
                     <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#" onClick={logout}><i class="icofont-logout"></i>Se déconnecter</a></NavLink>
                     </li>
@@ -265,12 +268,6 @@ confidentialité</a></NavLink>
                         <span>S'inscrire</span>
                     </a></Link>
                 </div>
-                <ul class="nav-list">
-                    <li>
-                        <a class="nav-link dropdown-link" href="#">
-                        <i class="icofont-lock"></i>authentic</a>
-                    </li>
-                </ul>
                 <div class="nav-info-group">
                     <div class="nav-info">
                         <i class="icofont-ui-touch-phone"></i>
@@ -322,11 +319,13 @@ confidentialité</a></NavLink>
                             <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
                             <div id="myDropdown" class="rounded dropdown-content show">
                                 {result.slice(0,5).map((result, Index) => (
+                                   
                                     <a  key={Index}>
-                                        <img src={result.photo} class="mx-3 rounded" height="30"/>
+                                        <img src={result.photo} class="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
                                         {result.name}
                                     </a>
-                                ))}  
+                                ))
+                                }  
                             </div>
                         </div>
                         <button><i className="fas fa-search"></i></button>
@@ -368,7 +367,7 @@ confidentialité</a></NavLink>
                 <li alt="Mes commandes"><Link to="OrderHistory"> Commandes </Link></li>
                 <li><button className="dashboard__btn"
                     onClick={logout}> 
-                <Link to="/"> Logout </Link> </button></li>
+                <Link to="/"> Déconnecter </Link> </button></li>
             </ul>
             </span>
         }
@@ -379,11 +378,11 @@ confidentialité</a></NavLink>
                 </div>
             </header>
             <div className="mobile-menu">
-                    <a href="index.html" title="Home Page">
+            <Link to="/"> <a  title="Home Page">
                         <i className="fas fa-home"></i>
                         
-                            <span><Link to="/">  Accueil </Link></span>
-                    </a>
+                            <span>  Accueil </span>
+                    </a></Link>
                     <button className="cate-btn" title="Category List">
                         <i className="fas fa-list"></i>
                         <span>Pages</span>
@@ -393,16 +392,12 @@ confidentialité</a></NavLink>
                         <span>Chariot</span>
                         <sup>{cartItems.length}</sup>
                     </button>
-                    <a href="front/wishlist.html" title="Wishlist">
+                   <Link to="/wishDetails"><a href="" title="Wishlist">
                         <i className="fas fa-heart"></i>
                         <span>wishlist</span>
-                        <sup>0</sup>
-                    </a>
-                    <a href="front/compare.html" title="Compare List">
-                        <i className="fas fa-random"></i>
-                        <span>compare</span>
-                        <sup>0</sup>
-                    </a>
+                        <sup>{wishItems.length}</sup>
+                    </a></Link> 
+                   
             </div>
             <Cart/>
             <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>

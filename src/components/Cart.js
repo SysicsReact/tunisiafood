@@ -47,11 +47,9 @@ const Cart = () => {
     return (
 
         <aside class="cart-sidebar">
-            
-
             {cartItems.length === 0 ? (
                 <>
-                                        <div class="cart-header">
+                    <div class="cart-header">
                         <div class="cart-total">
                             <i class="fas fa-shopping-basket"></i>
                             <span>totale: 0 </span>
