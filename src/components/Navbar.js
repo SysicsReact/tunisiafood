@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 class Navbar extends React.Component{
      render() {
           return (
-    <html lang="en">
+    <>
         <head>
                <meta charset="UTF-8"/>
                <meta name="name" content="Greeny"/>
@@ -102,7 +102,7 @@ class Navbar extends React.Component{
         <script src="assets/js/venobox.js"></script>
         <script src="assets/js/slick.js"></script>
         <script src="assets/js/main.js"></script> 
-     </html>
+     </>
    );
 
 }

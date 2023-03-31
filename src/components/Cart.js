@@ -3,9 +3,7 @@ import {  useNavigate } from "react-router-dom";
 import { GetCardDetails, auth, db } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, SAVE_URL, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc } from "@firebase/firestore";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectuserID } from "../redux/slice/authSlice";
 import { Link } from "react-router-dom";
@@ -46,58 +44,58 @@ const Cart = () => {
     }
     return (
 
-        <aside class="cart-sidebar">
+        <aside className="cart-sidebar">
             {cartItems.length === 0 ? (
                 <>
-                    <div class="cart-header">
-                        <div class="cart-total">
-                            <i class="fas fa-shopping-basket"></i>
+                    <div className="cart-header">
+                        <div className="cart-total">
+                            <i className="fas fa-shopping-basket"></i>
                             <span>totale: 0 </span>
                         </div>
-                        <button class="cart-close"><i class="icofont-close"></i></button>
+                        <button className="cart-close"><i className="icofont-close"></i></button>
                     </div>
-                    <div class="cart-info-group">
-                        <div class="cart-footer">
+                    <div className="cart-info-group">
+                        <div className="cart-footer">
                             <h6 className="coupon-btn">Votre Chariot Est Vide !</h6>
                         </div>
                     </div>
-                    <div class="cart-footer">
-                        <a class="cart-checkout-btn" href="#">
-                            <span class="checkout-label">Parcourir les produits</span>
-                            <span class="checkout-price"><i class=""></i></span>
+                    <div className="cart-footer">
+                        <a className="cart-checkout-btn" href="">
+                          <Link to="/ShopProduct">  <span className="checkout-label">Parcourir les produits</span></Link>
+                            <span className="checkout-price"><i className=""></i></span>
                         </a>
                     </div>
                     
                 </>
             ) : (
                 <>
-                    <div class="cart-header">
-                        <div class="cart-total">
-                            <i class="fas fa-shopping-basket"></i>
+                    <div className="cart-header">
+                        <div className="cart-total">
+                            <i className="fas fa-shopping-basket"></i>
                             <span>totale: {cartTotalQuantity} </span>
                         </div>
-                        <button class="cart-close"><i class="icofont-close"></i></button>
+                        <button className="cart-close"><i className="icofont-close"></i></button>
                     </div>
-                    <ul class="cart-list">
+                    <ul className="cart-list">
                         {cartItems.map((cart, index) => {
                             const { id, name, price, photo, cartQuantity } = cart;
                             return (
                                 <>
-                                    <li class="cart-item">
-                                        <div class="cart-media">
+                                    <li className="cart-item" key={{id}}>
+                                        <div className="cart-media">
                                             <a href="#"><img src={photo} alt="product" /></a>
-                                            <button class="cart-delete" onClick={() => removeFromCart(cart)}><i class="far fa-trash-alt"></i></button>
+                                            <button className="cart-delete" onClick={() => removeFromCart(cart)}><i className="far fa-trash-alt"></i></button>
                                         </div>
-                                        <div class="cart-info-group">
-                                            <div class="cart-info">
+                                        <div className="cart-info-group">
+                                            <div className="cart-info">
                                                 <h6><a href="product-single.html">{name}</a></h6>
                                                 <p>Prix Unitaire €{price}</p>
                                             </div>
-                                            <div class="cart-action-group">
-                                                <div class="product-action">
-                                                    <button class="action-minus" title="Quantity Minus" onClick={() => (decreaseCart(cart))} ><i class="icofont-minus" ></i></button>
+                                            <div className="cart-action-group">
+                                                <div className="product-action">
+                                                    <button className="action-minus" title="Quantity Minus" onClick={() => (decreaseCart(cart))} ><i className="icofont-minus" ></i></button>
                                                     <h6>{cartQuantity}</h6>
-                                                    <button class="action-plus" title="Quantity Plus" onClick={() => (increaseCart(cart))}><i class="icofont-plus"></i></button>
+                                                    <button className="action-plus" title="Quantity Plus" onClick={() => (increaseCart(cart))}><i className="icofont-plus"></i></button>
                                                 </div>
                                                 <h6>Prix : €{(price * cartQuantity).toFixed(2)}</h6>
                                             </div>
@@ -110,16 +108,16 @@ const Cart = () => {
                         const { id, name, price, photo, cartQuantity } = cart;
                         return (
                             <>
-                                <div class="cart-footer">
-                                   <a class="cart-checkout-btn" href="">
-                                   <span class="checkout-label" onClick={processToCheckout} >Checkout</span>
-                                        <span class="checkout-price">${cartTotalAmount.toFixed(2)}</span>
+                                <div className="cart-footer">
+                                   <a className="cart-checkout-btn" href="">
+                                   <span className="checkout-label" onClick={processToCheckout} >Checkout</span>
+                                        <span className="checkout-price">${cartTotalAmount.toFixed(2)}</span>
                                     </a>
                                 </div>
-                                <div class="cart-footer">
-                                    <a class="cart-checkout-btn" href="" onClick={() => (clearCart(cart))}>
-                                        <span class="checkout-label">Vider Le chariot  </span>
-                                        <span class="checkout-price"><i class="far fa-trash-alt" ></i></span>
+                                <div className="cart-footer">
+                                    <a className="cart-checkout-btn" href="" onClick={() => (clearCart(cart))}>
+                                        <span className="checkout-label">Vider Le chariot  </span>
+                                        <span className="checkout-price"><i className="far fa-trash-alt" ></i></span>
                                     </a>
                                 </div>
                             </>)

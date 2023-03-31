@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Register from "./pages/register";
 import Reset from "./pages/resetPwd";
 import Header from "./components/Header";
+import Head from "./components/Head";
 import Navbar from "./components/Navbar";
 import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";

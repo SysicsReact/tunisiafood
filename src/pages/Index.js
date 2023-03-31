@@ -12,6 +12,7 @@ import { ADD_TO_WISH, selectWishItems } from "../redux/slice/wishSlice";
 import {Modal} from 'react-fade-modal';
 import { query, onSnapshot } from "firebase/firestore";
 import { collection } from "firebase/firestore";
+import './main.css';
 
 
 function Dashboard() {
@@ -173,19 +174,19 @@ function Dashboard() {
            {isOpen &&<Modal
           setIsOpen={setIsOpen}>  
         
-                    <div class="product-view">
-                        <div class="row"key={singleProduct.id}>
-                            <div class="col-md-6 col-lg-6">
-                                <div class="view-gallery">
-                                    <div class="product-wish wish">
+                    <div className="product-view">
+                        <div className="row" key={singleProduct.id}>
+                            <div className="col-md-6 col-lg-6">
+                                <div className="view-gallery">
+                                    <div className="product-wish wish">
                                     {singleProduct.category=="plat"&&
-                                        <label class="view-label order">{singleProduct.category}</label>}
+                                        <label className="view-label order">{singleProduct.category}</label>}
                                     {singleProduct.category=="epice"&&
-                                        <label class="view-label rate">{singleProduct.category}</label>}
+                                        <label className="view-label rate">{singleProduct.category}</label>}
                                     {singleProduct.category=="sucré"&&
-                                        <label class="view-label sucre">{singleProduct.category}</label>}   
+                                        <label className="view-label sucre">{singleProduct.category}</label>}   
                                     </div>
-                                    <div class="product-label">
+                                    <div className="product-label">
                     {singleProduct.tag=="nouveau"&&
                     <label className="label-text new">{singleProduct.tag}</label>}
                     {singleProduct.tag=="solde"&&
@@ -193,24 +194,24 @@ function Dashboard() {
                     {singleProduct.tag=="populaire"&&
                     <label className="label-text feat">{singleProduct.tag}</label>}
                     </div>
-                                    <ul class="preview-slider slider-arrow"> 
+                                    <ul className="preview-slider slider-arrow"> 
                                         <li><img src={singleProduct.photo} alt="product"/></li>
                             
                                     </ul>
                                    
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-6">
-                                <div class="view-details">
-                                    <h3 class="view-name">
+                            <div className="col-md-6 col-lg-6">
+                                <div className="view-details">
+                                    <h3 className="view-name">
                                         <a href="product-video.html">{singleProduct.name}</a>
                                     </h3>
-                                    <div class="view-meta">
+                                    <div className="view-meta">
                                         
                                         <p>Catégorie:<a href="#">{singleProduct.category}</a></p>
                                     </div>
 
-                                    <h3 class="view-price">
+                                    <h3 className="view-price">
                                         {singleProduct.discount!="0"&&
                                     <>
                                         <del> €{singleProduct.price}</del>
@@ -224,31 +225,31 @@ function Dashboard() {
                                         </>
                                     }
                                     </h3>
-                                    <p class="view-desc">{shortenText(singleProduct.description, 180)}</p>
-                                    <div class="view-list-group">
-                                        <label class="view-list-title">tags:</label>
-                                        <ul class="view-tag-list">
+                                    <p className="view-desc">{shortenText(singleProduct.description, 100)}</p>
+                                    <div className="view-list-group">
+                                        <label className="view-list-title">tags:</label>
+                                        <ul className="view-tag-list">
                                             <li><a href="#">Tunisien</a></li>
                                             <li><a href="#">Gastronomie</a></li>
                                             <li><a href="#">Home Made</a></li>
                                         </ul>
                                     </div>
-                                    <div class="view-add-group">
-                                        <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
-                                            <i class="fas fa-shopping-basket"></i>
+                                    <div className="view-add-group">
+                                        <button className="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                            <i className="fas fa-shopping-basket"></i>
                                             <span>Ajouter</span>
                                         </button>
                                     </div>
-                                    <div class="view-action-group">
-                                        <a class="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
-                                            <i class="icofont-eye"></i>
+                                    <div className="view-action-group">
+                                        <a className="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
+                                            <i className="icofont-eye"></i>
                                             <span>Voir plus de détails</span>
                                         </a>
                                     </div>
                                     <br/>
-                                    <div class="view-action-group">
-                                        <a class="view-wish wish" href="" onClick={()=> addToWish(e)} title="Add Your Wishlist" >
-                                            <i class="icofont-heart"></i>
+                                    <div className="view-action-group">
+                                        <a className="view-wish wish" href="" onClick={()=> addToWish(e)} title="Add Your Wishlist" >
+                                            <i className="icofont-heart"></i>
                                             <span>Ajouter au wishlist</span>
                                         </a>
                                     </div>

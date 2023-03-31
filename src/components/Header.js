@@ -18,6 +18,7 @@ import { selectProducts } from "../redux/slice/productSlice";
 const locations={}
 function checkIfTrue(){
     var str=window.location.href.toLowerCase()
+    localStorage.clear()
    var strsplit= str.split("/");
    //alert(strsplit[strsplit.length-1]);
    if(strsplit[strsplit.length-1]=="")
@@ -33,13 +34,14 @@ function checkIfTrue(){
     }
    }
    
+   
 }
 let x=0;
 export function updatex(value)
 {
     x=value;
 }
-const Dashboard=()=> {
+const Header = () => {
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
     const dispatch = useDispatch();
@@ -58,25 +60,12 @@ const Dashboard=()=> {
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
     const url = window.location.href;
-    const [search, setSearch ] = useState(false);
    
     
     //-------get user by ID
-    useEffect(()=>{
-        var str=window.location.href.toLowerCase()
-        if ((str.includes("product"))) {
-            setSearch(true)
-        }
-        else{
-            setSearch(false)
-        }
-    },[search,window.location])
-
+   
     useEffect(() => {
-        const showSearch = async () => {
-            
-        }
-        
+
         // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -182,12 +171,12 @@ const Dashboard=()=> {
         if (value.length > 0) {
             setResult([]);
             let searchQuery = value.toLowerCase();
-            for (const key in products) {
-                let fruit = products[key].description.toLowerCase();
+            for (const item in products) {
+                let fruit = products[item].description.toLowerCase();
                 if (fruit.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
                     
                     setResult(prevResult => {
-                        return [...prevResult, products[key]]
+                        return [...prevResult, products[item]]
                     });
                 }
             }
@@ -215,12 +204,12 @@ const Dashboard=()=> {
           };
     
     return (  
-        <html lang="en">
+        <>
             <head>
                 <meta charset="UTF-8" />
                 <meta name="name" content="Greeny" />
                 <meta name="title" content="Greeny - eCommerce HTML Template" />
-                <title>Classic Home - Greeny</title>
+                <title>Cook Tounsi</title>
                 <link rel="icon" href="assets/images/cook.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -235,93 +224,92 @@ const Dashboard=()=> {
             {(!completeLoading) &&<Loader/>}
 
             {isLoggedIn &&
-            <aside class="nav-sidebar">
-            <div class="nav-header">
+            <aside className="nav-sidebar">
+            <div className="nav-header">
                 <a href="#"><img src={window.location.origin +'/assets/images/cook.png'}   alt="logo"/></a>
-                <button class="nav-close"><i class="icofont-close"></i></button>
+                <button className="nav-close"><i className="icofont-close"></i></button>
             </div>
-            <div class="nav-content">
-               <div class="nav-profile">
+            <div className="nav-content">
+               <div className="nav-profile">
                   
                     {logUser.photo!=undefined&&
-                    <a class="nav-user" href="#"><img src={logUser.photo} alt="user"/></a>
+                    <a className="nav-user" href=""><img src={logUser.photo} alt="user"/></a>
                     }
                     
-                    <h4 class="nav-name"><a href="profile.html">{displayName}</a></h4>
+                    <h4 className="nav-name"><a href="">{displayName}</a></h4>
                 </div> 
-                <ul class="nav-list">
+                <ul className="nav-list">
                     <li>
-                    <NavLink to="/MyProfile" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-bag-alt"></i>Profile</a></NavLink>
+                    <NavLink to="/MyProfile" className="My-link" > <a className="nav-link dropdown-link" href=""><i className="icofont-bag-alt"></i>Profile</a></NavLink>
                     </li>
                     <li>
-                    <NavLink to="/OrderHistory" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-page"></i>
+                    <NavLink to="/OrderHistory" className="My-link" > <a className="nav-link dropdown-link" href=""><i className="icofont-page"></i>
                     Commandes</a></NavLink>
-                    <NavLink to="/Politics" className="My-link" > <a class="nav-link dropdown-link" href="#"><i class="icofont-warning"></i>
+                    <NavLink to="/Politics" className="My-link" > <a className="nav-link dropdown-link" href=""><i className="icofont-warning"></i>
 confidentialité</a></NavLink>
                     </li>
                     <li>
-                    <NavLink to="/" className="My-link" > <a class="nav-link dropdown-link" href="#" onClick={logout}><i class="icofont-logout"></i>Se déconnecter</a></NavLink>
+                    <NavLink to="/" className="My-link" > <a className="nav-link dropdown-link" href="" onClick={logout}><i className="icofont-logout"></i>Se déconnecter</a></NavLink>
                     </li>
                 </ul>
-                <div class="nav-info-group">
-                    <div class="nav-info">
-                        <i class="icofont-ui-touch-phone"></i>
+                <div className="nav-info-group">
+                    <div className="nav-info">
+                        <i className="icofont-ui-touch-phone"></i>
                         <p>
                             <small>Appelez-nous</small>
                             <span>(+216) 50 450 960</span>
                         </p>
                     </div>
-                    <div class="nav-info">
-                        <i class="icofont-ui-email"></i>
+                    <div className="nav-info">
+                        <i className="icofont-ui-email"></i>
                         <p>
                             <small>Envoyez-nous un email</small>
                             <span>contact@cooktounsi.com</span>
                         </p>
                     </div>
                 </div>
-                <div class="nav-footer">
-                    <p>Tous droits réservés par <a href="#">Cook Tounsi</a></p>
+                <div className="nav-footer">
+                    <p>Tous droits réservés par <a href="">Cook Tounsi</a></p>
                 </div>
             </div>
 
         </aside>}
         {!isLoggedIn &&
-        <aside class="nav-sidebar">
-            
-            <div class="nav-header">
+        <aside className="nav-sidebar">
+            <div className="nav-header">
                 <a href="#"><img src="assets/images/cook.png" alt="logo"/></a>
-                <button class="nav-close"><i class="icofont-close"></i></button>
+                <button className="nav-close"><i className="icofont-close"></i></button>
             </div>
-            <div class="nav-content">
-                <div class="nav-btn">
-                    <Link to="/Login"><a href="" class="btn btn-inline">
-                        <i class="fa fa-unlock-alt"></i>
+            <div className="nav-content">
+                <div className="nav-btn">
+                    <Link to="/Login"><a href="" className="btn btn-inline">
+                        <i className="fa fa-unlock-alt"></i>
                         <span>S'inscrire</span>
                     </a></Link>
                 </div>
-                <div class="nav-info-group">
-                    <div class="nav-info">
-                        <i class="icofont-ui-touch-phone"></i>
+                <div className="nav-info-group">
+                    <div className="nav-info">
+                        <i className="icofont-ui-touch-phone"></i>
                         <p>
                             <small>Appelez-nous</small>
                             <span>(+216) 50 450 960</span>
                         </p>
                     </div>
-                    <div class="nav-info">
-                        <i class="icofont-ui-email"></i>
+                    <div className="nav-info">
+                        <i className="icofont-ui-email"></i>
                         <p>
                             <small>Envoyez-nous un email</small>
                             <span>contact@cooktounsi.com</span>
                         </p>
                     </div>
                 </div>
-                <div class="nav-footer">
-                    <p>Tous droits réservés par <a href="#">Cook Tounsi</a></p>
+                <div className="nav-footer">
+                    <p>Tous droits réservés par <a href="">Cook Tounsi</a></p>
                 </div>
             </div>
 
         </aside>}
-            <header className="header-part">  
+            <header className="header-part" >  
                 <div className="container">
                     <div className="header-content">
                         <div className="header-media-group">
@@ -348,13 +336,13 @@ confidentialité</a></NavLink>
                        {checkIfTrue()&&
                             <>
                             <form className="header-form">
-                        <div class="dropdown">
+                        <div className="dropdown">
                             <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
-                            <div id="myDropdown" class="rounded dropdown-content show">
-                                {result.slice(0,5).map((result, Index) => (
+                            <div id="myDropdown" className="rounded dropdown-content show">
+                                {result.slice(0,5).map((result, id) => (
                                    
-                                    <a  key={Index}>
-                                        <img src={result.photo} class="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
+                                    <a  key={{id}}>
+                                        <img src={result.photo} className="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
                                         {result.name}
                                     </a>
                                 ))
@@ -369,7 +357,7 @@ confidentialité</a></NavLink>
                             <>
                                 
                             <form className="header-form">
-                        <div class="dropdown">
+                        <div className="dropdown">
                             <span style={{fontSize:"22px"}}>
                                 Pour nous tout est une question de sens et de souvenirs d’enfance 
                             </span>
@@ -463,7 +451,7 @@ confidentialité</a></NavLink>
             <script src="assets/js/venobox.js"></script>
             <script src="assets/js/slick.js"></script>
             <script src="assets/js/main.js"></script>
-        </html>
+        </>
     );
 }
-export default Dashboard;
+export default Header;

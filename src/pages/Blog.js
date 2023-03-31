@@ -50,24 +50,24 @@ return(
             </head>
             <body>
             <div className="backdrop"></div>
-               <a class="backtop fas fa-arrow-up" href="#"></a>
-          <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-            <div class="container">
+               <a className="backtop fas fa-arrow-up" href="#"></a>
+          <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+            <div className="container">
                 <h2>blogs</h2>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tout les blogs</li>
+                <ol className="breadcrumb">
+                    <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page">Tout les blogs</li>
                 </ol>
             </div>
           </section>
-            <section class="inner-section blog-standard">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-lg-12">
+            <section className="inner-section blog-standard">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-8">
+                        <div className="row">
+                            <div className="col-lg-12">
                             </div>
-                            <div class="col-lg-12">
+                            <div className="col-lg-12">
         {blogs.length!=0&&
     <>
      {blogs.map((blog, index) =>
@@ -75,30 +75,30 @@ return(
                             
                                 return(
                                     <>
-                                    <div class="blog-card" key={id}>
-                                    <div class="blog-media">
-                                        <a class="blog-img" href="#">
+                                    <div className="blog-card" key={{id}}>
+                                    <div className="blog-media">
+                                        <a className="blog-img" href="#">
                                             <img src={blog.data.photo} alt="blog"/>
                                         </a>
                                     </div>
-                                    <div class="blog-content">
-                                        <ul class="blog-meta">
+                                    <div className="blog-content">
+                                        <ul className="blog-meta">
                                             <li>
-                                                <i class="icofont-ui-calendar"></i>
+                                                <i className="icofont-ui-calendar"></i>
                                                 <span>{blog.data.tags}</span>
                                             </li>
                                             <li>
-                                                <i class="icofont-user-alt-3"></i>
+                                                <i className="icofont-user-alt-3"></i>
                                                 <span>{blog.data.author}</span>
                                             </li>
                                         </ul>
-                                        <h4 class="blog-title">
+                                        <h4 className="blog-title">
                                             <a href="">{blog.data.title}</a>
                                         </h4>
-                                        <p class="blog-desc">{blog.data.shortDescription}</p>
-                                        <a class="blog-btn" href="" onClick={() => view(id)}>
+                                        <p className="blog-desc">{blog.data.shortDescription}</p>
+                                        <a className="blog-btn" href="" onClick={() => view(id)}>
                                             <span>Lire</span>
-                                            <i class="icofont-arrow-right"></i>
+                                            <i className="icofont-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -111,22 +111,22 @@ return(
                         
                         </div>
                     </div>
-                    <div class="col-sm-10 col-md-7 col-lg-4">
-                        <div class="blog-widget">
-                            <h3 class="blog-widget-title">Les Plus Populaires</h3>
-                            <ul class="blog-widget-feed">
+                    <div className="col-sm-10 col-md-7 col-lg-4">
+                        <div className="blog-widget">
+                            <h3 className="blog-widget-title">Les Plus Populaires</h3>
+                            <ul className="blog-widget-feed">
                                 {blogs.length!=0&&
                          <>
                              {blogs.map((blog, index) =>
                             { const {author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
-                            console.log(blog.data.author)
+                           
                                 return(
                                     <>
-                                <li>
-                                    <a class="blog-widget-media" href="#">
+                                <li >
+                                    <a className="blog-widget-media" href="#">
                                         <img src={blog.data.photo} style={{height:"70px"}} alt="blog-widget"/>
                                     </a>
-                                    <h6 class="blog-widget-text">
+                                    <h6 className="blog-widget-text">
                                         <a href="#">{blog.data.title}</a>
                                         <span>31, 01, 2023</span>
                                     </h6>
@@ -137,14 +137,14 @@ return(
                                  }
                             </ul>
                         </div>
-                        <div class="blog-widget">
-                            <h3 class="blog-widget-title">follow us</h3>
-                            <ul class="blog-widget-social">
-                                <li><a href="#" class="icofont-facebook"></a></li>
-                                <li><a href="#" class="icofont-twitter"></a></li>
-                                <li><a href="#" class="icofont-linkedin"></a></li>
-                                <li><a href="#" class="icofont-pinterest"></a></li>
-                                <li><a href="#" class="icofont-instagram"></a></li>
+                        <div className="blog-widget">
+                            <h3 className="blog-widget-title">follow us</h3>
+                            <ul className="blog-widget-social">
+                                <li><a href="#" className="icofont-facebook"></a></li>
+                                <li><a href="#" className="icofont-twitter"></a></li>
+                                <li><a href="#" className="icofont-linkedin"></a></li>
+                                <li><a href="#" className="icofont-pinterest"></a></li>
+                                <li><a href="#" className="icofont-instagram"></a></li>
                             </ul>
                         </div>
                     </div>

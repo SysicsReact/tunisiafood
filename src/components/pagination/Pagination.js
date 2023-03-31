@@ -40,21 +40,21 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
    }
 
   return (
-     <div class="row">
-          <div class="col-lg-12">
-               <div class="bottom-paginate"> 
-                    <ul class="pagination">
+     <div className="row">
+          <div className="col-lg-12">
+               <div className="bottom-paginate"> 
+                    <ul className="pagination">
                          {currentPage!=pageNumbers[0]&&
                           <li className= "page-item"  onClick={paginatePrev}>
-                          <a class="page-link">
-                               <i class="fas fa-long-arrow-alt-left"></i>
+                          <a className="page-link">
+                               <i className="fas fa-long-arrow-alt-left"></i>
                           </a>
                      </li>
                          }
                     {pageNumbers.map((number)=>{
                           if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit){
                         return(
-            <li class="page-item" >
+            <li className="page-item" >
               <button className="header-widget"> <a className= {currentPage === number ? `page-link active` : `page-link`}
             onClick={() =>paginate(number)} 
             key={number}>{number}</a></button>
@@ -62,19 +62,19 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
                          );}
                     })}
                     {currentPage != pageNumbers[pageNumbers.length - 1]&&
-                          <li class="page-item" onClick={paginateNext}>
+                          <li className="page-item" onClick={paginateNext}>
                               <button className="header-widget">
-                          <a class="page-link" >
-                               <i class="fas fa-long-arrow-alt-right"></i>
+                          <a className="page-link" >
+                               <i className="fas fa-long-arrow-alt-right"></i>
                           </a></button>
                      </li>
                     }
-                    <p class="page-info"> </p>
-                    <li class="page-item"> <button className="header-widget">
-                         <a class="page-link">{`${currentPage}`}</a></button></li>
-                    <p class="page-info"> {` Sur `} </p>
-                    <li class="page-item"> <button className="header-widget">
-                         <a class="page-link">{`${Math.ceil(totalPages)}`}</a></button></li>
+                    <p className="page-info"> </p>
+                    <li className="page-item"> <button className="header-widget">
+                         <a className="page-link">{`${currentPage}`}</a></button></li>
+                    <p className="page-info"> {` Sur `} </p>
+                    <li className="page-item"> <button className="header-widget">
+                         <a className="page-link">{`${Math.ceil(totalPages)}`}</a></button></li>
                     </ul>
                </div>
           </div>
