@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Intro()
 {
 return(
-     <html lang='en'>
+     <>
             <head>
                 <meta charset="UTF-8" />
                 <meta name="name" content="Tunisian Food" />
@@ -98,7 +98,7 @@ Nous croyons que notre application conséquente et continue du principe « la qu
                 <script src="assets/js/slick.js"></script>
                 <script src="assets/js/main.js"></script>
       
-     </html>
+     </>
 )
 
 }

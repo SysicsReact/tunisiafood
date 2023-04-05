@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MyComponent from "./test1";
 class Footer extends React.Component{
      render() {
     return (
-               <html lang="en">
+               <>
         <head>
                <meta charset="UTF-8"/>
                <meta name="name" content="Greeny"/>
@@ -95,6 +96,7 @@ class Footer extends React.Component{
                                 </li>
                                 <li><Link to="/Faq">FAQ</Link>
                                 </li>
+                                <MyComponent/>
                                 </ul>
                             </div>
                         </div>
@@ -123,7 +125,7 @@ class Footer extends React.Component{
         <script src="assets/js/venobox.js"></script>
         <script src="assets/js/slick.js"></script>
         <script src="assets/js/main.js"></script> 
-               </html>
+               </>
    );
 
 }

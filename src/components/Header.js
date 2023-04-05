@@ -15,6 +15,7 @@ import { selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/car
 import { CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, selectCartItems } from "../redux/slice/cartSlice";
 import { selectWishItems } from "../redux/slice/wishSlice";
 import { selectProducts } from "../redux/slice/productSlice";
+
 const locations={}
 function checkIfTrue(){
     var str=window.location.href.toLowerCase()

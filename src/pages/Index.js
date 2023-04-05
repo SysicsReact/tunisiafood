@@ -12,7 +12,6 @@ import { ADD_TO_WISH, selectWishItems } from "../redux/slice/wishSlice";
 import {Modal} from 'react-fade-modal';
 import { query, onSnapshot } from "firebase/firestore";
 import { collection } from "firebase/firestore";
-import './main.css';
 
 
 function Dashboard() {
@@ -204,11 +203,11 @@ function Dashboard() {
                             <div className="col-md-6 col-lg-6">
                                 <div className="view-details">
                                     <h3 className="view-name">
-                                        <a href="product-video.html">{singleProduct.name}</a>
+                                        <a href="">{singleProduct.name}</a>
                                     </h3>
                                     <div className="view-meta">
                                         
-                                        <p>Catégorie:<a href="#">{singleProduct.category}</a></p>
+                                        <p>Catégorie:<a href="">{singleProduct.category}</a></p>
                                     </div>
 
                                     <h3 className="view-price">
@@ -229,9 +228,8 @@ function Dashboard() {
                                     <div className="view-list-group">
                                         <label className="view-list-title">tags:</label>
                                         <ul className="view-tag-list">
-                                            <li><a href="#">Tunisien</a></li>
-                                            <li><a href="#">Gastronomie</a></li>
-                                            <li><a href="#">Home Made</a></li>
+                                            <li><a href="">Tunisien</a></li>
+                                            <li><a href="">Gastronomie</a></li>
                                         </ul>
                                     </div>
                                     <div className="view-add-group">
@@ -264,7 +262,7 @@ function Dashboard() {
                                     <i className="product-price" href="">{weight} G</i>
                                     </div>
                                     <h6 className="product-name">
-                                        <a href="product-video.html">{name}</a>
+                                        <a href="">{name}</a>
                                     </h6>
                                     <h6 className="product-price">
                                     {discount!="0"&&
@@ -465,7 +463,7 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
-                        <Link to="/Blog"> <a href="blog-grid.html" className="btn btn-outline">
+                        <Link to="/Blog"> <a href="" className="btn btn-outline">
                                 <i className="fas fa-eye"></i>
                                 <span> Voir tous les blogs</span>
                             </a></Link>

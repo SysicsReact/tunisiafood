@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 class Navbar extends React.Component{
      render() {
+
+       
+
           return (
     <>
         <head>
@@ -44,6 +47,9 @@ class Navbar extends React.Component{
                                         </li>
                                         <li className="navbar-item">
                                         <span className="feature-name"><Link to="Faq" className="navbar-link" > FAQ </Link></span>
+                                        </li>
+                                        <li className="navbar-item">
+                                        <span className="feature-name"><Link to="Faq" className="navbar-link" > Test </Link></span>
                                         </li>
                                     </ul>
                                 </div>
@@ -95,7 +101,6 @@ class Navbar extends React.Component{
         <script src="assets/vendor/niceselect/nice-select.min.js"></script>
         <script src="assets/vendor/slickslider/slick.min.js"></script>
         <script src="assets/vendor/venobox/venobox.min.js"></script>
-
         <script src="assets/js/nice-select.js"></script>
         <script src="assets/js/countdown.js"></script>
         <script src="assets/js/accordion.js"></script>

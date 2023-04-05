@@ -9,6 +9,7 @@ import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import Profile from "./pages/Profile";
+
 import SingleProduct from "./pages/SingleProduct";
 import Politics from "./pages/Politics";
 import About from "./pages/About";
