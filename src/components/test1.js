@@ -4,7 +4,7 @@ function MyComponent() {
   const [responseData, setResponseData] = useState(null);
 
   const handleApiCall = async () => {
-    const url = "https://konnect.network/gateway/me/641bf7ab1403637d60f578db";
+    const url = "https://api.konnect.network/api/v2/payments/init-payment";
     const requestBody = {
       receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
       token: "TND",
@@ -33,7 +33,8 @@ function MyComponent() {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "x-api-key":"642a7d6c2e9c6ea045f6f078:vQ0vuCOFUFExHuxzJ"
       },
       body: JSON.stringify(requestBody)
     });
