@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function MyComponent() {
   const [responseData, setResponseData] = useState(null);
+  const[canOpenWindow , setCanOpenWindow] = useState(false);
 
   const handleApiCall = async () => {
     const url = "https://api.konnect.network/api/v2/payments/init-payment";
     const requestBody = {
       receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
       token: "TND",
-      amount: 10000,
+      amount: 5000,
       type: "immediate",
       description: "payment description",
       lifespan: 10,
@@ -40,13 +41,25 @@ function MyComponent() {
     });
     const jsonData = await response.json();
     setResponseData(jsonData);
+    setCanOpenWindow(true);
   };
+  useEffect(() => {
+    // Open the link in a new tab when the countdown ends
+    if (canOpenWindow === true) {
+
+      // 👇 Open link in new tab programmatically
+      if(responseData.payUrl != null)
+      window.open(responseData.payUrl, '_blank', 'noreferrer');
+      setCanOpenWindow(false);
+    }
+  }, [responseData]);
 
   return (
     <div>
       <button onClick={handleApiCall}>Call API</button>
       {responseData && (
         <pre>{JSON.stringify(responseData, null, 2)}</pre>
+        
       )}
     </div>
   );
