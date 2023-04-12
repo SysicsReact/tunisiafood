@@ -54,6 +54,10 @@ function MyComponent() {
     }
   }, [responseData]);
 
+  const CheckIfPaid = async () => {
+    
+  }
+
   return (
     <div>
       <button onClick={handleApiCall}>Call API</button>

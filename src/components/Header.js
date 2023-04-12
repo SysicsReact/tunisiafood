@@ -19,7 +19,6 @@ import { selectProducts } from "../redux/slice/productSlice";
 const locations={}
 function checkIfTrue(){
     var str=window.location.href.toLowerCase()
-    localStorage.clear()
    var strsplit= str.split("/");
    //alert(strsplit[strsplit.length-1]);
    if(strsplit[strsplit.length-1]=="")

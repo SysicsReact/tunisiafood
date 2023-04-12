@@ -206,7 +206,7 @@ const CartDetails = () => {
             )
         } else {
             return (
-                <><option selected disabled hidden>Choose City</option></>
+                <><option selected disabled hidden>Choisir Ville</option></>
             )
         }
     }
@@ -217,7 +217,7 @@ const CartDetails = () => {
             )
         } else {
             return (
-                <><option selected disabled hidden>Choose country</option></>
+                <><option selected disabled hidden>Choisir Pays</option></>
             )
         }
     }

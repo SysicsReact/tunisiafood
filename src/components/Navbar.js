@@ -48,9 +48,6 @@ class Navbar extends React.Component{
                                         <li className="navbar-item">
                                         <span className="feature-name"><Link to="Faq" className="navbar-link" > FAQ </Link></span>
                                         </li>
-                                        <li className="navbar-item">
-                                        <span className="feature-name"><Link to="Faq" className="navbar-link" > Test </Link></span>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
