@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function CheckoutSuccess() {
-     const [responseData, setResponseData] = useState(null);
-     const CheckPayment = async () => {
-          
-     }
+     const CheckPayment = async () => { }
+
   return (
      <html>
           <head>
@@ -38,13 +36,13 @@ function CheckoutSuccess() {
          <div class="row">
              <div class="col-lg-12">
                  <div class="alert-info">
-                     <p>Thank you! We have recieved your order.</p>
+                     <p>Merci! Nous avons reçu votre commande.</p>
                  </div>
              </div>
              <div class="col-lg-12">
                  <div class="account-card">
                      <div class="account-title">
-                         <h4>order recieved</h4>
+                         <h4>Commande</h4>
                      </div>
                      <div class="account-content">
                          <div class="invoice-recieved">

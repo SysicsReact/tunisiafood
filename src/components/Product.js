@@ -2,7 +2,7 @@ import React, {Component} from "react";
 class Product extends Component{
      render() {
           return (
-               <html lang="en">
+               <>
           <head>
                <meta charset="UTF-8"/>
                <meta name="name" content="Greeny"/>
@@ -80,7 +80,7 @@ class Product extends Component{
         <script src="assets/js/venobox.js"></script>
         <script src="assets/js/slick.js"></script>
         <script src="assets/js/main.js"></script> 
-   </html>
+   </>
           );
 
      }
