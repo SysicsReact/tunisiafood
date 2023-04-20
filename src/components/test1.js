@@ -9,7 +9,7 @@ function MyComponent() {
     const requestBody = {
       receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
       token: "TND",
-      amount: 5000,
+      amount: 2000,
       type: "immediate",
       description: "payment description",
       lifespan: 10,
@@ -49,7 +49,7 @@ function MyComponent() {
 
       // 👇 Open link in new tab programmatically
       if(responseData.payUrl != null)
-      window.open(responseData.payUrl, '_blank', 'noreferrer');
+      window.location.replace(responseData.payUrl, '_blank', 'noreferrer');
       setCanOpenWindow(false);
     }
   }, [responseData]);
