@@ -21,7 +21,7 @@ function MyComponent() {
       orderId: "1234657",
       webhook: "https://merchant.tech/api/notification_payment",
       silentWebhook: true,
-      successUrl: "https://dev.konnect.network/gateway/payment-success",
+      successUrl: "https://cooktounsi.com/CheckoutSuccess",
       failUrl: "https://dev.konnect.network/gateway/payment-failure",
       checkoutForm: true,
       acceptedPaymentMethods: [
@@ -54,9 +54,13 @@ function MyComponent() {
     }
   }, [responseData]);
 
+  const CheckIfPaid = async () => {
+    
+  }
+
   return (
     <div>
-      <button onClick={handleApiCall}>Call API</button>
+      <button onClick={handleApiCall}>Accéder Au Paiement</button>
       {responseData && (
         <pre>{JSON.stringify(responseData, null, 2)}</pre>
         

@@ -9,7 +9,7 @@ import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import Profile from "./pages/Profile";
-
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 import SingleProduct from "./pages/SingleProduct";
 import Politics from "./pages/Politics";
 import About from "./pages/About";
@@ -81,6 +81,7 @@ class App extends Component {
           <Route path="/Politics" element={<Politics/>} />
           <Route path="/Cgv" element={<Cgv/>} />
           <Route path="/Faq" element={<Faq/>} />
+          <Route path="/CheckoutSuccess" element={<CheckoutSuccess/>} />
         </Routes>
         <div>
           <Footer />

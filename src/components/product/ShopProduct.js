@@ -43,10 +43,8 @@ const ShopProduct = () => {
    const addToCart = (e) => {
 dispatch(ADD_TO_CART(e));
    };
-   
     useEffect(()=>{
         dispatch(SORT_PRODUCTS({products,sort}));
-
     },[dispatch,products,sort])
 
     useEffect(()=>{
@@ -107,7 +105,6 @@ dispatch(ADD_TO_CART(e));
          
      </head>
      <body>
-    
      <ToastContainer></ToastContainer>
      <div className="backdrop"></div>
                <a class="backtop fas fa-arrow-up" href="#"></a>
@@ -123,7 +120,6 @@ dispatch(ADD_TO_CART(e));
             <section class="inner-section shop-part">
             <div class="container">
                 <div class="row content-reverse">
-                   
                     <div >
                     <div class="row">
                             <div class="col-lg-12">

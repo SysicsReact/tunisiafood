@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectuserID } from '../redux/slice/authSlice'
-
+import MyComponent from "../components/test1";
 const CartDetails = () => {
 
     const [user] = useAuthState(auth);
@@ -33,6 +33,7 @@ const CartDetails = () => {
     const cartTotalAmount = useSelector(selectCarTotalAmount);
     const url = window.location.href;
     const dispatch = useDispatch();
+    //const [checkout, setCheckout] = useState([]);
     const removeFromCart = (cart) => {
         dispatch(REMOVE_FROM_CART(cart));
     } 
@@ -197,6 +198,7 @@ const CartDetails = () => {
             }
         
     }
+    //Checkout: localStorage.getItem("orderConfig") ? JSON.parse(localStorage.getItem("orderConfig")):[],
     //--------html conditions
 
     function checkCity(loggedUser) {
@@ -206,7 +208,7 @@ const CartDetails = () => {
             )
         } else {
             return (
-                <><option selected disabled hidden>Choose City</option></>
+                <><option selected disabled hidden>Choisir Ville</option></>
             )
         }
     }
@@ -217,7 +219,7 @@ const CartDetails = () => {
             )
         } else {
             return (
-                <><option selected disabled hidden>Choose country</option></>
+                <><option selected disabled hidden>Choisir Pays</option></>
             )
         }
     }
@@ -424,7 +426,7 @@ const CartDetails = () => {
                             </div>
                             <div class="modal-dialog modal-dialog-centered">
             </div>
-            
+            <MyComponent/>
             </div>
            
                     </div>
