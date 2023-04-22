@@ -19,7 +19,7 @@ function MyComponent() {
       phoneNumber: "22777777",
       email: "john.doe@gmail.com",
       orderId: "1234657",
-      webhook: "https://merchant.tech/api/notification_payment",
+      webhook: false,
       silentWebhook: true,
       successUrl: "https://cooktounsi.com/CheckoutSuccess",
       failUrl: "https://dev.konnect.network/gateway/payment-failure",
