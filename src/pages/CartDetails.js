@@ -10,14 +10,10 @@ import { doc, getDoc,updateDoc, addDoc, collection } from "@firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { selectuserID } from '../redux/slice/authSlice'
-import MyComponent from "../components/test1";
 const CartDetails = () => {
 
     const [user] = useAuthState(auth);
-    const [username, setName] = useState({})
     const [loggedUser, setLoggedUser] = useState({})
-    const userID = useSelector(selectuserID)
     const [newPhone, setPhone] = useState({ });
     const [city, setCity] = useState({ });;
     const [country, setCountry] = useState({ });
@@ -25,24 +21,33 @@ const CartDetails = () => {
     const[livraisonCost,SetLivraisonCost]=useState("10")
     const [adress, setAdress] = useState({ });;
     const [postal, setPostal] = useState({ });;
-    const [carddetails,setCardDetails]=useState([])
     const notifyError = () => toast.error("Completez votre profile");
     const notifyErr = () => toast.error("Authentification requise");
     const navigate = useNavigate();
     const cartItems = useSelector(selectCartItems);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
     const url = window.location.href;
+    
     const dispatch = useDispatch();
+    //Payment 
+    const [responseData, setResponseData] = useState(null);
+    const[canOpenWindow , setCanOpenWindow] = useState(false);
+
     //const [checkout, setCheckout] = useState([]);
     const removeFromCart = (cart) => {
         dispatch(REMOVE_FROM_CART(cart));
-    } 
+    }
+
+
+
+    let price= cartTotalAmount.toString();
+    
+    let priceFinal = parseFloat(price) * 100;
     useEffect(() => {
         dispatch(CALCULATE_SUBTOTAL())
         dispatch(CALCULATE_TOTAL_QUANTITY())
         dispatch(SAVE_URL(""))
     }, [dispatch, cartItems]);
-    
     useEffect(()=>
     {
         onAuthStateChanged(auth, (user) => {
@@ -64,9 +69,7 @@ const CartDetails = () => {
     })
     
     }, [user])
-    
     //-----handling changes    
-
     function handlePhoneChange(event) {
         setPhone({
             phone: event.target.value,
@@ -140,9 +143,7 @@ const CartDetails = () => {
             });
         }
     }, [loggedUser])
-
     // setIsLoading(true);
-
     const shippingAddress = {
         city:city.city,
         adress:adress.adress, 
@@ -152,17 +153,8 @@ const CartDetails = () => {
         };
     //Save order
     const processToCheckout = () => {
-      
             if (user) {
                 const today = new Date();
-                for(var index in cartItems){
-                    setCardDetails({id:cartItems[index].id,
-                        quantity: cartItems[index].quantity})
-                }
-                cartItems.map((cart) => {
-                    setCardDetails({id:cart.id,
-                        quantity: cart.quantity})
-                })
                 const date = today.toDateString();
                 const uid = user.uid;
                 const docRef = doc(db, "users", uid);
@@ -200,7 +192,6 @@ const CartDetails = () => {
     }
     //Checkout: localStorage.getItem("orderConfig") ? JSON.parse(localStorage.getItem("orderConfig")):[],
     //--------html conditions
-
     function checkCity(loggedUser) {
         if (loggedUser.city) {
             return (
@@ -223,6 +214,60 @@ const CartDetails = () => {
             )
         }
     }
+
+    //Payment API
+    const handleApiCall = async () => {
+        const url = "https://api.konnect.network/api/v2/payments/init-payment";
+        const requestBody = {
+          receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
+          token: "EUR",
+          amount:  priceFinal,
+          type: "immediate",
+          description: "This is a fucked up code, do better",
+          lifespan: 10,
+          feesIncluded: false,
+          firstName: "John",
+          lastName: "Doe",
+          phoneNumber: "22777777",
+          email: "john.doe@gmail.com",
+          orderId: "1234657",
+          webhook: false,
+          silentWebhook: true,
+          successUrl: "https://cooktounsi.com/CheckoutSuccess",
+          failUrl: "https://dev.konnect.network/gateway/payment-failure",
+          checkoutForm: true,
+          acceptedPaymentMethods: [
+            "wallet",
+            "bank_card",
+            "e-DINAR"
+          ]
+        };
+    
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":"642a7d6c2e9c6ea045f6f078:vQ0vuCOFUFExHuxzJ"
+          },
+          body: JSON.stringify(requestBody)
+        });
+        const jsonData = await response.json();
+        setResponseData(jsonData);
+        setCanOpenWindow(true);
+      };
+      useEffect(() => {
+        // Open the link in a new tab when the countdown ends
+        if (canOpenWindow === true) {
+    
+          // 👇 Open link in new tab programmatically
+          if(responseData.payUrl != null)
+    
+          //window.location.replace(responseData.payUrl, '_blank', 'noreferrer');
+          //window.location.replace('https://cooktounsi.com/CheckoutSuccess', '_blank', 'noreferrer');
+          setCanOpenWindow(false);
+        }
+      }, [responseData]);
+      //Payment done
     return (
         <html lang="en">
           <head>
@@ -424,9 +469,20 @@ const CartDetails = () => {
                             <div class="checkout-proced">
                                 <button href="" class="btn btn-inline" onClick={processToCheckout} >procédez au payment</button>
                             </div>
-                            <div class="modal-dialog modal-dialog-centered">
-            </div>
-            <MyComponent/>
+
+<br/>
+
+            <div class="checkout-proced">
+      <button class="btn btn-inline" onClick={handleApiCall}>Accéder Au Paiement</button>
+      {responseData && (
+        <>
+  <object data={responseData.payUrl} width="1400" height="600" type="text/html">
+  </object>
+        </>
+      )}
+    </div>
+
+
             </div>
            
                     </div>

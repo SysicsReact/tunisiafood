@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import {  json, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SAVE_URL, CALCULATE_TOTAL_QUANTITY, 
-     CALCULATE_SUBTOTAL, REMOVE_FROM_CART, 
+     CALCULATE_SUBTOTAL, 
      selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
+import { SAVE_SHIPPING_ADDRESS } from '../redux/slice/checkoutSlice';
 
 export default function Checkout() {
      const navigate = useNavigate();
@@ -13,16 +14,61 @@ export default function Checkout() {
      const cartTotalAmount = useSelector(selectCarTotalAmount);
      const cartTotalQuantity = useSelector(selectCarTotalQuantity);
      const url = window.location.href;
+     const[livraisonCost,SetLivraisonCost]=useState("10");
+     const[livraisonType,SetLivraison]=useState({ });
+     const [phone, setPhone] = useState({ changeState: 0 });
+     const [city, setCity] = useState({ changeState: 0 });
+     const [country, setCountry] = useState({ changeState: 0 });
+     const [adress, setAdress] = useState({ changeState: 0 });
      const dispatch = useDispatch();
-     
-     const removeFromCart = (cart) => {
-         dispatch(REMOVE_FROM_CART(cart));
-     }
+     const initialAddressState = {
+        address:"",
+        city:"",
+        country:"",
+        postal:"",
+        phone:"",
+    }
+    const [shippingAddress, setShippingAddress] = useState({...initialAddressState});
+
+
+    const handleShipping = (e) =>{
+        const {name, value} = e.target;
+        setShippingAddress({
+            ...shippingAddress,
+            [name]: value,
+          });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
+        navigate("/Payment");
+        };
+     function handleLivraisonChange(event){
+        SetLivraison({
+            livraisonType: event.target.value,
+        });
+        switch(event.target.value){
+                case "Livraison Standard":
+                    SetLivraisonCost("10")
+                break;
+                case "Livraison Standard En europe":
+                    SetLivraisonCost("15")
+                    break;
+                case "Livraison rapide":
+                    SetLivraisonCost("25")
+                    break;
+        }}
+
      useEffect(() => {
          dispatch(CALCULATE_SUBTOTAL())
          dispatch(CALCULATE_TOTAL_QUANTITY())
          dispatch(SAVE_URL(""))
      }, [dispatch, cartItems]);
+     
+    const updateUser = async(e) =>{
+
+    }
   return (
     
      <html lang="en">
@@ -87,37 +133,135 @@ export default function Checkout() {
                       </div>
                       <div class="account-content">
                           <div class="checkout-charge">
-                              <ul>
-                              <li>
-                                      <span>Nb Produit</span>
-                                      <span>{cartTotalQuantity}</span>
-                                  </li>
-                                  <li>
-                                      <span>Sub-total</span>
-                                      <span>${cartTotalAmount.toFixed(2)}</span>
-                                  </li>
-                                  <li>
-                                      <span>Frais de livraison</span>
-                                      <span>$10.00</span>
-                                  </li>
-                                  <li>
-                                      <span>Total<small>(Incl. VAT)</small></span>
-                                      <span>${parseFloat(10) + parseFloat(cartTotalAmount.toFixed(2))}</span>
-                                  </li>
-                              </ul>
+                          <ul>
+                                        <li>
+                                            <span>Sub-total</span>
+                                            <span>€{cartTotalAmount.toFixed(2)}</span>
+                                        </li>
+                                        <li>
+                                            <span>Livraison:</span>
+                                    <select class="form-select" onChange={handleLivraisonChange}>
+                                        <option value="Livraison Standard">Livraison Standard</option>
+                                        <option value="Livraison Standard En europe">Livraison Standard En europe</option>
+                                        <option value="Livraison rapide">Livraison rapide</option>
+                                    </select>
+                                        </li>
+                                        
+                                        <li>
+                                            <span>Frais de livraison</span>
+                                            <span>€{livraisonCost}</span>
+                                        </li>
+                                        <li>
+                                            <span>Total<small>(Incl. VAT)</small></span>
+                                            <span>€{(parseFloat(livraisonCost) + parseFloat(cartTotalAmount)).toFixed(2)}</span>
+                                        </li>
+                                    </ul>
                           </div>
-                      </div>
-                      <div class="checkout-check">
-                          <input type="checkbox" id="checkout-check"/>
-                          <label for="checkout-check">
-En effectuant cet achat, vous acceptez nos <a href="#">Termes et conditions</a>.</label>
-                      </div>
-                      <div class="checkout-proced">
-                          <button href="" class="btn btn-inline"  >procédez au payment</button>
                       </div>
                   </div>
               </div>
-             
+              <div class="col-lg-12">
+                <div class="account-card">
+                    <div class="account-title">
+                        <h4>Détails de livraison</h4>
+                    </div>
+                    <form class="modal-content" onSubmit={handleSubmit}>
+                        <div class="row">
+                        <div class="col-md-6 col-lg-4 alert fade show" >
+                                <div class="profile-card contact active" >
+                                <label >
+                            Si vous voulez, vous pouvez changer les détails de livraisons par ici et confirmer.</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact active">
+                                    <h6>Pays</h6>
+                                    <select class="form-select" 
+                                    onChange={(e) => handleShipping(e)}
+                                    value={shippingAddress.city}
+                                    required
+                                    name="country" >
+                                        <option value="France">France</option>
+                                        <option value="Belgique">Belgique</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact active">
+                                    <h6>Ville</h6>
+                                    <select class="form-select"
+                                    value={shippingAddress.city}
+                                    required
+                                    name="city"
+                                    onChange={(e) => handleShipping(e)}>
+                                        <option value="Paris">Paris</option>
+                                        <option value="Lyon">Lyon</option>
+                                        <option value="Marseille">Marseille</option>
+                                        <option value="Toulouse">Toulouse</option>
+                                        <option value="Lille">Lille</option>
+                                        <option value="Nice">Nice</option>
+                                        <option value="Nantes">Nantes</option>
+                                        <option value="Strasbourg">Strasbourg</option>
+                                        <option value="Rennes">Rennes</option>
+                                        <option value="Grenoble">Grenoble</option>
+                                        <option value="Rouen">Rouen</option>
+                                        <option value="Toulon">Toulon</option>
+                                        <option value="Montpelier">Montpelier</option>
+                                        <option value="Douai et Lens">Douai et Lens</option>
+                                        <option value="Avignon">Avignon</option>
+                                        <option value="Saint-Etienne">Saint-Etienne</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact active">
+                                    <h6>Adresse</h6>
+                                    <input class="form-control" type="text"
+                                    value={shippingAddress.address}
+                                    onChange={(e) => handleShipping(e)}
+                                    name="address"
+                                    required
+                                    placeholder="Entrez votre adresse..." />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact active">
+                                    <h6>Code Postal</h6>
+                                    <input class="form-control" type="text" 
+                                    value={shippingAddress.postal}
+                                    onChange={(e) => handleShipping(e)}
+                                    name="postal"
+                                    required
+                                    placeholder="Entrez le code postal..." />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 alert fade show">
+                                <div class="profile-card contact active">
+                                    <h6>Téléphone</h6>
+                                    <input class="form-control" type="text" 
+                                    value={shippingAddress.phone}
+                                    name="phone"
+                                    required
+                                    onChange={(e) => handleShipping(e)}
+                                    placeholder="Entrez Votre numéro de téléphone..." />
+                                </div>
+                            </div>
+                        </div>
+                           
+                        <div class="checkout-proced">
+                                <button href="" class="btn btn-inline" type='submit' >procédez au payment</button>
+                        </div>
+                    </form>
+                    
+
+                               
+                </div>
+                           
+
+<br/>
+
+
+            </div>
           </div>
       </div>
          </section>

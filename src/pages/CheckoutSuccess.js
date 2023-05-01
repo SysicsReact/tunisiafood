@@ -1,9 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Loader from '../components/loader/Loader';
+import { useNavigate } from "react-router-dom";
+import { auth, db } from "../firebase.config";
+import { useDispatch, useSelector } from "react-redux";
+import {  CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, CLEAR_CART,
+     selectCartItems, selectCarTotalAmount} from "../redux/slice/cartSlice";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc,updateDoc, addDoc, Timestamp, collection } from "@firebase/firestore";
+import { ToastContainer, toast } from 'react-toastify';
+import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { selectEmail, selectUserID  } from '../redux/slice/authSlice';
+import { selectShippingAddress } from '../redux/slice/checkoutSlice';
 
 function CheckoutSuccess() {
-     const CheckPayment = async () => { }
+    const [user] = useAuthState(auth);
+  const [loggedUser, setLoggedUser] = useState({})
+  const userEmail = useSelector(selectEmail);
+  const navigate = useNavigate();
+  const shippingAddress = useSelector(selectShippingAddress);
+  const cartItems = useSelector(selectCartItems);
+  const cartTotalAmount = useSelector(selectCarTotalAmount);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+      dispatch(CALCULATE_SUBTOTAL())
+      dispatch(CALCULATE_TOTAL_QUANTITY())
+  }, [dispatch, cartItems]);
+
+
+    // Save Order In DB
+const saveOrder = () => {
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+    const orderConfig = {
+      userEmail,
+      orderDate: date,
+      orderAmount: cartTotalAmount,
+      cartItems,
+      shippingAddress,
+      createdAt: Timestamp.now().toDate(),
+    };
+    try {
+      addDoc(collection(db, "orders"), orderConfig);
+      
+      dispatch(CLEAR_CART());
+      toast.success("Order saved");
+    } catch (error) {
+      toast.error("Something Went Wrong");
+    }
+  };
+        toast.success("Payment successful");
+        saveOrder();
+  
+    const [isLoading, setIsLoading] = useState(true);
   return (
      <html>
           <head>
@@ -19,6 +70,7 @@ function CheckoutSuccess() {
           <link rel="stylesheet" href="assets/css/user-auth.css" />
           <link rel="stylesheet" href="assets/css/checkout.css"></link>
           </head>
+          {(isLoading) &&<Loader/>}
      <body>
      <div className="backdrop"></div>
      <a class="backtop fas fa-arrow-up" href="#"></a>
@@ -54,86 +106,7 @@ function CheckoutSuccess() {
                      </div>
                  </div>
              </div>
-             <div class="col-lg-6">
-                 <div class="account-card">
-                     <div class="account-title">
-                         <h4>Order Details</h4>
-                     </div>
-                     <div class="account-content">
-                         <ul class="invoice-details">
-                             <li>
-                                 <h6>Total Item</h6>
-                                 <p>6 Items</p>
-                             </li>
-                             <li>
-                                 <h6>Order Time</h6>
-                                 <p>1.00pm 10-12-2021</p>
-                             </li>
-                             <li>
-                                 <h6>Delivery Time</h6>
-                                 <p>90 Minute Express Delivery</p>
-                             </li>
-                             <li>
-                                 <h6>Delivery Location</h6>
-                                 <p>House 17/A, West Jalkuri, Dhaka.</p>
-                             </li>
-                         </ul>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-lg-6">
-                 <div class="account-card">
-                     <div class="account-title">
-                         <h4>Amount Details</h4>
-                     </div>
-                     <div class="account-content">
-                         <ul class="invoice-details">
-                             <li>
-                                 <h6>Sub Total</h6>
-                                 <p>$10,864.00</p>
-                             </li>
-                             <li>
-                                 <h6>discount</h6>
-                                 <p>$20.00</p>
-                             </li>
-                             <li>
-                                 <h6>Payment Method</h6>
-                                 <p>Cash On Delivery</p>
-                             </li>
-                             <li>
-                                 <h6>Total<small>(Incl. VAT)</small></h6>
-                                 <p>$10,874.00</p>
-                             </li>
-                         </ul>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-lg-12">
-                 <div class="table-scroll">
-                     <table class="table-list">
-                         <thead>
-                             <tr>
-                                 <th scope="col">Serial</th>
-                                 <th scope="col">Product</th>
-                                 <th scope="col">Name</th>
-                                 <th scope="col">Price</th>
-                                 <th scope="col">brand</th>
-                                 <th scope="col">quantity</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <tr>
-                                 <td class="table-serial"><h6>01</h6></td>
-                                 <td class="table-image"><img src="images/product/01.jpg" alt="product"/></td>
-                                 <td class="table-name"><h6>product name</h6></td>
-                                 <td class="table-price"><h6>$19<small>/kilo</small></h6></td>
-                                 <td class="table-brand"><h6>Fresh Company</h6></td>
-                                 <td class="table-quantity"><h6>3</h6></td>
-                             </tr>
-                         </tbody>
-                     </table>
-                 </div>
-             </div>
+             
          </div>
          <div class="row">
              <div class="col-lg-12 text-center mt-5">

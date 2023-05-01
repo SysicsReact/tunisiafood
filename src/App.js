@@ -33,6 +33,7 @@ import OrderDetails from "./pages/OrderDetails";
 import WishDetails from "./pages/WishDetails";
 import Faq from "./pages/Faq";
 import Cgv from "./pages/Cgv";
+import Payment from "./pages/Payment";
 let test = false;
 class App extends Component {
 
@@ -82,6 +83,7 @@ class App extends Component {
           <Route path="/Cgv" element={<Cgv/>} />
           <Route path="/Faq" element={<Faq/>} />
           <Route path="/CheckoutSuccess" element={<CheckoutSuccess/>} />
+          <Route path="/Payment" element={<Payment/>} />
         </Routes>
         <div>
           <Footer />

@@ -6,6 +6,7 @@ import cartReducer from "./slice/cartSlice";
 import filterReducer from "./slice/filterSlice";
 import orderReducer from "./slice/orderSlice";
 import wishReducer from "./slice/wishSlice";
+import checkoutReducer from "./slice/checkoutSlice";
 
 
 const rootReducer=combineReducers({   
@@ -15,6 +16,7 @@ const rootReducer=combineReducers({
     filter: filterReducer,
     orders: orderReducer, 
     wish: wishReducer,
+    checkout: checkoutReducer,
 
 });
 

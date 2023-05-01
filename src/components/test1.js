@@ -49,21 +49,21 @@ function MyComponent() {
 
       // 👇 Open link in new tab programmatically
       if(responseData.payUrl != null)
-      window.location.replace(responseData.payUrl, '_blank', 'noreferrer');
+
+      //window.location.replace(responseData.payUrl, '_blank', 'noreferrer');
+      //window.location.replace('https://cooktounsi.com/CheckoutSuccess', '_blank', 'noreferrer');
       setCanOpenWindow(false);
     }
   }, [responseData]);
-
-  const CheckIfPaid = async () => {
-    
-  }
 
   return (
     <div>
       <button onClick={handleApiCall}>Accéder Au Paiement</button>
       {responseData && (
-        <pre>{JSON.stringify(responseData, null, 2)}</pre>
-        
+        <>
+  <object data={responseData.payUrl} width="1400" height="600" type="text/html">
+  </object>
+        </>
       )}
     </div>
   );
