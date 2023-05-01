@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {  json, useNavigate } from "react-router-dom";
+import { getDoc, updateDoc, doc } from "firebase/firestore";
+import { db, auth } from '../firebase.config';
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { SAVE_URL, CALCULATE_TOTAL_QUANTITY, 
      CALCULATE_SUBTOTAL, 
@@ -10,16 +13,17 @@ import { SAVE_SHIPPING_ADDRESS } from '../redux/slice/checkoutSlice';
 
 export default function Checkout() {
      const navigate = useNavigate();
+     const [user] = useAuthState(auth);
      const cartItems = useSelector(selectCartItems);
      const cartTotalAmount = useSelector(selectCarTotalAmount);
      const cartTotalQuantity = useSelector(selectCarTotalQuantity);
-     const url = window.location.href;
      const[livraisonCost,SetLivraisonCost]=useState("10");
      const[livraisonType,SetLivraison]=useState({ });
      const [phone, setPhone] = useState({ changeState: 0 });
      const [city, setCity] = useState({ changeState: 0 });
      const [country, setCountry] = useState({ changeState: 0 });
      const [adress, setAdress] = useState({ changeState: 0 });
+     const [postalCode, setPostalCode] = useState({ changeState: 0 });
      const dispatch = useDispatch();
      const initialAddressState = {
         address:"",
@@ -27,6 +31,7 @@ export default function Checkout() {
         country:"",
         postal:"",
         phone:"",
+        livraisonType:"",
     }
     const [shippingAddress, setShippingAddress] = useState({...initialAddressState});
 
@@ -66,8 +71,77 @@ export default function Checkout() {
          dispatch(SAVE_URL(""))
      }, [dispatch, cartItems]);
      
-    const updateUser = async(e) =>{
+    //--------update user    
+    const updateUser = async (e) => {
+       
+        try{
+            if (city.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    city: city.City
+                });
+            }
+            if (postalCode.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    postalCode: postalCode.postalCode
+                });
+            }
+            if (country.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    country: country.country
+                });
+            }
+            if (phone.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    phone: phone.phone
+                });
+            }
+            if (adress.changeState == 1) {
+                const washingtonRef = doc(db, "users", user.uid);
+                await updateDoc(washingtonRef, {
+                    adress: adress.adress
+                });
+               
+            }
+        }catch (e) {
+            alert(e)
+          }
 
+        
+    };
+    //-----handling changes    
+    function handlePostalChange(event) {
+        setPostalCode({
+            postalCode: event.target.value,
+            changeState: 1
+        });
+    }
+    function handlePhoneChange(event) {
+        setPhone({
+            phone: event.target.value,
+            changeState: 1
+        });
+    }
+    function handleCityChange(event) {
+        setCity({
+            City: event.target.value,
+            changeState: 1
+        });
+    }
+    function handleCountryChange(event) {
+        setCountry({
+            country: event.target.value,
+            changeState: 1
+        });
+    }
+    function handleAdressChange(event) {
+        setAdress({
+            adress: event.target.value,
+            changeState: 1
+        });
     }
   return (
     
@@ -177,10 +251,10 @@ export default function Checkout() {
                                 <div class="profile-card contact active">
                                     <h6>Pays</h6>
                                     <select class="form-select" 
-                                    onChange={(e) => handleShipping(e)}
-                                    value={shippingAddress.city}
+                                    value={shippingAddress.country}
                                     required
-                                    name="country" >
+                                    name="country"
+                                    onChange={(e) => handleShipping(e)} >
                                         <option value="France">France</option>
                                         <option value="Belgique">Belgique</option>
                                     </select>

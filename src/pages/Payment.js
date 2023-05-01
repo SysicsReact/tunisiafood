@@ -145,15 +145,13 @@ function Payment() {
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="account-card">
                             <div class="account-title">
-                                <h4>Votre Commande</h4>
+                                <h4>Détails de livraison</h4>
                             </div>
                             <div class="account-content">
                                 <div class="checkout-charge">
-                                    <ul>
+                                    <ul> 
                                         <li>
                                             <span>Pays</span>
                                             <span>{shippingAddress.country}</span>
@@ -176,8 +174,6 @@ function Payment() {
                         </div>
             <div class="col-lg-12">
                 <div class="account-card">
-                    
-                    
                                 <input type="checkbox" id="checkout-check"/>
                                 <label for="checkout-check">
                              En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>
