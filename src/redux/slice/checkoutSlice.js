@@ -14,10 +14,16 @@ const checkoutSlice = createSlice({
       state.shippingAddress = action.payload;
       localStorage.setItem("shippingAddress", JSON.stringify(state.shippingAddress));
     },
+    CLEAR_SHIPPING_ADDRESS(state, action) {
+      state.shippingAddress = [];
+    
+      localStorage.setItem("shippingAddress", JSON.stringify(state.shippingAddress));
+    },
   },
 });
 
-export const { SAVE_SHIPPING_ADDRESS } =
+
+export const { SAVE_SHIPPING_ADDRESS, CLEAR_SHIPPING_ADDRESS } =
   checkoutSlice.actions;
 
 export const selectShippingAddress = (state) => state.checkout.shippingAddress;

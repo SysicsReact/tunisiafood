@@ -201,6 +201,7 @@ const Header = () => {
     } 
     const view = async (idp) => {
         navigate("/ProductItems", { state: { id: idp } });
+        setResult([]);
           };
     
     return (  
@@ -226,7 +227,7 @@ const Header = () => {
             {isLoggedIn &&
             <aside className="nav-sidebar">
             <div className="nav-header">
-                <a href="#"><img src={window.location.origin +'/assets/images/cook.png'}   alt="logo"/></a>
+                <a href=""><img src={window.location.origin +'/assets/images/cook.png'}   alt="logo"/></a>
                 <button className="nav-close"><i className="icofont-close"></i></button>
             </div>
             <div className="nav-content">
@@ -338,15 +339,16 @@ confidentialité</a></NavLink>
                             <form className="header-form">
                         <div className="dropdown">
                             <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
-                            <div id="myDropdown" className="rounded dropdown-content show">
-                                {result.slice(0,5).map((result, id) => (
-                                   
-                                    <a  key={{id}}>
-                                        <img src={result.photo} className="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
-                                        {result.name}
-                                    </a>
-                                ))
-                                }  
+                            
+                           <div id="myDropdown" className="rounded dropdown-content show">
+                               
+                           {result.slice(0,5).map((result, id) => (
+                            <a  key={{id}}>
+                                    <img src={result.photo} className="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
+                                    <h6 onClick={() => view(result.id)}>{result.name}</h6> 
+                            </a>
+                             ))
+                            } 
                             </div>
                         </div>
                         <button><i className="fas fa-search"></i></button>
@@ -356,21 +358,18 @@ confidentialité</a></NavLink>
                        {!checkIfTrue()&&
                             <>
                                 
-                            <form className="header-form">
-                        <div className="dropdown">
+                            <form className="">
+                        <div className="">
                             <span style={{fontSize:"22px"}}>
-                                Pour nous tout est une question de sens et de souvenirs d’enfance 
+                               Tout est une question de sens et de souvenirs d’enfance 
                             </span>
-                           
                         </div>
                         
                         </form>
                             </>
                        }
-                        
-
     <div className="header-widget-group">
-        <a href="front/compare.html" className="header-widget" title="Compare List">
+        <a href="front/compare.html" className="header-widget" hidden title="Compare List">
             <i className="fas fa-random"></i>
             <sup>0</sup>
         </a>

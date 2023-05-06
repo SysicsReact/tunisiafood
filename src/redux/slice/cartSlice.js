@@ -60,15 +60,21 @@ const cartSlice = createSlice({
           toast.info(`Cart cleared`, {
             position: "top-left",
           });
-    
           localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
         CALCULATE_SUBTOTAL(state, action) {
           const array = [];
           state.cartItems.map((item) => {
-            const { price, cartQuantity } = item;
-            const cartItemAmount = price * cartQuantity;
+            const { price, discount, cartQuantity } = item;
+            let cartItemAmount = 0;
+            if (discount != 0){
+              cartItemAmount= cartQuantity * (Math.round((price-(price*discount)/100)*100)/100);
+            }else if(discount == 0){
+              cartItemAmount = price * cartQuantity;
+            }
+            
             return array.push(cartItemAmount);
+            
           });
           const totalAmount = array.reduce((a, b) => {
             return a + b;
@@ -84,7 +90,7 @@ const cartSlice = createSlice({
           });
           const totalQuantity = array.reduce((a, b) => {
             return a + b;
-          }, 0);
+          }, 0); 
           state.cartTotalQuantity = totalQuantity;
         },
         SAVE_URL(state, action){
@@ -104,5 +110,6 @@ export const {
 export const selectCartItems = (state) => state.cart.cartItems;
 export const selectCarTotalQuantity = (state) => state.cart.cartTotalQuantity;
 export const selectCarTotalAmount = (state) => state.cart.cartTotalAmount;
+export const selectCartItemAmount = (state) => state.cart.cartItemAmount;
 export const selectPreviousURL = (state) => state.cart.previousURL;
 export default cartSlice.reducer

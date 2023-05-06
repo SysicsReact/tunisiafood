@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { GetCardDetails, auth, db } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, SAVE_URL, CALCULATE_SUBTOTAL, CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
+import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, SAVE_URL, CALCULATE_SUBTOTAL,
+     CLEAR_CART, DECREASE_CART, REMOVE_FROM_CART, selectCartItems, 
+     selectCartItemAmount, selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/cartSlice";
 import { toast } from 'react-toastify';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectuserID } from "../redux/slice/authSlice";
@@ -18,6 +20,7 @@ const Cart = () => {
     const cartItems = useSelector(selectCartItems);
     const userID = useSelector(selectuserID)
     const url = window.location.href;
+    const cartItemAmount = useSelector(selectCartItemAmount)
     const cartTotalAmount = useSelector(selectCarTotalAmount);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const dispatch = useDispatch();
@@ -40,7 +43,7 @@ const Cart = () => {
    
     const processToCheckout = () => {
       
-        navigate("/CartDetails")
+        navigate("/checkout")
     }
     return (
 
@@ -65,7 +68,6 @@ const Cart = () => {
                             <span className="checkout-price"><i className=""></i></span>
                         </a>
                     </div>
-                    
                 </>
             ) : (
                 <>
@@ -78,7 +80,7 @@ const Cart = () => {
                     </div>
                     <ul className="cart-list">
                         {cartItems.map((cart, index) => {
-                            const { id, name, price, photo, cartQuantity } = cart;
+                            const { id, name, price, discount,  photo, cartQuantity, cartItemAmount } = cart;
                             return (
                                 <>
                                     <li className="cart-item" key={{id}}>
@@ -89,7 +91,12 @@ const Cart = () => {
                                         <div className="cart-info-group">
                                             <div className="cart-info">
                                                 <h6><a href="product-single.html">{name}</a></h6>
-                                                <p>Prix Unitaire €{price}</p>
+                                               {discount!= 0 &&
+                                               <p>Prix Unitaire €{  (Math.round((price-(price*discount)/100)*100)/100)}</p>
+                                               }
+                                                {discount== 0 &&
+                                               <p>Prix Unitaire €{price}</p>
+                                               }
                                             </div>
                                             <div className="cart-action-group">
                                                 <div className="product-action">
@@ -97,7 +104,12 @@ const Cart = () => {
                                                     <h6>{cartQuantity}</h6>
                                                     <button className="action-plus" title="Quantity Plus" onClick={() => (increaseCart(cart))}><i className="icofont-plus"></i></button>
                                                 </div>
+                                                {discount != 0 &&
+                                                <h6>Prix : €{((Math.round((price-(price*discount)/100)*100)/100) * cartQuantity).toFixed(2)}</h6>
+                                                }
+                                                 {discount == 0 &&
                                                 <h6>Prix : €{(price * cartQuantity).toFixed(2)}</h6>
+                                                }
                                             </div>
                                         </div>
                                     </li>
@@ -105,7 +117,6 @@ const Cart = () => {
                         })}
                     </ul>
                     {cartItems.map((cart, index) => {
-                        const { id, name, price, photo, cartQuantity } = cart;
                         return (
                             <>
                                 <div className="cart-footer">

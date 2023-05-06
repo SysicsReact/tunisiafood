@@ -74,7 +74,7 @@ class App extends Component {
           <Route path="/CartDetails" element={<CartDetails />} />
           <Route path="/ProductItems" element={<ProductItem/>} />
           <Route path="/SingleProduct/:id" element={<SingleProduct/>} />
-          <Route path="/Checkout" element={<Checkout/>} />
+          <Route path="/checkout" element={<Checkout/>} />
           <Route path="/OrderHistory" element={<OrderHistory/>} />
           <Route path="/OrderDetails" element={<OrderDetails/>} />
           <Route path="/BlogDetails" element={<BlogDetails/>} />

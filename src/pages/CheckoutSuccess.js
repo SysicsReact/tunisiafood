@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectEmail, selectUserID  } from '../redux/slice/authSlice';
-import { selectShippingAddress } from '../redux/slice/checkoutSlice';
+import { selectShippingAddress, CLEAR_SHIPPING_ADDRESS } from '../redux/slice/checkoutSlice';
 
 function CheckoutSuccess() {
     const [user] = useAuthState(auth);
@@ -22,15 +22,9 @@ function CheckoutSuccess() {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCarTotalAmount);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-      dispatch(CALCULATE_SUBTOTAL())
-      dispatch(CALCULATE_TOTAL_QUANTITY())
-  }, [dispatch, cartItems]);
-
-
-    // Save Order In DB
-const saveOrder = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const saveOrder = () => {
     const today = new Date();
     const date = today.toDateString();
     const time = today.toLocaleTimeString();
@@ -44,17 +38,28 @@ const saveOrder = () => {
     };
     try {
       addDoc(collection(db, "orders"), orderConfig);
-      
-      dispatch(CLEAR_CART());
-      toast.success("Order saved");
+     toast.success("Commande Envoyé !");
     } catch (error) {
       toast.error("Something Went Wrong");
     }
   };
-        toast.success("Payment successful");
+
+  useEffect(() => {
+    if(cartItems){
+        dispatch(CALCULATE_SUBTOTAL())
+        dispatch(CALCULATE_TOTAL_QUANTITY())
+        dispatch(CLEAR_SHIPPING_ADDRESS())
+        dispatch(CLEAR_CART())
         saveOrder();
+    }
+  }, [dispatch, cartItems]);
+
   
-    const [isLoading, setIsLoading] = useState(true);
+    // Save Order In DB
+
+      toast.success("Paiement réçu avec succeès !");
+  
+    
   return (
      <html>
           <head>
@@ -70,7 +75,7 @@ const saveOrder = () => {
           <link rel="stylesheet" href="assets/css/user-auth.css" />
           <link rel="stylesheet" href="assets/css/checkout.css"></link>
           </head>
-          {(isLoading) &&<Loader/>}
+         
      <body>
      <div className="backdrop"></div>
      <a class="backtop fas fa-arrow-up" href="#"></a>
@@ -106,7 +111,6 @@ const saveOrder = () => {
                      </div>
                  </div>
              </div>
-             
          </div>
          <div class="row">
              <div class="col-lg-12 text-center mt-5">

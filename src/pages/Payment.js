@@ -20,18 +20,35 @@ function Payment() {
   const userEmail = useSelector(selectEmail);
   const navigate = useNavigate();
   const shippingAddress = useSelector(selectShippingAddress);
+  const[livraisonCost,SetLivraisonCost]=useState("10")
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCarTotalAmount);
   const url = window.location.href;
-  
   const dispatch = useDispatch();
   //Payment 
   const [responseData, setResponseData] = useState(null);
   const[canOpenWindow , setCanOpenWindow] = useState(false);
 
+    const fees = shippingAddress.livraisonType;
+    
+    useEffect(() => {
+        switch(fees){
+            case "Livraison Standard":
+                SetLivraisonCost("10")
+                
+            break;
+            case "Livraison Standard En europe":
+                SetLivraisonCost("15")
+                break;
+            case "Livraison rapide":
+                SetLivraisonCost("25")
+                break;
+    }
+    })
+    
 
   let price= cartTotalAmount.toString();
-  let priceFinal = parseFloat(price) * 100;
+  let priceFinal = (parseFloat(livraisonCost) + parseFloat(price)) * 100;
   useEffect(() => {
       dispatch(CALCULATE_SUBTOTAL())
       dispatch(CALCULATE_TOTAL_QUANTITY())
@@ -39,7 +56,7 @@ function Payment() {
   }, [dispatch, cartItems]);
   //console.log(shippingAddress.address);
 
-
+  //alert(fees)
   //Payment API
   const handleApiCall = async () => {
       const url = "https://api.konnect.network/api/v2/payments/init-payment";
@@ -55,7 +72,6 @@ function Payment() {
         successUrl: "https://cooktounsi.com/CheckoutSuccess",
         failUrl: "https://dev.konnect.network/gateway/payment-failure",
         checkoutForm: true,
-
       };
   
       const response = await fetch(url, {
@@ -69,18 +85,15 @@ function Payment() {
       const jsonData = await response.json();
       setResponseData(jsonData);
       setCanOpenWindow(true);
-      
-      console.log(shippingAddress);
+      //console.log(shippingAddress);
     };
     useEffect(() => {
       // Open the link in a new tab when the countdown ends
       if (canOpenWindow === true) {
-
         // 👇 Open link in new tab programmatically
         if(responseData.payUrl != null)
         {
       setCanOpenWindow(false);
-
         }
       }
     }, [responseData]);
@@ -131,15 +144,25 @@ function Payment() {
                                         </li>
                                         <li>
                                             <span>Type de livraison</span>
-                                            <span>€livraisonCost</span>
+                                            <span>{shippingAddress.livraisonType}</span>
                                         </li>
                                         <li>
                                             <span>Frais de livraison</span>
-                                            <span>€livraisonCost</span>
+                                            {shippingAddress.livraisonType=="Livraison Standard"&&
+                                            <span>€ 10</span>}
+                                            {shippingAddress.livraisonType=="Livraison Standard En europe"&&
+                                            <span>€ 15</span>}
+                                            {shippingAddress.livraisonType=="Livraison rapide"&&
+                                            <span>€ 25</span>}
                                         </li>
                                         <li>
                                             <span>Total<small>(Incl. VAT)</small></span>
-                                            <span>€{( parseFloat(cartTotalAmount)).toFixed(2)}</span>
+                                            {shippingAddress.livraisonType=="Livraison Standard"&&
+                                            <span>€{(10 + parseFloat(cartTotalAmount)).toFixed(2)}</span>}
+                                            {shippingAddress.livraisonType=="Livraison Standard En europe"&&
+                                            <span>€{(15 + parseFloat(cartTotalAmount)).toFixed(2)}</span>}
+                                            {shippingAddress.livraisonType=="Livraison rapide"&&
+                                            <span>€{(25 + parseFloat(cartTotalAmount)).toFixed(2)}</span>}
                                         </li>
                                     </ul>
                                 </div>
@@ -165,6 +188,10 @@ function Payment() {
                                             <span>{shippingAddress.address}</span>
                                         </li>
                                         <li>
+                                            <span>Code Postal</span>
+                                            <span>{shippingAddress.postal}</span>
+                                        </li>
+                                        <li>
                                             <span>Téléphone</span>
                                             <span>{shippingAddress.phone}</span>
                                         </li>
@@ -181,10 +208,19 @@ function Payment() {
 
             <div class="checkout-proced">
       <button class="btn btn-inline" onClick={handleApiCall}>Accéder Au Paiement</button>
+      <br/>
       {responseData && (
         <>
-  <object data={responseData.payUrl} width="1400" height="600" type="text/html">
-  </object>
+     <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="account-card">
+                    <object data={responseData.payUrl} width="1400" height="600" type="text/html">
+                    </object>
+                </div>
+            </div>
+        </div>
+    </div>
         </>
       )}
     </div>
