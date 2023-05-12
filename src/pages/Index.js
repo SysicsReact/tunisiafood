@@ -43,7 +43,8 @@ function Dashboard() {
     const ShowItem=(e)=>{
         //alert(e);
         setSingleProduct(e);
-        setIsOpen(true)
+        setIsOpen(true);
+        
            }
     const view = async (idp) => {
         navigate("/ProductItems", { state: { id: idp } });
@@ -69,10 +70,17 @@ function Dashboard() {
             });
             
           }, []);
+
+          const customStyles = {
+            overlay: {
+              background: "rgba(0, 0, 0, 0.2)",
+              overflowY:"scroll" 
+            },
+          };
           const viewB = async (idb) => {
             navigate("/BlogDetails", { state: { id: idb } });
                   };
-
+                
     return (
         <html lang="en">
             <head>
@@ -171,22 +179,22 @@ function Dashboard() {
                                        <button onClick={()=> addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
                                 </div>
-    {isOpen &&<Modal
-          setIsOpen={setIsOpen}>  
-        
-                    <div className="product-view">
+    {isOpen && <Modal modalCss = {"myModal"}
+
+          setIsOpen={setIsOpen} >  
+                    <div >
                         <div className="row" key={singleProduct.id}>
                             <div className="col-md-6 col-lg-6">
                                 <div className="view-gallery">
-                                    <div className="product-wish wish">
-                                    {singleProduct.category=="plat"&&
-                                        <label className="view-label order">{singleProduct.category}</label>}
-                                    {singleProduct.category=="epice"&&
-                                        <label className="view-label rate">{singleProduct.category}</label>}
-                                    {singleProduct.category=="sucré"&&
-                                        <label className="view-label sucre">{singleProduct.category}</label>}   
-                                    </div>
-                                    <div className="product-label">
+                    <button className="product-wish wish">
+                                        {singleProduct.category=="plat"&&
+                                                <label className="label-text order">{singleProduct.category}</label>}
+                                        {singleProduct.category=="epice"&&
+                                                <label className="label-text rate">{singleProduct.category}</label>}
+                                        {singleProduct.category=="sucré"&&
+                                                <label className="label-text sucre">{singleProduct.category}</label>}
+                    </button>
+                    <div className="product-label">
                     {singleProduct.tag=="nouveau"&&
                     <label className="label-text new">{singleProduct.tag}</label>}
                     {singleProduct.tag=="solde"&&
@@ -194,9 +202,10 @@ function Dashboard() {
                     {singleProduct.tag=="populaire"&&
                     <label className="label-text feat">{singleProduct.tag}</label>}
                     </div>
-                                    <ul className="preview-slider slider-arrow"> 
-                                        <li><img src={singleProduct.photo} alt="product"/></li>
-                            
+                                    <ul className="preview-slider"> 
+                                        <li><img src={singleProduct.photo} alt="product"/>
+                                        </li>
+                                        
                                     </ul>
                                    
                                 </div>
@@ -240,23 +249,23 @@ function Dashboard() {
                                         </button>
                                     </div>
                                     <div className="view-action-group">
-                                        <a className="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
-                                            <i className="icofont-eye"></i>
-                                            <span>Voir plus de détails</span>
-                                        </a>
-                                    </div>
-                                    <br/>
-                                    <div className="view-action-group">
                                         <a className="view-wish wish" href="" onClick={()=> addToWish(e)} title="Add Your Wishlist" >
                                             <i className="icofont-heart"></i>
                                             <span>Ajouter au wishlist</span>
                                         </a>
                                     </div>
+                                    <div className="view-action-group">
+                                        <a className="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
+                                            <i className="icofont-eye"></i>
+                                            <span>Voir plus de détails</span>
+                                        </a>
+                                    </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-               
           </Modal>}
                                 <div className="product-content">
                                     <div className="product-rating">

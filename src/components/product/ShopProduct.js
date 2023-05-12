@@ -199,7 +199,7 @@ dispatch(ADD_TO_CART(e));
                                         <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <button onClick={() => ShowItem(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
-                                    {isOpen &&<Modal
+                                    {isOpen &&<Modal modalCss = {"myModal"}
                                     setIsOpen={setIsOpen}>  
                                     <div className="row" >
                                         <div class="col">
