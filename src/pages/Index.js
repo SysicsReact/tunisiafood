@@ -4,6 +4,7 @@ import { Link,useLocation,useNavigate, useParams } from "react-router-dom";
 import { auth, db, logout } from "../firebase.config";
 import Loader from "../components/loader/Loader";
 import Intro from "../components/Intro";
+import MyModal from "../components/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import useFetchCollection from "../components/customHooks/useFetchCollection";
 import { STORE_PRODUCTS, selectProducts } from "../redux/slice/productSlice";
@@ -170,7 +171,7 @@ function Dashboard() {
                                        <button onClick={()=> addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
                                 </div>
-           {isOpen &&<Modal
+    {isOpen &&<Modal
           setIsOpen={setIsOpen}>  
         
                     <div className="product-view">
@@ -233,7 +234,7 @@ function Dashboard() {
                                         </ul>
                                     </div>
                                     <div className="view-add-group">
-                                        <button className="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                        <button className="product-add" onClick={()=> addToCart(e)} title="Add to Cart" >
                                             <i className="fas fa-shopping-basket"></i>
                                             <span>Ajouter</span>
                                         </button>
@@ -314,6 +315,7 @@ function Dashboard() {
                 </div>
             </div>
         </div>
+     
         <section className="section feature-part">
             <div className="container">
                 <div className="row">
@@ -399,6 +401,8 @@ function Dashboard() {
                 </div>
             </div>
         </section>
+       
+
         <Intro/>
 
         <section className="section blog-part">

@@ -31,7 +31,7 @@ function Profile() {
     const [adress, setAdress] = useState({ changeState: 0 });;
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
-    const notifySuccess = () => toast.success("Vos étaient enregistrées");
+    const notifySuccess = () => toast.success("Vos données étaient enregistrées");
     const navigate = useNavigate();
     //-------get user by ID
 

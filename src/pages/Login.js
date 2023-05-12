@@ -22,8 +22,6 @@ function Login() {
     const redirectUser = () =>{
         window.scrollTo(0, 0);
         if (previousURL.includes("Cart")){
-            alert(previousURL)
-            console.log(previousURL)
             navigate("/CartDetails");
         }else{
             navigate("/")

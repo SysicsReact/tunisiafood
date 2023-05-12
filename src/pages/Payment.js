@@ -52,9 +52,9 @@ function Payment() {
   useEffect(() => {
       dispatch(CALCULATE_SUBTOTAL())
       dispatch(CALCULATE_TOTAL_QUANTITY())
-      dispatch(SAVE_URL(""))
+      dispatch(SAVE_URL(url))
   }, [dispatch, cartItems]);
-  //console.log(shippingAddress.address);
+  console.log(url);
 
   //alert(fees)
   //Payment API

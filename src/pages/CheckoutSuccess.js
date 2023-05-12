@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import {  CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, CLEAR_CART,
-     selectCartItems, selectCarTotalAmount} from "../redux/slice/cartSlice";
+     selectCartItems, selectPreviousURL, selectCarTotalAmount} from "../redux/slice/cartSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc,updateDoc, addDoc, Timestamp, collection } from "@firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
@@ -22,6 +22,7 @@ function CheckoutSuccess() {
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCarTotalAmount);
   const dispatch = useDispatch();
+  const previousURL = useSelector(selectPreviousURL);
   const [isLoading, setIsLoading] = useState(true);
   
   const saveOrder = () => {
@@ -43,21 +44,26 @@ function CheckoutSuccess() {
       toast.error("Something Went Wrong");
     }
   };
-
+  
   useEffect(() => {
     if(cartItems){
         dispatch(CALCULATE_SUBTOTAL())
         dispatch(CALCULATE_TOTAL_QUANTITY())
-        dispatch(CLEAR_SHIPPING_ADDRESS())
-        dispatch(CLEAR_CART())
-        saveOrder();
+       // dispatch(CLEAR_SHIPPING_ADDRESS())
+       // dispatch(CLEAR_CART())
     }
   }, [dispatch, cartItems]);
 
-  
-    // Save Order In DB
+      // Save Order In DB
+  const redirectUser = () =>{
+    if (previousURL.includes("Payment")){
+        saveOrder();
+    }else{
+        toast.error("Quelque chose s'est mal passé");
+    }
+  console.log(previousURL)}
 
-      toast.success("Paiement réçu avec succeès !");
+    //toast.success("Paiement réçu avec succeès !");
   
     
   return (
@@ -75,7 +81,6 @@ function CheckoutSuccess() {
           <link rel="stylesheet" href="assets/css/user-auth.css" />
           <link rel="stylesheet" href="assets/css/checkout.css"></link>
           </head>
-         
      <body>
      <div className="backdrop"></div>
      <a class="backtop fas fa-arrow-up" href="#"></a>
