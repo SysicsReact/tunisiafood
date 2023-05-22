@@ -38,10 +38,9 @@ export default function Checkout() {
         livraisonType:"Livraison Standard",
     }
     const [shippingAddress, setShippingAddress] = useState({...initialAddressState});
-        //-------get user by ID
-
+       
+    //-------get user by ID
         useEffect(() => {
-            // setIsLoading(true);
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     const uid = user.uid;
@@ -56,7 +55,7 @@ export default function Checkout() {
                 }
             })
         })
-
+  
     const handleShipping = (e) =>{
         const {name, value} = e.target;
         setShippingAddress({
@@ -64,7 +63,7 @@ export default function Checkout() {
             [name]: value,
           });
     };
-
+    //console.log(loggedUser.country)
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
@@ -80,6 +79,12 @@ export default function Checkout() {
     
      <html lang="en">
      <head>
+     <meta charset="UTF-8" />
+          <meta name="name" content="Cook Tounsi" />
+        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+        <title>Checkout - Cook Tounsi</title>
      <link rel="icon" href="assets/images/favicon.png" />
      <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
      <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -230,6 +235,7 @@ export default function Checkout() {
                                     <h6>Pays</h6>
                                     <select class="form-select" 
                                     required
+                                    value={loggedUser.country}
                                     name="country"
                                     onChange={(e) => handleShipping(e)} >
                                         Choisir votre pays

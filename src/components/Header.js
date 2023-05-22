@@ -171,14 +171,26 @@ const Header = () => {
         if (value.length > 0) {
             setResult([]);
             let searchQuery = value.toLowerCase();
+            let tempResult =[]
             for (const item in products) {
-                let fruit = products[item].description.toLowerCase();
-                if (fruit.slice(0, searchQuery.length).indexOf(searchQuery) !== -1) {
+                if(products[item].searchTags){
+                    for(const tag in products[item].searchTags)
+                    {
+                        let fruit = products[item].searchTags[tag];
+                        if(fruit.includes(searchQuery)){
+                            
+                            if(tempResult.findIndex(x => x.id === products[item].id) == -1){
+                                tempResult.push(products[item]);
+                            }
+                            
+                        }
+                      
+                    }
                     
-                    setResult(prevResult => {
-                        return [...prevResult, products[item]]
-                    });
                 }
+                
+                setResult(tempResult)
+               
             }
         } else {
             setResult([]);
@@ -203,6 +215,18 @@ const Header = () => {
         navigate("/ProductItems", { state: { id: idp } });
         setResult([]);
           };
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => {
+          setWindowWidth(window.innerWidth);
+        };
+        window.addEventListener('resize',handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+          };
+        }, []);
+        const shouldHideDiv = windowWidth < 700;
     
     return (  
         <>
@@ -310,110 +334,121 @@ confidentialité</a></NavLink>
             </div>
 
         </aside>}
-            <header className="header-part" >  
-                <div className="container">
-                    <div className="header-content">
-                        <div className="header-media-group">
-                            
-                            <button className="header-user">{logUser.photo!=undefined&&<img src={logUser.photo} alt="user" /> }
-                            {logUser.photo==undefined&&
-                             <img src={window.location.origin +'/assets/images/user.png'} alt="user" />
-                            }
-                              </button>
-                           
-                           
-                            <a className="header-logo">
-                            <Link to="/">
-                                <img src="assets/images/cook.png" alt="logo" />
-                            </Link>
-                        </a>
-                            <button className="header-src"><i className="fas fa-search"></i></button>
-                        </div>
-                        <a className="header-logo">
-                            <Link to="/">
-                                <img src="assets/images/cook.png" alt="logo" />
-                            </Link>
-                        </a>
-                       {checkIfTrue()&&
-                            <>
-                            <form className="header-form">
-                        <div className="dropdown">
-                            <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
-                            
-                           <div id="myDropdown" className="rounded dropdown-content show">
-                               
-                           {result.slice(0,5).map((result, id) => (
-                            <a  key={{id}}>
-                                    <img src={result.photo} className="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
-                                    <h6 onClick={() => view(result.id)}>{result.name}</h6> 
-                            </a>
-                             ))
-                            } 
-                            </div>
-                        </div>
-                        <button><i className="fas fa-search"></i></button>
-                        </form>
-                            </>
-                       }
-                       {!checkIfTrue()&&
-                            <>
-                                
-                            <form className="">
-                        <div className="">
-                            <span style={{fontSize:"22px"}}>
-                               Tout est une question de sens et de souvenirs d’enfance 
-                            </span>
-                        </div>
+        <header className="header-part" >  
+            <div className="container">
+                <div className="header-content">
+                    <div className="header-media-group">
                         
-                        </form>
-                            </>
-                       }
-    <div className="header-widget-group">
-        <a href="front/compare.html" className="header-widget" hidden title="Compare List">
-            <i className="fas fa-random"></i>
-            <sup>0</sup>
-        </a>
-       <a href="" className="header-widget" title="Wishlist">
-       <Link to="WishDetails"> <i className="fas fa-heart"></i></Link>
-            <sup>{wishItems.length}</sup>
-        </a>
-        <button className="header-widget header-cart" title="Cartlist">
-            <i className="fas fa-shopping-basket"></i>
-            <sup  >{cartTotalQuantity}</sup>
-            <span>total price<small>${cartTotalAmount.toFixed(2)}</small></span>
-            <span><small></small></span>
-        </button>
-    </div>
+                        <button className="header-user">{logUser.photo!=undefined&&<img src={logUser.photo} alt="user" /> }
+                        {logUser.photo==undefined&&
+                            <img src={window.location.origin +'/assets/images/user.png'} alt="user" />
+                        }
+                            </button>
+                        
+                        
+                        <a className="header-logo">
+                        <Link to="/">
+                            <img src="assets/images/cook.png" alt="logo" />
+                        </Link>
+                    </a>
+                    {checkIfTrue()&&
+                     <button className="header-src"><i className="fas fa-search"></i></button>
+                    }
+                     </div>
+                    <a className="header-logo">
+                        <Link to="/">
+                            <img src="assets/images/cook.png" alt="logo" />
+                        </Link>
+                    </a>
+                    {checkIfTrue()&&
+                        <>
+                        <form className="header-form">
+                    <div className="dropdown">
+                        <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
+                        
+                        
+                            
+                        {result.slice(0,5).map((result, id) => (
+                        <div key={{id}} className="rounded dropdown-content show">
+                            <div className="" onClick={() => view(result.id)} >
+                        <a  >
+                                <img src={result.photo} className="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
+                                <span onClick={() => view(result.id)}>{result.name}</span> 
+                        </a>
+                        </div>
+                        </div>
+                            ))
+                        } 
+                        
+                    </div>
+                    <button><i className="fas fa-search"></i></button>
+                    </form>
+                        </>
+                    }
+                    
+                    
+                    
+                    
+                    {!checkIfTrue()&&
+                    
+                    <>
+                    {shouldHideDiv ?null:
+                    <form className="">
+                <div className="">
+                    <span style={{fontSize:"22px"}}>
+                        Tout est une question de sens et de souvenirs d’enfance 
+                    </span>
+                </div>
+                </form>}
+                    </>
+                    
+                }
+<div className="header-widget-group">
+    <a href="front/compare.html" className="header-widget" hidden title="Compare List">
+        <i className="fas fa-random"></i>
+        <sup>0</sup>
+    </a>
+    <a href="" className="header-widget" title="Wishlist">
+    <Link to="WishDetails"> <i className="fas fa-heart"></i></Link>
+        <sup>{wishItems.length}</sup>
+    </a>
+    <button className="header-widget header-cart" title="Cartlist">
+        <i className="fas fa-shopping-basket"></i>
+        <sup  >{cartTotalQuantity}</sup>
+        <span>total price<small>${cartTotalAmount.toFixed(2)}</small></span>
+        <span><small></small></span>
+    </button>
+</div>
 <li className="header-widget">
-    {!isLoggedIn&&
-               <span ><Link to="/Login"> S'inscrire </Link></span>
-            }
-            
+{!isLoggedIn&&
+            <span ><Link to="/Login"> S'inscrire </Link></span>
+        }
+        
 {isLoggedIn &&
 
 <span className="navbar-item dropdown" >  
 {logUser.photo!=undefined&&
-            <img src={logUser.photo} alt="user" />
-            }
-            {logUser.photo==undefined&&
-            <img src={window.location.origin + '/assets/images/user.png'}  alt="user" />
-            }
-<NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
-            <ul className="dropdown-position-list">
-                <li><Link to="MyProfile"> profile </Link></li>
-                <li alt="Mes commandes"><Link to="OrderHistory"> Commandes </Link></li>
-                <li><button className="dashboard__btn"
-                    onClick={logout}> 
-                <Link to="/"> Déconnecter </Link> </button></li>
-            </ul>
-            </span>
+        <img src={logUser.photo} alt="user" />
         }
+        {logUser.photo==undefined&&
+        <img src={window.location.origin + '/assets/images/user.png'}  alt="user" />
+        }
+<NavLink to="/MyProfile" className="My-link" >{displayName} </NavLink>
+        <ul className="dropdown-position-list">
+            <li><Link to="MyProfile"> profile </Link></li>
+            <li alt="Mes commandes"><Link to="OrderHistory"> Commandes </Link></li>
+            <li><button className="dashboard__btn"
+                onClick={logout}> 
+            <Link to="/"> Déconnecter </Link> </button></li>
+        </ul>
+        </span>
+    }
 
-    
+
 </li>
-                    </div>
                 </div>
-            </header>
+            </div>
+        </header>
             <div className="mobile-menu">
             <Link to="/"> <a  title="Home Page">
                         <i className="fas fa-home"></i>

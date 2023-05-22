@@ -103,6 +103,12 @@ function Payment() {
   return (
     <html lang="en">
           <head>
+          <meta charset="UTF-8" />
+    <meta name="name" content="Cook Tounsi" />
+    <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+    <title>Paiement - Cook Tounsi</title>
           <link rel="icon" href="assets/images/favicon.png" />
           <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
           <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -211,16 +217,10 @@ function Payment() {
       <br/>
       {responseData && (
         <>
-     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="account-card">
-                    <object data={responseData.payUrl} width="1400" height="600" type="text/html">
-                    </object>
-                </div>
-            </div>
+        <div className="container-iframe">
+            <iframe className="responsive-iframe" data={responseData.payUrl} width="1400" height="600" type="text/html">
+            </iframe>
         </div>
-    </div>
         </>
       )}
     </div>

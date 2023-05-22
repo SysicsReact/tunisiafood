@@ -18,8 +18,16 @@ const useFetchCollection = (collectionName) => {
              id: doc.id,
              ...doc.data(),
            }));
-           setData(allData);
+           if( collectionName=="products"){
+            const updatedItems = allData.filter(item => parseInt(item.stock) > 0);
+            setData(updatedItems);
            setIsLoading(false);
+           }
+           else{
+            setData(allData);
+            setIsLoading(false);
+           }
+           
          });
        } catch (error) {
          setIsLoading(false);

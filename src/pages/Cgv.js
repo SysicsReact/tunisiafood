@@ -6,9 +6,11 @@ function Cgv() {
   return (
      <html>
      <head>
-           <meta charset="UTF-8" />
-           <meta name="name" content="Greeny" />
-           <meta name="title" content="Greeny - eCommerce HTML Template" />
+     <meta charset="UTF-8" />
+          <meta name="name" content="Cook Tounsi" />
+        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
            <title>CONDITIONS GÉNÉRALES DE VENTE</title>
            <link rel="icon" href="assets/images/favicon.png" />
            <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
@@ -63,7 +65,6 @@ function Cgv() {
        <div class="scrollspy-content" id="item-1">
                <h3>ARTICLE1:</h3>
                <p>Conformément à Loi n°200-83 du 9 août 2000, relative aux échanges et au commerce électronique, il est précisé dans cet article l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
-<br/>Le site cooktounsi.com est édité par : La société ……………., Société de Droit Tunisien au capital de ……….. Dinars, MF …………….., domiciliée à l'adresse suivante : ……………………………
 <br/>Téléphone : 216 ********/ Adresse e-mail : contact@cooktounsi.com
 Le directeur de publication du site est : Mr/Mme *****************
 <br/>Le site <Link to="/">www.cooktounsi.com </Link>est hébergé par <b>Firebase</b>

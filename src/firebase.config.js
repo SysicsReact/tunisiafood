@@ -70,9 +70,22 @@ function GetCardDetails(){
   return cartcount;
 }
 
+function ReturnMeasurement(category){
+switch(category)
+{
+  case "Boisson":
+    return "CL"
+   
 
+    break;
+    default:
+      return "G"
+      break;
+}
+
+}
 
 export { app, db, storage, auth ,
   sendPasswordReset,
   createUserWithEmailAndPassword,
-  logout,changeIsLoading,changeIsTesting,testLoading,SetCartDetails,GetCardDetails };
+  logout,changeIsLoading,changeIsTesting,testLoading,SetCartDetails,GetCardDetails,ReturnMeasurement };

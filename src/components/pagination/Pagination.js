@@ -40,10 +40,17 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
    }
 
   return (
+     
      <div className="row">
           <div className="col-lg-12">
                <div className="bottom-paginate"> 
                     <ul className="pagination">
+                    <p className="page-info"> Affichage de </p>
+                    <li className="page-item"> <button className="header-widget">
+                         <a className="page-link">{`${currentPage}`}</a></button></li>
+                    <p className="page-info"> {` Sur `} </p>
+                    <li className="page-item"> <button className="header-widget">
+                         <a className="page-link">{`${Math.ceil(totalPages)}`}</a></button></li>
                          {currentPage!=pageNumbers[0]&&
                           <li className= "page-item"  onClick={paginatePrev}>
                           <a className="page-link">
@@ -69,12 +76,7 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
                           </a></button>
                      </li>
                     }
-                    <p className="page-info"> </p>
-                    <li className="page-item"> <button className="header-widget">
-                         <a className="page-link">{`${currentPage}`}</a></button></li>
-                    <p className="page-info"> {` Sur `} </p>
-                    <li className="page-item"> <button className="header-widget">
-                         <a className="page-link">{`${Math.ceil(totalPages)}`}</a></button></li>
+                    
                     </ul>
                </div>
           </div>

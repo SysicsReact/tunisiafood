@@ -69,6 +69,12 @@ function CheckoutSuccess() {
   return (
      <html>
           <head>
+          <meta charset="UTF-8" />
+          <meta name="name" content="Cook Tounsi" />
+        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+        <title>Commande Réçu - Cook Tounsi</title>
           <link rel="icon" href="assets/images/favicon.png" />
           <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
           <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />

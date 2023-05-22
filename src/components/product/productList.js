@@ -1,13 +1,16 @@
-import {useState, React } from 'react'
+import {useState, useEffect, React } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { selectProducts } from '../../redux/slice/productSlice';
 import { Modal } from 'react-fade-modal';
+import useFetchCollection from '../customHooks/useFetchCollection';
 import { useNavigate } from 'react-router-dom';
 import { ADD_TO_CART } from '../../redux/slice/cartSlice';
+
 
 const ProductList= ()=> {
     const products = useSelector(selectProducts);
     const [isOpen, setIsOpen] = useState(false);
+
     const[singleProduct,setSingleProduct]=useState([])
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -19,6 +22,8 @@ const ProductList= ()=> {
     const view = async (idp) => {
     navigate("/ProductItems", { state: { id: idp } });
             };
+
+    console.log(products)
     const addToCart = (e) => {
     dispatch(ADD_TO_CART(e));
             };
@@ -49,16 +54,14 @@ const ProductList= ()=> {
         <link rel="stylesheet" href="assets/css/profile.css" />
     </head>
     
-        {products.slice(0,10).map((e) => {
-                       const { id, weight, tag, category, photo, name, price, discount, description } = e;
+        {products.map((e) => {
+        const { id, weight, tag, category, photo, name, price, stock, discount, description } = e;
                       
                     return (
                         <>  
-             <div className="row">
+             <div className="row" key={id}>
              <div class="col">
                 <div class="product-standard">
-                    
-                    
                     <div class="standard-media">
                     <div class="product-label">
                             {tag=="nouveau"&&

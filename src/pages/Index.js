@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link,useLocation,useNavigate, useParams } from "react-router-dom";
-import { auth, db, logout } from "../firebase.config";
+import { auth, db, logout,ReturnMeasurement } from "../firebase.config";
 import Loader from "../components/loader/Loader";
 import Intro from "../components/Intro";
 import MyModal from "../components/Modal";
@@ -41,11 +41,10 @@ function Dashboard() {
         dispatch(ADD_TO_WISH(e));
                };
     const ShowItem=(e)=>{
-        //alert(e);
         setSingleProduct(e);
         setIsOpen(true);
-        
            }
+    
     const view = async (idp) => {
         navigate("/ProductItems", { state: { id: idp } });
           };
@@ -70,13 +69,6 @@ function Dashboard() {
             });
             
           }, []);
-
-          const customStyles = {
-            overlay: {
-              background: "rgba(0, 0, 0, 0.2)",
-              overflowY:"scroll" 
-            },
-          };
           const viewB = async (idb) => {
             navigate("/BlogDetails", { state: { id: idb } });
                   };
@@ -85,9 +77,11 @@ function Dashboard() {
         <html lang="en">
             <head>
                 <meta charset="UTF-8" />
-                <meta name="name" content="Greeny" />
-                <meta name="title" content="Greeny - eCommerce HTML Template" />
-                <title>Classic Home - Greeny</title>
+                <meta name="name" content="Cook Tounsi" />
+                <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+                <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+                <title>Cook Tounsi- Accueil</title>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -122,8 +116,12 @@ function Dashboard() {
                                         <i className="fas fa-shopping-basket"></i>
                                         <span>Achat</span>
                                     </a></Link>
+                                    <Link to="/ShopProduct"><a style={{visibility:"hidden"}} className="">
+                                        
+                                        <span>A</span>
+                                    </a></Link>
                                     <Link to="/Contact">  <a className="btn btn-outline">
-                                   <i className="icofont-sale-discount"></i>
+                                   <i className="icofont-ui-email"></i>
                                         <span>Contact</span>
                                     </a></Link>
                                 </div>
@@ -147,7 +145,7 @@ function Dashboard() {
                 <div>
                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
                 {!isLoading &&products.slice(0,10).map((e) => {
-                       const { id, weight, tag, category, photo, name, price, discount, description } = e;
+                       const { id, weight, tag, category, photo, name, price, video, discount, description } = e;
                       
                     return (
                         <>  
@@ -163,19 +161,21 @@ function Dashboard() {
                                             <label className="label-text feat">{tag}</label>}
                                     </div>
                                     <button className="product-wish wish">
-                                    {category=="plat"&&
+                                    {category=="Plat"&&
                                             <label className="label-text order">{category}</label>}
-                                        {category=="epice"&&
+                                        {category=="Epice"&&
                                             <label className="label-text rate">{category}</label>}
-                                        {category=="sucré"&&
+                                        {category=="Sucré"&&
                                             <label className="label-text sucre">{category}</label>}
+                                        {category=="Boisson"&&
+                            <label className="label-text drink">{category}</label>}
                                     </button>
                                     <a className="product-image"  onClick={() => ShowItem(e)}>
                                         <img src={photo} alt="product"/>
                                     </a>
                                     <div className="product-widget">
                                         <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
-                                        <a title="Product Video" href="" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                        <a title="Product Video" href={video} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <button onClick={()=> addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
                                 </div>
@@ -185,14 +185,16 @@ function Dashboard() {
                     <div >
                         <div className="row" key={singleProduct.id}>
                             <div className="col-md-6 col-lg-6">
-                                <div className="view-gallery">
+                <div className="view-gallery">
                     <button className="product-wish wish">
-                                        {singleProduct.category=="plat"&&
-                                                <label className="label-text order">{singleProduct.category}</label>}
-                                        {singleProduct.category=="epice"&&
-                                                <label className="label-text rate">{singleProduct.category}</label>}
-                                        {singleProduct.category=="sucré"&&
-                                                <label className="label-text sucre">{singleProduct.category}</label>}
+                    {singleProduct.category=="Plat"&&
+                            <label className="label-text order">{singleProduct.category}</label>}
+                    {singleProduct.category=="Epice"&&
+                            <label className="label-text rate">{singleProduct.category}</label>}
+                    {singleProduct.category=="Sucré"&&
+                            <label className="label-text sucre">{singleProduct.category}</label>}
+                    {singleProduct.category=="Boisson"&&
+                            <label className="label-text drink">{singleProduct.category}</label>}
                     </button>
                     <div className="product-label">
                     {singleProduct.tag=="nouveau"&&
@@ -202,13 +204,11 @@ function Dashboard() {
                     {singleProduct.tag=="populaire"&&
                     <label className="label-text feat">{singleProduct.tag}</label>}
                     </div>
-                                    <ul className="preview-slider"> 
-                                        <li><img src={singleProduct.photo} alt="product"/>
-                                        </li>
-                                        
-                                    </ul>
-                                   
-                                </div>
+                        <ul className="preview-slider"> 
+                            <li><img src={singleProduct.photo} alt="product"/>
+                            </li>
+                        </ul>
+                        </div>
                             </div>
                             <div className="col-md-6 col-lg-6">
                                 <div className="view-details">
@@ -219,7 +219,6 @@ function Dashboard() {
                                         
                                         <p>Catégorie:<a href="">{singleProduct.category}</a></p>
                                     </div>
-
                                     <h3 className="view-price">
                                         {singleProduct.discount!="0"&&
                                     <>
@@ -230,7 +229,7 @@ function Dashboard() {
                                     {singleProduct.discount=="0"&&
                                         <>
                                        
-                                        <span> € {singleProduct.price}<small>/{singleProduct.weight} G</small></span>
+                                        <span> € {singleProduct.price}<small>/{singleProduct.weight} {ReturnMeasurement(singleProduct.category)}</small></span>
                                         </>
                                     }
                                     </h3>
@@ -249,41 +248,38 @@ function Dashboard() {
                                         </button>
                                     </div>
                                     <div className="view-action-group">
-                                        <a className="view-wish wish" href="" onClick={()=> addToWish(e)} title="Add Your Wishlist" >
-                                            <i className="icofont-heart"></i>
-                                            <span>Ajouter au wishlist</span>
-                                        </a>
-                                    </div>
-                                    <div className="view-action-group">
                                         <a className="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
                                             <i className="icofont-eye"></i>
                                             <span>Voir plus de détails</span>
                                         </a>
                                     </div>
-                                    
-                                    
+                                    <div className="view-add-group">
+                                        <button className="product-add" onClick={()=> addToWish(e)} title="Ajouter au wishlis" >
+                                            <i className="icofont-heart"></i>
+                                            <span>Ajouter au wishlist</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-          </Modal>}
+    </Modal>}
                                 <div className="product-content">
                                     <div className="product-rating">
-                                    <i className="product-price" href="">{weight} G</i>
+                                    <i className="product-price" href="">{weight} {ReturnMeasurement(category)}</i>
                                     </div>
                                     <h6 className="product-name">
                                         <a href="">{name}</a>
                                     </h6>
                                     <h6 className="product-price">
-                                    {discount!="0"&&
+                                    {parseInt(discount)!= 0 &&
                                     <>
                                         <del> €{price}</del>
                                         <span> € {Math.round((price-(price*discount)/100)*100)/100}<small></small></span>
                                         </>
                                     }
-                                    {discount=="0"&&
+                                    {parseInt(discount)== 0 &&
                                         <>
-                                       
                                         <span> € {price}<small></small></span>
                                         </>
                                     }</h6>
@@ -344,33 +340,33 @@ function Dashboard() {
                             <div className="feature-media">
                                 <div className="feature-label">
                                 {tag=="nouveau"&&
-                                            <label className="label-text new">{tag}</label>}
-
-                                            {tag=="solde"&&
-                                            <label className="label-text sale">{tag}</label>}
-
-                                            {tag=="populaire"&&
-                                            <label className="label-text feat">{tag}</label>}
+                                <label className="label-text new">{tag}</label>}
+                                {tag=="solde"&&
+                                <label className="label-text sale">{tag}</label>}
+                                {tag=="populaire"&&
+                                <label className="label-text feat">{tag}</label>}
                                 </div>
                                 <button className="feature-wish wish">
-                                {category=="plat"&&
+                                {category=="Plat"&&
                                             <label className="label-text order">{category}</label>}
-                                        {category=="epice"&&
+                                {category=="Epice"&&
                                             <label className="label-text rate">{category}</label>}
-                                        {category=="sucré"&&
+                                {category=="Boisson"&&
+                                            <label className="label-text drink">{category}</label>}
+                                {category=="Sucré"&&
                                             <label className="label-text sucre">{category}</label>}
                                 </button>
-                                <a className="feature-image" href="" onClick={() => ShowItem(e)}>
+                                <a className="feature-image" onClick={() => ShowItem(e)}>
                                     <img src={photo} style={{ borderRadius:"5px"}} alt={name}/>
                                 </a>
                                 <div className="feature-widget">
                                 <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
-                                        <a title="Product Video" href="" onClick={() => ShowItem(e)} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                        <a title="Product Video" onClick={() => ShowItem(e)} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <button onClick={() => addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                 </div>
                             </div>
                             <div className="feature-content">
-                                <h6 className="feature-name">
+                                <h6 className="product-name">
                                     <a href="">{name}</a>
                                 </h6>
                                 <h6 className="feature-price">
@@ -383,9 +379,12 @@ function Dashboard() {
                                     {discount=="0"&&
                                         <>
                                        
-                                        <span> € {price}<small></small></span>
+                                        <span> € {price} <small></small></span>
                                         </>
                                     }
+                                </h6>
+                                <h6 className="product-name">
+                                   <a href=""> {weight} {ReturnMeasurement(category)} </a>
                                 </h6>
                                 <p className="feature-desc">{shortenText(description, 150)}</p>
                                 <button className="product-add" onClick={()=> addToCart(e)}>

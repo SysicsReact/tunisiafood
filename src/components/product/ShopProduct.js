@@ -9,7 +9,9 @@ import ProductList from './productList'
 import { ADD_TO_CART } from '../../redux/slice/cartSlice'
 import {  ToastContainer, toast } from "react-toastify";
 import { Modal } from 'react-fade-modal';
-import Pagination from '../pagination/Pagination'
+import Pagination from '../pagination/Pagination';
+import { ADD_TO_WISH } from '../../redux/slice/wishSlice'
+import { ReturnMeasurement } from '../../firebase.config'
 
 
 const ShopProduct = () => {
@@ -39,7 +41,9 @@ const ShopProduct = () => {
             })
           );
     },[dispatch,data]);
-
+    const addToWish = (e) => {
+        dispatch(ADD_TO_WISH(e));
+               };
    const addToCart = (e) => {
 dispatch(ADD_TO_CART(e));
    };
@@ -89,10 +93,12 @@ dispatch(ADD_TO_CART(e));
   return (
      <html lang="en">
      <head>
-         <meta charset="UTF-8" />
-         <meta name="title" content="Tunisian Food" />
-         <meta name="keywords" content="organic, food, shop, ecommerce, store, agriculture, vegetables, farm, grocery, natural, online store" />
-         <title>Tout les produits</title>
+        <meta charset="UTF-8" />
+        <meta name="name" content="Cook Tounsi" />
+        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+         <title>Cook Tounsi- Tout les produits</title>
          <link rel="icon" href="assets/images/favicon.png" />
          <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
          <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -113,7 +119,7 @@ dispatch(ADD_TO_CART(e));
                         <h2>Tout Les Produits</h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                            <li class="breadcrumb-item active" aria-current="page">Catalogue des produits</li>
                         </ol>
                     </div>
             </section>
@@ -143,12 +149,12 @@ dispatch(ADD_TO_CART(e));
                                     <div class="filter-short">
                                     <label class="filter-label">Catégory:</label>
                                     <select class="form-select" value={category} onChange={(e)=>setCategory(e.target.value)}>
-                                    <option value="all" selected>All</option>
+                                    <option value="all" selected>Tout</option>
                                         <option value="sucré">Patisserie</option>
                                         <option value="plat">Nos Plats</option>
                                         <option value="epice">Nos Epices</option>
                                     </select>
-                            </div>
+                                    </div>
                                     <div class="filter-action">
                                         <button class="header-widget" onClick={()=>clearFilters()} >
                                             <i className='fas fa-trash'></i></button>
@@ -165,13 +171,12 @@ dispatch(ADD_TO_CART(e));
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                            </div>
-                        </div>
-                        {grid &&
+                            {grid &&
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
                         {grid &&currentProducts.map((e) => {
                        const { id, tag, category,photo,name,discount, weight, price } = e;
-                    return (    
+                    return (   
+                        
                             <div class="col" key={id}>    
                                 <div class="product-card">
                                     <div class="product-media">
@@ -184,12 +189,14 @@ dispatch(ADD_TO_CART(e));
                                             <label class="label-text feat">{tag}</label>}
                                         </div>
                                         <button class="product-wish wish">
-                                        {category=="plat"&&
+                                        {category=="Plat"&&
                                             <label class="label-text order">{category}</label>}
-                                        {category=="epice"&&
+                                        {category=="Epice"&&
                                             <label class="label-text rate">{category}</label>}
-                                        {category=="sucré"&&
+                                        {category=="Sucré"&&
                                             <label class="label-text sucre">{category}</label>}
+                                        {category=="Boisson"&&
+                                            <label class="label-text drink">{category}</label>}
                                         </button>
                                         <a class="product-image" href="">
                                             <img src={photo} alt="product"/>
@@ -213,6 +220,8 @@ dispatch(ADD_TO_CART(e));
                                                             <label className="label-text rate">{singleProduct.category}</label>}
                                                     {singleProduct.category=="sucré"&&
                                                             <label className="label-text sucre">{singleProduct.category}</label>}
+                                                    {singleProduct.category=="Boisson"&&
+                                                            <label className="label-text rate">{singleProduct.category}</label>}
                                                 </button>
                                                 <div class="product-label">
                                                 {singleProduct.tag=="nouveau"&&
@@ -247,14 +256,14 @@ dispatch(ADD_TO_CART(e));
                                                             <i class="fas fa-shopping-basket"></i>
                                                             <span>Ajouter</span>
                                                         </button>
-                                                        <button class="standard-wish wish" title="Add to Wishlist">
+                                                        <button class="standard-wish wish" onClick={() => addToWish(e)} title="Add to Wishlist">
                                                             <i class="fas fa-heart"></i>
                                                             <span>Ajouter au wishlist</span>
                                                         </button>
-                                                <button class="standard-wish wish" title="Add to Wishlist" onClick={() => view(e.id)}><a href="">
-                                                Plus de Détails</a>
-                                            
-                                                        </button>
+                                                        <button class="standard-wish wish" title="Add to Wishlist" onClick={() => view(singleProduct.id)}>
+                               <i class="fas fa-eye"></i>
+                                Plus de Détails
+                                       </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -264,7 +273,7 @@ dispatch(ADD_TO_CART(e));
                                     </div>
                                     <div class="product-content">
                                       
-                                            <i class="product-mass">{weight} G</i>
+                                            <i class="product-mass">{weight} {ReturnMeasurement(category)}</i>
                                       
                                         <h6 class="product-name">
                                             <a href="">{name}</a>
@@ -291,27 +300,165 @@ dispatch(ADD_TO_CART(e));
                                     </div>
                                 </div>
                             </div>
-                            
                                );
                               })}
                     </div>
+                    
                     }
+                    
+                            </div>
+                        </div>
+                     
                     {!grid &&products.map((e) => {
-                       const { id, tag, category,photo,name,price,description } = e;
+                       const { id, tag, category,photo,name, discount, price,description } = e;
                     return (
-                        
-                        <ProductList {...products} />
+                        <>  
+                        <div className="row" key={id}>
+                        <div class="col">
+                           <div class="product-standard">
+                               <div class="standard-media">
+                               <div class="product-label">
+                                       {tag=="nouveau"&&
+                                   <label class="label-text new">{tag}</label>}
+                                   {tag=="solde"&&
+                                   <label class="label-text sale">{tag}</label>}
+                                   {tag=="populaire"&&
+                                   <label class="label-text feat">{tag}</label>}
+                               </div>
+                               <button class="product-wish wish">
+                               {category=="Plat"&&
+                                   <label class="label-text order">{category}</label>}
+                               {category=="Epice"&&
+                                   <label class="label-text rate">{category}</label>}
+                                {category=="Boisson"&&
+                                   <label class="label-text rate">{category}</label>}
+                               {category=="Sucré"&&
+                                   <label class="label-text sucre">{category}</label>}
+                               </button>
+                                   <a class="standard-image" href="product-video.html" >
+                                       <img src={photo} alt="product" style={{ borderRadius: "10px" }} />
+                                   </a>
+                                   <div class="standard-widget">
+                                       <a title="Product Compare" onClick={() => addToWish(e)} class="fas fa-heart"></a>
+                                       <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                       <a title="Product View" onClick={() => ShowItem(e)} class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                   </div>
+                    {isOpen &&<Modal modalCss = {"myModal"}
+                     setIsOpen={setIsOpen}>  
+                   <div className="row" >
+                       <div class="col">
+                           <div class="product-standard">
+                               <div class="standard-media">
+                                       <img class="product-image" src={singleProduct.photo} style={{width:"250px", borderRadius:"8px"}} alt="product"/>
+                                       <button className="product-wish wish">
+                                   {singleProduct.category=="plat"&&
+                                           <label className="label-text order">{singleProduct.category}</label>}
+                                   {singleProduct.category=="epice"&&
+                                           <label className="label-text rate">{singleProduct.category}</label>}
+                                   {singleProduct.category=="sucré"&&
+                                           <label className="label-text sucre">{singleProduct.category}</label>}
+                               </button>
+                               <div class="product-label">
+                               {singleProduct.tag=="nouveau"&&
+                               <label className="label-text new">{singleProduct.tag}</label>}
+                               {singleProduct.tag=="solde"&&
+                               <label className="label-text sale">{singleProduct.tag}</label>}
+                               {singleProduct.tag=="populaire"&&
+                               <label className="label-text feat">{singleProduct.tag}</label>}
+                               </div>
+                               </div>
+                               <div class="standard-content">
+                                   <h4 class="standard-name">
+                                       <a href="product-video.html">{singleProduct.name}</a>
+                                   </h4>
+                                   <h5 class="standard-price">
+                                   {singleProduct.discount!="0"&&
+                                               <>
+                                                   <del> €{singleProduct.price}</del>
+                                                   <span> € {Math.round((singleProduct.price-(singleProduct.price*singleProduct.discount)/100)*100)/100}<small></small></span>
+                                                   </>
+                                               }
+                                               {singleProduct.discount=="0"&&
+                                                   <>
+                                                   <span> € {singleProduct.price}<small></small></span>
+                                                   </>
+                                               } 
+                                   </h5>
+                                   <p class="standard-desc">{singleProduct.description}</p>
+                                   <div class="standard-action-group">
+                                       <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                           <i class="fas fa-shopping-basket"></i>
+                                           <span>Ajouter</span>
+                                       </button>
+                                       <button class="standard-wish wish" title="Add to Wishlist">
+                                           <i class="fas fa-heart"></i>
+                                           <span>Ajouter au wishlist</span>
+                                       </button>
+                               <button class="standard-wish wish" title="Add to Wishlist" onClick={() => view(e.id)}>
+                               <i class="fas fa-eye"></i>
+                                Plus de Détails
+                                       </button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                     </Modal>}
+                               </div>
+                               <div class="standard-content">
+                                   <h4 class="standard-name">
+                                       <a href="" onClick={() => ShowItem(e)}>{name}</a>
+                                   </h4>
+                                   <h5 class="standard-price">
+                                   {discount!="0"&&
+                                               <>
+                                                   <del> €{price}</del>
+                                                   <span> € {Math.round((price-(price*discount)/100)*100)/100}<small></small></span>
+                                                   </>
+                                               }
+                                               {discount=="0"&&
+                                                   <>
+                                                  
+                                                   <span> € {price}</span>
+                                                   </>
+                                               }
+                                   </h5>
+                                   
+                                   <p class="standard-desc">{shortenText(description, 350)}</p>
+                                   <div class="standard-action-group">
+                                       <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                           <i class="fas fa-shopping-basket"></i>
+                                           <span>Ajouter au chariot</span>
+                                       </button>
+                                       <div class="product-action">
+                                           <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
+                                           <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                           <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                       </div>
+                                       <button class="standard-wish wish" title="Add to Wishlist" onClick={() => ShowItem(e)}>
+                                           <i class="fas fa-eye"></i>
+                                           <span>Plus de Détails</span>
+                                       </button>
+                                       <button class="standard-wish wish" title="Add to Wishlist" onClick={() => addToWish(e)} >
+                                           <i class="fas fa-heart"></i>
+                                           <span>Ajouter au Wishlist</span>
+                                       </button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       </div>
+                       </>
                                );
                               })}  
+                  </div>
+                </div>
                 <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 productsPerPage={productsPerPage}
                 totalProducts={filteredProducts.length}
                 />
-                </div>
-                </div>
-            
             </div>
             </section>
 
