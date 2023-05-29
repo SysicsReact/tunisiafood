@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails } from "../firebase.config";
+import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails, RemoveRefCommand } from "../firebase.config";
 import { onAuthStateChanged } from "firebase/auth";
 import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
@@ -59,7 +59,7 @@ const Header = () => {
     const wishItems = useSelector(selectWishItems);
     const cartTotalQuantity = useSelector(selectCarTotalQuantity);
     const cartTotalAmount = useSelector(selectCarTotalAmount);
-    const url = window.location.href;
+   
    
     
     //-------get user by ID
@@ -77,6 +77,12 @@ const Header = () => {
                             setLogUser(docSnap.data())
                         }
                     })
+                    let url = window.location.href.toLowerCase();
+
+                    if(!url.includes("checkoutsuccess") ){
+                        RemoveRefCommand(true,uid);
+                    }
+                   
                 }
             }
         })

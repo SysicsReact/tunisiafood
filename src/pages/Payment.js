@@ -1,18 +1,21 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase.config";
+import { RemoveRefCommand, auth, db,removePaymentByUserId } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { SAVE_URL, CALCULATE_TOTAL_QUANTITY, 
      CALCULATE_SUBTOTAL, CLEAR_CART, REMOVE_FROM_CART, 
      selectCartItems, selectCarTotalAmount} from "../redux/slice/cartSlice";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc,updateDoc, addDoc, Timestamp, collection } from "@firebase/firestore";
+import { doc, getDoc,serverTimestamp, updateDoc, addDoc, Timestamp, collection } from "@firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectEmail, selectUserID  } from '../redux/slice/authSlice';
 import { selectShippingAddress } from '../redux/slice/checkoutSlice';
+
+
+
 function Payment() {
 
   const [user] = useAuthState(auth);
@@ -23,12 +26,12 @@ function Payment() {
   const[livraisonCost,SetLivraisonCost]=useState("10")
   const cartItems = useSelector(selectCartItems);
   const cartTotalAmount = useSelector(selectCarTotalAmount);
+  const [commandReference, setCommandReference] = useState("1111")
   const url = window.location.href;
   const dispatch = useDispatch();
   //Payment 
   const [responseData, setResponseData] = useState(null);
   const[canOpenWindow , setCanOpenWindow] = useState(false);
-
     const fees = shippingAddress.livraisonType;
     
     useEffect(() => {
@@ -49,31 +52,57 @@ function Payment() {
 
   let price= cartTotalAmount.toString();
   let priceFinal = (parseFloat(livraisonCost) + parseFloat(price)) * 100;
+  priceFinal = priceFinal.toFixed(2);
   useEffect(() => {
       dispatch(CALCULATE_SUBTOTAL())
       dispatch(CALCULATE_TOTAL_QUANTITY())
       dispatch(SAVE_URL(url))
   }, [dispatch, cartItems]);
-  console.log(url);
 
-  //alert(fees)
+  useEffect(() => {
+
+    // setIsLoading(true);
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+        }
+    })
+}, [dispatch])
   //Payment API
-  const handleApiCall = async () => {
+  const generateData = async() =>{
+    removePaymentByUserId(user.uid)
+    .then((isRemoved) => {
+    if (isRemoved) {
+        const randomId = Math.random().toString(36).substring(2) + Date.now().toString(36);
+        setCommandReference(randomId);
+        handleApiCall(randomId)
+        console.log('Removal process completed.');
+        
+        } else {
+        console.log('Removal process failed.');
+        }
+        })
+    .catch((error) => {
+        toast.error('Erreur lors du processus: ', error);
+    });
+  }
+  const handleApiCall = async (refid) => {
       const url = "https://api.konnect.network/api/v2/payments/init-payment";
       const requestBody = {
         receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
-        token: "EUR",
-        amount:  priceFinal,
+        token: "TND",
+        amount: 5000 ,
         type: "immediate",
         lifespan: 10,
         feesIncluded: false,
+        orderId: refid,
         webhook: false,
         silentWebhook: true,
-        successUrl: "https://cooktounsi.com/CheckoutSuccess",
+        //successUrl: "https://cooktounsi.com/CheckoutSuccess", 
+        successUrl:`https://cooktounsi.com/CheckoutSuccess?refid=${refid}`,
         failUrl: "https://dev.konnect.network/gateway/payment-failure",
         checkoutForm: true,
       };
-  
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -83,23 +112,59 @@ function Payment() {
         body: JSON.stringify(requestBody)
       });
       const jsonData = await response.json();
-      setResponseData(jsonData);
-      setCanOpenWindow(true);
-      //console.log(shippingAddress);
+      if(response.ok){
+        setResponseData(jsonData);
+        setCanOpenWindow(true);
+      }
+      else{
+        setResponseData(null);
+        setCanOpenWindow(true);
+      }
+     
     };
     useEffect(() => {
       // Open the link in a new tab when the countdown ends
       if (canOpenWindow === true) {
         // 👇 Open link in new tab programmatically
-        if(responseData.payUrl != null)
+        if(responseData){
+            if(responseData.payUrl != null)
         {
-      setCanOpenWindow(false);
+            console.log(responseData);
+            //setCanOpenWindow(false);
+            addPaymentToStart();
+            //const checkIfComplete = await RemoveRefCommand(true,user.uid);
         }
+        }
+        else{
+            toast.error("plz regenerate again");
+        }
+        
       }
     }, [responseData]);
     //Payment done
-
-
+    const addPaymentToStart = async () => {
+        const userId = 'USER_ID'; // Replace with the actual user ID
+         // Replace with the actual command reference
+    
+        try {
+          // Create a new document in "paymentstostart" collection
+          const p =  await addDoc(collection(db, 'paymentstostart'), {
+            userId: user.uid,
+            items: cartItems,
+            totalAmount: priceFinal/100,
+            commandReference: commandReference,
+            shippingAddress,
+            state: "-1",
+            timestamp: serverTimestamp(),
+          });
+        
+          console.log('Payment added successfully!');
+          window.location.href = responseData.payUrl;
+        } catch (error) {
+          console.error('Error adding payment: ', error);
+        }
+      };
+     
   return (
     <html lang="en">
           <head>
@@ -213,16 +278,21 @@ function Payment() {
                 </div>
 
             <div class="checkout-proced">
-      <button class="btn btn-inline" onClick={handleApiCall}>Accéder Au Paiement</button>
+      <button class="btn btn-inline" onClick={generateData}>Accéder Au Paiement</button>
       <br/>
-      {responseData && (
+      
+      {/*{responseData && (
+        
         <>
+        
         <div className="container-iframe">
             <iframe className="responsive-iframe" data={responseData.payUrl} width="1400" height="600" type="text/html">
             </iframe>
         </div>
+       
         </>
-      )}
+       
+      )}*/}
     </div>
             </div>
                     </div>

@@ -58,7 +58,7 @@ const OrderDetails = () => {
                          <div class="col-lg-12">
                          <div class="orderlist">
                               <div class="orderlist-head">
-                                   <h5 >Commande : </h5>
+                                   <h5 >Votre Commande : </h5>
                               </div>
                               <div class="orderlist-body">
                                    <div class="row">
@@ -67,12 +67,12 @@ const OrderDetails = () => {
                                         <div class="col-lg-4">
                                         <ul class="orderlist-details">
                                              <li>
-                                                  <h6>Identifiant:</h6>
+                                                  <h6>Référence:</h6>
                                                   <p>{order.id}</p>
                                              </li>
                                              <li>
-                                                  <h6>Passée le:</h6>
-                                                  <p>{order.timestamp}</p>
+                                                  <h6>Téléphone:</h6>
+                                                  <p>{order.shippingAddress.phone}</p>
                                              </li>
                                              <li>
                                                   <h6>Etat:</h6>
@@ -90,20 +90,16 @@ const OrderDetails = () => {
                                         <ul class="orderlist-details">
                                             <li>
                                                 <h6>Prix:</h6>
-                                                <p>€ {order.price_total.toFixed(2)}</p>
+                                                <p>€ {order.totalAmount}</p>
                                             </li>
                                             <li>
                                                 <h6>Livraison:</h6>
-                                                <p></p>
+                                                <p>{order.shippingAddress.livraisonType}</p>
                                             </li>
                                             <li>
-                                                <h6>Total<small>(H-TVA)</small>:</h6>
-                                                {order.livraisonType.livraisonType=="Livraison rapide"&&
-                                            <p>{(parseFloat(25) + parseFloat(order.price_total)).toFixed(2)}</p>}
-                                             {order.livraisonType.livraisonType=="Livraison Standard"&&
-                                            <p>{(parseFloat(10) + parseFloat(order.price_total)).toFixed(2)}</p>}   
-                                            {order.livraisonType.livraisonType=="Livraison Standard En europe"&&
-                                            <p>{(parseFloat(15) + parseFloat(order.price_total)).toFixed(2)}</p>}
+                                                <h6>Date de livraison:</h6>
+                                                {order.shippingAddress.livraisonType=="Livraison Standard"&&
+                                            <p> 10 à 15 jours </p>}
                                                 
                                             </li>
                                         </ul>
@@ -112,15 +108,15 @@ const OrderDetails = () => {
                                         <ul class="orderlist-details">
                                             <li>
                                                 <h6>Pays:</h6>
-                                                <p>{order.shipping.country}</p>
+                                                <p>{order.shippingAddress.country}</p>
                                             </li>
                                             <li>
                                                 <h6>Ville:</h6>
-                                                <p>{order.shipping.city}</p>
+                                                <p>{order.shippingAddress.city}</p>
                                             </li>
                                             <li>
                                                 <h6>Adresse:</h6>
-                                                <p>{order.shipping.adress}</p>
+                                                <p>{order.shippingAddress.address}</p>
                                             </li>
                                         </ul>
                                         </div>
@@ -145,7 +141,7 @@ const OrderDetails = () => {
                                              </tr>
                                         </thead>
                                         <tbody>
-                                        { order.product.map((cart, index) =>{
+                                        { order.items.map((cart, index) =>{
                                              const {id, name, price, photo, cartQuantity,weight , category} = cart
                                             return(
                                              <tr key={id}>

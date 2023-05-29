@@ -65,8 +65,7 @@ function Cgv() {
        <div class="scrollspy-content" id="item-1">
                <h3>ARTICLE1:</h3>
                <p>Conformément à Loi n°200-83 du 9 août 2000, relative aux échanges et au commerce électronique, il est précisé dans cet article l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
-<br/>Téléphone : 216 ********/ Adresse e-mail : contact@cooktounsi.com
-Le directeur de publication du site est : Mr/Mme *****************
+<br/>Téléphone : 216 50 450 960/ Adresse e-mail : contact@cooktounsi.com.
 <br/>Le site <Link to="/">www.cooktounsi.com </Link>est hébergé par <b>Firebase</b>
 <br/>Les dispositions suivantes ont pour objet de définir les Conditions Générales de Vente sur le Site 
 <Link to="/">«https://www.cooktounsi.com/»</Link>

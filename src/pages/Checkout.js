@@ -235,7 +235,6 @@ export default function Checkout() {
                                     <h6>Pays</h6>
                                     <select class="form-select" 
                                     required
-                                    value={loggedUser.country}
                                     name="country"
                                     onChange={(e) => handleShipping(e)} >
                                         Choisir votre pays

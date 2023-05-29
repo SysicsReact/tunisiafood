@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Loader from '../components/loader/Loader';
-import { useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase.config";
+import { redirect, useNavigate, Link } from "react-router-dom";
+import { auth, db,removePaymentByUserId } from "../firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import {  CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, CLEAR_CART,
      selectCartItems, selectPreviousURL, selectCarTotalAmount} from "../redux/slice/cartSlice";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc,updateDoc, addDoc, Timestamp, collection } from "@firebase/firestore";
+import { doc, getDoc,updateDoc, addDoc, Timestamp, collection,query,where, getDocs, } from "@firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
-import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectEmail, selectUserID  } from '../redux/slice/authSlice';
 import { selectShippingAddress, CLEAR_SHIPPING_ADDRESS } from '../redux/slice/checkoutSlice';
-
 function CheckoutSuccess() {
     const [user] = useAuthState(auth);
   const [loggedUser, setLoggedUser] = useState({})
@@ -23,47 +19,68 @@ function CheckoutSuccess() {
   const cartTotalAmount = useSelector(selectCarTotalAmount);
   const dispatch = useDispatch();
   const previousURL = useSelector(selectPreviousURL);
+  const [saved, setSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  
-  const saveOrder = () => {
-    const today = new Date();
-    const date = today.toDateString();
-    const time = today.toLocaleTimeString();
-    const orderConfig = {
-      userEmail,
-      orderDate: date,
-      orderAmount: cartTotalAmount,
-      cartItems,
-      shippingAddress,
-      createdAt: Timestamp.now().toDate(),
-    };
+
+  const GenerateOrder = async(refID)=>{
+    saveOrder(refID)
+    .then((isRemoved) => {
+        if (isRemoved) {
+            removePaymentByUserId(user.uid)
+            }
+            })
+        .catch((error) => {
+            //console.log('Error during removal process: ');
+        });
+  }
+  const saveOrder = async (param) => {
+
     try {
-      addDoc(collection(db, "orders"), orderConfig);
-     toast.success("Commande Envoyé !");
+      const q = query(collection(db, 'paymentstostart'), where('userId', '==', user.uid),where('commandReference', '==', param));
+      const querySnapshot = await getDocs(q);
+      if(querySnapshot.docs.length<=0){
+       // navigate('/OrderHistory') 
+      }
+      const addPromises = querySnapshot.docs.map(async (doc) => {
+        const orderData = doc.data();
+        
+        // Replace 'orders' with the name of the collection you want to add the documents to
+        await addDoc(collection(db, 'orders'), orderData);
+      });
+      await Promise.all(addPromises);
+      toast.success('Commande Réçue Avec Succès!');
+      setSaved(true);
+      return true;
     } catch (error) {
-      toast.error("Something Went Wrong");
+      toast.error('Quelque chose s est mal passé:', error);
+      return false;
     }
   };
+useEffect(() => {
+    // This function will be called only once when the component mounts
+    if(user && user.uid){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+    
+    // Accessing query string values
+        const param1 = urlParams.get('refid');
+        GenerateOrder(param1);
+    }
+    
+  }, [dispatch, user]);
   
+
   useEffect(() => {
     if(cartItems){
-        dispatch(CALCULATE_SUBTOTAL())
-        dispatch(CALCULATE_TOTAL_QUANTITY())
-       // dispatch(CLEAR_SHIPPING_ADDRESS())
-       // dispatch(CLEAR_CART())
+       // if(saved){
+            dispatch(CALCULATE_SUBTOTAL())
+            dispatch(CALCULATE_TOTAL_QUANTITY())
+           //dispatch(CLEAR_SHIPPING_ADDRESS())
+          // dispatch(CLEAR_CART())
+       // }
+        
     }
-  }, [dispatch, cartItems]);
-
-      // Save Order In DB
-  const redirectUser = () =>{
-    if (previousURL.includes("Payment")){
-        saveOrder();
-    }else{
-        toast.error("Quelque chose s'est mal passé");
-    }
-  console.log(previousURL)}
-
-    //toast.success("Paiement réçu avec succeès !");
+  }, [dispatch, cartItems, saved]);
   
     
   return (
@@ -88,54 +105,35 @@ function CheckoutSuccess() {
           <link rel="stylesheet" href="assets/css/checkout.css"></link>
           </head>
      <body>
-     <div className="backdrop"></div>
-     <a class="backtop fas fa-arrow-up" href="#"></a>
-     <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-         <div class="container">
-             <h2>Checkout</h2>
-             <ol class="breadcrumb">
-                 <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                 <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-             </ol>
-         </div>
-     </section>
-     <section class="inner-section invoice-part">
-     <div class="container">
-         <div class="row">
-             <div class="col-lg-12">
-                 <div class="alert-info">
-                     <p>Merci! Nous avons reçu votre commande.</p>
-                 </div>
-             </div>
-             <div class="col-lg-12">
-                 <div class="account-card">
-                     <div class="account-title">
-                         <h4>Commande</h4>
-                     </div>
-                     <div class="account-content">
-                         <div class="invoice-recieved">
-                             <h6>order number <span>1665</span></h6>
-                             <h6>order date <span>february 02, 2021</span></h6>
-                             <h6>total amount <span>$24,176.00</span></h6>
-                             <h6>payment method <span>Cash on delivery</span></h6>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="row">
-             <div class="col-lg-12 text-center mt-5">
-                 <a class="btn btn-inline" href="#">
-                     <i class="icofont-download"></i>
-                     <span>download invoice</span>
-                 </a>
-                 <div class="back-home">
-                     <a href="index.html">Back to Home</a>
-                 </div>
-             </div>
-         </div>
-     </div>
-     </section>
+     <section class="section countdown-part">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="countdown-content">
+                        <h3 style={{visibility:"hidden"}}>Merci ! </h3>
+                            <h3>Merci ! Nous avons reçu votre commande.</h3>
+                            <Link to={"/OrderHistory"}> <a href="" class="btn btn-inline">
+                                <i class="fas fa-eye"></i>
+                                <span>commandes</span>
+                            </a></Link>
+                           <a style={{visibility:"hidden"}} className="">
+                                        <span>A</span>
+                                    </a>
+                                    <Link to={"/"}>  <a href="" class="btn btn-inline">
+                                <i class="fas fa-home"></i>
+                                <span>Accueil</span>
+                            </a></Link>
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-5">
+                        <div class="countdown-img">
+                            <img src="assets/images/heart.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
      </body>
      </html>
   )

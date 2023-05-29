@@ -22,6 +22,7 @@ function Dashboard() {
     const[singleProduct,setSingleProduct]=useState([])
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false)
+    const [isVideo, setIsVideo] = useState(false)
     //const [isLoading, setIsLoading ] = useState(false);
     const {data, isLoading} = useFetchCollection("products")
     const products = useSelector(selectProducts)
@@ -44,7 +45,10 @@ function Dashboard() {
         setSingleProduct(e);
         setIsOpen(true);
            }
-    
+    const ShowVideo=(e)=>{
+    setSingleProduct(e);
+    setIsVideo(true);
+        }
     const view = async (idp) => {
         navigate("/ProductItems", { state: { id: idp } });
           };
@@ -175,7 +179,7 @@ function Dashboard() {
                                     </a>
                                     <div className="product-widget">
                                         <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
-                                        <a title="Product Video" href={video} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                        <a  href={video} className="venobox fas fa-play"></a>
                                        <button onClick={()=> addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                     </div>
                                 </div>
@@ -264,6 +268,13 @@ function Dashboard() {
                         </div>
                     </div>
     </Modal>}
+
+    {isVideo && <Modal modalCss = {"myModal"} 
+    setIsVideo = {setIsVideo}>
+            <div  key={singleProduct.id}>
+            <iframe width="560" height="315" src={singleProduct.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+    </Modal>}
                                 <div className="product-content">
                                     <div className="product-rating">
                                     <i className="product-price" href="">{weight} {ReturnMeasurement(category)}</i>
@@ -332,7 +343,7 @@ function Dashboard() {
                 </div>
                 <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
                 {!isLoading &&products.slice(0,6).map((e) => {
-                       const { id, tag, category,discount, photo,name,price, weight, description } = e;
+                       const { id, tag, category,discount, video, photo,name,price, weight, description } = e;
                       
                     return (
                     <div className="col">
@@ -361,7 +372,7 @@ function Dashboard() {
                                 </a>
                                 <div className="feature-widget">
                                 <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
-                                        <a title="Product Video" onClick={() => ShowItem(e)} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                        <a title="Product Video" href={video} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <button onClick={() => addToWish(e)} className="product-v"><i className="fas fa-heart" style={{color:"white"}}></i></button>
                                 </div>
                             </div>

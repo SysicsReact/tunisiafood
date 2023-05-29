@@ -1,10 +1,12 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+
+
 import { getDatabase, ref, set } from "firebase/database";
 import { GoogleAuthProvider,getAuth,signInWithPopup,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
-import { getFirestore } from "@firebase/firestore";
-import { useState } from "react";
+import { getFirestore,collection, query, where, getDocs, deleteDoc } from "@firebase/firestore";
 import { updatex } from "./components/Header";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCpajBxsVUdz7VMFWI9tPQihxQPoXv0F2Y",
@@ -22,7 +24,41 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 
+  
 
+const RemoveRefCommand = async (force, id)=>{
+  var str=window.location.href.toLowerCase()
+ 
+  try {
+    const q = query(collection(db, 'paymentstostart'), where('userId', '==', id));
+    const querySnapshot = await getDocs(q);
+
+    const deletionPromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
+    await Promise.all(deletionPromises);
+    return true;
+  } catch (error) {
+    console.error('Error removing payment: ', error);
+    return false;
+  }
+}
+
+const removePaymentByUserId = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const q = query(collection(db, 'paymentstostart'), where('userId', '==', userId));
+      const querySnapshot = await getDocs(q);
+
+      const deletionPromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
+      await Promise.all(deletionPromises);
+
+      console.log('Payments removed successfully!');
+      resolve(true); // Removal completed successfully
+    } catch (error) {
+      console.error('Error removing payments: ', error);
+      resolve(false); // Removal failed
+    }
+  });
+};
 
 
 const sendPasswordReset = async (email) => {
@@ -88,4 +124,4 @@ switch(category)
 export { app, db, storage, auth ,
   sendPasswordReset,
   createUserWithEmailAndPassword,
-  logout,changeIsLoading,changeIsTesting,testLoading,SetCartDetails,GetCardDetails,ReturnMeasurement };
+  logout,changeIsLoading,changeIsTesting,testLoading,SetCartDetails,GetCardDetails,ReturnMeasurement,RemoveRefCommand,removePaymentByUserId };
