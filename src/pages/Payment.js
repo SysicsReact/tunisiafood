@@ -90,8 +90,8 @@ function Payment() {
       const url = "https://api.konnect.network/api/v2/payments/init-payment";
       const requestBody = {
         receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
-        token: "TND",
-        amount: 5000 ,
+        token: "EUR",
+        amount: priceFinal ,
         type: "immediate",
         lifespan: 10,
         feesIncluded: false,
