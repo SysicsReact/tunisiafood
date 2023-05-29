@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
     let data = GetCardDetails();
     const notifyError = () => toast.error("Complete your profile");
-    const notifyErr = () => toast.error("Authentification required");
+    const notifyErr = () => toast.error("Authentification requise");
     const navigate = useNavigate();
     const [loggedUser, setLoggedUser] = useState({});
     const [user] = useAuthState(auth);
@@ -42,8 +42,14 @@ const Cart = () => {
     }, [dispatch, cartItems]);
    
     const processToCheckout = () => {
-      
-        navigate("/checkout")
+        if(user){
+            navigate("/checkout")
+        }
+        else{
+            notifyErr();
+            navigate("/login")
+        }
+        
     }
     return (
 

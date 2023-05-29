@@ -9,6 +9,41 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectEmail, selectUserID  } from '../redux/slice/authSlice';
 import { selectShippingAddress, CLEAR_SHIPPING_ADDRESS } from '../redux/slice/checkoutSlice';
+
+const GenerateOrder = async(refID,ID)=>{
+  saveOrder(refID)
+  .then((isRemoved) => {
+      if (isRemoved) {
+          removePaymentByUserId(ID)
+          }
+          })
+      .catch((error) => {
+          //console.log('Error during removal process: ');
+      });
+}
+const saveOrder = async (param,ID) => {
+
+  try {
+    const q = query(collection(db, 'paymentstostart'), where('userId', '==', ID),where('commandReference', '==', param));
+    const querySnapshot = await getDocs(q);
+    if(querySnapshot.docs.length<=0){
+     // navigate('/OrderHistory') 
+    }
+    const addPromises = querySnapshot.docs.map(async (doc) => {
+      const orderData = doc.data();
+      
+      // Replace 'orders' with the name of the collection you want to add the documents to
+      await addDoc(collection(db, 'orders'), orderData);
+    });
+    await Promise.all(addPromises);
+    toast.success('Commande Réçue Avec Succès!');
+    //setSaved(true);
+    return true;
+  } catch (error) {
+    toast.error('Quelque chose s est mal passé:', error);
+    return false;
+  }
+};
 function CheckoutSuccess() {
     const [user] = useAuthState(auth);
   const [loggedUser, setLoggedUser] = useState({})
@@ -22,40 +57,8 @@ function CheckoutSuccess() {
   const [saved, setSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const GenerateOrder = async(refID)=>{
-    saveOrder(refID)
-    .then((isRemoved) => {
-        if (isRemoved) {
-            removePaymentByUserId(user.uid)
-            }
-            })
-        .catch((error) => {
-            //console.log('Error during removal process: ');
-        });
-  }
-  const saveOrder = async (param) => {
-
-    try {
-      const q = query(collection(db, 'paymentstostart'), where('userId', '==', user.uid),where('commandReference', '==', param));
-      const querySnapshot = await getDocs(q);
-      if(querySnapshot.docs.length<=0){
-       // navigate('/OrderHistory') 
-      }
-      const addPromises = querySnapshot.docs.map(async (doc) => {
-        const orderData = doc.data();
-        
-        // Replace 'orders' with the name of the collection you want to add the documents to
-        await addDoc(collection(db, 'orders'), orderData);
-      });
-      await Promise.all(addPromises);
-      toast.success('Commande Réçue Avec Succès!');
-      setSaved(true);
-      return true;
-    } catch (error) {
-      toast.error('Quelque chose s est mal passé:', error);
-      return false;
-    }
-  };
+  
+ 
 useEffect(() => {
     // This function will be called only once when the component mounts
     if(user && user.uid){
@@ -64,7 +67,7 @@ useEffect(() => {
     
     // Accessing query string values
         const param1 = urlParams.get('refid');
-        GenerateOrder(param1);
+        GenerateOrder(param1,user.uid);
     }
     
   }, [dispatch, user]);
