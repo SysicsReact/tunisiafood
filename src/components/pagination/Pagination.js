@@ -14,7 +14,13 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  //Scroll up 
+  const handleScrollToTop = () => {
+     window.scrollTo({
+       top: 0,
+       behavior: 'smooth',
+     });
+   };
   // GO to next page
   const paginateNext = () => {
     setCurrentPage(currentPage + 1);
@@ -44,25 +50,21 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
      <div className="row">
           <div className="col-lg-12">
                <div className="bottom-paginate"> 
-                    <ul className="pagination">
-                    <p className="page-info"> Affichage de </p>
-                    <li className="page-item"> <button className="header-widget">
-                         <a className="page-link">{`${currentPage}`}</a></button></li>
-                    <p className="page-info"> {` Sur `} </p>
-                    <li className="page-item"> <button className="header-widget">
-                         <a className="page-link">{`${Math.ceil(totalPages)}`}</a></button></li>
+                    
+                    <p className="page-info"> Affichage de {`${currentPage}`} {` Sur `}{`${Math.ceil(totalPages)}`} </p>
+                <ul className="pagination"> 
                          {currentPage!=pageNumbers[0]&&
-                          <li className= "page-item"  onClick={paginatePrev}>
-                          <a className="page-link">
-                               <i className="fas fa-long-arrow-alt-left"></i>
-                          </a>
-                     </li>
+                   
+                    <a className="page-link" onClick={paginatePrev}>
+                         <i className="fas fa-long-arrow-alt-left" onClick={handleScrollToTop}></i>
+                    </a>
+                   
                          }
                     {pageNumbers.map((number)=>{
                           if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit){
                         return(
-            <li className="page-item" >
-              <button className="header-widget"> <a className= {currentPage === number ? `page-link active` : `page-link`}
+            <li className="page-item" onClick={handleScrollToTop}>
+              <button className=""> <a className= {currentPage === number ? `page-link active` : `page-link`}
             onClick={() =>paginate(number)} 
             key={number}>{number}</a></button>
             </li>
@@ -70,10 +72,9 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
                     })}
                     {currentPage != pageNumbers[pageNumbers.length - 1]&&
                           <li className="page-item" onClick={paginateNext}>
-                              <button className="header-widget">
-                          <a className="page-link" >
-                               <i className="fas fa-long-arrow-alt-right"></i>
-                          </a></button>
+                          <a className="page-link">
+                               <i className="fas fa-long-arrow-alt-right" onClick={handleScrollToTop}></i>
+                          </a>
                      </li>
                     }
                     
