@@ -47,7 +47,7 @@ const filterSlice = createSlice({
         tempProducts = products;
       } else {
         tempProducts = products.filter(
-          (product) => product.category === category
+          (product) => product.category.includes(category)
         );
       }
       state.filteredProducts = tempProducts;
@@ -60,7 +60,7 @@ const filterSlice = createSlice({
           tempProducts = products;
         } else {
             tempProducts = products.filter(
-                (product) => product.tag === tag
+                (product) => product.tag.includes(tag)
               
           );
         }
