@@ -178,7 +178,7 @@ dispatch(ADD_TO_CART(e));
                     return (   
                         
                             <div class="col" key={id}>    
-                                <div class="product-card">
+                                <div class="product-card" onClick={()=>ShowItem(e)}>
                                     <div class="product-media">
                                         <div class="product-label">
                                              {tag=="nouveau"&&
@@ -198,7 +198,7 @@ dispatch(ADD_TO_CART(e));
                                         {category=="Boisson"&&
                                             <label class="label-text drink">{category}</label>}
                                         </button>
-                                        <a class="product-image" href="">
+                                        <a class="product-image">
                                             <img src={photo} alt="product"/>
                                         </a>
                                         <div className="product-widget">
