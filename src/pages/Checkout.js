@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {  json, useNavigate } from "react-router-dom";
-import { getDoc, updateDoc, doc } from "firebase/firestore";
+import { getDoc, updateDoc, collection, query, where, onSnapshot, documentId, setDoc, doc } from "firebase/firestore";
 import { db, auth } from '../firebase.config';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onAuthStateChanged } from "firebase/auth";
@@ -21,13 +21,14 @@ export default function Checkout() {
     }
      const cartItems = useSelector(selectCartItems);
      const cartTotalAmount = useSelector(selectCarTotalAmount);
+
+     var DBcountry = [];
+     const [select, setSelect] = useState('France');
+     const [test, setTest] = useState([])
+     const [test1, setTest1] = useState([])
      const cartTotalQuantity = useSelector(selectCarTotalQuantity);
      const[livraisonCost,SetLivraisonCost]=useState("10");
      const[livraisonType,SetLivraison]=useState({});
-     const [phone, setPhone] = useState({ changeState: 0 });
-     const [city, setCity] = useState({ changeState: 0 });
-     const [country, setCountry] = useState({ changeState: 0 });
-     const [adress, setAdress] = useState({ changeState: 0 });
      const dispatch = useDispatch();
      const initialAddressState = {
         address:"",
@@ -38,7 +39,36 @@ export default function Checkout() {
         livraisonType:"Livraison Standard",
     }
     const [shippingAddress, setShippingAddress] = useState({...initialAddressState});
-       
+    
+
+    useEffect(() => {
+        DBcountry = []
+        const q = query(
+            collection(db, "regions")
+        );
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if (!DBcountry.includes(doc.data().country)) {
+                    DBcountry.push(doc.data().country)
+                }
+            });
+        });
+        setTest(DBcountry)
+    }, []);
+        //----------get selected cities based on selected country
+
+        useEffect(() => {
+            const q = query(
+                collection(db, "regions"),
+                where(documentId(), "==", select)
+    
+            );
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setTest1(doc.data().optionSelected)
+                });
+            });
+        }, [select]);
     //-------get user by ID
         useEffect(() => {
             onAuthStateChanged(auth, (user) => {
@@ -57,6 +87,7 @@ export default function Checkout() {
         })
   
     const handleShipping = (e) =>{
+        setSelect(e.target.value)
         const {name, value} = e.target;
         setShippingAddress({
             ...shippingAddress,
@@ -99,48 +130,48 @@ export default function Checkout() {
      </head>
      <body>
                <div className="backdrop"></div>
-                <a class="backtop fas fa-arrow-up" href="#"></a>
-                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+                <a className="backtop fas fa-arrow-up" href="#"></a>
+                <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Caisse</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Checkout</li>
                         </ol>
                     </div>
                 </section>
             <ToastContainer />
      {cartItems.length === 0 ? (
           <>
-              <div class="cart-info-group">
-                  <div class="cart-footer">
+              <div className="cart-info-group">
+                  <div className="cart-footer">
                       <h6 className="coupon-btn">Nous Avons Bien Reçu Votre Commande. Merci pour votre fidélité!</h6>
                   </div>
               </div> 
-              <div class="cart-footer">
-                 <Link to={"/OrderHistory"}> <a class="cart-checkout-btn" href="#">
-                      <span class="checkout-label">Parcourir Votre Historique de Commandes</span>
+              <div className="cart-footer">
+                 <Link to={"/OrderHistory"}> <a className="cart-checkout-btn" href="#">
+                      <span className="checkout-label">Parcourir Votre Historique de Commandes</span>
                   </a></Link>
               </div>
-              <div class="cart-footer">
-              <Link to={"/ShopProduct"}>  <a class="cart-checkout-btn" href="#">
-                      <span class="checkout-label">Parcourir les produits</span>
+              <div className="cart-footer">
+              <Link to={"/ShopProduct"}>  <a className="cart-checkout-btn" href="#">
+                      <span className="checkout-label">Parcourir les produits</span>
                   </a></Link>
               </div>
           </>
       ) : (
           <>      
-       <section class="inner-section checkout-part">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12">
-              <div class="account-card">
-                            <div class="account-title">
+       <section className="inner-section checkout-part">
+      <div className="container">
+          <div className="row">
+              <div className="col-lg-12">
+              <div className="account-card">
+                            <div className="account-title">
                                 <h4>Votre Chariot</h4>
                             </div>
-                            <div class="account-content">
-                                <div class="table-scroll">
-                                    <table class="table-list">
+                            <div className="account-content">
+                                <div className="table-scroll">
+                                    <table className="table-list">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Produit</th>
@@ -157,13 +188,13 @@ export default function Checkout() {
                                 <>
                                         <tbody>
                                             <tr key={id}>
-                                                <td class="table-image"><img src={photo} alt="product"/></td>
-                                                <td class="table-name"><h6>{name}</h6></td>
-                                                <td class="table-quantity"><h6>{cartQuantity}</h6></td>
-                                                <td class="table-price"><h6>€{price}<small>/kilo</small></h6></td>
-                                                <td class="table-price"><h6>€{(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
-                                                <td class="table-action">
-                                                    <a class="trash" href="" title="Remove Wishlist" onClick={() => removeFromCart(cart)}><i class="icofont-trash"></i></a>
+                                                <td className="table-image"><img src={photo} alt="product"/></td>
+                                                <td className="table-name"><h6>{name}</h6></td>
+                                                <td className="table-quantity"><h6>{cartQuantity}</h6></td>
+                                                <td className="table-price"><h6>€{price}<small>/kilo</small></h6></td>
+                                                <td className="table-price"><h6>€{(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
+                                                <td className="table-action">
+                                                    <a className="trash" href="" title="Remove Wishlist" onClick={() => removeFromCart(cart)}><i className="icofont-trash"></i></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -175,13 +206,13 @@ export default function Checkout() {
                             </div>
                         </div>
               </div>
-              <div class="col-lg-12">
-                  <div class="account-card">
-                      <div class="account-title">
+              <div className="col-lg-12">
+                  <div className="account-card">
+                      <div className="account-title">
                           <h4>Votre Commande</h4>
                       </div>
-                      <div class="account-content">
-                          <div class="checkout-charge">
+                      <div className="account-content">
+                          <div className="checkout-charge">
                           <ul>
                                         <li>
                                             <span>Sub-total</span>
@@ -189,7 +220,7 @@ export default function Checkout() {
                                         </li>
                                         <li>
                                             <span>Livraison:</span>
-                                    <select class="form-select" value={shippingAddress.livraisonType}
+                                    <select className="form-select" value={shippingAddress.livraisonType}
                                     required
                                     defaultValue="Livraison Standard"
                                     name="livraisonType"
@@ -223,92 +254,79 @@ export default function Checkout() {
                       </div>
                   </div>
               </div>
-              <div class="col-lg-12">
-                <div class="account-card">
-                    <div class="account-title">
+              <div className="col-lg-12">
+                <div className="account-card">
+                    <div className="account-title">
                         <h4>Détails de livraison</h4>
                     </div>
-                    <form class="modal-content" onSubmit={handleSubmit}>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                    <form className="modal-content" onSubmit={handleSubmit}>
+                        <div className="row">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Pays</h6>
-                                    <select class="form-select" 
+                                    <select className="form-select" 
                                     required
                                     name="country"
                                     onChange={(e) => handleShipping(e)} >
                                         Choisir votre pays
-                                        <option value="">Choisir votre pays</option>
-                                        <option value="France">France</option>
-                                        <option value="Belgique">Belgique</option>
+                                        {test.map(fbb =>
+                            <option  >{fbb}</option>
+                        )};
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Ville</h6>
-                                    <select class="form-select"
+                                    <select className="form-select"
                                     required
                                     name="city"
                                     onChange={(e) => handleShipping(e)}>
-                                        <option value="">Choisir votre Ville</option>
-                                        <option value="Paris">Paris</option>
-                                        <option value="Lyon">Lyon</option>
-                                        <option value="Marseille">Marseille</option>
-                                        <option value="Toulouse">Toulouse</option>
-                                        <option value="Lille">Lille</option>
-                                        <option value="Nice">Nice</option>
-                                        <option value="Nantes">Nantes</option>
-                                        <option value="Strasbourg">Strasbourg</option>
-                                        <option value="Rennes">Rennes</option>
-                                        <option value="Grenoble">Grenoble</option>
-                                        <option value="Rouen">Rouen</option>
-                                        <option value="Toulon">Toulon</option>
-                                        <option value="Montpelier">Montpelier</option>
-                                        <option value="Douai et Lens">Douai et Lens</option>
-                                        <option value="Avignon">Avignon</option>
-                                        <option value="Saint-Etienne">Saint-Etienne</option>
+                                         {test1.map(b =>
+                        <option key={b.key} value={b.key}>{b}</option>
+                    )};
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Adresse</h6>
-                                    <input class="form-control" type="text"
+                                    <input className="form-control" type="text"
                                     onChange={(e) => handleShipping(e)}
                                     name="address"
                                     required
                                     />
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Code Postal</h6>
-                                    <input class="form-control" type="text" 
+                                    <input className="form-control" type="text" 
                                     onChange={(e) => handleShipping(e)}
                                     name="postal"
                                     required
                                     />
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Téléphone</h6>
-                                    <input class="form-control" type="text" 
+                                    <input className="form-control" type="text" 
                                     name="phone"
                                     required
                                     onChange={(e) => handleShipping(e)} />
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show" >
-                                <div class="profile-card contact active" >
+                            <div className="col-md-6 col-lg-4 alert fade show" >
+                                <div className="profile-card contact active" >
+                                <input type="checkbox" required id="checkout-check"/>
                                 <label >
-                            Veiller saisir les détails de livraisons par ici et confirmer. Veiller nous contacter si vous voulez changer l'adresse de livraison.</label>
+                                En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="checkout-proced">
-                                <button href="" class="btn btn-inline" type='submit' >procédez au payment</button>
+                        <div className="checkout-proced">
+                                <button href="" className="btn btn-inline" type='submit' >procédez au payment</button>
                         </div>
                     </form>
                     
