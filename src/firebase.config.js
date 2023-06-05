@@ -1,11 +1,12 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-
+import 'firebase/analytics';
 
 import { getDatabase, ref, set } from "firebase/database";
 import { GoogleAuthProvider,getAuth,signInWithPopup,signInWithEmailAndPassword, createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from "firebase/auth";
 import { getFirestore,collection, query, where, getDocs, deleteDoc } from "@firebase/firestore";
 import { updatex } from "./components/Header";
+import { getAnalytics } from "firebase/analytics";
 
 
 const firebaseConfig = {

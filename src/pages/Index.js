@@ -149,8 +149,15 @@ function Dashboard() {
                 <div>
                 <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
                 {!isLoading &&products.slice(0,10).map((e) => {
-                       const { id, weight, tag, category, photo, name, price, video, discount, description } = e;
-                      
+                       const { id, weight, tag, category, photo, name, price, video, discount, description,searchTags } = e;
+                       let concatenatedString = '';
+                       if(searchTags&& searchTags.length>0){
+                        searchTags.forEach((element) => {
+                            
+                            concatenatedString+=  element ;
+                            // Perform your desired actions with each element here
+                          });
+                       }
                     return (
                         <>  
                         <div className="col" key={id}>
@@ -175,7 +182,7 @@ function Dashboard() {
                             <label className="label-text drink">{category}</label>}
                                     </button>
                                     <a className="product-image"  onClick={() => ShowItem(e)}>
-                                        <img src={photo} alt="product"/>
+                                        <img src={photo} meta={concatenatedString} alt="product"/>
                                     </a>
                                     <div className="product-widget">
                                         <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
