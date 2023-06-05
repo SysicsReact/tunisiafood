@@ -188,26 +188,26 @@ function Payment() {
           </head>
           <body>
           <div className="backdrop"></div>
-                <a class="backtop fas fa-arrow-up" href="#"></a>
-                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+                <a className="backtop fas fa-arrow-up" href="#"></a>
+                <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Checkout</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Paiement</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Paiement</li>
                         </ol>
                     </div>
                 </section>
-          <section class="inner-section checkout-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="account-card">
-                            <div class="account-title">
+          <section className="inner-section checkout-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="account-card">
+                            <div className="account-title">
                                 <h4>Votre Commande</h4>
                             </div>
-                            <div class="account-content">
-                                <div class="checkout-charge">
+                            <div className="account-content">
+                                <div className="checkout-charge">
                                     <ul>
                                         <li>
                                             <span>Sub-total</span>
@@ -239,12 +239,12 @@ function Payment() {
                                 </div>
                             </div>
                         </div>
-                        <div class="account-card">
-                            <div class="account-title">
+                        <div className="account-card">
+                            <div className="account-title">
                                 <h4>Détails de livraison</h4>
                             </div>
-                            <div class="account-content">
-                                <div class="checkout-charge">
+                            <div className="account-content">
+                                <div className="checkout-charge">
                                     <ul> 
                                         <li>
                                             <span>Pays</span>
@@ -270,15 +270,15 @@ function Payment() {
                                 </div>
                             </div>
                         </div>
-            <div class="col-lg-12">
-                <div class="account-card">
+            <div className="col-lg-12">
+                <div className="account-card">
                                 <input type="checkbox" id="checkout-check" required/>
                                 <label for="checkout-check">
                              En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>
                 </div>
 
-            <div class="checkout-proced">
-      <button class="btn btn-inline" onClick={generateData}>Accéder Au Paiement</button>
+            <div className="checkout-proced">
+      <button className="btn btn-inline" onClick={generateData}>Accéder Au Paiement</button>
       <br/>
       
       {/*{responseData && (

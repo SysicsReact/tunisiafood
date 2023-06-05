@@ -33,6 +33,7 @@ import WishDetails from "./pages/WishDetails";
 import Faq from "./pages/Faq";
 import Cgv from "./pages/Cgv";
 import Payment from "./pages/Payment";
+
 let test = false;
 class App extends Component {
 
