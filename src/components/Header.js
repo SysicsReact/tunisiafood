@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails, RemoveRefCommand } from "../firebase.config";
+import {app, auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails, RemoveRefCommand } from "../firebase.config";
 import { onAuthStateChanged } from "firebase/auth";
 import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
@@ -15,6 +15,7 @@ import { selectCarTotalAmount, selectCarTotalQuantity } from "../redux/slice/car
 import { CALCULATE_TOTAL_QUANTITY, CALCULATE_SUBTOTAL, selectCartItems } from "../redux/slice/cartSlice";
 import { selectWishItems } from "../redux/slice/wishSlice";
 import { selectProducts } from "../redux/slice/productSlice";
+import { getAnalytics } from "firebase/analytics";
 
 const locations={}
 function checkIfTrue(){
@@ -224,6 +225,7 @@ const Header = () => {
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     useEffect(() => {
+        const firebaseAnalytics = getAnalytics(app);
         const handleResize = () => {
           setWindowWidth(window.innerWidth);
         };
