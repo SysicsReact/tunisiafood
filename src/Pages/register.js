@@ -66,7 +66,7 @@ const Register = () => {
     return (
         <html lang="en">
             <head>
-            <meta charset="UTF-8" />
+            <meta charSet="UTF-8" />
     <meta name="name" content="Cook Tounsi" />
     <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 

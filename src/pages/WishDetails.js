@@ -31,7 +31,7 @@ const WishDetails = () => {
     return (
         <html lang="en">
           <head>
-          <meta charset="UTF-8" />
+          <meta charSet="UTF-8" />
     <meta name="name" content="Cook Tounsi" />
     <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -51,50 +51,50 @@ const WishDetails = () => {
           </head>
           <body>
           <div className="backdrop"></div>
-                <a class="backtop fas fa-arrow-up" href="#"></a>
-                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+                <a className="backtop fas fa-arrow-up" href="#"></a>
+                <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Votre Liste des souhaits</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Liste des souhaits</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Liste des souhaits</li>
                         </ol>
                     </div>
                 </section>
 
             {wishItems.length === 0 ? (
                 <>
-                    <div class="cart-info-group">
-                        <div class="cart-footer">
+                    <div className="cart-info-group">
+                        <div className="cart-footer">
                             <h6 className="coupon-btn">Votre Chariot Est Vide !</h6>
                         </div>
                     </div>
-                    <div class="cart-footer">
-                        <a class="cart-checkout-btn" href="#">
-                            <span class="checkout-label">Parcourir les produits</span>
-                            <span class="checkout-price"><i class="fas fa-shopping-basket"></i></span>
+                    <div className="cart-footer">
+                        <a className="cart-checkout-btn" href="#">
+                            <span className="checkout-label">Parcourir les produits</span>
+                            <span className="checkout-price"><i className="fas fa-shopping-basket"></i></span>
                         </a>
                     </div>
                 </>
             ) : (
                 <>
                       
-             <section class="inner-section checkout-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert-info">
+             <section className="inner-section checkout-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="alert-info">
                             <p> <Link to="/ShopProduct"><a href="">Retour aux achats ?</a></Link></p>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="account-card">
-                            <div class="account-title">
+                    <div className="col-lg-12">
+                        <div className="account-card">
+                            <div className="account-title">
                                 <h4>Votre liste de souhaits</h4>
                             </div>
-                            <div class="account-content">
-                                <div class="table-scroll">
-                                    <table class="table-list">
+                            <div className="account-content">
+                                <div className="table-scroll">
+                                    <table className="table-list">
                                     <thead>
                                     <tr>
                                         <th scope="col">Product</th>
@@ -110,14 +110,14 @@ const WishDetails = () => {
                                 <>
                                         <tbody>
                                             <tr>
-                                        <td class="table-image"><img src={photo} alt="product"/></td>
-                                        <td class="table-name"><h6>{name}</h6></td>
-                                        <td class="table-price"><h6>${price}<small>/kilo</small></h6></td>
-                                        <td class="table-shop">
-                                            <button class="product-add" title="Ajouter" onClick={() => addToCart(wish)} >Ajouter</button>
+                                        <td className="table-image"><img src={photo} alt="product"/></td>
+                                        <td className="table-name"><h6>{name}</h6></td>
+                                        <td className="table-price"><h6>${price}<small>/kilo</small></h6></td>
+                                        <td className="table-shop">
+                                            <button className="product-add" title="Ajouter" onClick={() => addToCart(wish)} >Ajouter</button>
                                         </td>
-                                        <td class="table-action">
-                                            <a class="trash"  title="Supprimer" onClick={() => removeFromWish(wish)}><i class="icofont-trash"></i></a>
+                                        <td className="table-action">
+                                            <a className="trash"  title="Supprimer" onClick={() => removeFromWish(wish)}><i className="icofont-trash"></i></a>
                                         </td>
                                     </tr>
                                         </tbody>

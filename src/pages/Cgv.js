@@ -6,7 +6,7 @@ function Cgv() {
   return (
      <html>
      <head>
-     <meta charset="UTF-8" />
+     <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -28,41 +28,41 @@ function Cgv() {
      </head>
      <div className="backdrop"></div>
            <a className="backtop fas fa-arrow-up" href="#"></a>
-     <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-               <div class="container">
+     <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+               <div className="container">
                    <h2>CONDITIONS GÉNÉRALES DE VENTE</h2>
-                   <ol class="breadcrumb">
-                       <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                       <li class="breadcrumb-item active" aria-current="page">CONDITIONS GÉNÉRALES DE VENTE</li>
+                   <ol className="breadcrumb">
+                       <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                       <li className="breadcrumb-item active" aria-current="page">CONDITIONS GÉNÉRALES DE VENTE</li>
                    </ol>
                </div>
      </section>
 
      <body>
-     <section class="inner-section privacy-part">
-       <div class="container">
-           <div class="row">
-           <div class="col-lg-3">
-                   <nav class="nav nav-pills flex-column" id="scrollspy">
-                       <a class="nav-link" href="#item-1">ARTICLE1.</a>
-                       <a class="nav-link" href="#item-2">ARTICLE 2. CATALOGUE OU BOUTIQUE EN LIGNE</a>
-                       <a class="nav-link" href="#item-3">ARTICLE 3. PRIX</a>
-                       <a class="nav-link" href="#item-4">ARTICLE 4. COMMANDE EN LIGNE</a>
-                       <a class="nav-link" href="#item-5">ARTICLE 5. CONFIRMATION ET PAIEMENT DE LA COMMANDE</a>
-                       <a class="nav-link" href="#item-6">ARTICLE 6. SIGNATURE ÉLECTRONIQUE</a>
-                       <a class="nav-link" href="#item-7">ARTICLE 7. PREUVE DE LA TRANSACTION</a>
-                       <a class="nav-link" href="#item-8">ARTICLE 8. MODE DE PAIEMENT</a>
-                       <a class="nav-link" href="#item-9">ARTICLE 9. LIVRAISON</a>
-                       <a class="nav-link" href="#item-10">ARTICLE 10. GARANTIES DES PRODUITS</a>
-                       <a class="nav-link" href="#item-11">ARTICLE 11. INDISPONIBILITÉ DES PRODUITS ET REMBOURSEMENT</a>
-                       <a class="nav-link" href="#item-12">ARTICLE 12. DROIT DE RÉTRACTATION ET DE RETOUR</a>
-                       <a class="nav-link" href="#item-13">ARTICLE 13. REMBOURSEMENT </a>
-                       <a class="nav-link" href="#item-14">ARTICLE 14. FORCE MAJEURE </a>
+     <section className="inner-section privacy-part">
+       <div className="container">
+           <div className="row">
+           <div className="col-lg-3">
+                   <nav className="nav nav-pills flex-column" id="scrollspy">
+                       <a className="nav-link" href="#item-1">ARTICLE1.</a>
+                       <a className="nav-link" href="#item-2">ARTICLE 2. CATALOGUE OU BOUTIQUE EN LIGNE</a>
+                       <a className="nav-link" href="#item-3">ARTICLE 3. PRIX</a>
+                       <a className="nav-link" href="#item-4">ARTICLE 4. COMMANDE EN LIGNE</a>
+                       <a className="nav-link" href="#item-5">ARTICLE 5. CONFIRMATION ET PAIEMENT DE LA COMMANDE</a>
+                       <a className="nav-link" href="#item-6">ARTICLE 6. SIGNATURE ÉLECTRONIQUE</a>
+                       <a className="nav-link" href="#item-7">ARTICLE 7. PREUVE DE LA TRANSACTION</a>
+                       <a className="nav-link" href="#item-8">ARTICLE 8. MODE DE PAIEMENT</a>
+                       <a className="nav-link" href="#item-9">ARTICLE 9. LIVRAISON</a>
+                       <a className="nav-link" href="#item-10">ARTICLE 10. GARANTIES DES PRODUITS</a>
+                       <a className="nav-link" href="#item-11">ARTICLE 11. INDISPONIBILITÉ DES PRODUITS ET REMBOURSEMENT</a>
+                       <a className="nav-link" href="#item-12">ARTICLE 12. DROIT DE RÉTRACTATION ET DE RETOUR</a>
+                       <a className="nav-link" href="#item-13">ARTICLE 13. REMBOURSEMENT </a>
+                       <a className="nav-link" href="#item-14">ARTICLE 14. FORCE MAJEURE </a>
                    </nav>
                </div>
-<div class="col-lg-9">
+<div className="col-lg-9">
 <div data-bs-spy="scroll" data-bs-target="#scrollspy" data-bs-offset="0" tabindex="0">
-       <div class="scrollspy-content" id="item-1">
+       <div className="scrollspy-content" id="item-1">
                <h3>ARTICLE1:</h3>
                <p>Conformément à Loi n°200-83 du 9 août 2000, relative aux échanges et au commerce électronique, il est précisé dans cet article l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
 <br/>Téléphone : 216 50 450 960/ Adresse e-mail : contact@cooktounsi.com.
@@ -79,7 +79,7 @@ function Cgv() {
 <br/>Le vendeur se réserve le droit de modifier les CGV. Les modifications seront applicables dès leur mise en ligne.
 </p>
        </div>
-       <div class="scrollspy-content" id="item-2">
+       <div className="scrollspy-content" id="item-2">
           <h3>ARTICLE 2. CATALOGUE OU BOUTIQUE EN LIGNE</h3>
           <p>Par l'intermédiaire du Site, le vendeur fournit au client un catalogue ou une boutique en ligne présentant avec exactitude les produits vendus, sans que les photographies aient une valeur contractuelle.
           <br/>Les produits sont décrits et présentés avec la plus grande exactitude possible. Toutefois, en cas d'erreurs ou omissions dans la présentation, la responsabilité du vendeur ne pourra être engagée de ce fait.
@@ -88,7 +88,7 @@ function Cgv() {
           <br/>
 </p>
        </div>
-       <div class="scrollspy-content" id="item-3">
+       <div className="scrollspy-content" id="item-3">
                            <h3>ARTICLE 3. PRIX</h3>
            <p>
 <br/>Le vendeur se réserve le droit de modifier ses prix à tout moment en les publiant en ligne.
@@ -99,7 +99,7 @@ function Cgv() {
 <br/>Le paiement de la totalité du prix doit être réalisé lors de la commande.
           </p>
        </div>
-       <div class="scrollspy-content" id="item-4">
+       <div className="scrollspy-content" id="item-4">
        <h3>ARTICLE 4. COMMANDE EN LIGNE</h3>
      <p>Le client a la possibilité de remplir un bon de commande en ligne, au moyen d'un formulaire électronique. En remplissant le formulaire électronique, le client accepte le prix et la description des produits.
   <br/>Le client devra accepter en cliquant à l'endroit indiqué, les présentes Conditions Générales de Vente, pour que sa commande soit validée.
@@ -125,7 +125,7 @@ function Cgv() {
   <br/><b>13. </b>Une facture est automatiquement éditée, envoyée par email et reste disponible sur l’espace client.
        </p>
        </div>
-       <div class="scrollspy-content" id="item-5">
+       <div className="scrollspy-content" id="item-5">
            <h3>ARTICLE 5. CONFIRMATION ET PAIEMENT DE LA COMMANDE</h3>
            <p>Il s'agit d'une commande avec obligation de paiement, ce qui signifie que la passation de la commande implique un règlement du client.
 <br/><b>1. PAIEMENT</b>
@@ -148,26 +148,26 @@ function Cgv() {
 <br/><b>Email : contact@cooktounsi.com</b>
    </p>
        </div>
-       <div class="scrollspy-content" id="item-6">
+       <div className="scrollspy-content" id="item-6">
            <h3>ARTICLE 6. SIGNATURE ÉLECTRONIQUE</h3>
            <p>
            Conformément aux dispositions de la Loi n° 2000-230 du 13 mars 2000, la fourniture en ligne du numéro de carte bancaire de l'acheteur et la validation finale de la commande valent preuve de l'accord du client, de l'exigibilité des sommes dues au titre du bon de commande, signature et acceptation expresse de toutes les opérations effectuées.
            </p>
        </div>
-       <div class="scrollspy-content" id="item-7">
+       <div className="scrollspy-content" id="item-7">
            <h3>ARTICLE 7. PREUVE DE LA TRANSACTION</h3>
            <p>
            Les communications, commandes et paiements intervenus entre le client et le vendeur pourront être prouvés grâce aux registres informatisés, conservés dans les systèmes informatiques du vendeur dans des conditions raisonnables de sécurité. Les bons de commandes et factures sont archivés sur un support fiable et durable considéré, notamment, comme un moyen de preuve.
            <br/>
            </p>
        </div>
-       <div class="scrollspy-content" id="item-8">
+       <div className="scrollspy-content" id="item-8">
 <h3>ARTICLE 8. MODE DE PAIEMENT</h3>
 <p>L'ensemble des modes de paiement mis à la disposition du client sont listés sur le Site du vendeur. Le client garantit au vendeur qu'il dispose des autorisations éventuellement nécessaires pour utiliser le mode de paiement choisi par lui, lors de la passation de commande.
 <br/>
 </p>
        </div>
-       <div class="scrollspy-content" id="item-9">
+       <div className="scrollspy-content" id="item-9">
 <h3>ARTICLE 9. LIVRAISON</h3>
 <p>La livraison n'est faite qu'après confirmation du paiement par l'organisme bancaire du vendeur.
 Les produits sont livrés à l'adresse indiquée par le client sur le formulaire en ligne valant bon de commande, le client devant veiller à son exactitude.
@@ -237,7 +237,7 @@ Commande enregistrée en date du :
 <br/>Tout produit à échanger ou à rembourser devra être retourné au vendeur dans son ensemble et dans son emballage d'origine. Les frais de retour sont à la charge du client.
 </p>
        </div>
-       <div class="scrollspy-content" id="item-10">
+       <div className="scrollspy-content" id="item-10">
 <h3>ARTICLE 10. GARANTIES DES PRODUITS</h3>
 <p>Le vendeur est garant de la conformité des produits au contrat.
 <br/>Le client peut formuler une demande au titre de la garantie légale de conformité, conformément aux dispositions des articles L. 211-4 du Code de la consommation, ou au titre de la garantie des vices des articles 1641 et suivants du Code civil.
@@ -252,13 +252,13 @@ Commande enregistrée en date du :
 <br/>Le client, s'il met en œuvre la garantie des vices prévue aux articles 1641 et suivants du Code civil, pourra choisir entre la résolution de la vente ou une réduction du prix, et ce conformément à l'article 1644 du Code civil.
 </p>
        </div>
-       <div class="scrollspy-content" id="item-11">
+       <div className="scrollspy-content" id="item-11">
 <h3>ARTICLE 11. INDISPONIBILITÉ DES PRODUITS ET REMBOURSEMENT</h3>
 <p>En cas d'indisponibilité d'un produit commandé, le client en sera informé par courrier électronique. Le client aura la possibilité d'annuler sa commande et aura ainsi le choix entre le remboursement des sommes versées par lui, dans les 14 jours au plus tard de leur versement, ou à l'échange du produit.
 <br/>
 </p>
        </div>
-       <div class="scrollspy-content" id="item-12">
+       <div className="scrollspy-content" id="item-12">
 <h3>ARTICLE 12. DROIT DE RÉTRACTATION ET DE RETOUR</h3>
 <p>Avant l'expiration du délai de rétractation, le client fera valoir son droit de rétractation en contactant le service client :
 <br/>- Email : contact@cooktounsi.com

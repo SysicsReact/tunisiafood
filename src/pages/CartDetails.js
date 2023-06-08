@@ -271,7 +271,7 @@ const CartDetails = () => {
     return (
         <html lang="en">
           <head>
-          <meta charset="UTF-8" />
+          <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -291,13 +291,13 @@ const CartDetails = () => {
           </head>
           <body>
           <div className="backdrop"></div>
-                <a class="backtop fas fa-arrow-up" href="#"></a>
-                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+                <a className="backtop fas fa-arrow-up" href="#"></a>
+                <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Checkout</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Checkout</li>
                         </ol>
                     </div>
                 </section>
@@ -305,37 +305,37 @@ const CartDetails = () => {
 
             {cartItems.length === 0 ? (
                 <>
-                    <div class="cart-info-group">
-                        <div class="cart-footer">
+                    <div className="cart-info-group">
+                        <div className="cart-footer">
                             <h6 className="coupon-btn">Votre Chariot Est Vide !</h6>
                         </div>
                     </div>
-                    <div class="cart-footer">
-                        <a class="cart-checkout-btn" href="#">
-                            <span class="checkout-label">Parcourir les produits</span>
-                            <span class="checkout-price"><i class="fas fa-shopping-basket"></i></span>
+                    <div className="cart-footer">
+                        <a className="cart-checkout-btn" href="#">
+                            <span className="checkout-label">Parcourir les produits</span>
+                            <span className="checkout-price"><i className="fas fa-shopping-basket"></i></span>
                         </a>
                     </div>
                 </>
             ) : (
                 <>
                       
-             <section class="inner-section checkout-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert-info">
+             <section className="inner-section checkout-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="alert-info">
                             <p>Vous n'avez pas terminé vos achats ? <Link to="/ShopProduct"><a href="">Retour aux achats</a></Link></p>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="account-card">
-                            <div class="account-title">
+                    <div className="col-lg-12">
+                        <div className="account-card">
+                            <div className="account-title">
                                 <h4>Votre Commande</h4>
                             </div>
-                            <div class="account-content">
-                                <div class="table-scroll">
-                                    <table class="table-list">
+                            <div className="account-content">
+                                <div className="table-scroll">
+                                    <table className="table-list">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Produit</th>
@@ -353,15 +353,15 @@ const CartDetails = () => {
                                 <>
                                         <tbody>
                                             <tr key={id}>
-                                                <td class="table-image"><img src={photo} alt="product"/></td>
-                                                <td class="table-name"><h6>{name}</h6></td>
-                                                <td class="table-brand"><h6>{category}</h6></td>
-                                                <td class="table-quantity"><h6>{cartQuantity}</h6></td>
-                                                <td class="table-price"><h6>€{price}<small>/kilo</small></h6></td>
-                                                <td class="table-price"><h6>€{(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
-                                                <td class="table-action">
-                                                    <a class="view" href="" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i class="fas fa-eye"></i></a>
-                                                    <a class="trash" href="" title="Remove Wishlist" onClick={() => removeFromCart(cart)}><i class="icofont-trash"></i></a>
+                                                <td className="table-image"><img src={photo} alt="product"/></td>
+                                                <td className="table-name"><h6>{name}</h6></td>
+                                                <td className="table-brand"><h6>{category}</h6></td>
+                                                <td className="table-quantity"><h6>{cartQuantity}</h6></td>
+                                                <td className="table-price"><h6>€{price}<small>/kilo</small></h6></td>
+                                                <td className="table-price"><h6>€{(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
+                                                <td className="table-action">
+                                                    <a className="view" href="" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i className="fas fa-eye"></i></a>
+                                                    <a className="trash" href="" title="Remove Wishlist" onClick={() => removeFromCart(cart)}><i className="icofont-trash"></i></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -369,7 +369,7 @@ const CartDetails = () => {
                         })}
                                     </table>
                                 </div>
-                                <div class="checkout-charge">
+                                <div className="checkout-charge">
                                     <ul>
                                         <li>
                                             <span>Sub-total</span>
@@ -377,7 +377,7 @@ const CartDetails = () => {
                                         </li>
                                         <li>
                                             <span>Livraison:</span>
-                                    <select class="form-select" onChange={handleLivraisonChange}>
+                                    <select className="form-select" onChange={handleLivraisonChange}>
                                         <option value="Livraison Standard">Livraison Standard</option>
                                         <option value="Livraison Standard En europe">Livraison Standard En europe</option>
                                         <option value="Livraison rapide">Livraison rapide</option>
@@ -396,35 +396,35 @@ const CartDetails = () => {
                                 </div>
                             </div>
                         </div>
-            <div class="col-lg-12">
-                <div class="account-card">
-                    <div class="account-title">
+            <div className="col-lg-12">
+                <div className="account-card">
+                    <div className="account-title">
                         <h4>Détails de livraison</h4>
                         <button data-bs-toggle="modal" >Modifier</button>
                     </div>
-                    <form class="modal-content" onSubmit={(event) => event.preventDefault()}>
-                        <div class="row">
-                        <div class="col-md-6 col-lg-4 alert fade show" >
-                                <div class="profile-card contact active" style={{backgroundColor:"#7ce4f5"}}>
+                    <form className="modal-content" onSubmit={(event) => event.preventDefault()}>
+                        <div className="row">
+                        <div className="col-md-6 col-lg-4 alert fade show" >
+                                <div className="profile-card contact active" style={{backgroundColor:"#7ce4f5"}}>
                                 
                                 <label style={{Color:"white"}}>
                             Si vous voulez, vous pouvez changer les détails de livraisons par ici et confirmer.</label>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Pays</h6>
-                                    <select class="form-select" onChange={handleCountryChange} >
+                                    <select className="form-select" onChange={handleCountryChange} >
                                     {checkCountry(loggedUser)}
                                         <option value="France">France</option>
                                         <option value="Belgique">Belgique</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Ville</h6>
-                                    <select class="form-select" onChange={handleCityChange} >
+                                    <select className="form-select" onChange={handleCityChange} >
                                         {checkCity(loggedUser)}
                                         <option value="Paris">Paris</option>
                                         <option value="Lyon">Lyon</option>
@@ -445,22 +445,22 @@ const CartDetails = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Adresse</h6>
-                                    <input class="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Entrez votre adresse..." />
+                                    <input className="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Entrez votre adresse..." />
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Code Postal</h6>
-                                    <input class="form-control" type="text" onChange={handlePostalChange} placeholder="Entrez le code postal..." />
+                                    <input className="form-control" type="text" onChange={handlePostalChange} placeholder="Entrez le code postal..." />
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 alert fade show">
-                                <div class="profile-card contact active">
+                            <div className="col-md-6 col-lg-4 alert fade show">
+                                <div className="profile-card contact active">
                                     <h6>Téléphone</h6>
-                                    <input class="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Entrez Votre numéro de téléphone..." />
+                                    <input className="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Entrez Votre numéro de téléphone..." />
                                 </div>
                             </div>
                            
@@ -472,14 +472,14 @@ const CartDetails = () => {
                              En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>
                                
                 </div>
-                            <div class="checkout-proced">
-                                <button href="" class="btn btn-inline" onClick={processToCheckout} >procédez au payment</button>
+                            <div className="checkout-proced">
+                                <button href="" className="btn btn-inline" onClick={processToCheckout} >procédez au payment</button>
                             </div>
 
 <br/>
 
-            <div class="checkout-proced">
-      <button class="btn btn-inline" onClick={handleApiCall}>Accéder Au Paiement</button>
+            <div className="checkout-proced">
+      <button className="btn btn-inline" onClick={handleApiCall}>Accéder Au Paiement</button>
       {responseData && (
         <>
   <object data={responseData.payUrl} width="1400" height="600" type="text/html">

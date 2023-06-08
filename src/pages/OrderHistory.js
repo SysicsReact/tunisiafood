@@ -28,7 +28,7 @@ const OrderHistory = () => {
     return (
     <html lang="en">
     <head>
-    <meta charset="UTF-8" />
+    <meta charSet="UTF-8" />
     <meta name="name" content="Cook Tounsi" />
     <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -49,20 +49,20 @@ const OrderHistory = () => {
     </head>
     <body>
     <div className="backdrop"></div>
-        <a class="backtop fas fa-arrow-up" href="#"></a>
-        <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/Bann.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+        <a className="backtop fas fa-arrow-up" href="#"></a>
+        <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/Bann.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Historique des commandes</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Historique de Commandes</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Historique de Commandes</li>
                         </ol>
                     </div>
         </section>
-        <section class="inner-section orderlist-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
+        <section className="inner-section orderlist-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
                    
                     {filteredOrders.length === 0 ?
                        (
@@ -76,13 +76,13 @@ const OrderHistory = () => {
                             </div>
                             </div>
                             </div>
-                            <div class="row">
-                            <div class="col-lg-12">
-                                <div class="orderlist-filter">
+                            <div className="row">
+                            <div className="col-lg-12">
+                                <div className="orderlist-filter">
                                     <h5>Total : <span>{filteredOrders.length}</span></h5>
-                                    <div class="filter-short">
-                                        <label class="form-label">Filtrer:</label>
-                                        <select class="form-select">
+                                    <div className="filter-short">
+                                        <label className="form-label">Filtrer:</label>
+                                        <select className="form-select">
                                             <option value="all" selected>Tout </option>
                                             <option value="recieved">Réçue</option>
                                             <option value="processed">Expédiée</option>
@@ -96,16 +96,16 @@ const OrderHistory = () => {
                             { const {id, state,commandReference, items, timestamp, totalAmount} = order
                                 return(
                             <>
-                        <div class="orderlist">
-                            <div class="orderlist-head">
+                        <div className="orderlist">
+                            <div className="orderlist-head">
                                 <h5 onClick={() => viewOrder(order.id)}>Commande : {index+1}</h5>
                             </div>   
-                            <div class="orderlist-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
+                            <div className="orderlist-body">
+                                <div className="row">
+                                    <div className="col-lg-12">
                                     </div>
-                                    <div class="col-lg-5">
-                                    <ul class="orderlist-details">
+                                    <div className="col-lg-5">
+                                    <ul className="orderlist-details">
                                             <li>
                                             <h6>Réference:</h6>
                                                 <p>{commandReference}</p>
@@ -121,8 +121,8 @@ const OrderHistory = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <ul class="orderlist-details">
+                                    <div className="col-lg-4">
+                                        <ul className="orderlist-details">
                                             <li>
                                                 <h6>Total Achat:</h6>
                                                 <p> {items.length}</p>
@@ -133,9 +133,9 @@ const OrderHistory = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <ul class="orderlist-details">
-                                            <li class="my-buttonf">
+                                    <div className="col-lg-3">
+                                        <ul className="orderlist-details">
+                                            <li className="my-buttonf">
                                                 <button  className="my-buttonf" onClick={() => viewOrder(order.id)}>
                                                     Détails de la commande</button>
                                             </li>

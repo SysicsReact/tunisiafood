@@ -34,7 +34,7 @@ const ShopProduct = () => {
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct )
-    useEffect(() => {
+    useEffect(() => { 
         dispatch(
             STORE_PRODUCTS({
                 products:  data,
@@ -93,7 +93,7 @@ dispatch(ADD_TO_CART(e));
   return (
      <html lang="en">
      <head>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -113,42 +113,42 @@ dispatch(ADD_TO_CART(e));
      <body>
      <ToastContainer></ToastContainer>
      <div className="backdrop"></div>
-               <a class="backtop fas fa-arrow-up" href="#"></a>
-            <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+               <a className="backtop fas fa-arrow-up" href="#"></a>
+            <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Tout Les Produits</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Catalogue des produits</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Catalogue des produits</li>
                         </ol>
                     </div>
             </section>
-            <section class="inner-section shop-part">
-            <div class="container">
-                <div class="row content-reverse">
+            <section className="inner-section shop-part">
+            <div className="container">
+                <div className="row content-reverse">
                     <div >
-                    <div class="row">
-                            <div class="col-lg-12">
-                                <div class="top-filter">
-                                    <div class="filter-short">
-                                        <select class="form-select filter-select" value={tag} onChange={(e)=>setTag(e.target.value)}>
+                    <div className="row">
+                            <div className="col-lg-12">
+                                <div className="top-filter">
+                                    <div className="filter-short">
+                                        <select className="form-select filter-select" value={tag} onChange={(e)=>setTag(e.target.value)}>
                                             <option value="all" selected>Tout</option>
                                             <option value="populaire">populaire</option>
                                             <option value="nouveau">nouveau</option>
                                             <option value="solde">soldé</option>
                                         </select>
                                     </div>
-                                    <div class="filter-short">
-                                    <label class="form-label">Trier par:</label>
-                                    <select class="form-select" value={sort} onChange={(e)=>setSort(e.target.value)} >
+                                    <div className="filter-short">
+                                    <label className="form-label">Trier par:</label>
+                                    <select className="form-select" value={sort} onChange={(e)=>setSort(e.target.value)} >
                                         <option value="latest">Les plus récents</option>
                                         <option value="lowest-price">Les moins chers</option>
                                         <option value="highest-price">Les plus chers</option>
                                     </select>
                                     </div>
-                                    <div class="filter-short">
-                                    <label class="filter-label">Catégory:</label>
-                                    <select class="form-select" value={category} onChange={(e)=>setCategory(e.target.value)}>
+                                    <div className="filter-short">
+                                    <label className="filter-label">Catégory:</label>
+                                    <select className="form-select" value={category} onChange={(e)=>setCategory(e.target.value)}>
                                     <option value="all" selected>Tout</option>
                                         <option value="Sucré">Patisserie</option>
                                         <option value="Plat">Nos Plats</option>
@@ -156,50 +156,50 @@ dispatch(ADD_TO_CART(e));
                                         <option value="Boisson">Nos Boissons</option>
                                     </select>
                                     </div>
-                                    <div class="filter-action">
-                                        <button class="header-widget" onClick={()=>clearFilters()} >
+                                    <div className="filter-action">
+                                        <button className="header-widget" onClick={()=>clearFilters()} >
                                             <i className='fas fa-trash'></i></button>
                                     </div>
-                                    <div class="filter-action">
+                                    <div className="filter-action">
                                         <button  className="header-widget" title="Three Column">
-                                            <i class="fas fa-th" onClick={()=>setGrid(true)}></i></button>
+                                            <i className="fas fa-th" onClick={()=>setGrid(true)}></i></button>
                                        <button className="header-widget" title="Item List"> 
-                                       <i class="fas fa-th-list" onClick={()=>setGrid(false)}>
+                                       <i className="fas fa-th-list" onClick={()=>setGrid(false)}>
                                         </i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
+                        <div className="row">
+                            <div className="col-lg-12">
                             {grid &&
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
+                    <div className="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
                         {grid &&currentProducts.map((e) => {
                        const { id, tag, category,photo,name, video, discount, weight, price } = e;
                     return (   
                         
-                            <div class="col" key={id}>    
-                                <div class="product-card" onClick={()=>ShowItem(e)}>
-                                    <div class="product-media">
-                                        <div class="product-label">
+                            <div className="col" key={id}>    
+                                <div className="product-card" onClick={()=>ShowItem(e)}>
+                                    <div className="product-media">
+                                        <div className="product-label">
                                              {tag=="nouveau"&&
-                                            <label class="label-text new">{tag}</label>}
+                                            <label className="label-text new">{tag}</label>}
                                             {tag=="solde"&&
-                                            <label class="label-text sale">{tag}</label>}
+                                            <label className="label-text sale">{tag}</label>}
                                             {tag=="populaire"&&
-                                            <label class="label-text feat">{tag}</label>}
+                                            <label className="label-text feat">{tag}</label>}
                                         </div>
-                                        <button class="product-wish wish">
+                                        <button className="product-wish wish">
                                         {category=="Plat"&&
-                                            <label class="label-text order">{category}</label>}
+                                            <label className="label-text order">{category}</label>}
                                         {category=="Epice"&&
-                                            <label class="label-text rate">{category}</label>}
+                                            <label className="label-text rate">{category}</label>}
                                         {category=="Sucré"&&
-                                            <label class="label-text sucre">{category}</label>}
+                                            <label className="label-text sucre">{category}</label>}
                                         {category=="Boisson"&&
-                                            <label class="label-text drink">{category}</label>}
+                                            <label className="label-text drink">{category}</label>}
                                         </button>
-                                        <a class="product-image">
+                                        <a className="product-image">
                                             <img src={photo} alt="product"/>
                                         </a>
                                         <div className="product-widget">
@@ -292,14 +292,14 @@ dispatch(ADD_TO_CART(e));
                     </div>
     </Modal>}
                                     </div>
-                                    <div class="product-content">
+                                    <div className="product-content">
                                       
-                                            <i class="product-mass">{weight} {ReturnMeasurement(category)}</i>
+                                            <i className="product-mass">{weight} {ReturnMeasurement(category)}</i>
                                       
-                                        <h6 class="product-name">
+                                        <h6 className="product-name">
                                             <a href="">{name}</a>
                                         </h6>
-                                        <h6 class="product-price">
+                                        <h6 className="product-price">
                                         {discount!="0"&&
                                     <>
                                         <del> €{price}</del>
@@ -312,9 +312,9 @@ dispatch(ADD_TO_CART(e));
                                         </>
                                     }
                                         </h6>
-                                        <button class="product-add" title="Add to Cart" 
+                                        <button className="product-add" title="Add to Cart" 
                                         onClick={()=> addToCart(e)}>
-                                            <i class="fas fa-shopping-basket"></i>
+                                            <i className="fas fa-shopping-basket"></i>
                                             <span>Ajouter</span>
                                         </button>
                                     </div>
@@ -334,34 +334,34 @@ dispatch(ADD_TO_CART(e));
                     return (
                         <>  
                         <div className="row" key={id}>
-                        <div class="col">
-                           <div class="product-standard">
-                               <div class="standard-media">
-                               <div class="product-label">
+                        <div className="col">
+                           <div className="product-standard">
+                               <div className="standard-media">
+                               <div className="product-label">
                                        {tag=="nouveau"&&
-                                   <label class="label-text new">{tag}</label>}
+                                   <label className="label-text new">{tag}</label>}
                                    {tag=="solde"&&
-                                   <label class="label-text sale">{tag}</label>}
+                                   <label className="label-text sale">{tag}</label>}
                                    {tag=="populaire"&&
-                                   <label class="label-text feat">{tag}</label>}
+                                   <label className="label-text feat">{tag}</label>}
                                </div>
-                               <button class="product-wish wish">
+                               <button className="product-wish wish">
                                {category=="Plat"&&
-                                   <label class="label-text order">{category}</label>}
+                                   <label className="label-text order">{category}</label>}
                                {category=="Epice"&&
-                                   <label class="label-text rate">{category}</label>}
+                                   <label className="label-text rate">{category}</label>}
                                 {category=="Boisson"&&
-                                   <label class="label-text rate">{category}</label>}
+                                   <label className="label-text rate">{category}</label>}
                                {category=="Sucré"&&
-                                   <label class="label-text sucre">{category}</label>}
+                                   <label className="label-text sucre">{category}</label>}
                                </button>
-                                   <a class="standard-image" href="product-video.html" >
+                                   <a className="standard-image" href="product-video.html" >
                                        <img src={photo} alt="product" style={{ borderRadius: "10px" }} />
                                    </a>
-                                   <div class="standard-widget">
-                                       <a title="Product Compare" onClick={() => addToWish(e)} class="fas fa-heart"></a>
-                                       <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                       <a title="Product View" onClick={() => ShowItem(e)} class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                   <div className="standard-widget">
+                                       <a title="Product Compare" onClick={() => addToWish(e)} className="fas fa-heart"></a>
+                                       <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                       <a title="Product View" onClick={() => ShowItem(e)} className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                    </div>
                                    {isOpen && <Modal modalCss = {"myModal"}
           setIsOpen={setIsOpen} >  
@@ -446,11 +446,11 @@ dispatch(ADD_TO_CART(e));
                     </div>
     </Modal>}
                                </div>
-                               <div class="standard-content">
-                                   <h4 class="standard-name">
+                               <div className="standard-content">
+                                   <h4 className="standard-name">
                                        <a href="" onClick={() => ShowItem(e)}>{name}</a>
                                    </h4>
-                                   <h5 class="standard-price">
+                                   <h5 className="standard-price">
                                    {discount!="0"&&
                                                <>
                                                    <del> €{price}</del>
@@ -465,23 +465,23 @@ dispatch(ADD_TO_CART(e));
                                                }
                                    </h5>
                                    
-                                   <p class="standard-desc">{shortenText(description, 350)}</p>
-                                   <div class="standard-action-group">
-                                       <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
-                                           <i class="fas fa-shopping-basket"></i>
+                                   <p className="standard-desc">{shortenText(description, 350)}</p>
+                                   <div className="standard-action-group">
+                                       <button className="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                           <i className="fas fa-shopping-basket"></i>
                                            <span>Ajouter au chariot</span>
                                        </button>
-                                       <div class="product-action">
-                                           <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                           <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                           <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                       <div className="product-action">
+                                           <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                           <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                           <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                                        </div>
-                                       <button class="standard-wish wish" title="Add to Wishlist" onClick={() => ShowItem(e)}>
-                                           <i class="fas fa-eye"></i>
+                                       <button className="standard-wish wish" title="Add to Wishlist" onClick={() => ShowItem(e)}>
+                                           <i className="fas fa-eye"></i>
                                            <span>Plus de Détails</span>
                                        </button>
-                                       <button class="standard-wish wish" title="Add to Wishlist" onClick={() => addToWish(e)} >
-                                           <i class="fas fa-heart"></i>
+                                       <button className="standard-wish wish" title="Add to Wishlist" onClick={() => addToWish(e)} >
+                                           <i className="fas fa-heart"></i>
                                            <span>Ajouter au Wishlist</span>
                                        </button>
                                    </div>

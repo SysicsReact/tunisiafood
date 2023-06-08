@@ -239,7 +239,7 @@ const Header = () => {
     return (  
         <>
             <head>
-                <meta charset="UTF-8" />
+                <meta charSet="UTF-8" />
                 <meta name="name" content="Greeny" />
                 <meta name="title" content="Greeny - eCommerce HTML Template" />
                 <title>Cook Tounsi</title>
@@ -389,7 +389,7 @@ confidentialité</a></NavLink>
                         } 
                         
                     </div>
-                    <button><i className="fas fa-search"></i></button>
+                    <i className="fas fa-search"></i>
                     </form>
                         </>
                     }

@@ -6,7 +6,7 @@ class Footer extends React.Component{
     return (
                <>
         <head>
-               <meta charset="UTF-8"/>
+               <meta charSet="UTF-8"/>
                <meta name="name" content="Greeny"/>
                <meta name="title" content="Greeny - eCommerce HTML Template"/>
                <title>Classic Home - Greeny</title>
@@ -21,35 +21,35 @@ class Footer extends React.Component{
                <link rel="stylesheet" href="assets/css/main.css"/>
                <link rel="stylesheet" href="assets/css/home-classic.css"/>
         </head>
-        <footer class="footer-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="footer-widget">
-                        <h3 class="footer-title">Cook Tounsi</h3>
-                            <p class="footer-desc">Un voyage à travers les souvenirs, les recettes secrètes de famille et la bistronomie moderne de La Tunisie.</p>
-                            <ul class="footer-social">
-                                <li><a class="icofont-facebook" href="#"></a></li>
-                                <li><a class="icofont-twitter" href="#"></a></li>
-                                <li><a class="icofont-linkedin" href="#"></a></li>
-                                <li><a class="icofont-instagram" href="#"></a></li>
-                                <li><a class="icofont-pinterest" href="#"></a></li>
+        <footer className="footer-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-6 col-xl-3">
+                        <div className="footer-widget">
+                        <h3 className="footer-title">Cook Tounsi</h3>
+                            <p className="footer-desc">Un voyage à travers les souvenirs, les recettes secrètes de famille et la bistronomie moderne de La Tunisie.</p>
+                            <ul className="footer-social">
+                                <li><a className="icofont-facebook" href="#"></a></li>
+                                <li><a className="icofont-twitter" href="#"></a></li>
+                                <li><a className="icofont-linkedin" href="#"></a></li>
+                                <li><a className="icofont-instagram" href="#"></a></li>
+                                <li><a className="icofont-pinterest" href="#"></a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="footer-widget contact">
-                            <h3 class="footer-title">Contactez-nous</h3>
-                            <ul class="footer-contact">
+                    <div className="col-sm-6 col-xl-3">
+                        <div className="footer-widget contact">
+                            <h3 className="footer-title">Contactez-nous</h3>
+                            <ul className="footer-contact">
                                 <li>
-                                    <i class="icofont-ui-email"></i>
+                                    <i className="icofont-ui-email"></i>
                                     <p>
                                         <span>contact@cooktounsi.com</span>
                                         <span>carrer@cooktounsi.com</span>
                                     </p>
                                 </li>
                                 <li>
-                                    <i class="icofont-ui-touch-phone"></i>
+                                    <i className="icofont-ui-touch-phone"></i>
                                     <p>
                                         <span>+216 50 450 960</span>
                                         <span>+216 42 226 434</span>
@@ -58,10 +58,10 @@ class Footer extends React.Component{
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="footer-widget">
-                            <h3 class="footer-title">Liens</h3>
-                            <div class="footer-links">
+                    <div className="col-sm-6 col-xl-3">
+                        <div className="footer-widget">
+                            <h3 className="footer-title">Liens</h3>
+                            <div className="footer-links">
                                 <ul>
                                 <li><Link to="/">Accueil</Link>
                                 </li>
@@ -81,10 +81,10 @@ class Footer extends React.Component{
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="footer-widget">
-                        <h3 class="footer-title">Liens</h3>
-                            <div class="footer-links">
+                    <div className="col-sm-6 col-xl-3">
+                        <div className="footer-widget">
+                        <h3 className="footer-title">Liens</h3>
+                            <div className="footer-links">
                                 <ul>
                                 <li><Link to="/Politics">Confidentialité</Link>
                                 </li>
@@ -101,10 +101,10 @@ class Footer extends React.Component{
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="footer-bottom">
-                            <p class="footer-copytext">&copy;  Tous droits d'auteur réservés par <a target="_blank" href="https://themeforest.net/user/mironcoder">Sysics Studio</a></p>
+                <div className="row">
+                    <div className="col-12">
+                        <div className="footer-bottom">
+                            <p className="footer-copytext">&copy;  Tous droits d'auteur réservés par <a target="_blank" href="https://themeforest.net/user/mironcoder">Sysics Studio</a></p>
                         </div>
                     </div>
                 </div>

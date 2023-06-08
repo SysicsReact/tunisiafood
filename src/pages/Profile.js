@@ -190,7 +190,7 @@ function Profile() {
     return (
         <html lang="en">
             <head>
-            <meta charset="UTF-8" />
+            <meta charSet="UTF-8" />
     <meta name="name" content="Cook Tounsi" />
     <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -207,55 +207,53 @@ function Profile() {
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/profile.css" />
             </head>
-
             <body>
                 <ToastContainer />
                 <div className="backdrop"></div>
-               <a class="backtop fas fa-arrow-up" href="#"></a>
-                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+               <a className="backtop fas fa-arrow-up" href="#"></a>
+                <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Modifier votre profile</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">profile</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">profile</li>
                         </ol>
                     </div>
                 </section>
-
                 <div >
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <form class="modal-form" onSubmit={(event) => event.preventDefault()}>
-                                <div class="form-title">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <form className="modal-form" onSubmit={(event) => event.preventDefault()}>
+                                <div className="form-title">
                                     <h3>Modifier vos données</h3>
 
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Votre photo  </label> <span> : </span>
+                                <div className="form-group">
+                                    <label className="form-label">Votre photo  </label> <span> : </span>
                                     {loggedUser.photo!=undefined&&
                                     <img src={loggedUser.photo} style={{borderRadius:"50px",height:"100px"}} />
                                     }
                                     
-                                    <input class="form-control" type="file"
+                                    <input className="form-control" type="file"
                                         onChange={(event) => {
                                             setImageUpload(event.target.files[0]);
                                         }} />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Votre Nom</label>
-                                    <input class="form-control" type="text" defaultValue={loggedUser.userName} onChange={handleNameChange} placeholder="Type your new name..." />
+                                <div className="form-group">
+                                    <label className="form-label">Votre Nom</label>
+                                    <input className="form-control" type="text" defaultValue={loggedUser.userName} onChange={handleNameChange} placeholder="Type your new name..." />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Pays</label>
-                                    <select class="form-select" onChange={handleCountryChange} >
+                                <div className="form-group">
+                                    <label className="form-label">Pays</label>
+                                    <select className="form-select" onChange={handleCountryChange} >
                                         {checkCountry(loggedUser)}
                                         <option value="France">France</option>
                                         <option value="Belgique">Belgique</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Ville</label>
-                                    <select class="form-select" onChange={handleCityChange} >
+                                <div className="form-group">
+                                    <label className="form-label">Ville</label>
+                                    <select className="form-select" onChange={handleCityChange} >
                                         {checkCity(loggedUser)}
                                         <option value="Paris">Paris</option>
                                         <option value="Lyon">Lyon</option>
@@ -275,20 +273,19 @@ function Profile() {
                                         <option value="Saint-Etienne">Saint-Etienne</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Adresse</label>
-                                    <input class="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Type exact adress..." />
+                                <div className="form-group">
+                                    <label className="form-label">Adresse</label>
+                                    <input className="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Votre adresse..." />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Numéro de Téléphone</label>
-                                    <input class="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Type your number..." />
+                                <div className="form-group">
+                                    <label className="form-label">Numéro de Téléphone</label>
+                                    <input className="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Téléphone..." />
                                 </div>
-                                <button class="btn btn-outline" type="submit" onClick={() => uploadFile()} >Sauvegarder</button>
+                                <button className="btn btn-outline" type="submit" onClick={() => uploadFile()} >Sauvegarder</button>
                             </form>
                         </div>
                     </div>
                 </div>
-
 
                 <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>

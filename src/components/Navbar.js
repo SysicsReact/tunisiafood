@@ -8,7 +8,7 @@ class Navbar extends React.Component{
           return (
     <>
         <head>
-               <meta charset="UTF-8"/>
+               <meta charSet="UTF-8"/>
                <meta name="name" content="Greeny"/>
                <meta name="title" content="Greeny - eCommerce HTML Template"/>
                <title>Classic Home - Greeny</title>
@@ -43,7 +43,7 @@ class Navbar extends React.Component{
                                         <span className="feature-name"><Link to="Blog" className="navbar-link" > Blog </Link></span>
                                         </li>
                                         <li className="navbar-item">
-                                        <span className="feature-name"><Link to="Contact" className="navbar-link" > Contacts </Link></span>
+                                        <span className="feature-name"><Link to="Contact" className="navbar-link" > Contact </Link></span>
                                         </li>
                                         <li className="navbar-item">
                                         <span className="feature-name"><Link to="Faq" className="navbar-link" > FAQ </Link></span>

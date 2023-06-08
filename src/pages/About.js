@@ -9,7 +9,7 @@ function About() {
         <html lang="en">
             <head>
 
-                <meta charset="UTF-8" />
+                <meta charSet="UTF-8" />
                 <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -93,57 +93,57 @@ function About() {
                 </ul>
             </div>
             </section>
-        <section class="about-choose">
-            <div class="container">
-                <div class="row">
-                    <div class="col-11 col-md-9 col-lg-7 col-xl-6 mx-auto">
-                        <div class="section-heading">
+        <section className="about-choose">
+            <div className="container">
+                <div className="row">
+                    <div className="col-11 col-md-9 col-lg-7 col-xl-6 mx-auto">
+                        <div className="section-heading">
                             <h2>Pourquoi les consommateurs nous choisissent</h2>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="choose-card">
-                            <div class="choose-icon">
-                                <i class="icofont-fruits"></i>
+                <div className="row">
+                    <div className="col-lg-6">
+                        <div className="choose-card">
+                            <div className="choose-icon">
+                                <i className="icofont-fruits"></i>
                             </div>
-                            <div class="choose-text">
+                            <div className="choose-text">
                                 <h4>100% aliments et ingrédients frais </h4>
                                 <p>
 Nous croyons que notre application conséquente et continue du principe « la qualité d'abord » est le secret de notre réussite.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="choose-card">
-                            <div class="choose-icon">
-                                <i class="icofont-vehicle-delivery-van"></i>
+                    <div className="col-lg-6">
+                        <div className="choose-card">
+                            <div className="choose-icon">
+                                <i className="icofont-vehicle-delivery-van"></i>
                             </div>
-                            <div class="choose-text">
+                            <div className="choose-text">
                                 <h4>
     Livraison rapide</h4>
                                 <p>A partir de la réception de la demande d’achat, nous respectons les délais définis. Nous assurons la livraison de tout les produits,dans des courtes délais où que vous soyez.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="choose-card">
-                            <div class="choose-icon">
-                                <i class="icofont-loop"></i>
+                    <div className="col-lg-6">
+                        <div className="choose-card">
+                            <div className="choose-icon">
+                                <i className="icofont-loop"></i>
                             </div>
-                            <div class="choose-text">
+                            <div className="choose-text">
                                 <h4>convivialité et sécurité des données</h4>
                                 <p>Nous faisons de la commande de nourriture une expérience agréable pour nos détaillants et nos clients.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="choose-card">
-                            <div class="choose-icon">
-                                <i class="icofont-support"></i>
+                    <div className="col-lg-6">
+                        <div className="choose-card">
+                            <div className="choose-icon">
+                                <i className="icofont-support"></i>
                             </div>
-                            <div class="choose-text">
+                            <div className="choose-text">
                                 <h4>
 Équipe d'assistance instantanée</h4>
                                 <p>L'assistance via messagerie instantanée. Veuillez vous identifier pour utiliser la messagerie instantanée avec un membre de l'équipe d'assistance.</p>
@@ -153,11 +153,11 @@ Nous croyons que notre application conséquente et continue du principe « la qu
                 </div>
             </div>
         </section>
-        <section class="news-part" style={{ backgroundImage: "url(assets/images/bann.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px", }}>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-5 col-lg-6 col-xl-7">
-                        <div class="news-text">
+        <section className="news-part" style={{ backgroundImage: "url(assets/images/bann.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px", }}>
+            <div className="container">
+                <div className="row align-items-center">
+                    <div className="col-md-5 col-lg-6 col-xl-7">
+                        <div className="news-text">
                             <h2>Get 20% Discount for Subscriber</h2>
                             <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
                         </div>

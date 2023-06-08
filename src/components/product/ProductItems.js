@@ -41,7 +41,7 @@ const ProductItems = () => {
     return(
         <html lang="en">
         <head>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -62,30 +62,30 @@ const ProductItems = () => {
         <ToastContainer></ToastContainer>
       
                  
-               <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                       <div class="container">
+               <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                       <div className="container">
                            <h2>Tout Les Produits</h2>
-                           <ol class="breadcrumb">
-                               <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                               <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                           <ol className="breadcrumb">
+                               <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                               <li className="breadcrumb-item active" aria-current="page">Shop</li>
                            </ol>
                        </div>
                </section>
-            <section class="inner-section">
+            <section className="inner-section">
             {product!=null &&
                   <>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="details-gallery">
-                            <div class="details-label-group">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-6">
+                        <div className="details-gallery">
+                            <div className="details-label-group">
                             {product.category=="plat"&&
                                             <label className="label-text order">{product.category}</label>}
                                         {product.category=="epice"&&
                                             <label className="label-text rate">{product.category}</label>}
                                         {product.category=="sucré"&&
                                             <label className="label-text sucre">{product.category}</label>}
-                                <label class="details-label off">-{product.discount}%</label>
+                                <label className="details-label off">-{product.discount}%</label>
                                 {product.tag=="nouveau"&&
                                             <label className="label-text new">{product.tag}</label>}
                                             {product.tag=="solde"&&
@@ -93,58 +93,58 @@ const ProductItems = () => {
                                             {product.tag=="populaire"&&
                                             <label className="label-text feat">{product.tag}</label>}
                             </div>
-                            <ul class="details-thumb">
+                            <ul className="details-thumb">
                                 <li><img  alt="product" src={product.photo} /></li>
                                 
                             </ul>
                         </div>
                     </div>
                   
-                    <div class="col-lg-6">
-                        <div class="details-content">
-                            <h3 class="details-name"><a href="#">{product.name}</a></h3>
-                            <div class="details-meta">
+                    <div className="col-lg-6">
+                        <div className="details-content">
+                            <h3 className="details-name"><a href="#">{product.name}</a></h3>
+                            <div className="details-meta">
                                 <p>SKU:<span>{idProduct}</span></p>
                                 <p>BRAND:<a href="#">Cool Tounsi</a></p>
                             </div>
                             {product.discount!="0"&&
-                            <h3 class="details-price">
+                            <h3 className="details-price">
                                 <del> €{product.price}</del>
                                 <span> € {Math.round((product.price-(product.price*product.discount)/100)*100)/100}<small>/ {product.weight} G</small></span>
                             </h3>}
                             {product.discount=="0"&&
-                            <h3 class="details-price">
+                            <h3 className="details-price">
                                 <span> € {product.price}<small>/ {product.weight} G</small></span>
                             </h3>}
-                            <p class="details-desc">{product.description}</p>
-                            <div class="details-list-group">
-                                <label class="details-list-title">tags:</label>
-                                <ul class="details-tag-list">
+                            <p className="details-desc">{product.description}</p>
+                            <div className="details-list-group">
+                                <label className="details-list-title">tags:</label>
+                                <ul className="details-tag-list">
                                     <li><a href="#">{product.tag}</a></li>
                                     <li><a href="#">{product.category}</a></li>
                                     <li><a href="#">Kleya</a></li>
                                 </ul>
                             </div>
 
-                            <div class="details-add-group">
-                                <button class="product-add" title="Add to Cart" 
+                            <div className="details-add-group">
+                                <button className="product-add" title="Add to Cart" 
                                 onClick={()=> addToCart(product)}>
-                                    <i class="fas fa-shopping-basket"></i>
+                                    <i className="fas fa-shopping-basket"></i>
                                     <span>Ajouter au chariot</span>
                                 </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                <div className="product-action">
+                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                                 </div>
                             </div>
-                            <div class="details-action-group">
-                                <a class="details-wish wish" href="#" title="Add Your Wishlist">
-                                    <i class="icofont-heart"></i>
+                            <div className="details-action-group">
+                                <a className="details-wish wish" href="#" title="Add Your Wishlist">
+                                    <i className="icofont-heart"></i>
                                     <span>Ajouter au wishlist</span>
                                 </a>
-                                <Link to="/ShopProduct"><a class="details-compare" href="" title="Compare This Item" >
-                                    <i class="fas fa-random"></i>
+                                <Link to="/ShopProduct"><a className="details-compare" href="" title="Compare This Item" >
+                                    <i className="fas fa-random"></i>
                                     <span>Retour aux produits</span>
                                 </a></Link>
                             </div>

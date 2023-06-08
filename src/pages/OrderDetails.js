@@ -21,7 +21,7 @@ const OrderDetails = () => {
     return(
         <html lang="en">
         <head>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -40,32 +40,32 @@ const OrderDetails = () => {
         </head>
         <body>
         <ToastContainer></ToastContainer>
-        <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+        <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                          <h2>Détails de commande</h2>
-                         <ol class="breadcrumb">
-                              <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                              <li class="breadcrumb-item active" aria-current="page"><Link to="/OrderHistory">Commandes</Link></li>
-                              <li class="breadcrumb-item active" aria-current="page">Détails</li>
+                         <ol className="breadcrumb">
+                              <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                              <li className="breadcrumb-item active" aria-current="page"><Link to="/OrderHistory">Commandes</Link></li>
+                              <li className="breadcrumb-item active" aria-current="page">Détails</li>
                          </ol>
                     </div>
           </section>
         {order!=null &&
           <>
-          <section class="inner-section orderlist-part">
-               <div class="container">
-                    <div class="row">
-                         <div class="col-lg-12">
-                         <div class="orderlist">
-                              <div class="orderlist-head">
+          <section className="inner-section orderlist-part">
+               <div className="container">
+                    <div className="row">
+                         <div className="col-lg-12">
+                         <div className="orderlist">
+                              <div className="orderlist-head">
                                    <h5 >Votre Commande : </h5>
                               </div>
-                              <div class="orderlist-body">
-                                   <div class="row">
-                                        <div class="col-lg-12">
+                              <div className="orderlist-body">
+                                   <div className="row">
+                                        <div className="col-lg-12">
                                         </div>
-                                        <div class="col-lg-4">
-                                        <ul class="orderlist-details">
+                                        <div className="col-lg-4">
+                                        <ul className="orderlist-details">
                                              <li>
                                                   <h6>Référence:</h6>
                                                   <p>{order.id}</p>
@@ -86,8 +86,8 @@ const OrderDetails = () => {
                                              </ul>
                                         </div>
                                         
-                                        <div class="col-lg-4">
-                                        <ul class="orderlist-details">
+                                        <div className="col-lg-4">
+                                        <ul className="orderlist-details">
                                             <li>
                                                 <h6>Prix:</h6>
                                                 <p>€ {order.totalAmount}</p>
@@ -104,8 +104,8 @@ const OrderDetails = () => {
                                             </li>
                                         </ul>
                                         </div>
-                                        <div class="col-lg-4">
-                                        <ul class="orderlist-details">
+                                        <div className="col-lg-4">
+                                        <ul className="orderlist-details">
                                             <li>
                                                 <h6>Pays:</h6>
                                                 <p>{order.shippingAddress.country}</p>
@@ -126,9 +126,9 @@ const OrderDetails = () => {
                     </div>
                     </div>
                     <div className="row">
-                         <div class="col-lg-12">
-                              <div class="table-scroll">
-                                   <table class="table-list">
+                         <div className="col-lg-12">
+                              <div className="table-scroll">
+                                   <table className="table-list">
                                         <thead>
                                              <tr>
                                                   <th scope="col">Index</th>
@@ -145,13 +145,13 @@ const OrderDetails = () => {
                                              const {id, name, price, photo, cartQuantity,weight , category} = cart
                                             return(
                                              <tr key={id}>
-                                                  <td class="table-serial"><h6>{index+1}</h6></td>
-                                                  <td class="table-image"><img src={photo} alt="product"/></td>
-                                                  <td class="table-name"><h6>{name}</h6></td>
-                                                  <td class="table-brand"><h6>{category}</h6></td>
-                                                  <td class="table-price"><h6>€ {price}<small>/{weight}</small></h6></td>
-                                                  <td class="table-brand"><h6>{cartQuantity}</h6></td>
-                                                  <td class="table-quantity"><h6>{(price * cartQuantity).toFixed(2)}</h6></td>
+                                                  <td className="table-serial"><h6>{index+1}</h6></td>
+                                                  <td className="table-image"><img src={photo} alt="product"/></td>
+                                                  <td className="table-name"><h6>{name}</h6></td>
+                                                  <td className="table-brand"><h6>{category}</h6></td>
+                                                  <td className="table-price"><h6>€ {price}<small>/{weight}</small></h6></td>
+                                                  <td className="table-brand"><h6>{cartQuantity}</h6></td>
+                                                  <td className="table-quantity"><h6>{(price * cartQuantity).toFixed(2)}</h6></td>
                                              </tr>
                                             )}
                                         )}
