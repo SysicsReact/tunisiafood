@@ -21,11 +21,12 @@ export default function Checkout() {
     }
      const cartItems = useSelector(selectCartItems);
      const cartTotalAmount = useSelector(selectCarTotalAmount);
-
+     const [country, setCountry] = useState('France');
      var DBcountry = [];
+     const [test, setTest] = useState([]);
+     const [test1, setTest1] = useState([]);
      const [select, setSelect] = useState('France');
-     const [test, setTest] = useState([])
-     const [test1, setTest1] = useState([])
+     const [optionSelected, setOptionSelected] = useState([]);
      const cartTotalQuantity = useSelector(selectCarTotalQuantity);
      const[livraisonCost,SetLivraisonCost]=useState("10");
      const[livraisonType,SetLivraison]=useState({});
@@ -40,6 +41,20 @@ export default function Checkout() {
     }
     const [shippingAddress, setShippingAddress] = useState({...initialAddressState});
     
+    useEffect(() => {
+        setOptionSelected([])
+        const q = query(
+            collection(db, "regions"),
+            where(documentId(), "==", country)
+
+        );
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setOptionSelected(doc.data().optionSelected)
+            });
+        });
+    }, [country]);
+    //---------get countries  
 
     useEffect(() => {
         DBcountry = []
@@ -110,7 +125,7 @@ export default function Checkout() {
     
      <html lang="en">
      <head>
-     <meta charset="UTF-8" />
+     <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -266,6 +281,7 @@ export default function Checkout() {
                                     <h6>Pays</h6>
                                     <select className="form-select" 
                                     required
+                                    value={select}
                                     name="country"
                                     onChange={(e) => handleShipping(e)} >
                                         Choisir votre pays

@@ -38,7 +38,7 @@ const ProductList= ()=> {
     
     <html lang="en">
     <head>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="title" content="Tunisian Food" />
         <meta name="keywords" content="organic, food, shop, ecommerce, store, agriculture, vegetables, farm, grocery, natural, online store" />
         <title>Tout les produits</title>
@@ -60,40 +60,40 @@ const ProductList= ()=> {
                     return (
                         <>  
              <div className="row" key={id}>
-             <div class="col">
-                <div class="product-standard">
-                    <div class="standard-media">
-                    <div class="product-label">
+             <div className="col">
+                <div className="product-standard">
+                    <div className="standard-media">
+                    <div className="product-label">
                             {tag=="nouveau"&&
-                        <label class="label-text new">{tag}</label>}
+                        <label className="label-text new">{tag}</label>}
                         {tag=="solde"&&
-                        <label class="label-text sale">{tag}</label>}
+                        <label className="label-text sale">{tag}</label>}
                         {tag=="populaire"&&
-                        <label class="label-text feat">{tag}</label>}
+                        <label className="label-text feat">{tag}</label>}
                     </div>
-                    <button class="product-wish wish">
+                    <button className="product-wish wish">
                     {category=="plat"&&
-                        <label class="label-text order">{category}</label>}
+                        <label className="label-text order">{category}</label>}
                     {category=="epice"&&
-                        <label class="label-text rate">{category}</label>}
+                        <label className="label-text rate">{category}</label>}
                     {category=="sucré"&&
-                        <label class="label-text sucre">{category}</label>}
+                        <label className="label-text sucre">{category}</label>}
                     </button>
-                        <a class="standard-image" href="product-video.html" >
+                        <a className="standard-image" href="product-video.html" >
                             <img src={photo} alt="product" style={{ borderRadius: "10px" }} />
                         </a>
-                        <div class="standard-widget">
-                            <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
-                            <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                            <a title="Product View" onClick={() => ShowItem(e)} class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                        <div className="standard-widget">
+                            <a title="Product Compare" href="compare.html" className="fas fa-random"></a>
+                            <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                            <a title="Product View" onClick={() => ShowItem(e)} className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                         </div>
          {isOpen &&<Modal modalCss = {"myModal"}
           setIsOpen={setIsOpen}>  
         <div className="row" >
-            <div class="col">
-                <div class="product-standard">
-                    <div class="standard-media">
-                            <img class="product-image" src={singleProduct.photo} style={{width:"250px", borderRadius:"8px"}} alt="product"/>
+            <div className="col">
+                <div className="product-standard">
+                    <div className="standard-media">
+                            <img className="product-image" src={singleProduct.photo} style={{width:"250px", borderRadius:"8px"}} alt="product"/>
                             <button className="product-wish wish">
                         {singleProduct.category=="plat"&&
                                 <label className="label-text order">{singleProduct.category}</label>}
@@ -102,7 +102,7 @@ const ProductList= ()=> {
                         {singleProduct.category=="sucré"&&
                                 <label className="label-text sucre">{singleProduct.category}</label>}
                     </button>
-                    <div class="product-label">
+                    <div className="product-label">
                     {singleProduct.tag=="nouveau"&&
                     <label className="label-text new">{singleProduct.tag}</label>}
                     {singleProduct.tag=="solde"&&
@@ -111,11 +111,11 @@ const ProductList= ()=> {
                     <label className="label-text feat">{singleProduct.tag}</label>}
                     </div>
                     </div>
-                    <div class="standard-content">
-                        <h4 class="standard-name">
+                    <div className="standard-content">
+                        <h4 className="standard-name">
                             <a href="product-video.html">{singleProduct.name}</a>
                         </h4>
-                        <h5 class="standard-price">
+                        <h5 className="standard-price">
                         {singleProduct.discount!="0"&&
                                     <>
                                         <del> €{singleProduct.price}</del>
@@ -128,17 +128,17 @@ const ProductList= ()=> {
                                         </>
                                     } 
                         </h5>
-                        <p class="standard-desc">{singleProduct.description}</p>
-                        <div class="standard-action-group">
-                            <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
-                                <i class="fas fa-shopping-basket"></i>
+                        <p className="standard-desc">{singleProduct.description}</p>
+                        <div className="standard-action-group">
+                            <button className="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                <i className="fas fa-shopping-basket"></i>
                                 <span>Ajouter</span>
                             </button>
-                            <button class="standard-wish wish" title="Add to Wishlist">
-                                <i class="fas fa-heart"></i>
+                            <button className="standard-wish wish" title="Add to Wishlist">
+                                <i className="fas fa-heart"></i>
                                 <span>Ajouter au wishlist</span>
                             </button>
-                    <button class="standard-wish wish" title="Add to Wishlist" onClick={() => view(e.id)}><a href="">
+                    <button className="standard-wish wish" title="Add to Wishlist" onClick={() => view(e.id)}><a href="">
                      Plus de Détails</a>
                    
                             </button>
@@ -149,11 +149,11 @@ const ProductList= ()=> {
         </div>
           </Modal>}
                     </div>
-                    <div class="standard-content">
-                        <h4 class="standard-name">
+                    <div className="standard-content">
+                        <h4 className="standard-name">
                             <a href="product-video.html">{name}</a>
                         </h4>
-                        <h5 class="standard-price">
+                        <h5 className="standard-price">
                         {discount!="0"&&
                                     <>
                                         <del> €{price}</del>
@@ -168,19 +168,19 @@ const ProductList= ()=> {
                                     }
                         </h5>
                         
-                        <p class="standard-desc">{shortenText(description, 150)}</p>
-                        <div class="standard-action-group">
-                            <button class="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
-                                <i class="fas fa-shopping-basket"></i>
+                        <p className="standard-desc">{shortenText(description, 150)}</p>
+                        <div className="standard-action-group">
+                            <button className="product-add" title="Add to Cart" onClick={()=> addToCart(e)}>
+                                <i className="fas fa-shopping-basket"></i>
                                 <span>Ajouter au chariot</span>
                             </button>
-                            <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                            <div className="product-action">
+                                <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                             </div>
-                            <button class="standard-wish wish" title="Add to Wishlist">
-                                <i class="fas fa-heart"></i>
+                            <button className="standard-wish wish" title="Add to Wishlist">
+                                <i className="fas fa-heart"></i>
                                 <span>Ajouter au Wishlist</span>
                             </button>
                         </div>

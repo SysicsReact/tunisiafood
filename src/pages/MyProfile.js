@@ -57,7 +57,7 @@ function MyProfile() {
     return (
         <html lang="en">
             <head>
-            <meta charset="UTF-8" />
+            <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -77,29 +77,29 @@ function MyProfile() {
             </head>
 
             <body>
-                <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+                <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Profile</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Home</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">profile</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">profile</li>
                         </ol>
                     </div>
                 </section>
-                <section class="inner-section profile-part">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="account-card">
-                                    <div class="account-title">
+                <section className="inner-section profile-part">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="account-card">
+                                    <div className="account-title">
                                         <h4>Votre Profile</h4>
 
                                         <button data-bs-toggle="modal"><Link to="/Profile">Modifier</Link></button>
                                     </div>
-                                    <div class="account-content">
-                                        <div class="row">
-                                            <div class="col-lg-2">
-                                                <div class="profile-image">
+                                    <div className="account-content">
+                                        <div className="row">
+                                            <div className="col-lg-2">
+                                                <div className="profile-image">
                                                     {loggedUser.photo!=undefined&&
                                                     <img src={loggedUser.photo} alt="user" style={{borderRadius:"70px",height:"100px"}} />
                                                     }
@@ -109,16 +109,16 @@ function MyProfile() {
                                                     
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-lg-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Prénom</label>
+                                            <div className="col-md-6 col-lg-4">
+                                                <div className="form-group">
+                                                    <label className="form-label">Prénom</label>
                                                     <h5>{loggedUser.userName}</h5>
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-lg-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Email</label>
+                                            <div className="col-md-6 col-lg-4">
+                                                <div className="form-group">
+                                                    <label className="form-label">Email</label>
                                                     <h5>{loggedUser.email}</h5>
                                                 </div>
                                             </div>

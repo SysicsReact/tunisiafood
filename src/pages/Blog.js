@@ -5,13 +5,20 @@ import { collection } from 'firebase/firestore';
 import { query, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Pagination from '../components/pagination/Pagination';
 function Blog()
 {
 
     const [blogs, setBlogs] = useState([]);
     const dispatch= useDispatch();
     const navigate= useNavigate();
-
+     //pagination states
+     const [currentPage, setCurrentPage] = useState(1);
+     const [productsPerPage, setProductsPerPage] = useState(2);
+     //Get Current Products
+     const indexOfLastProduct = currentPage * productsPerPage;
+     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+     const currentProducts = blogs.slice(indexOfFirstProduct, indexOfLastProduct )
 
     useEffect(() => {
         const q = query(collection(db, "blogs"));
@@ -32,7 +39,7 @@ function Blog()
 return(
      <html lang='en'>
             <head>
-                <meta charset="UTF-8" />
+                <meta charSet="UTF-8" />
                 <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -72,14 +79,14 @@ return(
                             <div className="col-lg-12">
         {blogs.length!=0&&
     <>
-     {blogs.map((blog, index) =>
+     {currentProducts.map((blog, index) =>
                             { const {id, author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
                             
                                 return(
                                     <>
                                     <div className="blog-card" key={{id}}>
                                     <div className="blog-media">
-                                        <a className="blog-img" href="#">
+                                        <a className="blog-img" onClick={() => view(id)}>
                                             <img src={blog.data.photo} alt="blog"/>
                                         </a>
                                     </div>
@@ -95,7 +102,7 @@ return(
                                             </li>
                                         </ul>
                                         <h4 className="blog-title">
-                                            <a href="">{blog.data.title}</a>
+                                            <a href='' onClick={() => view(id)}>{blog.data.title}</a>
                                         </h4>
                                         <p className="blog-desc">{blog.data.shortDescription}</p>
                                         <a className="blog-btn" href="" onClick={() => view(id)}>
@@ -150,6 +157,12 @@ return(
                             </ul>
                         </div>
                     </div>
+                    <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                productsPerPage={productsPerPage}
+                totalProducts={blogs.length}
+                />
                 </div>
             </div>
             </section>

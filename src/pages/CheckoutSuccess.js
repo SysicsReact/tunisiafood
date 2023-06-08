@@ -89,7 +89,7 @@ useEffect(() => {
   return (
      <html>
           <head>
-          <meta charset="UTF-8" />
+          <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -108,29 +108,29 @@ useEffect(() => {
           <link rel="stylesheet" href="assets/css/checkout.css"></link>
           </head>
      <body>
-     <section class="section countdown-part">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 mx-auto">
-                        <div class="countdown-content">
+     <section className="section countdown-part">
+            <div className="container">
+                <div className="row align-items-center">
+                    <div className="col-lg-6 mx-auto">
+                        <div className="countdown-content">
                         <h3 style={{visibility:"hidden"}}>Merci ! </h3>
                             <h3>Merci ! Nous avons reçu votre commande.</h3>
-                            <Link to={"/OrderHistory"}> <a href="" class="btn btn-inline">
-                                <i class="fas fa-eye"></i>
+                            <Link to={"/OrderHistory"}> <a href="" className="btn btn-inline">
+                                <i className="fas fa-eye"></i>
                                 <span>commandes</span>
                             </a></Link>
                            <a style={{visibility:"hidden"}} className="">
                                         <span>A</span>
                                     </a>
-                                    <Link to={"/"}>  <a href="" class="btn btn-inline">
-                                <i class="fas fa-home"></i>
+                                    <Link to={"/"}>  <a href="" className="btn btn-inline">
+                                <i className="fas fa-home"></i>
                                 <span>Accueil</span>
                             </a></Link>
                         </div>
                     </div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-5">
-                        <div class="countdown-img">
+                    <div className="col-lg-1"></div>
+                    <div className="col-lg-5">
+                        <div className="countdown-img">
                             <img src="assets/images/heart.png"/>
                         </div>
                     </div>

@@ -12,7 +12,6 @@ function BlogDetails() {
      var idBlog = Location.state.id;
      const [blog, setBlog] = useState(null);
      useEffect(() => {
-          //alert(id)
           const q = query(
               collection(db, "blogs"),
               where(documentId(), "==", idBlog)
@@ -30,11 +29,10 @@ function BlogDetails() {
           }
           return text;
           };
-      console.log(idBlog)
   return (
     <html>
       <head>
-                <meta charset="UTF-8" />
+                <meta charSet="UTF-8" />
                 <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -55,66 +53,66 @@ function BlogDetails() {
             </head>
           <body>
           <div className="backdrop"></div>
-               <a class="backtop fas fa-arrow-up" href="#"></a>
-          <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-            <div class="container">
+               <a className="backtop fas fa-arrow-up" href="#"></a>
+          <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+            <div className="container">
                 <h2>blogs</h2>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                    <li class="breadcrumb-item active" aria-current="page"><Link to="/Blog">Tout les blogs</Link></li>
-                    <li class="breadcrumb-item active" aria-current="page">Détails</li>
+                <ol className="breadcrumb">
+                    <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page"><Link to="/Blog">Tout les blogs</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page">Détails</li>
                 </ol>
             </div>
           </section>
-            <section class="inner-section blog-details-part">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12 col-xl-10">
+            <section className="inner-section blog-details-part">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-12 col-xl-10">
                     {blog &&
                   <>
-                        <article class="blog-details">
-                            <a class="blog-details-thumb" href="">
+                        <article className="blog-details">
+                            <a className="blog-details-thumb" href="">
                                 <img src={blog.photo} alt="blog"/>
                             </a>
-                            <div class="blog-details-content">
-                                <ul class="blog-details-meta">
+                            <div className="blog-details-content">
+                                <ul className="blog-details-meta">
                                     <li>
-                                        <i class="icofont-ui-calendar"></i>
+                                        <i className="icofont-ui-calendar"></i>
                                         <span>{blog.tags}</span>
                                     </li>
                                     <li>
-                                        <i class="icofont-user-alt-3"></i>
+                                        <i className="icofont-user-alt-3"></i>
                                         <span>{blog.author}</span>
                                     </li>
                                 </ul>
-                                <h2 class="blog-details-title">{blog.title}</h2>
-                                <p class="blog-details-desc">{blog.shortDescription}</p>
-                                <blockquote class="blog-details-quote">
+                                <h2 className="blog-details-title">{blog.title}</h2>
+                                <p className="blog-details-desc">{blog.shortDescription}</p>
+                                <blockquote className="blog-details-quote">
                                     <p>{blog.title}</p>
                                     <footer>- ROSALINA PONG</footer>
                                 </blockquote>
-                                <div class="row blog-details-grid">
-                                    <div class="col-md-6 col-lg-6">
-                                        <img class="img-fluid" src={blog.photo} alt="blog"/>
+                                <div className="row blog-details-grid">
+                                    <div className="col-md-6 col-lg-6">
+                                        <img className="img-fluid" src={blog.photo} alt="blog"/>
                                     </div>
-                                    <div class="col-md-6 col-lg-6">
+                                    <div className="col-md-6 col-lg-6">
                                         <p>{shortenText(blog.shortDescription, 350)}</p>
                                     </div>
                                 </div>
-                                <div class="blog-details-subtitle">
+                                <div className="blog-details-subtitle">
                                     <h3>Aboris nisi ut aliquip commodo consequat</h3>
                                     <p>{blog.longDescription}</p>
                                 </div>
-                                <div class="blog-details-footer">
-                                    <ul class="blog-details-share">
+                                <div className="blog-details-footer">
+                                    <ul className="blog-details-share">
                                         <li><span>Abonnez-vous:</span></li>
-                                        <li><a href="#" class="icofont-facebook"></a></li>
-                                        <li><a href="#" class="icofont-twitter"></a></li>
-                                        <li><a href="#" class="icofont-linkedin"></a></li>
-                                        <li><a href="#" class="icofont-pinterest"></a></li>
-                                        <li><a href="#" class="icofont-instagram"></a></li>
+                                        <li><a href="#" className="icofont-facebook"></a></li>
+                                        <li><a href="#" className="icofont-twitter"></a></li>
+                                        <li><a href="#" className="icofont-linkedin"></a></li>
+                                        <li><a href="#" className="icofont-pinterest"></a></li>
+                                        <li><a href="#" className="icofont-instagram"></a></li>
                                     </ul>
-                                    <ul class="blog-details-tag">
+                                    <ul className="blog-details-tag">
                                         <li><span>tags:</span></li>
                                         <li><a href="#">{blog.tags}</a></li>
                                     </ul>

@@ -28,7 +28,6 @@ function Login() {
         }
     };
     const logInWithEmailAndPassword = async (email, password) => {
-        console.log(email, password)
         await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             const user = userCredential.user;
             setIsLoading(false)
@@ -57,7 +56,7 @@ function Login() {
             redirectUser();
 
         } catch (err) {
-            console.error(err);
+            toast.error(err);
         }
     };
 
@@ -67,7 +66,7 @@ function Login() {
     return (
         <html lang="en">
             <head>
-            <meta charset="UTF-8" />
+            <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 

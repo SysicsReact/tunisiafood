@@ -8,7 +8,7 @@ function Politics() {
 
 <html>
           <head>
-          <meta charset="UTF-8" />
+          <meta charSet="UTF-8" />
     <meta name="name" content="Cook Tounsi" />
     <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
@@ -30,35 +30,35 @@ function Politics() {
           </head>
           <div className="backdrop"></div>
                 <a className="backtop fas fa-arrow-up" href="#"></a>
-          <section class="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                    <div class="container">
+          <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                    <div className="container">
                         <h2>Politiques et confidentialités</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                            <li class="breadcrumb-item active" aria-current="page">Politiques et confidentialités</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Politiques et confidentialités</li>
                         </ol>
                     </div>
           </section>
 
           <body>
-          <section class="inner-section privacy-part">
-            <div class="container">
-                <div class="row">
-                <div class="col-lg-3">
-                        <nav class="nav nav-pills flex-column" id="scrollspy">
-                            <a class="nav-link" href="#item-1">PRÉAMBULE</a>
-                            <a class="nav-link" href="#item-2">COLLECTE ET TRAITEMENT DE DONNÉES</a>
-                            <a class="nav-link" href="#item-3">DONNÉES À CARACTÈRE PERSONNEL COLLECTÉES ET TRAITÉES DANS LE CADRE DE LA NAVIGATION SUR LE SITE</a>
-                            <a class="nav-link" href="#item-4">RESPONSABLE DU TRAITEMENT DES DONNÉES</a>
-                            <a class="nav-link" href="#item-5">DROITS DE L'UTILISATEUR</a>
-                            <a class="nav-link" href="#item-6">UTILISATION DES FICHIERS "COOKIES"</a>
-                            <a class="nav-link" href="#item-7">CONDITIONS DE MODIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ</a>
-                            <a class="nav-link" href="#item-8">ACCEPTATION PAR L'UTILISATEUR DE LA POLITIQUE DE CONFIDENTIALITÉ</a>
+          <section className="inner-section privacy-part">
+            <div className="container">
+                <div className="row">
+                <div className="col-lg-3">
+                        <nav className="nav nav-pills flex-column" id="scrollspy">
+                            <a className="nav-link" href="#item-1">PRÉAMBULE</a>
+                            <a className="nav-link" href="#item-2">COLLECTE ET TRAITEMENT DE DONNÉES</a>
+                            <a className="nav-link" href="#item-3">DONNÉES À CARACTÈRE PERSONNEL COLLECTÉES ET TRAITÉES DANS LE CADRE DE LA NAVIGATION SUR LE SITE</a>
+                            <a className="nav-link" href="#item-4">RESPONSABLE DU TRAITEMENT DES DONNÉES</a>
+                            <a className="nav-link" href="#item-5">DROITS DE L'UTILISATEUR</a>
+                            <a className="nav-link" href="#item-6">UTILISATION DES FICHIERS "COOKIES"</a>
+                            <a className="nav-link" href="#item-7">CONDITIONS DE MODIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ</a>
+                            <a className="nav-link" href="#item-8">ACCEPTATION PAR L'UTILISATEUR DE LA POLITIQUE DE CONFIDENTIALITÉ</a>
                         </nav>
                     </div>
-<div class="col-lg-9">
+<div className="col-lg-9">
     <div data-bs-spy="scroll" data-bs-target="#scrollspy" data-bs-offset="0" tabindex="0">
-            <div class="scrollspy-content" id="item-1">
+            <div className="scrollspy-content" id="item-1">
                     <h3>ARTICLE 1 : PRÉAMBULE</h3>
                     <p>Cette politique de confidentialité s'applique au site : www.cooktounsi.com
 La présente politique de confidentialité a pour but d'exposer aux utilisateurs du site : <br></br>
@@ -76,7 +76,7 @@ Cette politique de confidentialité complète les Conditions Générales de vent
 
 </p>
             </div>
-            <div class="scrollspy-content" id="item-2">
+            <div className="scrollspy-content" id="item-2">
                                 <h3>ARTICLE 2 : PRINCIPES GÉNÉRAUX EN MATIÈRE DE COLLECTE ET DE TRAITEMENT DE DONNÉES</h3>
                                 <p>Conformément aux dispositions de l'article 5 du Règlement européen 2016/679, la collecte et le traitement des données des utilisateurs du site respectent les principes suivants :
                                 <li>Licéité, loyauté et transparence : les données ne peuvent être collectées et traitées qu'avec le consentement de l'utilisateur propriétaire des données. A chaque fois que des données à caractère personnel seront collectées, il sera indiqué à l'utilisateur que ses données sont collectées, et pour quelles raisons ses données sont collectées ;
@@ -114,7 +114,7 @@ Le traitement et la collecte des données à caractère personnel sont nécessai
 </li>
 </p>
             </div>
-            <div class="scrollspy-content" id="item-3">
+            <div className="scrollspy-content" id="item-3">
                                 <h3>ARTICLE 3 : DONNÉES À CARACTÈRE PERSONNEL COLLECTÉES ET TRAITÉES DANS LE CADRE DE LA NAVIGATION SUR LE SITE
 
 </h3>
@@ -170,7 +170,7 @@ Les données collectées et traitées par le site sont exclusivement hébergées
 
             </p>
             </div>
-            <div class="scrollspy-content" id="item-4">
+            <div className="scrollspy-content" id="item-4">
             <h3>ARTICLE 4 : RESPONSABLE DU TRAITEMENT DES DONNÉES
 </h3>
                                 <p>
@@ -187,7 +187,7 @@ Le responsable du traitement s'engage à protéger les données à caractère pe
 <br></br>Dans le cas où l'intégrité, la confidentialité ou la sécurité des données à caractère personnel de l'utilisateur est compromise, le responsable du traitement s'engage à informer l'utilisateur par tout moyen.
             </p>
             </div>
-            <div class="scrollspy-content" id="item-5">
+            <div className="scrollspy-content" id="item-5">
                 <h3>ARTICLE 5 : DROITS DE L'UTILISATEUR</h3>
                 <p>
                 Conformément à la réglementation concernant le traitement des données à caractère personnel, l'utilisateur possède les droits ci-après énumérés.
@@ -217,7 +217,7 @@ Il est rappelé à l'utilisateur qu'il peut organiser quel doit être le devenir
 
                 </p>
             </div>
-            <div class="scrollspy-content" id="item-6">
+            <div className="scrollspy-content" id="item-6">
                 <h3>ARTICLE 6 : UTILISATION DES FICHIERS "COOKIES"</h3>
                 <p>
                 Le site a éventuellement recours aux techniques de "cookies".
@@ -248,7 +248,7 @@ Il est rappelé à l'utilisateur qu'il peut organiser quel doit être le devenir
 <br/>En naviguant sur le site, il est porté à connaissance de l'utilisateur que des fichiers "cookies" de tiers peuvent être enregistrés.
                 </p>
             </div>
-            <div class="scrollspy-content" id="item-7">
+            <div className="scrollspy-content" id="item-7">
                 <h3>ARTICLE 7 : CONDITIONS DE MODIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ</h3>
                 <p>
                 La présente politique de confidentialité peut être consultée à tout moment à l'adresse ci-après indiquée :
@@ -259,7 +259,7 @@ Il est rappelé à l'utilisateur qu'il peut organiser quel doit être le devenir
                 <br/>Il est porté à la connaissance de l'utilisateur que la dernière mise à jour de la présente politique de confidentialité est intervenue le : 01 / 03 / 2023.
                 </p>
             </div>
-            <div class="scrollspy-content" id="item-8">
+            <div className="scrollspy-content" id="item-8">
     <h3>ARTICLE 8 : ACCEPTATION PAR L'UTILISATEUR DE LA POLITIQUE DE CONFIDENTIALITÉ</h3>
     <p>
     En naviguant sur le site, l'utilisateur atteste avoir lu et compris la présente politique de confidentialité et en accepte les conditions, en ce qui concerne plus particulièrement la collecte et le traitement de ses données à caractère personnel, ainsi que l'utilisation de fichiers "cookies".

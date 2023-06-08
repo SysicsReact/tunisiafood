@@ -4,7 +4,7 @@ function productFilter() {
   return (
     <html lang="en">
      <head>
-         <meta charset="UTF-8" />
+         <meta charSet="UTF-8" />
          <meta name="title" content="Tunisian Food" />
          <meta name="keywords" content="organic, food, shop, ecommerce, store, agriculture, vegetables, farm, grocery, natural, online store" />
          <title>Tout les produits</title>
@@ -21,16 +21,16 @@ function productFilter() {
      </head>
      
     
-             <div class="col-lg-3">
-                 <div class="shop-widget">
-                     <h6 class="shop-widget-title">Filter</h6>
+             <div className="col-lg-3">
+                 <div className="shop-widget">
+                     <h6 className="shop-widget-title">Filter</h6>
                      <form>
-                         <div class="shop-widget-group">
+                         <div className="shop-widget-group">
                              <input type="text" placeholder="Min - 00"/>
                              <input type="text" placeholder="Max - 5k"/>
                          </div>
-                         <button class="shop-widget-btn">
-                             <i class="fas fa-search"></i>
+                         <button className="shop-widget-btn">
+                             <i className="fas fa-search"></i>
                              <span>Chercher</span>
                          </button>
                      </form>

@@ -96,7 +96,7 @@ const Cart = () => {
                                         </div>
                                         <div className="cart-info-group">
                                             <div className="cart-info">
-                                                <h6><a href="product-single.html">{name}</a></h6>
+                                                <h6><a href="">{name}</a></h6>
                                                {discount!= 0 &&
                                                <p>Prix Unitaire €{  (Math.round((price-(price*discount)/100)*100)/100)}</p>
                                                }

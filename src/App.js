@@ -52,10 +52,10 @@ class App extends Component {
       <>
       <ToastContainer />
         {!test && <Loader />}
-        <div>
+
           <Header />
           <Navbar />
-        </div>
+
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/Login" element={<Login />} />
@@ -72,7 +72,6 @@ class App extends Component {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/CartDetails" element={<CartDetails />} />
           <Route path="/ProductItems" element={<ProductItem/>} />
-          <Route path="/SingleProduct/:id" element={<SingleProduct/>} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/OrderHistory" element={<OrderHistory/>} />
           <Route path="/OrderDetails" element={<OrderDetails/>} />
@@ -84,9 +83,9 @@ class App extends Component {
           <Route path="/CheckoutSuccess" element={<CheckoutSuccess/>} />
           <Route path="/Payment" element={<Payment/>} />
         </Routes>
-        <div>
+    
           <Footer />
-        </div>
+       
 
 
       </>

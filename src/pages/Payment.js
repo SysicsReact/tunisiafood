@@ -48,8 +48,6 @@ function Payment() {
                 break;
     }
     })
-    
-
   let price= cartTotalAmount.toString();
   let priceFinal = (parseFloat(livraisonCost) + parseFloat(price)) * 100;
   priceFinal = priceFinal.toFixed(2);
@@ -60,11 +58,15 @@ function Payment() {
   }, [dispatch, cartItems]);
 
   useEffect(() => {
-
-    // setIsLoading(true);
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
+            const docRef = doc(db, "users", uid);
+            getDoc(docRef).then(docSnap => {
+                if (docSnap.exists()) {
+                    setLoggedUser(docSnap.data())
+                }
+            })
         }
     })
 }, [dispatch])
@@ -101,7 +103,7 @@ function Payment() {
         //successUrl: "https://cooktounsi.com/CheckoutSuccess", 
         successUrl:`https://cooktounsi.com/CheckoutSuccess?refid=${refid}`,
         failUrl: "https://dev.konnect.network/gateway/payment-failure",
-        checkoutForm: true,
+        checkoutForm: false,
       };
       const response = await fetch(url, {
         method: "POST",
@@ -129,7 +131,6 @@ function Payment() {
         if(responseData){
             if(responseData.payUrl != null)
         {
-            console.log(responseData);
             //setCanOpenWindow(false);
             addPaymentToStart();
             //const checkIfComplete = await RemoveRefCommand(true,user.uid);
@@ -138,7 +139,6 @@ function Payment() {
         else{
             toast.error("plz regenerate again");
         }
-        
       }
     }, [responseData]);
     //Payment done
@@ -157,8 +157,6 @@ function Payment() {
             state: "-1",
             timestamp: serverTimestamp(),
           });
-        
-          console.log('Payment added successfully!');
           window.location.href = responseData.payUrl;
         } catch (error) {
           console.error('Error adding payment: ', error);
@@ -168,7 +166,7 @@ function Payment() {
   return (
     <html lang="en">
           <head>
-          <meta charset="UTF-8" />
+          <meta charSet="UTF-8" />
     <meta name="name" content="Cook Tounsi" />
     <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 

@@ -4,7 +4,7 @@ class Product extends Component{
           return (
                <>
           <head>
-               <meta charset="UTF-8"/>
+               <meta charSet="UTF-8"/>
                <meta name="name" content="Greeny"/>
                <meta name="title" content="Greeny - eCommerce HTML Template"/>
                <link rel="icon" href="assets/images/favicon.png"/>
@@ -18,49 +18,49 @@ class Product extends Component{
                <link rel="stylesheet" href="assets/css/main.css"/>
                <link rel="stylesheet" href="assets/css/home-classic.css"/>
           </head>
-          <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-                    <div class="col">
-                        <div class="product-card">
-                            <div class="product-media">
-                                <div class="product-label">
-                                    <label class="label-text sale">sale</label>
+          <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+                    <div className="col">
+                        <div className="product-card">
+                            <div className="product-media">
+                                <div className="product-label">
+                                    <label className="label-text sale">sale</label>
                                 </div>
-                                <button class="product-wish wish">
-                                    <i class="fas fa-heart"></i>
+                                <button className="product-wish wish">
+                                    <i className="fas fa-heart"></i>
                                 </button>
-                                <a class="product-image" href="front/product-video.html">
+                                <a className="product-image" href="front/product-video.html">
                                     <img src="assets/images/product/jelbena.jpg" alt="product"/>
                                 </a>
-                                <div class="product-widget">
-                                    <a title="Product Compare" href="Shop.js" class="fas fa-random"></a>
-                                    <a title="Product Video" href="Shop.js" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                    <a title="Product View" href="Shop.js" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                <div className="product-widget">
+                                    <a title="Product Compare" href="Shop.js" className="fas fa-random"></a>
+                                    <a title="Product Video" href="Shop.js" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                    <a title="Product View" href="Shop.js" className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                 </div>
                             </div>
-                            <div class="product-content">
-                                <div class="product-rating">
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="active icofont-star"></i>
-                                    <i class="icofont-star"></i>
+                            <div className="product-content">
+                                <div className="product-rating">
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="active icofont-star"></i>
+                                    <i className="icofont-star"></i>
                                     <a href="product-video.html">(3)</a>
                                 </div>
-                                <h6 class="product-name">
+                                <h6 className="product-name">
                                     <a href="product-video.html">مرقة جلبانة بالعلوش</a>
                                 </h6>
-                                <h6 class="product-price">
+                                <h6 className="product-price">
                                     <del>$34</del>
                                     <span>$18<small>/plat</small></span>
                                 </h6>
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
+                                <button className="product-add" title="Add to Cart">
+                                    <i className="fas fa-shopping-basket"></i>
                                     <span>add</span>
                                 </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                <div className="product-action">
+                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
+                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
+                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,6 @@ class Product extends Component{
         <script src="assets/vendor/niceselect/nice-select.min.js"></script>
         <script src="assets/vendor/slickslider/slick.min.js"></script>
         <script src="assets/vendor/venobox/venobox.min.js"></script>
-
         <script src="assets/js/nice-select.js"></script>
         <script src="assets/js/countdown.js"></script>
         <script src="assets/js/accordion.js"></script>
