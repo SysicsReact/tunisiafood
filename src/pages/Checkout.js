@@ -21,11 +21,10 @@ export default function Checkout() {
     }
      const cartItems = useSelector(selectCartItems);
      const cartTotalAmount = useSelector(selectCarTotalAmount);
-     const [country, setCountry] = useState('France');
      var DBcountry = [];
      const [test, setTest] = useState([]);
      const [test1, setTest1] = useState([]);
-     const [select, setSelect] = useState('France');
+     const [select, setSelect] = useState("France");
      const [optionSelected, setOptionSelected] = useState([]);
      const cartTotalQuantity = useSelector(selectCarTotalQuantity);
      const[livraisonCost,SetLivraisonCost]=useState("10");
@@ -41,19 +40,7 @@ export default function Checkout() {
     }
     const [shippingAddress, setShippingAddress] = useState({...initialAddressState});
     
-    useEffect(() => {
-        setOptionSelected([])
-        const q = query(
-            collection(db, "regions"),
-            where(documentId(), "==", country)
 
-        );
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setOptionSelected(doc.data().optionSelected)
-            });
-        });
-    }, [country]);
     //---------get countries  
 
     useEffect(() => {
@@ -102,7 +89,7 @@ export default function Checkout() {
         })
   
     const handleShipping = (e) =>{
-        setSelect(e.target.value)
+
         const {name, value} = e.target;
         setShippingAddress({
             ...shippingAddress,
@@ -283,7 +270,8 @@ export default function Checkout() {
                                     required
                                     value={select}
                                     name="country"
-                                    onChange={(e) => handleShipping(e)} >
+                                    onChange={(e) => {handleShipping(e);
+                                        setSelect(e.target.value);} } >
                                         Choisir votre pays
                                         {test.map(fbb =>
                             <option  >{fbb}</option>
@@ -299,7 +287,7 @@ export default function Checkout() {
                                     name="city"
                                     onChange={(e) => handleShipping(e)}>
                                          {test1.map(b =>
-                        <option key={b.key} value={b.key}>{b}</option>
+                        <option  key={b.key} value={b.key}>{b}</option>
                     )};
                                     </select>
                                 </div>
