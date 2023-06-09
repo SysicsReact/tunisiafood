@@ -75,7 +75,7 @@ const sendPasswordReset = async (email) => {
 
 const logout = () => {
   signOut(auth);
-  window.location.reload(true)
+  window.location.reload(true);
 };
 
 let isLoading=false;
