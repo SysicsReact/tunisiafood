@@ -67,7 +67,7 @@ const ProductItems = () => {
                            <h2>Tout Les Produits</h2>
                            <ol className="breadcrumb">
                                <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                               <li className="breadcrumb-item active" aria-current="page">Shop</li>
+                               <li className="breadcrumb-item active" aria-current="page">Détails du produit</li>
                            </ol>
                        </div>
                </section>
@@ -83,8 +83,8 @@ const ProductItems = () => {
                                             <label className="label-text order">{product.category}</label>}
                                         {product.category=="epice"&&
                                             <label className="label-text rate">{product.category}</label>}
-                                        {product.category=="sucré"&&
-                                            <label className="label-text sucre">{product.category}</label>}
+                                        {product.category=="Sucré"&&
+                                            <label className="label-text sucre">Pâtisserie</label>}
                                 <label className="details-label off">-{product.discount}%</label>
                                 {product.tag=="nouveau"&&
                                             <label className="label-text new">{product.tag}</label>}
@@ -104,25 +104,25 @@ const ProductItems = () => {
                         <div className="details-content">
                             <h3 className="details-name"><a href="#">{product.name}</a></h3>
                             <div className="details-meta">
-                                <p>SKU:<span>{idProduct}</span></p>
+                                <p>Réf:<span>{idProduct}</span></p>
                                 <p>BRAND:<a href="#">Cool Tounsi</a></p>
                             </div>
-                            {product.discount!="0"&&
+                            {product.discount !== 0 &&
                             <h3 className="details-price">
                                 <del> €{product.price}</del>
-                                <span> € {Math.round((product.price-(product.price*product.discount)/100)*100)/100}<small>/ {product.weight} G</small></span>
+                                <span> € {Math.round((product.price-(product.price*product.discount)/100))}<small>/ {product.weight} G</small></span>
                             </h3>}
                             {product.discount=="0"&&
                             <h3 className="details-price">
                                 <span> € {product.price}<small>/ {product.weight} G</small></span>
                             </h3>}
                             <p className="details-desc">{product.description}</p>
+                            <p className="details-desc">{product.longDescription}</p>
                             <div className="details-list-group">
                                 <label className="details-list-title">tags:</label>
-                                <ul className="details-tag-list">
+                               <ul className="details-tag-list">
                                     <li><a href="#">{product.tag}</a></li>
                                     <li><a href="#">{product.category}</a></li>
-                                    <li><a href="#">Kleya</a></li>
                                 </ul>
                             </div>
 

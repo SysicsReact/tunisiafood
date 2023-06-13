@@ -77,7 +77,7 @@ const ProductList= ()=> {
                     {category=="epice"&&
                         <label className="label-text rate">{category}</label>}
                     {category=="sucré"&&
-                        <label className="label-text sucre">{category}</label>}
+                        <label className="label-text sucre">Pâtisserie</label>}
                     </button>
                         <a className="standard-image" href="product-video.html" >
                             <img src={photo} alt="product" style={{ borderRadius: "10px" }} />
@@ -100,7 +100,7 @@ const ProductList= ()=> {
                         {singleProduct.category=="epice"&&
                                 <label className="label-text rate">{singleProduct.category}</label>}
                         {singleProduct.category=="sucré"&&
-                                <label className="label-text sucre">{singleProduct.category}</label>}
+                                <label className="label-text sucre">Pâtisserie</label>}
                     </button>
                     <div className="product-label">
                     {singleProduct.tag=="nouveau"&&

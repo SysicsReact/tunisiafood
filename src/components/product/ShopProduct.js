@@ -195,7 +195,7 @@ dispatch(ADD_TO_CART(e));
                                         {category=="Epice"&&
                                             <label className="label-text rate">{category}</label>}
                                         {category=="Sucré"&&
-                                            <label className="label-text sucre">{category}</label>}
+                                            <label className="label-text sucre">Pâtisserie</label>}
                                         {category=="Boisson"&&
                                             <label className="label-text drink">{category}</label>}
                                         </button>
@@ -219,7 +219,7 @@ dispatch(ADD_TO_CART(e));
                     {singleProduct.category=="Epice"&&
                             <label className="label-text rate">{singleProduct.category}</label>}
                     {singleProduct.category=="Sucré"&&
-                            <label className="label-text sucre">{singleProduct.category}</label>}
+                            <label className="label-text sucre">Pâtisserie</label>}
                     {singleProduct.category=="Boisson"&&
                             <label className="label-text drink">{singleProduct.category}</label>}
                     </button>
@@ -353,7 +353,7 @@ dispatch(ADD_TO_CART(e));
                                 {category=="Boisson"&&
                                    <label className="label-text rate">{category}</label>}
                                {category=="Sucré"&&
-                                   <label className="label-text sucre">{category}</label>}
+                                   <label className="label-text sucre">Pâtisserie</label>}
                                </button>
                                    <a className="standard-image" href="product-video.html" >
                                        <img src={photo} alt="product" style={{ borderRadius: "10px" }} />
@@ -363,7 +363,7 @@ dispatch(ADD_TO_CART(e));
                                        <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <a title="Product View" onClick={() => ShowItem(e)} className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                    </div>
-                                   {isOpen && <Modal modalCss = {"myModal"}
+      {isOpen && <Modal modalCss = {"myModal"}
           setIsOpen={setIsOpen} >  
                     <div >
                         <div className="row" key={singleProduct.id}>
@@ -375,7 +375,7 @@ dispatch(ADD_TO_CART(e));
                     {singleProduct.category=="Epice"&&
                             <label className="label-text rate">{singleProduct.category}</label>}
                     {singleProduct.category=="Sucré"&&
-                            <label className="label-text sucre">{singleProduct.category}</label>}
+                            <label className="label-text sucre">Pâtisserie</label>}
                     {singleProduct.category=="Boisson"&&
                             <label className="label-text drink">{singleProduct.category}</label>}
                     </button>
