@@ -83,6 +83,8 @@ const ProductItems = () => {
                                             <label className="label-text order">{product.category}</label>}
                                         {product.category=="epice"&&
                                             <label className="label-text rate">{product.category}</label>}
+                                            {product.category=="Boisson"&&
+                                            <label className="label-text drink">{product.category}</label>}
                                         {product.category=="Sucré"&&
                                             <label className="label-text sucre">Pâtisserie</label>}
                                 <label className="details-label off">-{product.discount}%</label>
@@ -110,7 +112,7 @@ const ProductItems = () => {
                             {product.discount !== 0 &&
                             <h3 className="details-price">
                                 <del> €{product.price}</del>
-                                <span> € {Math.round((product.price-(product.price*product.discount)/100))}<small>/ {product.weight} G</small></span>
+                                <span> € {Math.round((product.price-(product.price*product.discount)/100)*100)/100}<small>/ {product.weight} G</small></span>
                             </h3>}
                             {product.discount=="0"&&
                             <h3 className="details-price">
