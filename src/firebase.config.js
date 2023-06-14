@@ -74,8 +74,11 @@ const sendPasswordReset = async (email) => {
 
 
 const logout = () => {
-  signOut(auth);
-  window.location.reload(true)
+  signOut(auth).then(() => {
+    window.location.reload();
+  }).catch((error) => {
+    console.log(error);
+  });
 };
 
 let isLoading=false;
