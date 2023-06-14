@@ -179,7 +179,7 @@ dispatch(ADD_TO_CART(e));
                     return (   
                         
                             <div className="col" key={id}>    
-                                <div className="product-card" onClick={()=>ShowItem(e)}>
+                                <div className="product-card">
                                     <div className="product-media">
                                         <div className="product-label">
                                              {tag=="nouveau"&&
@@ -195,11 +195,11 @@ dispatch(ADD_TO_CART(e));
                                         {category=="Epice"&&
                                             <label className="label-text rate">{category}</label>}
                                         {category=="Sucré"&&
-                                            <label className="label-text sucre">{category}</label>}
+                                            <label className="label-text sucre">Pâtisserie</label>}
                                         {category=="Boisson"&&
                                             <label className="label-text drink">{category}</label>}
                                         </button>
-                                        <a className="product-image">
+                                        <a className="product-image" onClick={()=>ShowItem(e)}>
                                             <img src={photo} alt="product"/>
                                         </a>
                                         <div className="product-widget">
@@ -219,7 +219,7 @@ dispatch(ADD_TO_CART(e));
                     {singleProduct.category=="Epice"&&
                             <label className="label-text rate">{singleProduct.category}</label>}
                     {singleProduct.category=="Sucré"&&
-                            <label className="label-text sucre">{singleProduct.category}</label>}
+                            <label className="label-text sucre">Pâtisserie</label>}
                     {singleProduct.category=="Boisson"&&
                             <label className="label-text drink">{singleProduct.category}</label>}
                     </button>
@@ -240,10 +240,9 @@ dispatch(ADD_TO_CART(e));
                             <div className="col-md-6 col-lg-6">
                                 <div className="view-details">
                                     <h3 className="view-name">
-                                        <a href="">{singleProduct.name}</a>
+                                        <a href="" onClick={() => view(singleProduct.id)}>{singleProduct.name}</a>
                                     </h3>
                                     <div className="view-meta">
-                                        
                                         <p>Catégorie:<a href="">{singleProduct.category}</a></p>
                                     </div>
                                     <h3 className="view-price">
@@ -290,12 +289,10 @@ dispatch(ADD_TO_CART(e));
                             </div>
                         </div>
                     </div>
-    </Modal>}
+            </Modal>}
                                     </div>
                                     <div className="product-content">
-                                      
                                             <i className="product-mass">{weight} {ReturnMeasurement(category)}</i>
-                                      
                                         <h6 className="product-name">
                                             <a href="">{name}</a>
                                         </h6>
@@ -330,7 +327,7 @@ dispatch(ADD_TO_CART(e));
                         </div>
                      
                     {!grid &&products.map((e) => {
-                       const { id, tag, category,photo,name, discount, price,description } = e;
+                       const { id, tag, category,photo,name, video, discount, price,description } = e;
                     return (
                         <>  
                         <div className="row" key={id}>
@@ -353,17 +350,17 @@ dispatch(ADD_TO_CART(e));
                                 {category=="Boisson"&&
                                    <label className="label-text rate">{category}</label>}
                                {category=="Sucré"&&
-                                   <label className="label-text sucre">{category}</label>}
+                                   <label className="label-text sucre">Pâtisserie</label>}
                                </button>
                                    <a className="standard-image" href="product-video.html" >
                                        <img src={photo} alt="product" style={{ borderRadius: "10px" }} />
                                    </a>
                                    <div className="standard-widget">
                                        <a title="Product Compare" onClick={() => addToWish(e)} className="fas fa-heart"></a>
-                                       <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
+                                       <a title="Product Video" href={video} className="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
                                        <a title="Product View" onClick={() => ShowItem(e)} className="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                    </div>
-                                   {isOpen && <Modal modalCss = {"myModal"}
+      {isOpen && <Modal modalCss = {"myModal"}
           setIsOpen={setIsOpen} >  
                     <div >
                         <div className="row" key={singleProduct.id}>
@@ -375,7 +372,7 @@ dispatch(ADD_TO_CART(e));
                     {singleProduct.category=="Epice"&&
                             <label className="label-text rate">{singleProduct.category}</label>}
                     {singleProduct.category=="Sucré"&&
-                            <label className="label-text sucre">{singleProduct.category}</label>}
+                            <label className="label-text sucre">Pâtisserie</label>}
                     {singleProduct.category=="Boisson"&&
                             <label className="label-text drink">{singleProduct.category}</label>}
                     </button>
@@ -405,7 +402,7 @@ dispatch(ADD_TO_CART(e));
                                         {singleProduct.discount!="0"&&
                                     <>
                                         <del> €{singleProduct.price}</del>
-                                        <span> € {Math.round((singleProduct.price-(singleProduct.price*singleProduct.discount)/100)*100)/100}<small></small></span>
+                                        <span> € {Math.round(singleProduct.price-(singleProduct.price*singleProduct.discount)/100)}<small></small></span>
                                         </>
                                     }
                                     {singleProduct.discount=="0"&&
@@ -459,7 +456,6 @@ dispatch(ADD_TO_CART(e));
                                                }
                                                {discount=="0"&&
                                                    <>
-                                                  
                                                    <span> € {price}</span>
                                                    </>
                                                }
@@ -471,11 +467,6 @@ dispatch(ADD_TO_CART(e));
                                            <i className="fas fa-shopping-basket"></i>
                                            <span>Ajouter au chariot</span>
                                        </button>
-                                       <div className="product-action">
-                                           <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                           <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                           <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                       </div>
                                        <button className="standard-wish wish" title="Add to Wishlist" onClick={() => ShowItem(e)}>
                                            <i className="fas fa-eye"></i>
                                            <span>Plus de Détails</span>

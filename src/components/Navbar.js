@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 class Navbar extends React.Component{
      render() {
 
-       
-
           return (
     <>
         <head>
@@ -63,33 +61,31 @@ class Navbar extends React.Component{
                 <button className="category-close"><i className="icofont-close"></i></button>
             </div>
             <ul className="category-list">
-                <li className="category-item">
-                <Link to="ShopProduct" className="category-link " >  
-                    Produits</Link>
+                <li className="category-item" >
+                  <a className="category-link"  href="/ShopProduct">
+                    Produits</a>
                 </li>
                 <li className="category-item">
-                <Link to="About" className="category-link" >  
-                    A propos</Link>
+                <a href="About" className="category-link" >  
+                    A propos</a>
                 </li>
                 <li className="category-item">
-                <Link to="Blog" className="category-link" >  
-                    Blogs</Link>
+                <a href="Blog" className="category-link" >  
+                    Blogs</a>
                 </li>
                 <li className="category-item">
-                <Link to="Blog" className="category-link" >  
-                    Offres</Link>
+                <a href="Blog" className="category-link" >  
+                    Offres</a>
                 </li>
                 <li className="category-item">
-                <Link to="Contact" className="category-link" >  
-                    Contacts</Link>
+                <a href="Contact" className="category-link" >  
+                    Contacts</a>
                 </li>
             </ul>
             <div className="category-footer">
-                <p>Tous droits réservés par <Link to="/">Cooktounsi</Link></p>
+                <p>Tous droits réservés par <a href="/">Cooktounsi</a></p>
             </div>
         </aside>
-
-
 
         <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
         <script src="assets/vendor/bootstrap/popper.min.js"></script>

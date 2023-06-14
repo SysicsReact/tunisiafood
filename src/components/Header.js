@@ -273,16 +273,21 @@ const Header = () => {
                 </div> 
                 <ul className="nav-list">
                     <li>
-                    <NavLink to="/MyProfile" className="My-link" > <a className="nav-link dropdown-link" href=""><i className="icofont-bag-alt"></i>Profile</a></NavLink>
+                    <a className="nav-link" href="/MyProfile">
+                        <i className="icofont-bag-alt"></i>Profile</a>
                     </li>
                     <li>
-                    <NavLink to="/OrderHistory" className="My-link" > <a className="nav-link dropdown-link" href=""><i className="icofont-page"></i>
-                    Commandes</a></NavLink>
-                    <NavLink to="/Politics" className="My-link" > <a className="nav-link dropdown-link" href=""><i className="icofont-warning"></i>
-confidentialité</a></NavLink>
+                    <a className="nav-link" href="/OrderHistory"><i className="icofont-page"></i>
+                    Commandes</a>
                     </li>
                     <li>
-                    <NavLink to="/" className="My-link" > <a className="nav-link dropdown-link" href="" onClick={logout}><i className="icofont-logout"></i>Se déconnecter</a></NavLink>
+                    <a className="nav-link" href="/Politics">
+                        <i className="icofont-warning"></i>
+                        confidentialité</a>
+                    </li>
+                    <li> 
+                    <a className="nav-link" href="/" onClick={logout}>
+                        <i className="icofont-logout"></i>Se déconnecter</a>
                     </li>
                 </ul>
                 <div className="nav-info-group">
@@ -315,10 +320,10 @@ confidentialité</a></NavLink>
             </div>
             <div className="nav-content">
                 <div className="nav-btn">
-                    <Link to="/Login"><a href="" className="btn btn-inline">
+                    <a href="/Login" className="btn btn-inline">
                         <i className="fa fa-unlock-alt"></i>
                         <span>S'inscrire</span>
-                    </a></Link>
+                    </a>
                 </div>
                 <div className="nav-info-group">
                     <div className="nav-info">
@@ -373,9 +378,6 @@ confidentialité</a></NavLink>
                         <form className="header-form">
                     <div className="dropdown">
                         <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
-                        
-                        
-                            
                         {result.slice(0,5).map((result, id) => (
                         <div key={{id}} className="rounded dropdown-content show">
                             <div className="" onClick={() => view(result.id)} >
@@ -393,12 +395,7 @@ confidentialité</a></NavLink>
                     </form>
                         </>
                     }
-                    
-                    
-                    
-                    
                     {!checkIfTrue()&&
-                    
                     <>
                     {shouldHideDiv ?null:
                     <form className="">

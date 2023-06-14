@@ -177,7 +177,7 @@ function Dashboard() {
                                         {category=="Epice"&&
                                             <label className="label-text rate">{category}</label>}
                                         {category=="Sucré"&&
-                                            <label className="label-text sucre">{category}</label>}
+                                            <label className="label-text sucre">Pâtisserie</label>}
                                         {category=="Boisson"&&
                             <label className="label-text drink">{category}</label>}
                                     </button>
@@ -203,7 +203,7 @@ function Dashboard() {
                     {singleProduct.category=="Epice"&&
                             <label className="label-text rate">{singleProduct.category}</label>}
                     {singleProduct.category=="Sucré"&&
-                            <label className="label-text sucre">{singleProduct.category}</label>}
+                            <label className="label-text sucre">Pâtisserie</label>}
                     {singleProduct.category=="Boisson"&&
                             <label className="label-text drink">{singleProduct.category}</label>}
                     </button>
@@ -276,12 +276,7 @@ function Dashboard() {
                     </div>
     </Modal>}
 
-    {isVideo && <Modal modalCss = {"myModal"} 
-    setIsVideo = {setIsVideo}>
-            <div  key={singleProduct.id}>
-            <iframe width="560" height="315" src={singleProduct.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-    </Modal>}
+    
                                 <div className="product-content">
                                     <div className="product-rating">
                                     <i className="product-price" href="">{weight} {ReturnMeasurement(category)}</i>
@@ -372,7 +367,7 @@ function Dashboard() {
                                 {category=="Boisson"&&
                                             <label className="label-text drink">{category}</label>}
                                 {category=="Sucré"&&
-                                            <label className="label-text sucre">{category}</label>}
+                                            <label className="label-text sucre">Pâtisserie</label>}
                                 </button>
                                 <a className="feature-image" onClick={() => ShowItem(e)}>
                                     <img src={photo} style={{ borderRadius:"5px"}} alt={name}/>
@@ -486,10 +481,7 @@ function Dashboard() {
                 </div>
                                     </>
                                 ) })}
-                                  
-                
-
-
+  
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-btn-25">
