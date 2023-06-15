@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link,useNavigate } from "react-router-dom";
 import { db} from '../firebase.config';
-import { collection } from 'firebase/firestore';
+import { collection, orderBy } from 'firebase/firestore';
 import { query, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -80,14 +80,14 @@ return(
         {blogs.length!=0&&
     <>
      {currentProducts.map((blog, index) =>
-                            { const {id, author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
+                            { const {id, author, p1, p2, photo1, photo2, timestamp, quote, shortDescription, tags, title} = blog
                             
                                 return(
                                     <>
                                     <div className="blog-card" key={{id}}>
                                     <div className="blog-media">
                                         <a className="blog-img" onClick={() => view(id)}>
-                                            <img src={blog.data.photo} alt="blog"/>
+                                            <img src={blog.data.photo1} alt="blog"/>
                                         </a>
                                     </div>
                                     <div className="blog-content">
@@ -133,11 +133,11 @@ return(
                                     <>
                                 <li >
                                     <a className="blog-widget-media" href="#">
-                                        <img src={blog.data.photo} style={{height:"70px"}} alt="blog-widget"/>
+                                        <img src={blog.data.photo1} style={{height:"70px"}} alt="blog-widget"/>
                                     </a>
                                     <h6 className="blog-widget-text">
                                         <a href="#">{blog.data.title}</a>
-                                        <span>31, 01, 2023</span>
+                                        <span></span>
                                     </h6>
                                 </li>
                                     </>
