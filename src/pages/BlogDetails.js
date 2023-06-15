@@ -31,9 +31,9 @@ function BlogDetails() {
           };
   return (
     <html>
-      <head>
-                <meta charSet="UTF-8" />
-                <meta name="name" content="Cook Tounsi" />
+        <head>
+        <meta charSet="UTF-8" />
+        <meta name="name" content="Cook Tounsi" />
         <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
         <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
         traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
@@ -50,7 +50,7 @@ function BlogDetails() {
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
                 <link rel="stylesheet" href="assets/css/slider.css" />
                 <link rel="stylesheet" href="assets/css/blog-details.css" />
-            </head>
+        </head>
           <body>
           <div className="backdrop"></div>
                <a className="backtop fas fa-arrow-up" href="#"></a>
@@ -72,7 +72,7 @@ function BlogDetails() {
                   <>
                         <article className="blog-details">
                             <a className="blog-details-thumb" href="">
-                                <img src={blog.photo} alt="blog"/>
+                                <img src={blog.photo1} alt="blog"/>
                             </a>
                             <div className="blog-details-content">
                                 <ul className="blog-details-meta">
@@ -88,20 +88,20 @@ function BlogDetails() {
                                 <h2 className="blog-details-title">{blog.title}</h2>
                                 <p className="blog-details-desc">{blog.shortDescription}</p>
                                 <blockquote className="blog-details-quote">
-                                    <p>{blog.title}</p>
-                                    <footer>- ROSALINA PONG</footer>
+                                    <p>{blog.quote}</p>
+                                    <footer>- Cook Tounsi</footer>
                                 </blockquote>
                                 <div className="row blog-details-grid">
                                     <div className="col-md-6 col-lg-6">
-                                        <img className="img-fluid" src={blog.photo} alt="blog"/>
+                                        <img className="img-fluid" src={blog.photo2} alt="blog"/>
                                     </div>
                                     <div className="col-md-6 col-lg-6">
-                                        <p>{shortenText(blog.shortDescription, 350)}</p>
+                                        <p>{blog.p1}</p>
                                     </div>
                                 </div>
                                 <div className="blog-details-subtitle">
-                                    <h3>Aboris nisi ut aliquip commodo consequat</h3>
-                                    <p>{blog.longDescription}</p>
+                                    <h3>{blog.quote}</h3>
+                                    <p>{blog.p2}</p>
                                 </div>
                                 <div className="blog-details-footer">
                                     <ul className="blog-details-share">

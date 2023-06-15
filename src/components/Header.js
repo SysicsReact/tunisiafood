@@ -378,17 +378,18 @@ const Header = () => {
                         <form className="header-form">
                     <div className="dropdown">
                         <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
+                        <div className="rounded dropdown-content show">
                         {result.slice(0,5).map((result, id) => (
-                        <div key={{id}} className="rounded dropdown-content show">
-                            <div className="" onClick={() => view(result.id)} >
-                        <a  >
+                        
+                            <div className="" >
+                        <a key={{id}} >
                                 <img src={result.photo} className="mx-3 rounded" height="30" onClick={() => view(result.id)}/>
                                 <span onClick={() => view(result.id)}>{result.name}</span> 
                         </a>
                         </div>
-                        </div>
+                        
                             ))
-                        } 
+                        } </div>
                         
                     </div>
                     <i className="fas fa-search"></i>
@@ -409,7 +410,7 @@ const Header = () => {
                     
                 }
 <div className="header-widget-group">
-    <a href="front/compare.html" className="header-widget" hidden title="Compare List">
+    <a href="" className="header-widget" hidden title="Compare List">
         <i className="fas fa-random"></i>
         <sup>0</sup>
     </a>

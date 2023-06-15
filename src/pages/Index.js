@@ -282,7 +282,7 @@ function Dashboard() {
                                     <i className="product-price" href="">{weight} {ReturnMeasurement(category)}</i>
                                     </div>
                                     <h6 className="product-name">
-                                        <a href="">{name}</a>
+                                        <a >{name}</a>
                                     </h6>
                                     <h6 className="product-price">
                                     {parseInt(discount)!= 0 &&
@@ -434,13 +434,13 @@ function Dashboard() {
                             <h2>   </h2>
                         </div>
                         <div className="section-heading">
-                            <h2>Lire nos articles</h2>
+                            <h2>Lire nos blogs</h2>
                         </div>
                     </div>
                 </div>
 
                 {blogs.slice(0,1).map((blog, index) =>
-                            { const {id, author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
+                            { const {id, author, photo1, timestamp, shortDescription, tags, title} = blog
                             
                                 return(
                                     <>
@@ -450,7 +450,7 @@ function Dashboard() {
                             <div className="blog-card">
                                 <div className="blog-media">
                                     <a className="blog-img" href="" onClick={() => viewB(id)}>
-                                        <img src={blog.data.photo} alt="blog"/>
+                                        <img src={blog.data.photo1} alt="blog"/>
                                     </a>
                                 </div>
                                 <div className="blog-content">
