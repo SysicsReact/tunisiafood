@@ -269,12 +269,7 @@ function Payment() {
                             </div>
                         </div>
             <div className="col-lg-12">
-                <div className="account-card">
-                                <input type="checkbox" id="checkout-check" required/>
-                                <label for="checkout-check">
-                             En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>
-                </div>
-
+                
             <div className="checkout-proced">
       <button className="btn btn-inline" onClick={generateData}>Accéder Au Paiement</button>
       <br/>
