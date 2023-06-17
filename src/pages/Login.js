@@ -107,10 +107,10 @@ function Login() {
                                         </div>
                                         <form className="user-form" onSubmit={loginUser}>
                                             <div className="form-group">
-                                                <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Entrez Votre email" />
+                                                <input type="email" required className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Entrez Votre email" />
                                             </div>
                                             <div className="form-group">
-                                                <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Entrez Votre password" />
+                                                <input type="password" required className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Entrez Votre password" />
                                             </div>
                                             <div className="form-check mb-3">
                                                 <input className="form-check-input" type="checkbox" value="" id="check" />
