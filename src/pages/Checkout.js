@@ -32,8 +32,8 @@ export default function Checkout() {
      const dispatch = useDispatch();
      const initialAddressState = {
         address:"",
-        city:"",
-        country:"",
+        city:"Paris",
+        country:"France",
         postal:"",
         phone:"",
         livraisonType:"Livraison Standard",
