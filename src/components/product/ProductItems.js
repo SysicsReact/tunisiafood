@@ -96,7 +96,7 @@ const ProductItems = () => {
                                             <label className="label-text feat">{product.tag}</label>}
                             </div>
                             <ul className="details-thumb">
-                                <li><img  alt="product" src={product.photo} /></li>
+                                <li><img  alt= {product.name} src={product.photo} /></li>
                                 
                             </ul>
                         </div>

@@ -182,7 +182,7 @@ function Dashboard() {
                             <label className="label-text drink">{category}</label>}
                                     </button>
                                     <a className="product-image"  onClick={() => ShowItem(e)}>
-                                        <img src={photo} meta={concatenatedString} alt="product"/>
+                                        <img src={photo} meta={concatenatedString} alt={name}/>
                                     </a>
                                     <div className="product-widget">
                                         <button onClick={() => ShowItem(e)} className="product-v"  ><i className="fas fa-eye" style={{color:"white"}}></i></button>
@@ -275,8 +275,6 @@ function Dashboard() {
                         </div>
                     </div>
     </Modal>}
-
-    
                                 <div className="product-content">
                                     <div className="product-rating">
                                     <i className="product-price" href="">{weight} {ReturnMeasurement(category)}</i>
@@ -327,7 +325,7 @@ function Dashboard() {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="promo-img">
-                            <a href=""><img src="assets/images/spices.jpg" alt="promo"/></a>
+                            <a href=""><img src="assets/images/spices.jpg" alt="Cook Tounsi"/></a>
                         </div>
                     </div>
                 </div>
