@@ -66,12 +66,12 @@ const WishDetails = () => {
                 <>
                     <div className="cart-info-group">
                         <div className="cart-footer">
-                            <h6 className="coupon-btn">Votre Chariot Est Vide !</h6>
+                            <h6 className="coupon-btn">Votre Liste Des Souhaits Est Vide !</h6>
                         </div>
                     </div>
                     <div className="cart-footer">
                         <a className="cart-checkout-btn" href="#">
-                            <span className="checkout-label">Parcourir les produits</span>
+                           <Link to={"/ProductShop"}> <span className="checkout-label">Parcourir les produits</span></Link>
                             <span className="checkout-price"><i className="fas fa-shopping-basket"></i></span>
                         </a>
                     </div>
