@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectEmail, selectUserID  } from '../redux/slice/authSlice';
 import { selectShippingAddress } from '../redux/slice/checkoutSlice';
-
+import axios from 'axios';
 
 
 function Payment() {
@@ -77,7 +77,7 @@ function Payment() {
     if (isRemoved) {
         const randomId = Math.random().toString(36).substring(2) + Date.now().toString(36);
         setCommandReference(randomId);
-        handleApiCall(randomId)
+        handleApiCall(randomId,priceFinal)
         console.log('Removal process completed.');
         
         } else {
@@ -88,7 +88,7 @@ function Payment() {
         toast.error('Erreur lors du processus: ', error);
     });
   }
-  const handleApiCall = async (refid) => {
+  const handleApiCall = async (refid,priceFinal) => {
       const url = "https://api.konnect.network/api/v2/payments/init-payment";
       const requestBody = {
         receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
@@ -124,6 +124,25 @@ function Payment() {
       }
      
     };
+
+
+
+    const callFirebaseFunction = async (refid, priceFinal) => {
+        console.log(refid +" " + priceFinal);
+        try {
+          const requestBody = { refid, priceFinal };
+          const response = await axios.post(
+            "https://us-central1-startnewproject-983bc.cloudfunctions.net/handleApiCall",
+            requestBody
+          );
+          const responseData = response.data;
+          // Do something with the response data
+          console.log(responseData);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
     useEffect(() => {
       // Open the link in a new tab when the countdown ends
       if (canOpenWindow === true) {
@@ -148,7 +167,7 @@ function Payment() {
     
         try {
           // Create a new document in "paymentstostart" collection
-          const p =  await addDoc(collection(db, 'paymentstostart'), {
+          const p =  await addDoc(collection(db, 'paymentstostarts'), {
             userId: user.uid,
             items: cartItems,
             totalAmount: priceFinal/100,

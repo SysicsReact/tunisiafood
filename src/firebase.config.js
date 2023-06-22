@@ -31,7 +31,7 @@ const RemoveRefCommand = async (force, id)=>{
   var str=window.location.href.toLowerCase()
  
   try {
-    const q = query(collection(db, 'paymentstostart'), where('userId', '==', id));
+    const q = query(collection(db, 'paymentstostarts'), where('userId', '==', id));
     const querySnapshot = await getDocs(q);
 
     const deletionPromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
@@ -46,7 +46,7 @@ const RemoveRefCommand = async (force, id)=>{
 const removePaymentByUserId = (userId) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const q = query(collection(db, 'paymentstostart'), where('userId', '==', userId));
+      const q = query(collection(db, 'paymentstostarts'), where('userId', '==', userId));
       const querySnapshot = await getDocs(q);
 
       const deletionPromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
