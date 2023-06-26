@@ -2,22 +2,15 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const express = require("express");
 const cors = require("cors");
-admin.initializeApp();
 
-exports.helloWorld = functions.https.onRequest(async (req, res) => {
-  try {
-    const snapshot = await admin.firestore().doc("regions/France").get();
-    const data = snapshot.data();
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error);
-  }
-});
+admin.initializeApp();
 const fetch = require("node-fetch");
 const app = express();
+
 app.use(cors({origin: true}));
-exports.handleApiCall = functions.https.onRequest(async (req, res) => {
+app.use(express.json());
+
+app.post("/handleApiCall", async (req, res) => {
   const {refid, priceFinal} = req.body;
   const url = "https://api.konnect.network/api/v2/payments/init-payment";
   const requestBody = {
@@ -40,17 +33,23 @@ exports.handleApiCall = functions.https.onRequest(async (req, res) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": "642a7d6c2e9c6ea045f6f078:vQ0vuCOFUFExHuxzJ",
+        "x-api-key": "642a7d6c2e9c6ea045f6f078:jgC3FXE949N3BANhFUUVD6rluv",
       },
       body: JSON.stringify(requestBody),
     });
 
-    // Handle the response here
-    const data = await response.json();
-    // Do something with the data or send it as a response
-    res.json(data);
+    if (response.status === 204) {
+      res.sendStatus(204);
+    } else {
+      // Handle the response here
+      const data = await response.json();
+      // Do something with the data or send it as a response
+      res.json(data);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
+
+exports.handleApiCall = functions.https.onRequest(app);

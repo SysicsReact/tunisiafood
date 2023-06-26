@@ -29,6 +29,8 @@ function Payment() {
   const [commandReference, setCommandReference] = useState("1111")
   const url = window.location.href;
   const dispatch = useDispatch();
+  const apiKonnectKey = process.env.REACT_APP_API_Konnect_Key;
+  const ReciveWalletKey = process.env.REACT_APP_receiverWallet_Id;
   //Payment 
   const [responseData, setResponseData] = useState(null);
   const[canOpenWindow , setCanOpenWindow] = useState(false);
@@ -91,7 +93,7 @@ function Payment() {
   const handleApiCall = async (refid,priceFinal) => {
       const url = "https://api.konnect.network/api/v2/payments/init-payment";
       const requestBody = {
-        receiverWalletId: "642a7d6c2e9c6ea045f6f07b",
+        receiverWalletId: ReciveWalletKey,
         token: "EUR",
         amount: priceFinal ,
         type: "immediate",
@@ -109,7 +111,7 @@ function Payment() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key":"642a7d6c2e9c6ea045f6f078:vQ0vuCOFUFExHuxzJ"
+          "x-api-key":apiKonnectKey
         },
         body: JSON.stringify(requestBody)
       });
