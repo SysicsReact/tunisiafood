@@ -22,7 +22,7 @@ export default function ContactUs (message, number) {
           value={messages}
           onChange={(e) => setMessages(e.target.value)}
           placeholder="Laissez-nous un message"/>
-          <WhatsAppContact message={messages} number={"+21652320220"}>
+          <WhatsAppContact message={messages} number={"+21651320220"}>
           <span>Envoyer  <i className="fas fa-comments"></i>
           </span>
           </WhatsAppContact>
