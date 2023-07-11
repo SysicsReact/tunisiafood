@@ -295,7 +295,7 @@ const Header = () => {
                         <i className="icofont-ui-touch-phone"></i>
                         <p>
                             <small>Appelez-nous</small>
-                            <span>(+216) 50 450 960</span>
+                            <a style={{color:'var(--primary-tshadow)'}} href="tel:+216 51 320 220">(+216) 51 320 220</a >
                         </p>
                     </div>
                     <div className="nav-info">
@@ -330,7 +330,7 @@ const Header = () => {
                         <i className="icofont-ui-touch-phone"></i>
                         <p>
                             <small>Appelez-nous</small>
-                            <span>(+216) 50 450 960</span>
+                            <a style={{color:'var(--primary-tshadow)'}} href="tel:+216 51 320 220">(+216) 51 320 220</a>
                         </p>
                     </div>
                     <div className="nav-info">
