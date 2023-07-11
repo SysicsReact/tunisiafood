@@ -97,7 +97,6 @@ function Payment() {
         token: "EUR",
         amount: priceFinal ,
         type: "immediate",
-        lifespan: 10,
         feesIncluded: false,
         orderId: refid,
         webhook: false,
