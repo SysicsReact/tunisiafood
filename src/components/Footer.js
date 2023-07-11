@@ -65,9 +65,9 @@ class Footer extends React.Component{
                                 <ul>
                                 <li><Link to="/">Accueil</Link>
                                 </li>
-                                <li><Link to="Profile">Mon Profile</Link>
+                                <li><Link to="MyProfile">Mon Profile</Link>
                                 </li>
-                                <li><Link to="Contact">Contacts</Link>
+                                <li><Link to="Contact">Contact</Link>
                                 </li>
                                 </ul>
                                 <ul>
@@ -104,7 +104,7 @@ class Footer extends React.Component{
                 <div className="row">
                     <div className="col-12">
                         <div className="footer-bottom">
-                            <p className="footer-copytext">&copy;  Tous droits d'auteur réservés par <a target="_blank" href="https://themeforest.net/user/mironcoder">Sysics Studio</a></p>
+                            <p className="footer-copytext">&copy;  Tous droits d'auteur réservés par <a target="_blank" href="">Sysics Studio</a></p>
                         </div>
                     </div>
                 </div>
