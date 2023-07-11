@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MyComponent from "./test1";
+import ContactUs from "./ContactUs";
 class Footer extends React.Component{
      render() {
     return (
@@ -29,11 +30,8 @@ class Footer extends React.Component{
                         <h3 className="footer-title">Cook Tounsi</h3>
                             <p className="footer-desc">Un voyage à travers les souvenirs, les recettes secrètes de famille et la bistronomie moderne de La Tunisie.</p>
                             <ul className="footer-social">
-                                <li><a className="icofont-facebook" href="#"></a></li>
-                                <li><a className="icofont-twitter" href="#"></a></li>
-                                <li><a className="icofont-linkedin" href="#"></a></li>
-                                <li><a className="icofont-instagram" href="#"></a></li>
-                                <li><a className="icofont-pinterest" href="#"></a></li>
+                                <li><a className="icofont-facebook" href="https://www.facebook.com/cooktounsi"></a></li>
+                                <li><a className="icofont-instagram" href="https://www.instagram.com/cooktounsi.store/"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -45,14 +43,12 @@ class Footer extends React.Component{
                                     <i className="icofont-ui-email"></i>
                                     <p>
                                         <span>contact@cooktounsi.com</span>
-                                        <span>carrer@cooktounsi.com</span>
                                     </p>
                                 </li>
                                 <li>
                                     <i className="icofont-ui-touch-phone"></i>
                                     <p>
-                                        <span>+216 50 450 960</span>
-                                        <span>+216 42 226 434</span>
+                                        <a style={{color:'var(--primary-tshadow)'}} href="tel:+216 51 320 220">+216 51 320 220</a>
                                     </p>
                                 </li>
                             </ul>

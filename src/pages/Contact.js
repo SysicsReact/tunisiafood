@@ -73,8 +73,8 @@ function Contact() {
                                 <div className="contact-card">
                                     <i className="icofont-location-pin"></i>
                                     <h4>Plus D'informations</h4>
-                                    <p>Découvrir Notre Concept:</p>
-                                   <Link to={"/Concept"}> <p style={{color:"grey"}}>Par Ici</p></Link>
+                                    <Link to={"/Concept"} style={{color:'grey'}}> <p>Par Ici:</p>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="col-md-6 col-lg-4">
@@ -82,8 +82,8 @@ function Contact() {
                                     <i className="icofont-phone"></i>
                                     <h4>Appelez-Nous</h4>
                                     <p>
-                                        <a href="#">+216 50 450 960</a>
-                                        <a href="#">+216 50 450 960</a>
+                                    <a style={{color:'var(--primary-tshadow)'}} href="tel:+216 51 320 220">(+216) 51 320 220</a >
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -92,8 +92,8 @@ function Contact() {
                                     <i className="icofont-email"></i>
                                     <h4>Support technique</h4>
                                     <p>
-                                        <a href="#">contact@cooktounsi.com</a>
-                                        <a href="#">info@cooktounsi.com</a>
+                                        <a href="/">contact@cooktounsi.com</a>
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@ function Contact() {
                             </div>
                             <div className="col-sm-6 col-md-6 col-lg-3">
                             <Link to="/Blog">  <div className="branch-card">
-                                    <img src="assets/images/product/P2.jpg" alt="branch" />
+                                    <img src="assets/images/product/P2.jpeg" alt="branch" />
                                     <div className="branch-overlay">
                                         <h3>Recettes</h3>
                                     </div>

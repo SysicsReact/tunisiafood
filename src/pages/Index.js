@@ -13,6 +13,7 @@ import { ADD_TO_WISH, selectWishItems } from "../redux/slice/wishSlice";
 import {Modal} from 'react-fade-modal';
 import { query, onSnapshot } from "firebase/firestore";
 import { collection } from "firebase/firestore";
+import ContactUs from "../components/ContactUs";
 
 
 function Dashboard() {
@@ -420,9 +421,11 @@ function Dashboard() {
                 </div>
             </div>
         </section>
-       
 
-        <Intro/>
+        
+       <ContactUs />
+
+        
 
         <section className="section blog-part">
             <div className="container">
@@ -492,7 +495,7 @@ function Dashboard() {
                 </div>
             </div>
         </section>
-        
+        <Intro/>
             </div>
             }   
                 <script src="assets/vendor/bootstrap/popper.min.js"></script>
