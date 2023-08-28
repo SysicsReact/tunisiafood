@@ -10,6 +10,7 @@ import Cart from "./components/Cart";
 import Profile from "./pages/Profile";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import SingleProduct from "./pages/SingleProduct";
+import SearchResult from "./pages/SearchResult";
 import Politics from "./pages/Politics";
 import About from "./pages/About";
 import { ToastContainer, toast } from 'react-toastify';
@@ -76,6 +77,7 @@ class App extends Component {
           <Route path="/OrderHistory" element={<OrderHistory/>} />
           <Route path="/OrderDetails" element={<OrderDetails/>} />
           <Route path="/BlogDetails" element={<BlogDetails/>} />
+          <Route path="/SearchResult" element={<SearchResult/>} />
           <Route path="/WishDetails" element={<WishDetails/>} />
           <Route path="/Politics" element={<Politics/>} />
           <Route path="/Cgv" element={<Cgv/>} />

@@ -94,12 +94,12 @@ position: absolute;
 
 .banner-content h1 {
   text-transform: capitalize;
-  margin-bottom: 22px;
+  margin-bottom: 25px;
   color: var(--white);
 }
 
 .banner-content p {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 28px;
   margin-bottom: 50px;
   color: var(--white);

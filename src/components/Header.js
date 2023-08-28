@@ -7,7 +7,7 @@ import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogOut } from "./hiddenLink";
 import { useDispatch, useSelector } from "react-redux";
 import { async } from "q";
-import { doc, getDoc, setDoc } from "@firebase/firestore";
+import { doc, getDoc, addDoc, setDoc } from "@firebase/firestore";
 import Loader from "../components/loader/Loader";
 import Cart from "./Cart";
 import { query, where, onSnapshot, documentId, updateDoc, collection } from "firebase/firestore";
@@ -30,6 +30,10 @@ function checkIfTrue(){
     if ((strsplit[strsplit.length-1].includes("product"))) {
         return true;
     }
+    if ((strsplit[strsplit.length-1].includes("result"))) {
+        return true;
+    }
+    
     else{
         return false;
     }
@@ -163,18 +167,6 @@ const Header = () => {
        }, [dispatch, cartItems]);
   
     useEffect(() => {
-        /*if (products.length == 0) {
-            const q = query(
-                collection(db, "products"),
-            );
-            const unsubscribe = onSnapshot(q, (querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    products.push(doc.data())
-                    console.log(doc.data())
-                });
-               
-            });
-        }*/
         if (value.length > 0) {
             setResult([]);
             let searchQuery = value.toLowerCase();
@@ -236,12 +228,30 @@ const Header = () => {
         }, []);
         const shouldHideDiv = windowWidth < 700;
     
+        const keyWord = async () => {
+            
+              try {
+                const docRef = await addDoc(collection(db, "search"), {
+                  Keyword: value,
+                });
+                console.log("Document written with ID: ", docRef.id);
+                localStorage.setItem('searchResults', JSON.stringify(result));
+                navigate("/SearchResult");
+              } catch (error) {
+                console.error("Error adding document:", error);
+              }
+           
+          };
+          
     return (  
         <>
             <head>
                 <meta charSet="UTF-8" />
-                <meta name="name" content="Greeny" />
-                <meta name="title" content="Greeny - eCommerce HTML Template" />
+                <meta name="name" content="CookTounsi" />
+                <meta name="title" content="Cook Tounsi - vente des plats tunisien en Europe en ligne" />
+                <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, recettes, épices, patisserie, healthy, livraison de nourriture,épicerie, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة, " />
                 <title>Cook Tounsi</title>
                 <link rel="icon" href="assets/images/cook.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
@@ -282,7 +292,7 @@ const Header = () => {
                     </li>
                     <li>
                     <a className="nav-link" href="/Politics">
-                        <i className="icofont-warning"></i>
+                        <i name="confidentialité" className="icofont-warning"></i>
                         confidentialité</a>
                     </li>
                     <li> 
@@ -374,8 +384,8 @@ const Header = () => {
                         </Link>
                     </a>
                     {checkIfTrue()&&
-                        <>
-                        <form className="header-form">
+                        <> 
+                        <form className="header-form" onSubmit={(e) => e.preventDefault()}>
                     <div className="dropdown">
                         <input type="text"  placeholder="Cherchez..." value={value} onChange={(e) => setValue(e.target.value)} />
                         <div className="rounded dropdown-content show">
@@ -392,7 +402,7 @@ const Header = () => {
                         } </div>
                         
                     </div>
-                    <i className="fas fa-search"></i>
+                    <button type="button" className="fas fa-search" onClick={() => keyWord()}></button>
                     </form>
                         </>
                     }

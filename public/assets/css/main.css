@@ -355,7 +355,30 @@ button:focus {
   background: rgba(0, 0, 0, 0.5);
   display: none;
 }
-
+.whats{
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  font-size: 15px;
+  color: var(--white);
+  line-height: 48px;
+  text-align: center;
+  display: none;
+  border-radius: 50%;
+  background: var(--primary);
+  -webkit-box-shadow: 0px 0px 15px 3px rgba(71, 254, 126, 0.5);
+          box-shadow: 0px 0px 15px 3px rgba(71, 254, 126, 0.5);
+  -webkit-animation: mahmud 2s infinite;
+          animation: mahmud 2s infinite;
+  transition: all linear .3s;
+  -webkit-transition: all linear .3s;
+  -moz-transition: all linear .3s;
+  -ms-transition: all linear .3s;
+  -o-transition: all linear .3s;
+}
 .backtop {
   position: fixed;
   right: 20px;
@@ -3785,7 +3808,8 @@ tbody tr td:last-child {
 }
 
 .branch-card:hover::before {
-  background: rgba(17, 151, 68, 0.85);
+  background: rgba(17, 151, 68, 0.5);
+  cursor: pointer;
 }
 
 .branch-card:hover .branch-overlay {

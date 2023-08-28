@@ -16,6 +16,7 @@ import { collection } from "firebase/firestore";
 import ContactUs from "../components/ContactUs";
 
 
+
 function Dashboard() {
     const [blogs, setBlogs] = useState([]);
     const [user, loading, error] = useAuthState(auth);
@@ -85,7 +86,8 @@ function Dashboard() {
                 <meta name="name" content="Cook Tounsi" />
                 <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
                 <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-                traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة, " />
                 <title>Cook Tounsi- Accueil</title>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
@@ -105,17 +107,20 @@ function Dashboard() {
             {!isLoading &&
             <div>
                 <div className="backdrop"></div>
-                <a className="backtop fas fa-arrow-up" href="#"></a>
+                <a className="backtop fas fa-arrow-up" href="/"></a>
+                
             <section className="home-classic-slider slider-arrow">
                     <div className="banner-part" 
-                    style={{ backgroundImage: "url(assets/images/chef.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
+                    style={{ backgroundImage: "url(assets/images/Chef01.png)", backgroundRepeat: "no-repeat", backgroundPosition: "center", borderRadius: "10px" }}>
                     <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-lg-6">
                             <div className="banner-content">
                                 <h3 style={{color:"white"}}>
-                                    Nous partageons l’amour comme nous partageons la nourriture</h3>
-                                <p>Avec nous tout est une question de sens et de souvenirs d’enfance de réunions de famille. L’odeur des épices fraîches, le goût des plats traditionnels. </p>
+                                كي تتوحش ريحة البلاد و الماكلة التونسية البنينة كلمنا و خلي الباقي علينا 
+</h3><br/>
+                                <p> نحطو على ذمتكم أطباق معلبة، حلو و مشروبات تونسية بوصفات زمنية. التوصيل متوفر لثلاثة بلدان أوروبية
+</p>
                                 <div className="banner-btn">
                                 <Link to="/ShopProduct"><a className="btn btn-inline">
                                         <i className="fas fa-shopping-basket"></i>
@@ -136,6 +141,66 @@ function Dashboard() {
                 </div>
                     </div>
             </section>
+
+
+            <section className="inner-section contact-part">
+                <div className="container">
+                <div className="row">
+                <div className="col-lg-12">
+                            <div className="section-heading">
+                                <h2>
+                Nous Offrons une panoplie de produits  
+                                </h2>
+                            </div>
+                        </div>
+                            <div className="col-sm-6 col-md-6 col-lg-3">
+                                    <div className="branch-card">
+                                        <img src="assets/images/product/P19.jpg" alt="branch" />
+                                        <div className="branch-overlay">
+                                            <h3>Epicerie</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 col-md-6 col-lg-3">
+                                    <div className="branch-card">
+                                        <img src="assets/images/product/P23.jpg" alt="branch" />
+                                        <div className="branch-overlay">
+                                            <h3>Boissons</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 col-md-6 col-lg-3">
+                                    <div className="branch-card">
+                                        <img src="assets/images/product/P2.jpeg" alt="branch" />
+                                        <div className="branch-overlay">
+                                            <h3>Plats</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 col-md-6 col-lg-3">
+                                    <div className="branch-card">
+                                        <img src="assets/images/product/P24.png" alt="branch" />
+                                        <div className="branch-overlay">
+                                            <h3>Pâtisserie</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </section>
+
+            <div className="section promo-part">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="promo-img">
+                            <a href=""><img src="assets/images/Dbara.png" alt="Cook Tounsi"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
             <section className="section recent-part">
                 <div className="container">
                 <div className="row">
@@ -156,7 +221,6 @@ function Dashboard() {
                         searchTags.forEach((element) => {
                             
                             concatenatedString+=  element ;
-                            // Perform your desired actions with each element here
                           });
                        }
                     return (
@@ -321,18 +385,76 @@ function Dashboard() {
                 </div>
                 </div>
             </section>
-             <div className="section promo-part">
+            
+            <section className="section blog-part">
             <div className="container">
                 <div className="row">
+                    <div className="col-12">
+                    <div className="section-heading">
+                            <h2>   </h2>
+                        </div>
+                        <div className="section-heading">
+                            <h2>Lire nos blogs</h2>
+                        </div>
+                    </div>
+                </div>
+
+                {blogs.slice(0,1).map((blog, index) =>
+                            { const {id, author, photo1, timestamp, shortDescription, tags, title} = blog
+                            
+                                return(
+                                    <>
+                                    <div className="row">
                     <div className="col-lg-12">
-                        <div className="promo-img">
-                            <a href=""><img src="assets/images/spices.jpg" alt="Cook Tounsi"/></a>
+                        <div className="blog-slider slider-arrow">
+                            <div className="blog-card">
+                                <div className="blog-media">
+                                    <a className="blog-img" href="" onClick={() => viewB(id)}>
+                                        <img src={blog.data.photo1} alt="blog"/>
+                                    </a>
+                                </div>
+                                <div className="blog-content">
+                                    <ul className="blog-meta">
+                                        <li>
+                                            <i className="fas fa-user"></i>
+                                            <span>{blog.data.author}</span>
+                                        </li>
+                                        <li>
+                                            <i className="fas fa-calendar-alt"></i>
+                                            <span>february 02, 2021</span>
+                                        </li>
+                                    </ul>
+                                    <h4 className="blog-title">
+                                        <a href="" onClick={() => viewB(id)}>{blog.data.title}</a>
+                                    </h4>
+                                    <p className="blog-desc">
+                                    {blog.data.shortDescription}
+                                    </p>
+                                    <a className="blog-btn" href="" onClick={() => viewB(id)}>
+                                        <span>Lire</span>
+                                        <i className="icofont-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                    </>
+                                ) })}
+  
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="section-btn-25">
+                        <Link to="/Blog"> <a href="" className="btn btn-outline">
+                                <i className="fas fa-eye"></i>
+                                <span> Voir tous les blogs</span>
+                            </a></Link>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-     
+        </section>
+
         <section className="section feature-part">
             <div className="container">
                 <div className="row">
@@ -421,80 +543,12 @@ function Dashboard() {
                 </div>
             </div>
         </section>
-
         
        <ContactUs />
 
         
 
-        <section className="section blog-part">
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                    <div className="section-heading">
-                            <h2>   </h2>
-                        </div>
-                        <div className="section-heading">
-                            <h2>Lire nos blogs</h2>
-                        </div>
-                    </div>
-                </div>
-
-                {blogs.slice(0,1).map((blog, index) =>
-                            { const {id, author, photo1, timestamp, shortDescription, tags, title} = blog
-                            
-                                return(
-                                    <>
-                                    <div className="row">
-                    <div className="col-lg-12">
-                        <div className="blog-slider slider-arrow">
-                            <div className="blog-card">
-                                <div className="blog-media">
-                                    <a className="blog-img" href="" onClick={() => viewB(id)}>
-                                        <img src={blog.data.photo1} alt="blog"/>
-                                    </a>
-                                </div>
-                                <div className="blog-content">
-                                    <ul className="blog-meta">
-                                        <li>
-                                            <i className="fas fa-user"></i>
-                                            <span>{blog.data.author}</span>
-                                        </li>
-                                        <li>
-                                            <i className="fas fa-calendar-alt"></i>
-                                            <span>february 02, 2021</span>
-                                        </li>
-                                    </ul>
-                                    <h4 className="blog-title">
-                                        <a href="" onClick={() => viewB(id)}>{blog.data.title}</a>
-                                    </h4>
-                                    <p className="blog-desc">
-                                    {blog.data.shortDescription}
-                                    </p>
-                                    <a className="blog-btn" href="" onClick={() => viewB(id)}>
-                                        <span>Lire</span>
-                                        <i className="icofont-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                    </>
-                                ) })}
-  
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="section-btn-25">
-                        <Link to="/Blog"> <a href="" className="btn btn-outline">
-                                <i className="fas fa-eye"></i>
-                                <span> Voir tous les blogs</span>
-                            </a></Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+       
         <Intro/>
             </div>
             }   

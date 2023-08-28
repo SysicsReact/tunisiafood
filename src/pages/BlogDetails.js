@@ -52,8 +52,8 @@ function BlogDetails() {
                 <link rel="stylesheet" href="assets/css/blog-details.css" />
         </head>
           <body>
-          <div className="backdrop"></div>
-               <a className="backtop fas fa-arrow-up" href="#"></a>
+            <div className="backdrop"></div>
+            <a className="backtop fas fa-arrow-up" href="#"></a>
           <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
             <div className="container">
                 <h2>blogs</h2>
@@ -106,11 +106,9 @@ function BlogDetails() {
                                 <div className="blog-details-footer">
                                     <ul className="blog-details-share">
                                         <li><span>Abonnez-vous:</span></li>
-                                        <li><a href="#" className="icofont-facebook"></a></li>
-                                        <li><a href="#" className="icofont-twitter"></a></li>
+                                        <li><a href="https://www.facebook.com/cooktounsi" className="icofont-facebook"></a></li>
+                                        <li><a href="https://www.instagram.com/cooktounsi.store/" className="icofont-instagram"></a></li>
                                         <li><a href="#" className="icofont-linkedin"></a></li>
-                                        <li><a href="#" className="icofont-pinterest"></a></li>
-                                        <li><a href="#" className="icofont-instagram"></a></li>
                                     </ul>
                                     <ul className="blog-details-tag">
                                         <li><span>tags:</span></li>
