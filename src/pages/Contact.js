@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from 'react-toastify';
 import { db } from "../firebase.config";
 import { collection, addDoc } from "firebase/firestore";
+import { Helmet } from 'react-helmet';
 
 function Contact() {
 
@@ -31,30 +32,14 @@ function Contact() {
         });;
     }
     return (
-        <html lang='en'>
-            <head>
-            <meta charSet="UTF-8" />
-          <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-        <title>Contact - Cook Tounsi</title>
-                <link rel="icon" href="assets/images/favicon.png" />
-                <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
-                <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
-                <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css" />
-                <link rel="stylesheet" href="assets/vendor/venobox/venobox.min.css" />
-                <link rel="stylesheet" href="assets/vendor/slickslider/slick.min.css" />
-                <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
-                <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
-                <link rel="stylesheet" href="assets/css/main.css" />
-                <link rel="stylesheet" href="assets/css/home-classic.css" />
-                <link rel="stylesheet" href="assets/css/slider.css" />
-                <link rel="stylesheet" href="assets/css/contact.css" />
-            </head>
-            <body>
+    <>
+        <Helmet>
+    <title>Contactez-nous</title>
+    <meta name="description" content="Cook Tounsi: Conactez-nous" />
+    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+        traditionnel, plats, épices, patisserie, livraison, contact, lifestyle " />
+        </Helmet>
             <ToastContainer/>
-
                 <div className="backdrop"></div>
                 <a className="backtop fas fa-arrow-up" href="#"></a>
                 <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/contact-us-banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
@@ -165,21 +150,8 @@ function Contact() {
                     </div>
                 </section>
                 <Intro />
-
-                <script src="assets/vendor/bootstrap/popper.min.js"></script>
-                <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
-                <script src="assets/vendor/countdown/countdown.min.js"></script>
-                <script src="assets/vendor/niceselect/nice-select.min.js"></script>
-                <script src="assets/vendor/slickslider/slick.min.js"></script>
-                <script src="assets/vendor/venobox/venobox.min.js"></script>
-                <script src="assets/js/nice-select.js"></script>
-                <script src="assets/js/countdown.js"></script>
-                <script src="assets/js/accordion.js"></script>
-                <script src="assets/js/venobox.js"></script>
-                <script src="assets/js/slick.js"></script>
-                <script src="assets/js/main.js"></script>
-            </body>
-        </html>
+            </>
+        
     )
 
 }

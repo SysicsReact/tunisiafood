@@ -108,10 +108,11 @@ dispatch(ADD_TO_CART(e));
          <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
          <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
          <link rel="stylesheet" href="assets/css/main.css" />
+         <link rel="stylesheet" href="assets/css/home-classic.css" />
          
      </head>
      <body>
-     <ToastContainer></ToastContainer>
+     <ToastContainer/>
      <div className="backdrop"></div>
                <a className="backtop fas fa-arrow-up" href="#"></a>
             <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>

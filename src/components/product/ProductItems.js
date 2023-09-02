@@ -8,6 +8,7 @@ import useFetchDocument from "../customHooks/useFetchDocument";
 import { db } from "../../firebase.config";
 import { ADD_TO_CART } from "../../redux/slice/cartSlice";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet";
 
 
 
@@ -39,14 +40,9 @@ const ProductItems = () => {
 
      
     return(
-        <html lang="en">
+        <>
         <head>
         <meta charSet="UTF-8" />
-        <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-         <title>Cook Tounsi- Détails du produit</title>
             <link rel="icon" href="assets/images/favicon.png" />
             <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
             <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -56,12 +52,11 @@ const ProductItems = () => {
             <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
             <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
             <link rel="stylesheet" href="assets/css/main.css" />
+            <link rel="stylesheet" href="assets/css/home-classic.css" />
             <link rel="stylesheet" href="assets/css/product-details.css"></link>
         </head>
-        <body>
         <ToastContainer></ToastContainer>
-      
-                 
+
                <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                        <div className="container">
                            <h2>Tout Les Produits</h2>
@@ -74,6 +69,13 @@ const ProductItems = () => {
             <section className="inner-section">
             {product!=null &&
                   <>
+                  <Helmet>
+                    <title>{product.name}</title>
+                    <meta name="name" content="Cook Tounsi" />
+                    <meta name="description" content={product.description} />
+                    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+                  </Helmet>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6">
@@ -173,8 +175,7 @@ const ProductItems = () => {
             <script src="assets/js/slick.js"></script>
             <script src="assets/js/main.js"></script>
    
-        </body>
-    </html>
+    </>
      );
 };
 
