@@ -34,6 +34,7 @@ import WishDetails from "./pages/WishDetails";
 import Faq from "./pages/Faq";
 import Cgv from "./pages/Cgv";
 import Payment from "./pages/Payment";
+import { Helmet } from "react-helmet";
 
 let test = false;
 class App extends Component {
@@ -56,7 +57,14 @@ class App extends Component {
 
           <Header />
           <Navbar />
-
+          <Helmet>
+            <title>Cook Tounsi</title>
+            <meta name="description" content="Vente et livraison des plats, patisserie, 
+            épicerie et boissons tunisiens en Europe." />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة," />
+          </Helmet>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/Login" element={<Login />} />

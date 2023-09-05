@@ -245,25 +245,6 @@ const Header = () => {
           
     return (  
         <>
-            <head>
-                <meta charSet="UTF-8" />
-                <meta name="name" content="CookTounsi" />
-                <meta name="title" content="Cook Tounsi - vente des plats tunisien en Europe en ligne" />
-                <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-                traditionnel, plats, recettes, épices, patisserie, healthy, livraison de nourriture,épicerie, recettes,
-                 food, livraison, ماكلة تونسية , أطباق , معلبة, " />
-                <title>Cook Tounsi</title>
-                <link rel="icon" href="assets/images/cook.png" />
-                <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
-                <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
-                <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css" />
-                <link rel="stylesheet" href="assets/vendor/venobox/venobox.min.css" />
-                <link rel="stylesheet" href="assets/vendor/slickslider/slick.min.css" />
-                <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
-                <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
-                <link rel="stylesheet" href="assets/css/main.css" />
-                <link rel="stylesheet" href="assets/css/home-classic.css" />
-            </head>
             {(!completeLoading) &&<Loader/>}
 
             {isLoggedIn &&

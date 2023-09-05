@@ -1,14 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link,useNavigate } from "react-router-dom";
 import { db} from '../firebase.config';
-import { collection, orderBy } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import { query, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Pagination from '../components/pagination/Pagination';
+import { Helmet } from 'react-helmet';
+
 function Blog()
 {
-
     const [blogs, setBlogs] = useState([]);
     const dispatch= useDispatch();
     const navigate= useNavigate();
@@ -29,21 +30,19 @@ function Blog()
               data: doc.data(),
             }))
           );
-
         });
-        
       }, []);
       const view = async (idb) => {
         navigate("/BlogDetails", { state: { id: idb } });
               };
 return(
-     <html lang='en'>
+     <>
             <head>
                 <meta charSet="UTF-8" />
                 <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+                <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+                <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
                 <title>Blog - Cook Tounsi</title>
                 <link rel="icon" href="assets/images/cook.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
@@ -57,10 +56,17 @@ return(
                 <link rel="stylesheet" href="assets/css/home-classic.css" />
                 <link rel="stylesheet" href="assets/css/slider.css" />
             </head>
-            <body>
+            <Helmet>
+            <meta name="name" content="Cook Tounsi" />
+            <title>Cook Tounsi - Blogs</title>
+            <meta name="description" content="Blogs" />
+            <meta name="keywords" content="cuisine, boissons, Tunisie, france, belgique, cuisine tunisienne, 
+            traditionnel, plats, blogs, épices, europe, patisserie, livraison, services, lifestyle " />
+            </Helmet>
+
             <div className="backdrop"></div>
-               <a className="backtop fas fa-arrow-up" href="#"></a>
-          <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+            <a className="backtop fas fa-arrow-up" href="#"></a>
+            <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
             <div className="container">
                 <h2>blogs</h2>
                 <ol className="breadcrumb">
@@ -68,7 +74,7 @@ return(
                     <li className="breadcrumb-item active" aria-current="page">Tout les blogs</li>
                 </ol>
             </div>
-          </section>
+            </section>
             <section className="inner-section blog-standard">
             <div className="container">
                 <div className="row justify-content-center">
@@ -79,7 +85,7 @@ return(
                             <div className="col-lg-12">
         {blogs.length!=0&&
     <>
-     {currentProducts.map((blog, index) =>
+        {currentProducts.map((blog, index) =>
                             { const {id, author, p1, p2, photo1, photo2, timestamp, quote, shortDescription, tags, title} = blog
                             
                                 return(
@@ -115,7 +121,7 @@ return(
                                 )})}
     </>
         }
-                           
+                            
                             </div>
                         
                         </div>
@@ -125,10 +131,10 @@ return(
                             <h3 className="blog-widget-title">Les Plus Populaires</h3>
                             <ul className="blog-widget-feed">
                                 {blogs.length!=0&&
-                         <>
-                             {blogs.map((blog, index) =>
+                            <>
+                                {blogs.map((blog, index) =>
                             { const {author, longDescription, photo, timestamp, shortDescription, tags, title} = blog
-                           
+                            
                                 return(
                                     <>
                                 <li >
@@ -142,18 +148,16 @@ return(
                                 </li>
                                     </>
                                 )})}
-                             </>
-                                 }
+                                </>
+                                    }
                             </ul>
                         </div>
                         <div className="blog-widget">
                             <h3 className="blog-widget-title">follow us</h3>
                             <ul className="blog-widget-social">
-                                <li><a href="#" className="icofont-facebook"></a></li>
-                                <li><a href="#" className="icofont-twitter"></a></li>
+                                <li><a href="https://www.facebook.com/cooktounsi" className="icofont-facebook"></a></li>
+                                <li><a href="https://www.instagram.com/cooktounsi.store/" className="icofont-instagram"></a></li>
                                 <li><a href="#" className="icofont-linkedin"></a></li>
-                                <li><a href="#" className="icofont-pinterest"></a></li>
-                                <li><a href="#" className="icofont-instagram"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -168,19 +172,19 @@ return(
             </section>
 
             <script src="assets/vendor/bootstrap/popper.min.js"></script>
-                <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
-                <script src="assets/vendor/countdown/countdown.min.js"></script>
-                <script src="assets/vendor/niceselect/nice-select.min.js"></script>
-                <script src="assets/vendor/slickslider/slick.min.js"></script>
-                <script src="assets/vendor/venobox/venobox.min.js"></script>
-                <script src="assets/js/nice-select.js"></script>
-                <script src="assets/js/countdown.js"></script>
-                <script src="assets/js/accordion.js"></script>
-                <script src="assets/js/venobox.js"></script>
-                <script src="assets/js/slick.js"></script>
-                <script src="assets/js/main.js"></script>
-            </body>
-     </html>
+            <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
+            <script src="assets/vendor/countdown/countdown.min.js"></script>
+            <script src="assets/vendor/niceselect/nice-select.min.js"></script>
+            <script src="assets/vendor/slickslider/slick.min.js"></script>
+            <script src="assets/vendor/venobox/venobox.min.js"></script>
+            <script src="assets/js/nice-select.js"></script>
+            <script src="assets/js/countdown.js"></script>
+            <script src="assets/js/accordion.js"></script>
+            <script src="assets/js/venobox.js"></script>
+            <script src="assets/js/slick.js"></script>
+            <script src="assets/js/main.js"></script>
+           
+     </>
 )
 
 }
