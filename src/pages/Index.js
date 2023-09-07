@@ -155,7 +155,7 @@ function Dashboard() {
                         </div>
                             <div className="col-sm-6 col-md-6 col-lg-3">
                                     <div className="branch-card">
-                                        <img src="assets/images/product/P19.jpg" alt="branch" />
+                                        <img src="assets/images/product/P19.jpg" alt="Epicerie" />
                                         <div className="branch-overlay">
                                             <h3>Epicerie</h3>
                                         </div>
@@ -163,7 +163,7 @@ function Dashboard() {
                                 </div>
                                 <div className="col-sm-6 col-md-6 col-lg-3">
                                     <div className="branch-card">
-                                        <img src="assets/images/product/P23.jpg" alt="branch" />
+                                        <img src="assets/images/product/P23.jpg" alt="Boissons" />
                                         <div className="branch-overlay">
                                             <h3>Boissons</h3>
                                         </div>
@@ -171,7 +171,7 @@ function Dashboard() {
                                 </div>
                                 <div className="col-sm-6 col-md-6 col-lg-3">
                                     <div className="branch-card">
-                                        <img src="assets/images/product/P2.jpeg" alt="branch" />
+                                        <img src="assets/images/product/P2.jpeg" alt="Plats" />
                                         <div className="branch-overlay">
                                             <h3>Plats</h3>
                                         </div>
@@ -179,7 +179,7 @@ function Dashboard() {
                                 </div>
                                 <div className="col-sm-6 col-md-6 col-lg-3">
                                     <div className="branch-card">
-                                        <img src="assets/images/product/P24.png" alt="branch" />
+                                        <img src="assets/images/product/P24.png" alt="Pâtisserie" />
                                         <div className="branch-overlay">
                                             <h3>Pâtisserie</h3>
                                         </div>
@@ -281,7 +281,7 @@ function Dashboard() {
                     <label className="label-text feat">{singleProduct.tag}</label>}
                     </div>
                         <ul className="preview-slider"> 
-                            <li><img src={singleProduct.photo} alt="product"/>
+                            <li><img src={singleProduct.photo} alt={singleProduct.name}/>
                             </li>
                         </ul>
                         </div>
@@ -410,7 +410,7 @@ function Dashboard() {
                             <div className="blog-card">
                                 <div className="blog-media">
                                     <a className="blog-img" href="" onClick={() => viewB(id)}>
-                                        <img src={blog.data.photo1} alt="blog"/>
+                                        <img src={blog.data.photo1} alt={blog.data.title}/>
                                     </a>
                                 </div>
                                 <div className="blog-content">

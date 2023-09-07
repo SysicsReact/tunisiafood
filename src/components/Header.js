@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useLocation, NavLink, useNavigate } from "react-router-dom";
 import {app, auth, db, logout, changeIsLoading,changeIsTesting,testLoading, GetCardDetails, RemoveRefCommand } from "../firebase.config";
 import { onAuthStateChanged } from "firebase/auth";
 import { SET_ACTIVE_USER,Remove_ACTIVE_USER } from "../redux/slice/authSlice";
@@ -50,6 +50,7 @@ const Header = () => {
     const [user] = useAuthState(auth);
     const[displayName,setDisplayName]=useState("");
     const dispatch = useDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
     const [logUser, setLogUser] = useState({})
     const [isLoading, setIsLoading ] = useState(true);
@@ -70,7 +71,6 @@ const Header = () => {
     //-------get user by ID
    
     useEffect(() => {
-
         // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -94,7 +94,6 @@ const Header = () => {
     }, [dispatch])
     //monitor currently siggnin user
     useEffect(()=>{
-      
        // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -181,15 +180,10 @@ const Header = () => {
                             if(tempResult.findIndex(x => x.id === products[item].id) == -1){
                                 tempResult.push(products[item]);
                             }
-                            
                         }
-                      
                     }
-                    
                 }
-                
                 setResult(tempResult)
-               
             }
         } else {
             setResult([]);
@@ -210,8 +204,8 @@ const Header = () => {
             )
         }
     } 
-    const view = async (idp) => {
-        navigate("/ProductItems", { state: { id: idp } });
+    const view = async (id) => {
+        navigate("/ProductItems", { state: { id: id } });
         setResult([]);
           };
 
@@ -242,6 +236,11 @@ const Header = () => {
               }
            
           };
+
+          useEffect(() => {
+            setResult([]);
+            setValue('');
+          }, [location.pathname]);
           
     return (  
         <>
@@ -250,14 +249,14 @@ const Header = () => {
             {isLoggedIn &&
             <aside className="nav-sidebar">
             <div className="nav-header">
-                <a href=""><img src={window.location.origin +'/assets/images/cook.png'}   alt="logo"/></a>
+                <a href=""><img src={window.location.origin +'/assets/images/cook.png'}   alt="Cook Tounsi"/></a>
                 <button className="nav-close"><i className="icofont-close"></i></button>
             </div>
             <div className="nav-content">
                <div className="nav-profile">
                   
                     {logUser.photo!=undefined&&
-                    <a className="nav-user" href=""><img src={logUser.photo} alt="user"/></a>
+                    <a className="nav-user" href=""><img src={logUser.photo} alt={displayName}/></a>
                     }
                     
                     <h4 className="nav-name"><a href="">{displayName}</a></h4>
@@ -348,11 +347,9 @@ const Header = () => {
                             <img src={window.location.origin +'/assets/images/user.png'} alt="user" />
                         }
                             </button>
-                        
-                        
                         <a className="header-logo">
                         <Link to="/">
-                            <img src="assets/images/cook.png" alt="logo" />
+                            <img src="assets/images/cook.png" alt="Cook Tounsi" />
                         </Link>
                     </a>
                     {checkIfTrue()&&
@@ -446,6 +443,7 @@ const Header = () => {
                 </div>
             </div>
         </header>
+            
             <div className="mobile-menu">
             <Link to="/"> <a  title="Home Page">
                         <i className="fas fa-home"></i>
