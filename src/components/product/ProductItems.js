@@ -16,31 +16,38 @@ import { Helmet } from "react-helmet";
 const ProductItems = () => {
    
      //const {id} = useParams();
-     const Location = useLocation(); 
-     var idProduct = Location.state.id;
+     const location = useLocation(); 
+     //var idProduct = Location.state.id;
      const [product, setProduct] = useState(null);
      const dispatch = useDispatch();
-     
+     const searchParams = new URLSearchParams(location.search);
+     const id = searchParams.get('id');
+
      useEffect(() => {
-        //alert(id)
-        const q = query(
-            collection(db, "products"),
-            where(documentId(), "==", idProduct)
-          );
-          const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              setProduct(doc.data());
-            });
-          });
-    }, [idProduct]);
+        if(id){
+            const q = query(
+                collection(db, "products"),
+                where(documentId(), "==", id)
+              );
+              const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                  setProduct(doc.data());
+                  console.log(id)
+                });
+              });
+        }
+
+    }, [id]);
 
     const addToCart = (e) => {
         dispatch(ADD_TO_CART(e));
            };
 
-     
     return(
-        <>
+   
+  
+
+        <html lang="en">
         <head>
         <meta charSet="UTF-8" />
             <link rel="icon" href="assets/images/favicon.png" />
@@ -53,11 +60,11 @@ const ProductItems = () => {
             <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
             <link rel="stylesheet" href="assets/css/main.css" />
             <link rel="stylesheet" href="assets/css/home-classic.css" />
-            <link rel="stylesheet" href="assets/css/product-details.css"></link>
+            <link rel="stylesheet" href="assets/css/product-details.css"/>
         </head>
-        <ToastContainer></ToastContainer>
+        <ToastContainer />
 
-               <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+            <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                        <div className="container">
                            <h2>Tout Les Produits</h2>
                            <ol className="breadcrumb">
@@ -65,7 +72,8 @@ const ProductItems = () => {
                                <li className="breadcrumb-item active" aria-current="page">Détails du produit</li>
                            </ol>
                        </div>
-               </section>
+            </section>
+
             <section className="inner-section">
             {product!=null &&
                   <>
@@ -99,7 +107,6 @@ const ProductItems = () => {
                             </div>
                             <ul className="details-thumb">
                                 <li><img  alt= {product.name} src={product.photo} /></li>
-                                
                             </ul>
                         </div>
                     </div>
@@ -108,7 +115,7 @@ const ProductItems = () => {
                         <div className="details-content">
                             <h3 className="details-name"><a href="#">{product.name}</a></h3>
                             <div className="details-meta">
-                                <p>Réf:<span>{idProduct}</span></p>
+                              
                                 <p>BRAND:<a href="#">Cool Tounsi</a></p>
                             </div>
                             {product.discount !== 0 &&
@@ -136,11 +143,7 @@ const ProductItems = () => {
                                     <i className="fas fa-shopping-basket"></i>
                                     <span>Ajouter au chariot</span>
                                 </button>
-                                <div className="product-action">
-                                    <button className="action-minus" title="Quantity Minus"><i className="icofont-minus"></i></button>
-                                    <input className="action-input" title="Quantity Number" type="text" name="quantity" value="1"/>
-                                    <button className="action-plus" title="Quantity Plus"><i className="icofont-plus"></i></button>
-                                </div>
+
                             </div>
                             <div className="details-action-group">
                                 <a className="details-wish wish" href="#" title="Add Your Wishlist">
@@ -159,7 +162,7 @@ const ProductItems = () => {
             </div>
             </>}
             </section>
-               <Intro/>
+            <Intro/>
         
             <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
             <script src="assets/vendor/bootstrap/popper.min.js"></script>
@@ -175,7 +178,7 @@ const ProductItems = () => {
             <script src="assets/js/slick.js"></script>
             <script src="assets/js/main.js"></script>
    
-    </>
+            </html>
      );
 };
 

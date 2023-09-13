@@ -324,10 +324,10 @@ function Dashboard() {
                                         </button>
                                     </div>
                                     <div className="view-action-group">
-                                        <a className="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
+                                     <Link Link to={`/ProductItems?id=${singleProduct.id}`}> <a className="view-wish wish" href="" title="Add Your Wishlist" >
                                             <i className="icofont-eye"></i>
                                             <span>Voir plus de détails</span>
-                                        </a>
+                                        </a></Link>  
                                     </div>
                                     <div className="view-add-group">
                                         <button className="product-add" onClick={()=> addToWish(e)} title="Ajouter au wishlis" >

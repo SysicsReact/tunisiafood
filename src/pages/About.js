@@ -157,8 +157,8 @@ function About() {
                     <div className="row align-items-center">
                         <div className="col-md-5 col-lg-6 col-xl-7">
                             <div className="news-text">
-                                <h2>Get 20% Discount for Subscriber</h2>
-                                <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
+                                <h2>Obtenez 20% de réduction avec des coupons</h2>
+                                <p>Envoyez-nous un message pour savoir comment avoir obtener les coupons</p>
                             </div>
                         </div>
                     </div>
