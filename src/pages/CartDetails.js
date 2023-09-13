@@ -10,6 +10,7 @@ import { doc, getDoc,updateDoc, addDoc, collection } from "@firebase/firestore";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Helmet } from "react-helmet";
 const CartDetails = () => {
 
     const [user] = useAuthState(auth);
@@ -302,6 +303,13 @@ const CartDetails = () => {
                     </div>
                 </section>
             <ToastContainer />
+            <Helmet>
+            <meta name="name" content="Cook Tounsi" />
+            <title>Cook Tounsi - Blogs</title>
+            <meta name="description" content="Blogs" />
+            <meta name="keywords" content="cuisine, boissons, Tunisie, france, belgique, cuisine tunisienne, 
+            traditionnel, plats, blogs, épices, europe, patisserie, livraison, services, lifestyle " />
+            </Helmet>
 
             {cartItems.length === 0 ? (
                 <>
@@ -319,186 +327,177 @@ const CartDetails = () => {
                 </>
             ) : (
                 <>
-                      
-             <section className="inner-section checkout-part">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="alert-info">
-                            <p>Vous n'avez pas terminé vos achats ? <Link to="/ShopProduct"><a href="">Retour aux achats</a></Link></p>
+            <section className="inner-section checkout-part">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="alert-info">
+                                <p>Vous n'avez pas terminé vos achats ? <Link to="/ShopProduct"><a href="">Retour aux achats</a></Link></p>
+                            </div>
                         </div>
+                        <div className="col-lg-12">
+                            <div className="account-card">
+                                <div className="account-title">
+                                    <h4>Votre Commande</h4>
+                                </div>
+                                <div className="account-content">
+                                    <div className="table-scroll">
+                                        <table className="table-list">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Produit</th>
+                                                    <th scope="col">Nom</th>
+                                                    <th scope="col">Catégorie</th>
+                                                    <th scope="col">quantité</th>
+                                                    <th scope="col">Prix Unitaire</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">action</th>
+                                                </tr>
+                                            </thead>
+                                            {cartItems.map((cart, index) => {
+                                const { id, name, price, photo, category, cartQuantity } = cart;
+                                return (
+                                    <>
+                                            <tbody>
+                                                <tr key={id}>
+                                                    <td className="table-image"><img src={photo} alt="product"/></td>
+                                                    <td className="table-name"><h6>{name}</h6></td>
+                                                    <td className="table-brand"><h6>{category}</h6></td>
+                                                    <td className="table-quantity"><h6>{cartQuantity}</h6></td>
+                                                    <td className="table-price"><h6>€{price}<small>/kilo</small></h6></td>
+                                                    <td className="table-price"><h6>€{(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
+                                                    <td className="table-action">
+                                                        <a className="view" href="" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i className="fas fa-eye"></i></a>
+                                                        <a className="trash" href="" title="Remove Wishlist" onClick={() => removeFromCart(cart)}><i className="icofont-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                    </>)
+                            })}
+                                        </table>
+                                    </div>
+                                    <div className="checkout-charge">
+                                        <ul>
+                                            <li>
+                                                <span>Sub-total</span>
+                                                <span>€{cartTotalAmount.toFixed(2)}</span>
+                                            </li>
+                                            <li>
+                                                <span>Livraison:</span>
+                                        <select className="form-select" onChange={handleLivraisonChange}>
+                                            <option value="Livraison Standard">Livraison Standard</option>
+                                            <option value="Livraison Standard En europe">Livraison Standard En europe</option>
+                                            <option value="Livraison rapide">Livraison rapide</option>
+                                        </select>
+                                            </li>
+                                            
+                                            <li>
+                                                <span>Frais de livraison</span>
+                                                <span>€{livraisonCost}</span>
+                                            </li>
+                                            <li>
+                                                <span>Total<small>(Incl. VAT)</small></span>
+                                                <span>€{(parseFloat(livraisonCost) + parseFloat(cartTotalAmount)).toFixed(2)}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                <div className="col-lg-12">
+                    <div className="account-card">
+                        <div className="account-title">
+                            <h4>Détails de livraison</h4>
+                            <button data-bs-toggle="modal" >Modifier</button>
+                        </div>
+                        <form className="modal-content" onSubmit={(event) => event.preventDefault()}>
+                            <div className="row">
+                            <div className="col-md-6 col-lg-4 alert fade show" >
+                                    <div className="profile-card contact active" style={{backgroundColor:"#7ce4f5"}}>
+                                    
+                                    <label style={{Color:"white"}}>
+                                Si vous voulez, vous pouvez changer les détails de livraisons par ici et confirmer.</label>
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-lg-4 alert fade show">
+                                    <div className="profile-card contact active">
+                                        <h6>Pays</h6>
+                                        <select className="form-select" onChange={handleCountryChange} >
+                                        {checkCountry(loggedUser)}
+                                            <option value="France">France</option>
+                                            <option value="Belgique">Belgique</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-lg-4 alert fade show">
+                                    <div className="profile-card contact active">
+                                        <h6>Ville</h6>
+                                        <select className="form-select" onChange={handleCityChange} >
+                                            {checkCity(loggedUser)}
+                                            <option value="Paris">Paris</option>
+                                            <option value="Lyon">Lyon</option>
+                                            <option value="Marseille">Marseille</option>
+                                            <option value="Toulouse">Toulouse</option>
+                                            <option value="Lille">Lille</option>
+                                            <option value="Nice">Nice</option>
+                                            <option value="Nantes">Nantes</option>
+                                            <option value="Strasbourg">Strasbourg</option>
+                                            <option value="Rennes">Rennes</option>
+                                            <option value="Grenoble">Grenoble</option>
+                                            <option value="Rouen">Rouen</option>
+                                            <option value="Toulon">Toulon</option>
+                                            <option value="Montpelier">Montpelier</option>
+                                            <option value="Douai et Lens">Douai et Lens</option>
+                                            <option value="Avignon">Avignon</option>
+                                            <option value="Saint-Etienne">Saint-Etienne</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-lg-4 alert fade show">
+                                    <div className="profile-card contact active">
+                                        <h6>Adresse</h6>
+                                        <input className="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Entrez votre adresse..." />
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-lg-4 alert fade show">
+                                    <div className="profile-card contact active">
+                                        <h6>Code Postal</h6>
+                                        <input className="form-control" type="text" onChange={handlePostalChange} placeholder="Entrez le code postal..." />
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-lg-4 alert fade show">
+                                    <div className="profile-card contact active">
+                                        <h6>Téléphone</h6>
+                                        <input className="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Entrez Votre numéro de téléphone..." />
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </form>
+                        <input type="checkbox" id="checkout-check"/>
+                        <label for="checkout-check">
+                        En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>   
                     </div>
-                    <div className="col-lg-12">
-                        <div className="account-card">
-                            <div className="account-title">
-                                <h4>Votre Commande</h4>
-                            </div>
-                            <div className="account-content">
-                                <div className="table-scroll">
-                                    <table className="table-list">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Produit</th>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col">Catégorie</th>
-                                                <th scope="col">quantité</th>
-                                                <th scope="col">Prix Unitaire</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">action</th>
-                                            </tr>
-                                        </thead>
-                                        {cartItems.map((cart, index) => {
-                            const { id, name, price, photo, category, cartQuantity } = cart;
-                            return (
-                                <>
-                                        <tbody>
-                                            <tr key={id}>
-                                                <td className="table-image"><img src={photo} alt="product"/></td>
-                                                <td className="table-name"><h6>{name}</h6></td>
-                                                <td className="table-brand"><h6>{category}</h6></td>
-                                                <td className="table-quantity"><h6>{cartQuantity}</h6></td>
-                                                <td className="table-price"><h6>€{price}<small>/kilo</small></h6></td>
-                                                <td className="table-price"><h6>€{(price * cartQuantity).toFixed(2)}<small>/</small></h6></td>
-                                                <td className="table-action">
-                                                    <a className="view" href="" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i className="fas fa-eye"></i></a>
-                                                    <a className="trash" href="" title="Remove Wishlist" onClick={() => removeFromCart(cart)}><i className="icofont-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                </>)
-                        })}
-                                    </table>
-                                </div>
-                                <div className="checkout-charge">
-                                    <ul>
-                                        <li>
-                                            <span>Sub-total</span>
-                                            <span>€{cartTotalAmount.toFixed(2)}</span>
-                                        </li>
-                                        <li>
-                                            <span>Livraison:</span>
-                                    <select className="form-select" onChange={handleLivraisonChange}>
-                                        <option value="Livraison Standard">Livraison Standard</option>
-                                        <option value="Livraison Standard En europe">Livraison Standard En europe</option>
-                                        <option value="Livraison rapide">Livraison rapide</option>
-                                    </select>
-                                        </li>
-                                        
-                                        <li>
-                                            <span>Frais de livraison</span>
-                                            <span>€{livraisonCost}</span>
-                                        </li>
-                                        <li>
-                                            <span>Total<small>(Incl. VAT)</small></span>
-                                            <span>€{(parseFloat(livraisonCost) + parseFloat(cartTotalAmount)).toFixed(2)}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-            <div className="col-lg-12">
-                <div className="account-card">
-                    <div className="account-title">
-                        <h4>Détails de livraison</h4>
-                        <button data-bs-toggle="modal" >Modifier</button>
+                    <div className="checkout-proced">
+                        <button href="" className="btn btn-inline" onClick={processToCheckout} >procédez au payment</button>
                     </div>
-                    <form className="modal-content" onSubmit={(event) => event.preventDefault()}>
-                        <div className="row">
-                        <div className="col-md-6 col-lg-4 alert fade show" >
-                                <div className="profile-card contact active" style={{backgroundColor:"#7ce4f5"}}>
-                                
-                                <label style={{Color:"white"}}>
-                            Si vous voulez, vous pouvez changer les détails de livraisons par ici et confirmer.</label>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-4 alert fade show">
-                                <div className="profile-card contact active">
-                                    <h6>Pays</h6>
-                                    <select className="form-select" onChange={handleCountryChange} >
-                                    {checkCountry(loggedUser)}
-                                        <option value="France">France</option>
-                                        <option value="Belgique">Belgique</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-4 alert fade show">
-                                <div className="profile-card contact active">
-                                    <h6>Ville</h6>
-                                    <select className="form-select" onChange={handleCityChange} >
-                                        {checkCity(loggedUser)}
-                                        <option value="Paris">Paris</option>
-                                        <option value="Lyon">Lyon</option>
-                                        <option value="Marseille">Marseille</option>
-                                        <option value="Toulouse">Toulouse</option>
-                                        <option value="Lille">Lille</option>
-                                        <option value="Nice">Nice</option>
-                                        <option value="Nantes">Nantes</option>
-                                        <option value="Strasbourg">Strasbourg</option>
-                                        <option value="Rennes">Rennes</option>
-                                        <option value="Grenoble">Grenoble</option>
-                                        <option value="Rouen">Rouen</option>
-                                        <option value="Toulon">Toulon</option>
-                                        <option value="Montpelier">Montpelier</option>
-                                        <option value="Douai et Lens">Douai et Lens</option>
-                                        <option value="Avignon">Avignon</option>
-                                        <option value="Saint-Etienne">Saint-Etienne</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-4 alert fade show">
-                                <div className="profile-card contact active">
-                                    <h6>Adresse</h6>
-                                    <input className="form-control" type="text" defaultValue={loggedUser.adress} onChange={handleAdressChange} placeholder="Entrez votre adresse..." />
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-4 alert fade show">
-                                <div className="profile-card contact active">
-                                    <h6>Code Postal</h6>
-                                    <input className="form-control" type="text" onChange={handlePostalChange} placeholder="Entrez le code postal..." />
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-4 alert fade show">
-                                <div className="profile-card contact active">
-                                    <h6>Téléphone</h6>
-                                    <input className="form-control" type="text" defaultValue={loggedUser.phone} onChange={handlePhoneChange} placeholder="Entrez Votre numéro de téléphone..." />
-                                </div>
-                            </div>
-                           
-                        </div>
-                    </form>
-                    
-                                <input type="checkbox" id="checkout-check"/>
-                                <label for="checkout-check">
-                             En effectuant cet achat, vous acceptez nos <Link to="/Cgv">Termes et conditions</Link>.</label>
-                               
+
+        <br/>
+
+        <div className="checkout-proced">
+        <button className="btn btn-inline" onClick={handleApiCall}>Accéder Au Paiement</button>
+        {responseData && (
+            <>
+    <object data={responseData.payUrl} width="1400" height="600" type="text/html">
+    </object>
+            </>
+        )}
+        </div>
+
                 </div>
-                            <div className="checkout-proced">
-                                <button href="" className="btn btn-inline" onClick={processToCheckout} >procédez au payment</button>
-                            </div>
-
-<br/>
-
-            <div className="checkout-proced">
-      <button className="btn btn-inline" onClick={handleApiCall}>Accéder Au Paiement</button>
-      {responseData && (
-        <>
-  <object data={responseData.payUrl} width="1400" height="600" type="text/html">
-  </object>
-        </>
-      )}
-    </div>
-
-
-            </div>
-           
+                        </div>
                     </div>
-                   
                 </div>
-                
-            </div>
-               </section>
-                                
-
+            </section>
                 </>)
             }
         </body>

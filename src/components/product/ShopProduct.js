@@ -45,7 +45,7 @@ const ShopProduct = () => {
         dispatch(ADD_TO_WISH(e));
                };
    const addToCart = (e) => {
-dispatch(ADD_TO_CART(e));
+    dispatch(ADD_TO_CART(e));
    };
     useEffect(()=>{
         dispatch(SORT_PRODUCTS({products,sort}));
@@ -74,8 +74,8 @@ dispatch(ADD_TO_CART(e));
         setSingleProduct(e);
         setIsOpen(true)
            }
-    const view = async (idp) => {
-        navigate("/ProductItems", { state: { id: idp } });
+    const view = (id) => {
+        navigate(`/ProductItems/${id}`);
               };
     const shortenText = (text, n) => {
         if (text.length > n) {
@@ -83,10 +83,7 @@ dispatch(ADD_TO_CART(e));
             return shortenedText;
         }
         return text;
-    };
-
-
-        
+    };   
         
         
         
@@ -124,6 +121,48 @@ dispatch(ADD_TO_CART(e));
                         </ol>
                     </div>
             </section>
+            <section class="section niche-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-heading">
+                            <h2>Parcourir par catégorie</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="nav nav-tabs" >
+                            <li>
+                                <a href="" class="tab-link active">
+                                    <i class="flaticon-groceries"></i>
+                                    <span  value="Plat">Plats</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="tab-link" >
+                                    <i class="flaticon-dairy-products"></i>
+                                    <span value="Sucré">Patisserie</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="tab-link" >
+                                    <i class="flaticon-cheers"></i>
+                                    <span value="Boisson">Boissons</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="tab-link" >
+                                    <i class="flaticon-dried-fruit"></i>
+                                    <span value="Epice">Episserie</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
             <section className="inner-section shop-part">
             <div className="container">
                 <div className="row content-reverse">
@@ -274,11 +313,12 @@ dispatch(ADD_TO_CART(e));
                                             <span>Ajouter</span>
                                         </button>
                                     </div>
-                                    <div className="view-action-group">
-                                        <a className="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
+                                    <div className="view-action-group" key={singleProduct.id}>
+                                    <Link to={`/ProductItems?id=${singleProduct.id}`} > <a className="view-wish wish" href=""  title="Add Your Wishlist" >
+                                    
                                             <i className="icofont-eye"></i>
                                             <span>Voir plus de détails</span>
-                                        </a>
+                                        </a></Link>
                                     </div>
                                     <div className="view-add-group">
                                         <button className="product-add" onClick={()=> addToWish(e)} title="Ajouter au wishlis" >
@@ -353,7 +393,7 @@ dispatch(ADD_TO_CART(e));
                                {category=="Sucré"&&
                                    <label className="label-text sucre">Pâtisserie</label>}
                                </button>
-                                   <a className="standard-image" href="product-video.html" >
+                                   <a className="standard-image" href="" >
                                        <img src={photo} alt="product" style={{ borderRadius: "10px" }} />
                                    </a>
                                    <div className="standard-widget">
@@ -427,10 +467,10 @@ dispatch(ADD_TO_CART(e));
                                         </button>
                                     </div>
                                     <div className="view-action-group">
-                                        <a className="view-wish wish" href="" onClick={() => view(singleProduct.id)} title="Add Your Wishlist" >
+                                       <Link to={`/ProductItems?id=${singleProduct.id}`}> <a className="view-wish wish" href=""  title="Add Your Wishlist" >
                                             <i className="icofont-eye"></i>
                                             <span>Voir plus de détails</span>
-                                        </a>
+                                        </a></Link>
                                     </div>
                                     <div className="view-add-group">
                                         <button className="product-add" onClick={()=> addToWish(e)} title="Ajouter au wishlis" >

@@ -17,7 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
 import BlogDetails from "./pages/BlogDetails";
-import ProductItem from "./components/product/ProductItems";
+import ProductItems from "./components/product/ProductItems";
 import CartDetails from "./pages/CartDetails";
 import AllProducts from "./pages/AllProducts";
 import MyProfile from "./pages/MyProfile";
@@ -80,7 +80,8 @@ class App extends Component {
           <Route path="/ShopProduct" element={<ShopProduct />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/CartDetails" element={<CartDetails />} />
-          <Route path="/ProductItems" element={<ProductItem/>} />
+          <Route path="/ProductItems" element={<ProductItems/>} />
+         
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/OrderHistory" element={<OrderHistory/>} />
           <Route path="/OrderDetails" element={<OrderDetails/>} />
