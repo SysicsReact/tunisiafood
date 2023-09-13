@@ -83,6 +83,7 @@ const ProductItems = () => {
                     <meta name="description" content={product.description} />
                     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
         traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
+        <meta property="og:image" content={product.image} />
                   </Helmet>
             <div className="container">
                 <div className="row">
