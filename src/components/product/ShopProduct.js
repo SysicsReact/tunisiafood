@@ -12,6 +12,7 @@ import { Modal } from 'react-fade-modal';
 import Pagination from '../pagination/Pagination';
 import { ADD_TO_WISH } from '../../redux/slice/wishSlice'
 import { ReturnMeasurement } from '../../firebase.config'
+import { Helmet } from 'react-helmet'
 
 
 const ShopProduct = () => {
@@ -88,30 +89,38 @@ const ShopProduct = () => {
         
         
   return (
-     <html lang="en">
+     <>
      <head>
-        <meta charSet="UTF-8" />
-        <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-         <title>Cook Tounsi- Tout les produits</title>
          <link rel="icon" href="assets/images/favicon.png" />
          <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
          <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
          <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css" />
          <link rel="stylesheet" href="assets/vendor/venobox/venobox.min.css" />
-         <link rel="stylesheet" href="assets/vendor/slickslider/slick.min.css" />
          <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
          <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
          <link rel="stylesheet" href="assets/css/main.css" />
          <link rel="stylesheet" href="assets/css/home-classic.css" />
-         
      </head>
-     <body>
+
      <ToastContainer/>
-     <div className="backdrop"></div>
-               <a className="backtop fas fa-arrow-up" href="#"></a>
+
+     <Helmet>
+        {/* SEO metadata */}
+        <meta charset="utf-8"/>
+        <meta name="name" content="Tous les produits" />
+        <title>Cook Tounsi - Tous les produits</title>
+        <meta name="description" content="Cook Tounsi: Tous les produits" />
+        <meta name="keywords" content="cuisine, boissons, Tunisie, cuisine tunisienne, 
+    traditionnel, plats, épices, europe, patisserie, livraison, أطباق , معلبة ,
+    services,  " />
+
+        {/* Open Graph (OG) metadata for social media */}
+        <meta property="og:title" content="Cook Tounsi-Tous les produits" />
+        <meta property="og:image" content="assets\images\banner.jpg" />
+
+     </Helmet>
+            <div className="backdrop"></div>
+            <a className="backtop fas fa-arrow-up" href="#"></a>
             <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div className="container">
                         <h2>Tout Les Produits</h2>
@@ -161,7 +170,7 @@ const ShopProduct = () => {
                     </div>
                 </div>
             </div>
-        </section>
+            </section>
 
             <section className="inner-section shop-part">
             <div className="container">
@@ -552,8 +561,7 @@ const ShopProduct = () => {
          <script src="assets/js/slick.js"></script>
          <script src="assets/js/main.js"></script>
 
-     </body>
- </html>
+ </>
   )
 }
 
