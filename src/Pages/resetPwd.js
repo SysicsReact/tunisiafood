@@ -10,7 +10,7 @@ function Reset() {
    
     return (
 
-        <html lang="en">
+        <>
             <head>
             <meta charSet="UTF-8" />
     <meta name="name" content="Cook Tounsi" />
@@ -28,6 +28,7 @@ function Reset() {
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/user-auth.css" />
+                <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
             <body>
                 <section className="user-form-part">
@@ -35,40 +36,31 @@ function Reset() {
                         <div className="row justify-content-center">
                             <div className="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                                 <div className="user-form-logo">
-                                    <img src="assets/images/logo.png" alt="logo" />
+                                    <img src="assets/images/cook.png" alt="logo" />
                                 </div>
                                 <div className="user-form-card">
                                     <div className="user-form-title">
-                                        <h2>welcome!</h2>
-                                        <p>Use your credentials to access</p>
+                                        <h2>bienvenu!</h2>
+                                        <p>Entrez vos identifiants pour vous inscrire</p>
                                     </div>
                                     <div className="user-form-group">
-
-                                        <div className="user-form-divider">
-                                            <p>or</p>
-                                        </div>
                                         <form className="user-form" onSubmit={(event) => event.preventDefault()}>
-
                                             <div className="form-group">
                                                 <input type="email" className="form-control" value={email}
                                                     onChange={(e) => setEmail(e.target.value)} placeholder="E-mail Address" />
                                             </div>
-
-
                                             <div className="form-button">
                                                 <button
                                                     className="reset__btn"
                                                     onClick={() => sendPasswordReset(email)}
                                                 >
-                                                    Send password reset email
-                                                </button>                                        </div>
+                                                    Envoyer un e-mail de réinitialisation
+                                                </button>                                        
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div className="user-form-remind">
-                                </div>
-                                <div className="user-form-footer">
-                                    <p>TunisianFood | &COPY; Copyright by TunisianFood</p>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +81,7 @@ function Reset() {
                 <script src="assets/js/slick.js"></script>
                 <script src="assets/js/main.js"></script>
             </body>
-        </html>
+        </>
     );
 }
 export default Reset;

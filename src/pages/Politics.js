@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 function Politics() {
@@ -6,14 +7,8 @@ function Politics() {
   return (
 
 
-<html>
+<>
           <head>
-          <meta charSet="UTF-8" />
-    <meta name="name" content="Cook Tounsi" />
-    <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-    <title>Poliques et confidentialités - Cook Tounsi</title>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -28,6 +23,17 @@ function Politics() {
                 <link rel="stylesheet" href="./components/loader/loader.css" />
                 <link rel="stylesheet" href="assets/css/privacy.css"/>
           </head>
+          <Helmet>
+          <meta charSet="UTF-8" />
+            <title>Cook Tounsi - Poliques et confidentialités</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi- Poliques et confidentialités" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                    food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+            <meta property="og:title" content="Cook Tounsi - Poliques et confidentialités" />
+            <meta property="og:image" content="assets/images/about/1.jpg" />
+          </Helmet>
           <div className="backdrop"></div>
                 <a className="backtop fas fa-arrow-up" href="#"></a>
           <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
@@ -39,8 +45,6 @@ function Politics() {
                         </ol>
                     </div>
           </section>
-
-          <body>
           <section className="inner-section privacy-part">
             <div className="container">
                 <div className="row">
@@ -271,9 +275,9 @@ Il est rappelé à l'utilisateur qu'il peut organiser quel doit être le devenir
                 </div>
             </div>
         </section>
-          </body>
+        
 
-</html>
+</>
   )
 }
 

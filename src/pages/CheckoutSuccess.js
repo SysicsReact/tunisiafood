@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { selectEmail, selectUserID  } from '../redux/slice/authSlice';
 import { selectShippingAddress, CLEAR_SHIPPING_ADDRESS } from '../redux/slice/checkoutSlice';
+import { Helmet } from 'react-helmet';
 
 const GenerateOrder = async(refID,ID)=>{
   saveOrder(refID)
@@ -18,7 +19,6 @@ const GenerateOrder = async(refID,ID)=>{
           }
           })
       .catch((error) => {
-          //console.log('Error during removal process: ');
       });
 }
 const saveOrder = async (param,ID) => {
@@ -27,7 +27,6 @@ const saveOrder = async (param,ID) => {
     const q = query(collection(db, 'paymentstostart'), where('userId', '==', ID),where('commandReference', '==', param));
     const querySnapshot = await getDocs(q);
     if(querySnapshot.docs.length<=0){
-     // navigate('/OrderHistory') 
     }
     const addPromises = querySnapshot.docs.map(async (doc) => {
       const orderData = doc.data();
@@ -87,14 +86,8 @@ useEffect(() => {
   
     
   return (
-     <html>
+     <>
           <head>
-          <meta charSet="UTF-8" />
-          <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-        <title>Commande Réçu - Cook Tounsi</title>
           <link rel="icon" href="assets/images/favicon.png" />
           <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
           <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -104,9 +97,20 @@ useEffect(() => {
           <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
           <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
           <link rel="stylesheet" href="assets/css/main.css" />
-          <link rel="stylesheet" href="assets/css/user-auth.css" />
-          <link rel="stylesheet" href="assets/css/checkout.css"></link>
+          <link rel="stylesheet" href="assets/css/home-classic.css" />
+          <link rel="stylesheet" href="assets/css/checkout.css" />
           </head>
+          <Helmet>
+          <meta charSet="UTF-8" />
+            <title>Cook Tounsi - Commande Réçue</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi- Commande Réçue" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                    food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+            <meta property="og:title" content="Cook Tounsi - Commande Réçue" />
+            <meta property="og:image" content="assets/images/about/1.jpg" />
+          </Helmet>
      <body>
      <section className="section countdown-part">
             <div className="container">
@@ -138,7 +142,7 @@ useEffect(() => {
             </div>
         </section>
      </body>
-     </html>
+     </>
   )
 }
 

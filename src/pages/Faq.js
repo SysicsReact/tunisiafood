@@ -1,17 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 function Faq() {
     window.scrollTo(0, 0);
   return (
-     <html>
+     <>
           <head>
-          <meta charSet="UTF-8" />
-          <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-        <title>FAQ - Cook Tounsi</title>
           <link rel="icon" href="assets/images/favicon.png" />
           <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
           <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -22,11 +17,22 @@ function Faq() {
           <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
           <link rel="stylesheet" href="assets/css/main.css" />
           <link rel="stylesheet" href="assets/css/faq.css" />
-          
+          <link rel="stylesheet" href="assets/css/home-classic.css" />
           </head>
+          <Helmet>
+          <meta charSet="UTF-8" />
+            <title>Cook Tounsi - FAQ</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi - FAQ" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                    food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+            <meta property="og:title" content="Cook Tounsi - FAQ" />
+            <meta property="og:image" content="assets/images/about/1.jpg" />
+          </Helmet>
           <body>
           <div className="backdrop"></div>
-                <a className="backtop fas fa-arrow-up" href="#"></a>
+            <a className="backtop fas fa-arrow-up" href="#"></a>
                 <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/spices.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                     <div className="container">
                         <h2>QFP</h2>
@@ -90,7 +96,7 @@ function Faq() {
         </section>
           </body>
 
-     </html>
+     </>
   )
 }
 

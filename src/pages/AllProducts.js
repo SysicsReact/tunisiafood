@@ -41,14 +41,11 @@ function AllProducts() {
         
 const [cart, setCart] = useState([]);
 const addToCart = (product) => {
-    console.log("We are in Add to cart");
     
     setCart([...cart, product]);
-    console.log(cart.length);
     SetCartDetails(cart);
 };
 const filteredProducts = useSelector(STORE_PRODUCTS);
-console.log(filteredProducts);
     return (
         <>
                <div className="backdrop"></div>

@@ -270,7 +270,7 @@ const CartDetails = () => {
       }, [responseData]);
       //Payment done
     return (
-        <html lang="en">
+        <>
           <head>
           <meta charSet="UTF-8" />
           <meta name="name" content="Cook Tounsi" />
@@ -283,12 +283,12 @@ const CartDetails = () => {
           <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
           <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css" />
           <link rel="stylesheet" href="assets/vendor/venobox/venobox.min.css" />
-          <link rel="stylesheet" href="assets/vendor/slickslider/slick.min.css" />
           <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
           <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
           <link rel="stylesheet" href="assets/css/main.css" />
           <link rel="stylesheet" href="assets/css/user-auth.css" />
-          <link rel="stylesheet" href="assets/css/checkout.css"></link>
+          <link rel="stylesheet" href="assets/css/checkout.css" />
+          <link rel="stylesheet" href="assets/css/home-classic.css" />
           </head>
           <body>
           <div className="backdrop"></div>
@@ -501,7 +501,7 @@ const CartDetails = () => {
                 </>)
             }
         </body>
-        </html>
+        </>
     )
 }
 export default CartDetails;

@@ -9,27 +9,28 @@ function About() {
     return (
         <>
             <head>
+                <Helmet>
                 <meta charSet="UTF-8" />
+                <meta name="name" content="Cook Tounsi" />
+                <title>Cook Tounsi - Concept</title>
+                <meta name="description" content="Cook Tounsi: A propos" />
+                <meta name="keywords" content="cuisine, boissons, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, europe, patisserie, livraison, services, lifestyle " />
+                <meta property="og:title" content="Cook Tounsi- Concept" />
+                <meta property="og:image" content="assets\images\banner.jpg" />
+                </Helmet>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
                 <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css" />
                 <link rel="stylesheet" href="assets/vendor/venobox/venobox.min.css" />
-                <link rel="stylesheet" href="assets/vendor/slickslider/slick.min.css" />
                 <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
-                <link rel="stylesheet" href="assets/css/home-classic.css"></link>
+                <link rel="stylesheet" href="assets/css/home-classic.css" />
                 <link rel="stylesheet" href="assets/css/about.css"/>
             </head>
 
-            <Helmet>
-            <meta name="name" content="Cook Tounsi" />
-            <title>Cook Tounsi - Concept</title>
-            <meta name="description" content="Cook Tounsi: Conactez-nous" />
-            <meta name="keywords" content="cuisine, boissons, Tunisie, cuisine tunisienne, 
-            traditionnel, plats, épices, europe, patisserie, livraison, services, lifestyle " />
-            </Helmet>
             <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                 <div className="container">
                     <h2>Notre Concept</h2>

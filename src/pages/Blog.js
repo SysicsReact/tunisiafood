@@ -38,12 +38,6 @@ function Blog()
 return(
      <>
             <head>
-                <meta charSet="UTF-8" />
-                <meta name="name" content="Cook Tounsi" />
-                <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-                <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-                traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-                <title>Blog - Cook Tounsi</title>
                 <link rel="icon" href="assets/images/cook.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -57,11 +51,15 @@ return(
                 <link rel="stylesheet" href="assets/css/slider.css" />
             </head>
             <Helmet>
+            <meta charSet="UTF-8" />
             <meta name="name" content="Cook Tounsi" />
             <title>Cook Tounsi - Blogs</title>
             <meta name="description" content="Blogs" />
-            <meta name="keywords" content="cuisine, boissons, Tunisie, france, belgique, cuisine tunisienne, 
-            traditionnel, plats, blogs, épices, europe, patisserie, livraison, services, lifestyle " />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+            <meta property="og:title" content="Cook Tounsi - Nos Blogs" />
+            <meta property="og:image" content="assets/images/about/1.jpg" />
             </Helmet>
 
             <div className="backdrop"></div>

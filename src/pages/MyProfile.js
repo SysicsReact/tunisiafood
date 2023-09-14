@@ -9,15 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { doc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { getDoc } from "@firebase/firestore";
-import Loader from "../components/loader/Loader";
+import { Helmet } from "react-helmet";
+
 function MyProfile() {
-
-    //---------declarations
-
     const [user] = useAuthState(auth);
     const [loggedUser, setLoggedUser] = useState({})
     const [completeLoading, setCompleLoading] = useState(false)
-
     const issignIN = useSelector(selectIsLoggedIn);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -25,11 +22,7 @@ function MyProfile() {
     const [test, setTest] = useState(true)
     const userID = useSelector(selectuserID)
 
-
-    //-----------get userby ID    
-
     useEffect(() => {
-        // setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
@@ -55,14 +48,20 @@ function MyProfile() {
     
 
     return (
-        <html lang="en">
+        <>
             <head>
-            <meta charSet="UTF-8" />
-          <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-        <title>Mon Profile - Cook Tounsi</title>
+                <Helmet>
+                <meta charSet="UTF-8" />
+                <title>Cook Tounsi - Mon Profile</title>
+                <meta name="name" content="Cook Tounsi" />
+                <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+                <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة, " />
+                <meta property="og:title" content="Cook Tounsi- Mon Profile" />
+                <meta property="og:image" content="assets\images\banner.jpg" />
+                </Helmet>
+
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -73,7 +72,7 @@ function MyProfile() {
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/profile.css" />
-                <link rel="stylesheet" href="Assets/css/orderlist.css" />
+                <link rel="stylesheet" href="assets/css/home-classic.css"></link>
             </head>
 
             <body>
@@ -148,7 +147,7 @@ function MyProfile() {
                 <script src="assets/js/main.js"></script>
 
             </body>
-        </html>
+        </>
     );
 }
 

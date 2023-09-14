@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import CartDetails from "./CartDetails";
 import { selectPreviousURL } from "../redux/slice/cartSlice";
+import { Helmet } from "react-helmet";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -64,14 +65,20 @@ function Login() {
         if (user) navigate("/")
     }, [user, loading]);
     return (
-        <html lang="en">
+        <>
             <head>
+                <Helmet>
+            <title>Cook Tounsi - Login</title>
             <meta charSet="UTF-8" />
-          <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-        <title>Login - Cook Tounsi</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة, " />
+            
+            <meta property="og:title" content="Cook Tounsi- Login" />
+            <meta property="og:image" content="assets\images\banner.jpg" />
+                </Helmet>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -82,6 +89,7 @@ function Login() {
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/user-auth.css" />
+                <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
             <body>
                 <ToastContainer />
@@ -148,7 +156,7 @@ function Login() {
                 <script src="assets/js/slick.js"></script>
                 <script src="assets/js/main.js"></script>
             </body>
-        </html>
+        </>
     );
 }
 
