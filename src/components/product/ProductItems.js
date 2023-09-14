@@ -45,46 +45,46 @@ const ProductItems = () => {
 
     return(
    
-  
 
-        <html lang="en">
+        <>
         <head>
-        <meta charSet="UTF-8" />
-            <link rel="icon" href="assets/images/favicon.png" />
-            <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
-            <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
-            <link rel="stylesheet" href="assets/fonts/fontawesome/fontawesome.min.css" />
-            <link rel="stylesheet" href="assets/vendor/venobox/venobox.min.css" />
-            <link rel="stylesheet" href="assets/vendor/slickslider/slick.min.css" />
-            <link rel="stylesheet" href="assets/vendor/niceselect/nice-select.min.css" />
             <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
             <link rel="stylesheet" href="assets/css/main.css" />
             <link rel="stylesheet" href="assets/css/home-classic.css" />
             <link rel="stylesheet" href="assets/css/product-details.css"/>
+            {product!=null &&
+            <Helmet>
+                    {/* SEO metadata */}
+                    <meta charset="utf-8" />
+                    <title>{product.name}</title>
+                    <meta name="name" content="Cook Tounsi" />
+                    <meta name="description" content={product.description} />
+                    <meta name="keywords" content={`cuisine, boissons, Tunisie, cuisine tunisienne, 
+    traditionnel, plats, épices, europe, patisserie, livraison, ${product.searchTags.join(', ')} `} />
+                     {/* Open Graph (OG) metadata for social media */}
+                    <meta property="og:title" content={product.name} />
+                    <meta property="og:image" content={product.photo} />
+                  </Helmet>}
         </head>
         <ToastContainer />
 
-            <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
-                       <div className="container">
-                           <h2>Tout Les Produits</h2>
-                           <ol className="breadcrumb">
-                               <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
-                               <li className="breadcrumb-item active" aria-current="page">Détails du produit</li>
-                           </ol>
-                       </div>
+
+            <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
+                <div className="container">
+                    <h2>Tout Les Produits</h2>
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
+                        <li className="breadcrumb-item"><Link to="/ShopProduct">Tous Les Produits</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page"></li>
+                    </ol>
+                </div>
             </section>
 
             <section className="inner-section">
             {product!=null &&
                   <>
-                  <Helmet>
-                    <title>{product.name}</title>
-                    <meta name="name" content="Cook Tounsi" />
-                    <meta name="description" content={product.description} />
-                    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food " />
-                    <meta property="og:image" content={product.image} />
-                  </Helmet>
+                 
+
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6">
@@ -164,22 +164,9 @@ const ProductItems = () => {
             </>}
             </section>
             <Intro/>
-        
-            <script src="assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
-            <script src="assets/vendor/bootstrap/popper.min.js"></script>
-            <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
-            <script src="assets/vendor/countdown/countdown.min.js"></script>
-            <script src="assets/vendor/niceselect/nice-select.min.js"></script>
-            <script src="assets/vendor/slickslider/slick.min.js"></script>
-            <script src="assets/vendor/venobox/venobox.min.js"></script>
-            <script src="assets/js/nice-select.js"></script>
-            <script src="assets/js/countdown.js"></script>
-            <script src="assets/js/accordion.js"></script>
-            <script src="assets/js/venobox.js"></script>
-            <script src="assets/js/slick.js"></script>
-            <script src="assets/js/main.js"></script>
+
    
-            </html>
+            </>
      );
 };
 
