@@ -6,20 +6,15 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
-import Cart from "./components/Cart";
 import Profile from "./pages/Profile";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
-import SingleProduct from "./pages/SingleProduct";
 import SearchResult from "./pages/SearchResult";
 import Politics from "./pages/Politics";
 import About from "./pages/About";
 import { ToastContainer, toast } from 'react-toastify';
 import Blog from "./pages/Blog";
-import Shop from "./pages/Shop";
 import BlogDetails from "./pages/BlogDetails";
 import ProductItems from "./components/product/ProductItems";
-import CartDetails from "./pages/CartDetails";
-import AllProducts from "./pages/AllProducts";
 import MyProfile from "./pages/MyProfile";
 import './App.css';
 import { Route, Routes } from "react-router-dom";
@@ -34,7 +29,6 @@ import WishDetails from "./pages/WishDetails";
 import Faq from "./pages/Faq";
 import Cgv from "./pages/Cgv";
 import Payment from "./pages/Payment";
-import { Helmet } from "react-helmet";
 
 let test = false;
 class App extends Component {
@@ -57,14 +51,6 @@ class App extends Component {
 
           <Header />
           <Navbar />
-          <Helmet>
-            <title>Cook Tounsi</title>
-            <meta name="description" content="Vente et livraison des plats, patisserie, 
-            épicerie et boissons tunisiens en Europe." />
-            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
-                 food, livraison, ماكلة تونسية , أطباق , معلبة," />
-          </Helmet>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/Login" element={<Login />} />
@@ -73,15 +59,10 @@ class App extends Component {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/About" element={<About />} />
           <Route path="/MyProfile" element={<MyProfile />} />
-          <Route path="/Shop" element={<Shop />} />
           <Route path="/Blog" element={<Blog />} />
-          <Route path="/AllProducts" element={<AllProducts />} />
-          <Route path="/Cart" elemnt={<Cart />} />
           <Route path="/ShopProduct" element={<ShopProduct />} />
           <Route path="/Contact" element={<Contact />} />
-          <Route path="/CartDetails" element={<CartDetails />} />
           <Route path="/ProductItems" element={<ProductItems/>} />
-         
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/OrderHistory" element={<OrderHistory/>} />
           <Route path="/OrderDetails" element={<OrderDetails/>} />

@@ -4,20 +4,14 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Intro from "../Intro";
 import { query, where, onSnapshot,collection, documentId, doc } from "firebase/firestore";
-import useFetchDocument from "../customHooks/useFetchDocument";
 import { db } from "../../firebase.config";
 import { ADD_TO_CART } from "../../redux/slice/cartSlice";
 import { useDispatch } from "react-redux";
-import { Helmet } from "react-helmet";
-
-
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 const ProductItems = () => {
-   
-     //const {id} = useParams();
      const location = useLocation(); 
-     //var idProduct = Location.state.id;
      const [product, setProduct] = useState(null);
      const dispatch = useDispatch();
      const searchParams = new URLSearchParams(location.search);
@@ -32,11 +26,9 @@ const ProductItems = () => {
               const unsubscribe = onSnapshot(q, (querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                   setProduct(doc.data());
-                  console.log(id)
                 });
               });
         }
-
     }, [id]);
 
     const addToCart = (e) => {
@@ -44,47 +36,43 @@ const ProductItems = () => {
            };
 
     return(
-   
-
-        <>
+        <HelmetProvider>
+            <>
         <head>
             <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
             <link rel="stylesheet" href="assets/css/main.css" />
             <link rel="stylesheet" href="assets/css/home-classic.css" />
             <link rel="stylesheet" href="assets/css/product-details.css"/>
             {product!=null &&
-            <Helmet>
-                    {/* SEO metadata */}
-                    <meta charset="utf-8" />
-                    <title>{product.name}</title>
-                    <meta name="name" content="Cook Tounsi" />
-                    <meta name="description" content={product.description} />
-                    <meta name="keywords" content={`cuisine, boissons, Tunisie, cuisine tunisienne, 
-    traditionnel, plats, épices, europe, patisserie, livraison, ${product.searchTags.join(', ')} `} />
-                     {/* Open Graph (OG) metadata for social media */}
-                    <meta property="og:title" content={product.name} />
-                    <meta property="og:image" content={product.photo} />
-                  </Helmet>}
+        <Helmet>
+            {/* SEO metadata */}
+            <meta charset="utf-8" />
+            <title>{product.name}</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="description" content={product.description} />
+            <meta name="keywords" content={`cuisine, boissons, Tunisie, cuisine tunisienne, 
+traditionnel, plats, épices, europe, patisserie, livraison, ${product.searchTags.join(', ')} `} />
+                {/* Open Graph (OG) metadata for social media */}
+            <meta property="og:title" content={product.name} />
+            <meta property="og:image" content={product.photo} />
+        </Helmet>}
         </head>
         <ToastContainer />
-
-
             <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/profileBanner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
                 <div className="container">
                     <h2>Tout Les Produits</h2>
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><Link to="/">Accueil</Link></li>
                         <li className="breadcrumb-item"><Link to="/ShopProduct">Tous Les Produits</Link></li>
-                        <li className="breadcrumb-item active" aria-current="page"></li>
+                        {product!=null &&
+                        <li className="breadcrumb-item active" aria-current="page">{product.name}</li>}
                     </ol>
                 </div>
             </section>
 
             <section className="inner-section">
             {product!=null &&
-                  <>
-                 
-
+            <>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6">
@@ -164,9 +152,8 @@ const ProductItems = () => {
             </>}
             </section>
             <Intro/>
-
-   
             </>
+        </HelmetProvider>
      );
 };
 

@@ -4,6 +4,7 @@ import useFetchCollection from '../components/customHooks/useFetchCollection';
 import { useDispatch, useSelector } from 'react-redux';
 import { STORE_ORDERS, CALC_TOTAL_ORDER_AMOUNT, selectOrderHistory, selectTotalOrderAmount } from '../redux/slice/orderSlice';
 import { selectuserID } from '../redux/slice/authSlice';
+import { Helmet } from 'react-helmet';
 
 
 const OrderHistory = () => {
@@ -26,14 +27,8 @@ const OrderHistory = () => {
     };
     
     return (
-    <html lang="en">
+    <>
     <head>
-    <meta charSet="UTF-8" />
-    <meta name="name" content="Cook Tounsi" />
-    <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-    <title>Historique des commandes - Cook Tounsi</title>
     <link rel="icon" href="assets/images/favicon.png" />
     <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
     <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -46,7 +41,19 @@ const OrderHistory = () => {
     <link rel="stylesheet" href="assets/css/user-auth.css" />
     <link rel="stylesheet" href="assets/css/orderlist.css"/>
     <link rel="stylesheet" href="assets/css/checkout.css"></link>
+    <link rel="stylesheet" href="assets/css/home-classic.css" />
     </head>
+    <Helmet>
+    <meta charSet="UTF-8" />
+            <title>Cook Tounsi - Historique des commandes</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi- Historique des commandes" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                    food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+            <meta property="og:title" content="Cook Tounsi - Historique des commandes" />
+            <meta property="og:image" content="assets/images/about/1.jpg" />
+    </Helmet>
     <body>
     <div className="backdrop"></div>
         <a className="backtop fas fa-arrow-up" href="#"></a>
@@ -157,7 +164,7 @@ const OrderHistory = () => {
             </div>
 </section>
     </body>
-    </html>
+    </>
   )
 }
 

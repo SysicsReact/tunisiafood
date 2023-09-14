@@ -11,12 +11,10 @@ import { getDoc, updateDoc, doc } from "firebase/firestore";
 import {uploadBytes, getDownloadURL,} from "firebase/storage";
 import { v4 } from "uuid";
 import { ToastContainer, toast } from 'react-toastify';
+import { Helmet } from "react-helmet";
 
 
 function Profile() {
-
-    //--------declarations
-    
     const [user] = useAuthState(auth);
     const [username, setName] = useState({})
     const [loggedUser, setLoggedUser] = useState({})
@@ -62,7 +60,6 @@ function Profile() {
 
     //----------upload file
     const uploadFile = async () => {
-       
         if (!imageUpload) {
             updateUser();
             return 
@@ -79,9 +76,7 @@ function Profile() {
                     updateUser()
                 }
                 );
-                
                 if(url){
-                    
                 }
             });
             
@@ -90,7 +85,6 @@ function Profile() {
     }
     //--------update user    
     const updateUser = async (e) => {
-       
         try{
             if (city.changeState == 1) {
                 const washingtonRef = doc(db, "users", user.uid);
@@ -121,15 +115,12 @@ function Profile() {
                 await updateDoc(washingtonRef, {
                     adress: adress.adress
                 });
-               
             }
             notifySuccess()
             window.location.reload(false);
         }catch (e) {
             alert(e)
           }
-
-        
     };
     //-----handling changes    
     function handleNameChange(event) {
@@ -188,14 +179,20 @@ function Profile() {
 
 
     return (
-        <html lang="en">
+        <>
             <head>
-            <meta charSet="UTF-8" />
-    <meta name="name" content="Cook Tounsi" />
-    <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-    <title>Profile - Cook Tounsi</title>
+                <Helmet>
+                <meta charSet="UTF-8" />
+                <title>Cook Tounsi - Profile</title>
+                <meta name="name" content="Cook Tounsi" />
+                <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+                <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة, " />
+                <meta property="og:title" content="Cook Tounsi - Profile" />
+                <meta property="og:image" content="assets/images/about/1.jpg" />
+                </Helmet>
+            
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -206,6 +203,7 @@ function Profile() {
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/profile.css" />
+                <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
             <body>
                 <ToastContainer />
@@ -302,7 +300,7 @@ function Profile() {
                 <script src="assets/js/main.js"></script>
 
             </body>
-        </html>
+        </>
     );
 }
 

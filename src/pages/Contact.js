@@ -29,15 +29,20 @@ function Contact() {
 
         }).catch((error) => {
             notifyError(error.message);
-        });;
+        });
     }
     return (
     <>
         <Helmet>
     <title>Contactez-nous</title>
+    <meta charSet="UTF-8" />
+    <meta name="name" content="Cook Tounsi" />
     <meta name="description" content="Cook Tounsi: Conactez-nous" />
     <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, livraison, contact, lifestyle " />
+        traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+            food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+    <meta property="og:title" content="Cook Tounsi - Contactez-nous" />
+    <meta property="og:image" content="assets/images/contact-us-banner.jpg" />
         </Helmet>
             <ToastContainer/>
                 <div className="backdrop"></div>

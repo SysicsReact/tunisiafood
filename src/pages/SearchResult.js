@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_FROM_WISH, selectWishItems } from "../redux/slice/wishSlice";
 import { ADD_TO_CART } from "../redux/slice/cartSlice";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const SearchResult = () => {
     const navigate = useNavigate();
@@ -26,14 +27,8 @@ const SearchResult = () => {
     }, []);
 
     return (
-        <html lang="en">
+        <>
           <head>
-          <meta charSet="UTF-8" />
-    <meta name="name" content="Cook Tounsi" />
-    <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-    <title>Liste des souhaits - Cook Tounsi</title>
           <link rel="icon" href="assets/images/favicon.png" />
           <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
           <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -45,7 +40,19 @@ const SearchResult = () => {
           <link rel="stylesheet" href="assets/css/main.css" />
           <link rel="stylesheet" href="assets/css/user-auth.css" />
           <link rel="stylesheet" href="assets/css/checkout.css"></link>
+          <link rel="stylesheet" href="assets/css/home-classic.css" />
           </head>
+          <Helmet>
+          <meta charSet="UTF-8" />
+            <title>Cook Tounsi - Résultats de recherche</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi- Résultats de recherche" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                    food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+            <meta property="og:title" content="Cook Tounsi - Résultats de recherche" />
+            <meta property="og:image" content="assets/images/about/1.jpg" />
+          </Helmet>
           <body>
           <div className="backdrop"></div>
                 <a className="backtop fas fa-arrow-up" href="#"></a>
@@ -106,7 +113,7 @@ const SearchResult = () => {
                </section>
                
         </body>
-        </html>
+        </>
     )
 }
 export default SearchResult;

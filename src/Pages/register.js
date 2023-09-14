@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../components/loader/Loader";
 import { auth, createUserWithEmailAndPassword, } from "../firebase.config";
 import { doc, setDoc } from "@firebase/firestore";
+import { Helmet } from "react-helmet";
 var isvalidate = false;
 
 
@@ -52,8 +53,6 @@ const Register = () => {
         }).catch((error) => {
             setIsLoading(false)
             toast.error(error.message);
-            // Handle Errors here.
-            // ...
         });
     }
 
@@ -64,14 +63,19 @@ const Register = () => {
     };
 
     return (
-        <html lang="en">
+        <>
             <head>
+        <Helmet>
+            <title>Cook Tounsi - S'inscrire</title>
             <meta charSet="UTF-8" />
-    <meta name="name" content="Cook Tounsi" />
-    <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-    <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-    <title>S'inscrire - Cook Tounsi</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                 food, livraison, ماكلة تونسية , أطباق , معلبة, " />
+            <meta property="og:title" content="Cook Tounsi- S'inscrire" />
+            <meta property="og:image" content="assets\images\banner.jpg" />
+        </Helmet>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -82,6 +86,7 @@ const Register = () => {
                 <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
                 <link rel="stylesheet" href="assets/css/main.css" />
                 <link rel="stylesheet" href="assets/css/user-auth.css" />
+                <link rel="stylesheet" href="assets/css/home-classic.css" />
             </head>
             <body>
                 <ToastContainer />
@@ -91,7 +96,7 @@ const Register = () => {
                         <div className="row justify-content-center">
                             <div className="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                                 <div className="user-form-logo">
-                                    <img src="assets/images/logo.png" alt="logo" />
+                                    <img src="assets/images/cook.png" alt="logo" />
                                 </div>
                                 <div className="user-form-card">
                                     <div className="user-form-title">
@@ -123,7 +128,7 @@ const Register = () => {
                                     </div>
                                 </div>
                                 <div className="user-form-remind">
-                                    <p>You have an account?<a><Link to="/Login"> Login </Link></a></p>
+                                    <p>Vous avez un compte?<a><Link to="/Login"> Login </Link></a></p>
 
                                 </div>
                             </div>
@@ -145,7 +150,7 @@ const Register = () => {
                 <script src="assets/js/slick.js"></script>
                 <script src="assets/js/main.js"></script>
             </body>
-        </html>
+        </>
     );
 
 }

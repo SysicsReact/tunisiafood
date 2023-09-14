@@ -14,6 +14,7 @@ import {Modal} from 'react-fade-modal';
 import { query, onSnapshot } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import ContactUs from "../components/ContactUs";
+import { Helmet } from "react-helmet";
 
 
 
@@ -80,15 +81,20 @@ function Dashboard() {
                   };
                 
     return (
-        <html lang="en">
+        <>
             <head>
+                <Helmet>
                 <meta charSet="UTF-8" />
+                <title>Cook Tounsi- Accueil</title>
                 <meta name="name" content="Cook Tounsi" />
-                <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+                <meta name="description" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
+                <meta name="title" content="Cook Tounsi" />
                 <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
                 traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
                  food, livraison, ماكلة تونسية , أطباق , معلبة, " />
-                <title>Cook Tounsi- Accueil</title>
+                <meta property="og:title" content="Cook Tounsi - Accueil" />
+                <meta property="og:image" content="assets/images/about/1.jpg" />
+                </Helmet>
                 <link rel="icon" href="assets/images/favicon.png" />
                 <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
                 <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -566,6 +572,6 @@ function Dashboard() {
                 <script src="assets/js/slick.js"></script>
                 <script src="assets/js/main.js"></script>
             </body>
-        </html>
+        </>
     );}
 export default Dashboard;

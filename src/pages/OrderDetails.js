@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import useFetchDocument from "../components/customHooks/useFetchDocument";
 import Intro from "../components/Intro";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet";
 
 
 const OrderDetails = () => {
@@ -19,14 +20,8 @@ const OrderDetails = () => {
        setOrder(document);
     }, [document]);
     return(
-        <html lang="en">
+        <>
         <head>
-        <meta charSet="UTF-8" />
-          <meta name="name" content="Cook Tounsi" />
-        <meta name="title" content="Cook Tounsi: vente de vos plats tunisiens préférés 2023" />
-        <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
-        traditionnel, plats, épices, patisserie, healthy, lifestyle, food,  " />
-        <title>Commande_Détails - Cook Tounsi</title>
             <link rel="icon" href="assets/images/favicon.png" />
             <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
             <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css" />
@@ -37,7 +32,19 @@ const OrderDetails = () => {
             <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
             <link rel="stylesheet" href="assets/css/main.css" />
             <link rel="stylesheet" href="assets/css/orderlist.css"/>
+            <link rel="stylesheet" href="assets/css/home-classic.css" />
         </head>
+        <Helmet>
+        <meta charSet="UTF-8" />
+            <title>Cook Tounsi - Détails de Commande</title>
+            <meta name="name" content="Cook Tounsi" />
+            <meta name="title" content="Cook Tounsi - Détails de Commande" />
+            <meta name="keywords" content="cuisine, Tunisie, cuisine tunisienne, 
+                traditionnel, plats, épices, patisserie, healthy, lifestyle, recettes,
+                    food, livraison, ماكلة تونسية , أطباق , معلبة, "  />
+            <meta property="og:title" content="Cook Tounsi - Détails de Commande" />
+            <meta property="og:image" content="assets/images/about/1.jpg" />
+        </Helmet>
         <body>
         <ToastContainer></ToastContainer>
         <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
@@ -183,7 +190,7 @@ const OrderDetails = () => {
             <script src="assets/js/main.js"></script>
    
         </body>
-    </html>
+    </>
      );
 };
 

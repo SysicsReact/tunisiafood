@@ -89,7 +89,8 @@ const ShopProduct = () => {
         
         
   return (
-     <>
+
+    <>
      <head>
          <link rel="icon" href="assets/images/favicon.png" />
          <link rel="stylesheet" href="assets/fonts/flaticon/flaticon.css" />
@@ -103,9 +104,7 @@ const ShopProduct = () => {
      </head>
 
      <ToastContainer/>
-
-     <Helmet>
-        {/* SEO metadata */}
+    <Helmet>
         <meta charset="utf-8"/>
         <meta name="name" content="Tous les produits" />
         <title>Cook Tounsi - Tous les produits</title>
@@ -114,11 +113,10 @@ const ShopProduct = () => {
     traditionnel, plats, épices, europe, patisserie, livraison, أطباق , معلبة ,
     services,  " />
 
-        {/* Open Graph (OG) metadata for social media */}
         <meta property="og:title" content="Cook Tounsi-Tous les produits" />
         <meta property="og:image" content="assets\images\banner.jpg" />
-
-     </Helmet>
+    </Helmet>
+   
             <div className="backdrop"></div>
             <a className="backtop fas fa-arrow-up" href="#"></a>
             <section className="inner-section single-banner" style={{ backgroundImage: "url(assets/images/banner.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "center", }}>
@@ -562,6 +560,7 @@ const ShopProduct = () => {
          <script src="assets/js/main.js"></script>
 
  </>
+
   )
 }
 

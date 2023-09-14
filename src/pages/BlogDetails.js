@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { db } from '../firebase.config';
 import { query, where, onSnapshot,collection, documentId, doc } from "firebase/firestore";
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 
 function BlogDetails() {
@@ -31,6 +31,9 @@ function BlogDetails() {
           return text;
           };
   return (
+    <HelmetProvider>
+
+   
     <>
         <head>
             <meta charSet="UTF-8" />
@@ -72,6 +75,8 @@ function BlogDetails() {
                         <meta name="description" content={blog.quote} />
                         <meta name="keywords" content="cuisine, boissons, Tunisie, france, belgique, cuisine tunisienne, 
                         traditionnel, plats, blogs, épices, europe, patisserie, livraison, services, lifestyle " />
+                        <meta property="og:title" content={blog.title} />
+                        <meta property="og:image" content={blog.photo1} />
                     </Helmet>
                     <article className="blog-details">
                         <a className="blog-details-thumb" href="">
@@ -126,6 +131,7 @@ function BlogDetails() {
         </div>
         </section>
     </>
+    </HelmetProvider>
   )
 }
 
