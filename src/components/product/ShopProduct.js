@@ -128,47 +128,53 @@ const ShopProduct = () => {
                         </ol>
                     </div>
             </section>
-            <section class="section niche-part">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-heading">
-                            <h2>Parcourir par catégorie</h2>
+            <section className="section niche-part">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="section-heading">
+                                <h2>Parcourir par catégorie</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <ul className="nav nav-tabs">
+                            <li>
+                                <a href="" className={category === "" ? "tab-link active" : "tab-link"} onClick={(e) => { e.preventDefault(); setCategory("") }}>
+                                        <span>Tout</span>
+                                    </a>
+                                </li>
+                                <li>
+                                <a href="" className={category === "Plat" ? "tab-link active" : "tab-link"} onClick={(e) => { e.preventDefault(); setCategory("Plat") }}>
+                                        <i className="flaticon-groceries"></i>
+                                        <span>Plats</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" className={category === "Sucré" ? "tab-link active" : "tab-link"} onClick={(e) => { e.preventDefault(); setCategory("Sucré")}}>
+                                        <i className="flaticon-dairy-products"></i>
+                                        <span>Patisserie</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" className={category === "Boisson" ? "tab-link active" : "tab-link"} onClick={(e) => { e.preventDefault(); setCategory("Boisson")}}>
+                                        <i className="flaticon-cheers"></i>
+                                        <span>Boissons</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" className={category === "Epice" ? "tab-link active" : "tab-link"} onClick={(e) => { e.preventDefault(); setCategory("Epice")}}>
+                                        <i className="flaticon-dried-fruit"></i>
+                                        <span>Episserie</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="nav nav-tabs" >
-                            <li>
-                                <a href="" class="tab-link active">
-                                    <i class="flaticon-groceries"></i>
-                                    <span  value="Plat">Plats</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" class="tab-link" >
-                                    <i class="flaticon-dairy-products"></i>
-                                    <span value="Sucré">Patisserie</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" class="tab-link" >
-                                    <i class="flaticon-cheers"></i>
-                                    <span value="Boisson">Boissons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" class="tab-link" >
-                                    <i class="flaticon-dried-fruit"></i>
-                                    <span value="Epice">Episserie</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             </section>
+
 
             <section className="inner-section shop-part">
             <div className="container">
@@ -193,16 +199,7 @@ const ShopProduct = () => {
                                         <option value="highest-price">Les plus chers</option>
                                     </select>
                                     </div>
-                                    <div className="filter-short">
-                                    <label className="filter-label">Catégory:</label>
-                                    <select className="form-select" value={category} onChange={(e)=>setCategory(e.target.value)}>
-                                    <option value="all" selected>Tout</option>
-                                        <option value="Sucré">Patisserie</option>
-                                        <option value="Plat">Nos Plats</option>
-                                        <option value="Epice">Nos Epices</option>
-                                        <option value="Boisson">Nos Boissons</option>
-                                    </select>
-                                    </div>
+                                   
                                     <div className="filter-action">
                                         <button className="header-widget" onClick={()=>clearFilters()} >
                                             <i className='fas fa-trash'></i></button>
